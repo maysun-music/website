@@ -6,28 +6,29 @@
     <title>MAYSUN</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
             background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
         }
-        .logo-container {
+        img {
+            max-width: 100%; /* Responsive image */
+            height: auto;
+        }
+        .email-link {
+            margin-top: 20px;
             text-align: center;
-        }
-        .logo-container img {
-            width: 400px; /* Adjust this to the desired width */
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <a href="mailto:maysun.booking@gmail.com">
-            <img src="images/your-logo-file.png" alt="MAYSUN Logo">
-        </a>
-    </div>
+    <img src="images/logo.png" alt="MAYSUN Logo">
+    <p>Welcoming artistic possibilities — spatial audio, drums, synths, sound design, scoring, solo performances, touring, and any form of creative collaboration. If you like my sound, let’s work together.</p>
+    <p class="email-link">Email: <a href="mailto:maysun.booking@gmail.com">maysun.booking@gmail.com</a></p>
 </body>
 </html>
