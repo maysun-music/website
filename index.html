@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAYSUN</title>
+    <link rel="icon" href="images/m_favicon.ico" type="image/x-icon">
     <style>
         body {
             display: flex;
@@ -18,11 +19,57 @@
             height: auto;
             cursor: pointer; /* Change cursor to pointer for clickable image */
         }
+
+        /* Pointer Styles */
+        .pointer {
+            position: fixed;
+            width: 15px; /* Pointer width */
+            height: 15px; /* Pointer height */
+            background-color: black; /* Pointer color */
+            border-radius: 50%; /* Makes it circular */
+            pointer-events: none; /* Prevents pointer from interfering with other elements */
+            transition: transform 0.1s ease; /* Smooth transition effect */
+            z-index: 1000; /* Ensure it stays above other elements */
+        }
+
+        /* Trail Effect Styles */
+        .trail {
+            position: fixed;
+            width: 10px; /* Trail width */
+            height: 10px; /* Trail height */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            border-radius: 50%; /* Makes it circular */
+            pointer-events: none; /* Prevents trail from interfering with other elements */
+            transition: transform 0.2s ease; /* Smooth transition effect */
+        }
     </style>
 </head>
 <body>
     <a href="mailto:maysun.booking@gmail.com">
         <img src="images/logo_3MAYSUN.png" alt="MAYSUN Logo">
     </a>
+    <!-- Pointer Elements -->
+    <div class="pointer"></div>
+    <div class="trail"></div>
+
+    <script>
+        const pointer = document.querySelector('.pointer');
+        const trail = document.querySelector('.trail');
+    
+        document.addEventListener('mousemove', (e) => {
+            const pointerSize = 15; // Should match .pointer size
+            const trailSize = 10;    // Should match .trail size
+    
+            // Apply the offset based on the values you provided
+            const offsetX = -857; // Negative offset to pull it back
+            const offsetY = -489; // Negative offset to pull it back
+    
+            // Move the pointer to the mouse position
+            pointer.style.transform = `translate(${e.clientX - pointerSize / 2 + offsetX}px, ${e.clientY - pointerSize / 2 + offsetY}px)`;
+            
+            // Move the trail slightly behind the pointer
+            trail.style.transform = `translate(${e.clientX - trailSize / 2 + offsetX}px, ${e.clientY - trailSize / 2 + offsetY}px)`; // Adjust for trailing effect
+        });
+    </script>    
 </body>
 </html>
