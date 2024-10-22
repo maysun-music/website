@@ -20,11 +20,71 @@
             height: auto;
             cursor: pointer;
         }
+
+        /* Bottom Menu Styles */
+        .menu-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .menu-button {
+            background-color: black;
+            color: white;
+            padding: 5px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 0px;
+        }
+
+        .menu-items {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .menu-items a {
+            display: block;
+            color: black;
+            text-decoration: none;
+            margin: 5px 0;
+            font-size: 14px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .menu-items a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <a href="mailto:maysun.booking@gmail.com">
         <img src="images/logo_3MAYSUN.png" alt="MAYSUN Logo">
     </a>
+
+    <!-- Bottom Menu -->
+    <div class="menu-container">
+        <button class="menu-button" onclick="toggleMenu()">more</button>
+        <div class="menu-items" id="menuItems">
+            <a href="#biography">BIOGRAPHY</a>
+            <a href="#activities">ACTIVITIES</a>
+            <a href="#works">WORKS</a>
+            <a href="#contact">CONTACT</a>
+            <a href="#diy">DIY & RESSOURCES</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menuItems = document.getElementById('menuItems');
+            if (menuItems.style.display === 'block') {
+                menuItems.style.display = 'none';
+            } else {
+                menuItems.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
