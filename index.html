@@ -26,7 +26,7 @@
             font-size: 16px;
             line-height: 1.6;
             color: black;
-            z-index: 1; /* Ensure content is behind menu */
+            z-index: 1;
         }
 
         /* Responsive logo to avoid cutting off on smaller screens */
@@ -42,7 +42,6 @@
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
-            z-index: 2; /* Menu above content */
         }
 
         .menu-button {
@@ -58,9 +57,8 @@
         .menu-items {
             display: none;
             margin-top: 10px;
-            background-color: white; /* Solid background to differentiate from content */
+            background-color: white; /* Solid white background */
             padding: 10px;
-            z-index: 3; /* Keep menu items on top */
         }
 
         .menu-items a {
@@ -69,11 +67,27 @@
             text-decoration: none;
             margin: 5px 0;
             font-size: 14px;
-            font-family: Helvetica, Arial, sans-serif;
+            padding: 5px;
+            border-radius: 4px; /* Add slight rounding for the highlight effect */
         }
 
+        /* Highlight effect on hover instead of underline */
         .menu-items a:hover {
-            text-decoration: underline;
+            background-color: #f0f0f0; /* Light grey highlight */
+            text-decoration: none; /* Remove underline */
+            border-radius: 0; /* remove rounded corners */
+        }
+
+        /* Media query for adjusting font size on smaller screens */
+        @media (max-width: 600px) {
+            .menu-button {
+                font-size: 18px; /* Slightly larger button font size for mobile */
+            }
+
+            .menu-items a {
+                font-size: 18px; /* Larger menu item font size for mobile */
+                padding: 10px; /* Increase padding for easier tapping */
+            }
         }
     </style>
 </head>
