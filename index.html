@@ -35,7 +35,7 @@
             height: auto;
         }
 
-        /* Bottom Menu Styles */
+        /* Bottom Menu Styles for Desktop */
         .menu-container {
             position: absolute;
             bottom: 20px;
@@ -57,7 +57,7 @@
         .menu-items {
             display: none;
             margin-top: 10px;
-            background-color: white; /* Solid white background */
+            background-color: white;
             padding: 10px;
         }
 
@@ -68,25 +68,61 @@
             margin: 5px 0;
             font-size: 14px;
             padding: 5px;
-            border-radius: 4px; /* Add slight rounding for the highlight effect */
+            border-radius: 0;
         }
 
-        /* Highlight effect on hover instead of underline */
         .menu-items a:hover {
-            background-color: #f0f0f0; /* Light grey highlight */
-            text-decoration: none; /* Remove underline */
-            border-radius: 0; /* remove rounded corners */
+            background-color: #f0f0f0;
         }
 
-        /* Media query for adjusting font size on smaller screens */
+        /* Burger Menu for Mobile */
+        .burger-menu {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .burger-menu div {
+            width: 30px;
+            height: 4px;
+            background-color: black;
+            margin: 6px 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 15px 0;
+            color: black;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        /* Media query for Mobile */
         @media (max-width: 600px) {
-            .menu-button {
-                font-size: 18px; /* Slightly larger button font size for mobile */
+            .menu-container {
+                display: none; /* Hide bottom menu on mobile */
             }
 
-            .menu-items a {
+            .burger-menu {
+                display: block; /* Show burger menu on mobile */
+            }
+
+            .mobile-menu a {
                 font-size: 18px; /* Larger menu item font size for mobile */
-                padding: 10px; /* Increase padding for easier tapping */
             }
         }
     </style>
@@ -97,7 +133,7 @@
         <img src="images/logo_3MAYSUN.png" alt="MAYSUN Logo">
     </div>
 
-    <!-- Bottom Menu -->
+    <!-- Bottom Menu for Desktop -->
     <div class="menu-container">
         <button class="menu-button" onclick="toggleMenu()">more</button>
         <div class="menu-items" id="menuItems">
@@ -107,6 +143,22 @@
             <a href="#" onclick="loadContent('diy')">DIY & RESSOURCES</a>
             <a href="#" onclick="loadContent('contact')">CONTACT</a>
         </div>
+    </div>
+
+    <!-- Burger Menu for Mobile -->
+    <div class="burger-menu" onclick="toggleBurgerMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" onclick="loadContent('biography')">BIOGRAPHY</a>
+        <a href="#" onclick="loadContent('activities')">ACTIVITIES</a>
+        <a href="#" onclick="loadContent('works')">WORKS</a>
+        <a href="#" onclick="loadContent('diy')">DIY & RESSOURCES</a>
+        <a href="#" onclick="loadContent('contact')">CONTACT</a>
     </div>
 
     <script>
@@ -119,23 +171,34 @@
             }
         }
 
+        // Toggle mobile burger menu
+        function toggleBurgerMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.style.display === 'block') {
+                mobileMenu.style.display = 'none';
+            } else {
+                mobileMenu.style.display = 'block';
+            }
+        }
+
         // Function to load content into the center container and close menu
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
             const menuItems = document.getElementById('menuItems'); // Reference to menu
+            const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
 
             let content = ''; // Content to be displayed based on the clicked menu item
 
             if (section === 'biography') {
                 content = `<p>Etienne Mason, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
-                        <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. His artistic journey is driven by a deep passion for exploring spatial audio, technology, and a desire to create meaningful emotional connections through his music.</p>
-                        <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023 and is a proud member of the international artist collective Inland Ocean. He completed the prestigious 2024 ITP/IMA Fellowship at New York University and is currently a mentor at New Inc.</p>`;
+                        <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. His artistic journey is driven by a deep passion for exploring spatial audio, technology, and a desire to create meaningful emotional connections through his music.</p>`;
             } else if (section === 'activities') {
                 content = `<p>still working on this website...</p>`;
             } else if (section === 'works') {
-                content = `<p>still working on this website...</p>`;
+                content = `<p>https://maysunmusic.bandcamp.com/music</p>`;
             } else if (section === 'diy') {
-                content = `<p>still working on this website...</p>`;
+                content = `<p>Instruments I have built and modified, sound tips, and virtual speaker strucutres of places I have performed in.</p>
+                            <p>(still working on this website)</p>`;
             } else if (section === 'contact') {
                 content = `<p>Contact: <strong>maysun</strong>[dot] <strong>booking</strong>[at] <strong>gmail</strong>[dot] <strong>com</strong></p>`;
             }
@@ -143,8 +206,9 @@
             // Replace the content inside the container
             contentContainer.innerHTML = content;
 
-            // Close the menu after an option is selected
+            // Close both desktop and mobile menus after an option is selected
             menuItems.style.display = 'none';
+            mobileMenu.style.display = 'none';
         }
     </script>
 </body>
