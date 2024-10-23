@@ -8,14 +8,14 @@
     <style>
         body {
             display: flex;
-            flex-direction: column; /* Stack elements vertically */
-            justify-content: center; /* Center content vertically */
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: white;
-            font-family: Helvetica, Arial, sans-serif; /* Global font */
-            position: relative; /* Positioning for menu */
+            font-family: Helvetica, Arial, sans-serif;
+            position: relative;
         }
 
         /* Style for the content */
@@ -26,17 +26,23 @@
             font-size: 16px;
             line-height: 1.6;
             color: black;
-            z-index: 1; /* Ensure content is above the menu */
+            z-index: 1; /* Ensure content is behind menu */
+        }
+
+        /* Responsive logo to avoid cutting off on smaller screens */
+        #content img {
+            max-width: 100%;
+            height: auto;
         }
 
         /* Bottom Menu Styles */
         .menu-container {
-            position: absolute; /* Position it at the bottom */
-            bottom: 20px; /* Distance from the bottom */
+            position: absolute;
+            bottom: 20px;
             left: 50%;
-            transform: translateX(-50%); /* Center it horizontally */
+            transform: translateX(-50%);
             text-align: center;
-            font-family: Helvetica, Arial, sans-serif; /* Ensure consistency in menu */
+            z-index: 2; /* Menu above content */
         }
 
         .menu-button {
@@ -52,6 +58,9 @@
         .menu-items {
             display: none;
             margin-top: 10px;
+            background-color: white; /* Solid background to differentiate from content */
+            padding: 10px;
+            z-index: 3; /* Keep menu items on top */
         }
 
         .menu-items a {
@@ -78,11 +87,11 @@
     <div class="menu-container">
         <button class="menu-button" onclick="toggleMenu()">more</button>
         <div class="menu-items" id="menuItems">
-            <a onclick="loadContent('biography')">BIOGRAPHY</a>
-            <a onclick="loadContent('activities')">ACTIVITIES</a>
-            <a onclick="loadContent('works')">WORKS</a>
-            <a onclick="loadContent('diy')">DIY & RESSOURCES</a>
-            <a onclick="loadContent('contact')">CONTACT</a>
+            <a href="#" onclick="loadContent('biography')">BIOGRAPHY</a>
+            <a href="#" onclick="loadContent('activities')">ACTIVITIES</a>
+            <a href="#" onclick="loadContent('works')">WORKS</a>
+            <a href="#" onclick="loadContent('diy')">DIY & RESSOURCES</a>
+            <a href="#" onclick="loadContent('contact')">CONTACT</a>
         </div>
     </div>
 
@@ -96,9 +105,10 @@
             }
         }
 
-        // Function to load content into the center container
+        // Function to load content into the center container and close menu
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
+            const menuItems = document.getElementById('menuItems'); // Reference to menu
 
             let content = ''; // Content to be displayed based on the clicked menu item
 
@@ -118,6 +128,9 @@
 
             // Replace the content inside the container
             contentContainer.innerHTML = content;
+
+            // Close the menu after an option is selected
+            menuItems.style.display = 'none';
         }
     </script>
 </body>
