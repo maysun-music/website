@@ -8,15 +8,17 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center; /* Center content vertically */
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: white;
             font-family: Helvetica, Arial, sans-serif; /* Global font */
+            position: relative; /* Positioning for menu */
         }
-    
-        /* Style for the content when the logo changes */
+
+        /* Style for the content */
         #content {
             max-width: 800px;
             text-align: center;
@@ -24,18 +26,19 @@
             font-size: 16px;
             line-height: 1.6;
             color: black;
+            z-index: 1; /* Ensure content is above the menu */
         }
-    
+
         /* Bottom Menu Styles */
         .menu-container {
-            position: absolute;
-            bottom: 20px;
+            position: absolute; /* Position it at the bottom */
+            bottom: 20px; /* Distance from the bottom */
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%); /* Center it horizontally */
             text-align: center;
             font-family: Helvetica, Arial, sans-serif; /* Ensure consistency in menu */
         }
-    
+
         .menu-button {
             background-color: black;
             color: white;
@@ -45,12 +48,12 @@
             border: none;
             border-radius: 0px;
         }
-    
+
         .menu-items {
             display: none;
             margin-top: 10px;
         }
-    
+
         .menu-items a {
             display: block;
             color: black;
@@ -59,12 +62,11 @@
             font-size: 14px;
             font-family: Helvetica, Arial, sans-serif;
         }
-    
+
         .menu-items a:hover {
             text-decoration: underline;
         }
     </style>
-    
 </head>
 <body>
     <!-- Content Container -->
