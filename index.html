@@ -13,14 +13,19 @@
             height: 100vh;
             margin: 0;
             background-color: white;
+            font-family: Helvetica, Arial, sans-serif; /* Global font */
         }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            cursor: pointer;
+    
+        /* Style for the content when the logo changes */
+        #content {
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: black;
         }
-
+    
         /* Bottom Menu Styles */
         .menu-container {
             position: absolute;
@@ -28,8 +33,9 @@
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
+            font-family: Helvetica, Arial, sans-serif; /* Ensure consistency in menu */
         }
-
+    
         .menu-button {
             background-color: black;
             color: white;
@@ -39,12 +45,12 @@
             border: none;
             border-radius: 0px;
         }
-
+    
         .menu-items {
             display: none;
             margin-top: 10px;
         }
-
+    
         .menu-items a {
             display: block;
             color: black;
@@ -53,26 +59,28 @@
             font-size: 14px;
             font-family: Helvetica, Arial, sans-serif;
         }
-
+    
         .menu-items a:hover {
             text-decoration: underline;
         }
     </style>
+    
 </head>
 <body>
-    <a href="mailto:maysun.booking@gmail.com">
+    <!-- Content Container -->
+    <div class="content-container" id="content">
         <img src="images/logo_3MAYSUN.png" alt="MAYSUN Logo">
-    </a>
+    </div>
 
     <!-- Bottom Menu -->
     <div class="menu-container">
         <button class="menu-button" onclick="toggleMenu()">more</button>
         <div class="menu-items" id="menuItems">
-            <a href="#biography">BIOGRAPHY</a>
-            <a href="#activities">ACTIVITIES</a>
-            <a href="#works">WORKS</a>
-            <a href="#contact">CONTACT</a>
-            <a href="#diy">DIY & RESSOURCES</a>
+            <a onclick="loadContent('biography')">BIOGRAPHY</a>
+            <a onclick="loadContent('activities')">ACTIVITIES</a>
+            <a onclick="loadContent('works')">WORKS</a>
+            <a onclick="loadContent('diy')">DIY & RESSOURCES</a>
+            <a onclick="loadContent('contact')">CONTACT</a>
         </div>
     </div>
 
@@ -84,6 +92,30 @@
             } else {
                 menuItems.style.display = 'block';
             }
+        }
+
+        // Function to load content into the center container
+        function loadContent(section) {
+            const contentContainer = document.getElementById('content');
+
+            let content = ''; // Content to be displayed based on the clicked menu item
+
+            if (section === 'biography') {
+                content = `<p>Etienne Mason, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
+                        <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. His artistic journey is driven by a deep passion for exploring spatial audio, technology, and a desire to create meaningful emotional connections through his music.</p>
+                        <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023 and is a proud member of the international artist collective Inland Ocean. He completed the prestigious 2024 ITP/IMA Fellowship at New York University and is currently a mentor at New Inc.</p>`;
+            } else if (section === 'activities') {
+                content = `<p>still working on this website...</p>`;
+            } else if (section === 'works') {
+                content = `<p>still working on this website...</p>`;
+            } else if (section === 'diy') {
+                content = `<p>still working on this website...</p>`;
+            } else if (section === 'contact') {
+                content = `<p>Contact: <strong>maysun</strong>[dot] <strong>booking</strong>[at] <strong>gmail</strong>[dot] <strong>com</strong></p>`;
+            }
+
+            // Replace the content inside the container
+            contentContainer.innerHTML = content;
         }
     </script>
 </body>
