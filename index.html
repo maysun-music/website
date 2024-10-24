@@ -29,7 +29,7 @@
             z-index: 1;
         }
 
-        /* Responsive logo to avoid cutting off on smaller screens and trigger email on click */
+        /* Responsive logo */
         #content img {
             max-width: 100%;
             height: auto;
@@ -93,24 +93,26 @@
             margin: 6px 0;
         }
 
+        /* Updated Mobile Menu */
         .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%; /* Make the menu fill the whole screen */
-            background-color: white;
-            padding: 20px 0;
-            text-align: center;
-            z-index: 9; /* Make sure it appears above other elements */
+            display: none; /* Hidden by default */
+            position: fixed; /* Full-screen overlay */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: white; /* Background color */
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack items vertically */
+            justify-content: space-around; /* Evenly space items */
+            text-align: center; /* Center align text */
+            z-index: 9; /* Layer above other elements */
         }
 
         .mobile-menu a {
-            display: block;
-            padding: 15px 0;
+            padding: 15px 0; /* Padding for clickable area */
             color: black;
-            font-size: 18px;
+            font-size: 24px; /* Larger font size for visibility */
             text-decoration: none;
         }
 
@@ -122,10 +124,6 @@
 
             .burger-menu {
                 display: block; /* Show burger menu on mobile */
-            }
-
-            .mobile-menu a {
-                font-size: 18px; /* Larger menu item font size for mobile */
             }
         }
     </style>
@@ -173,7 +171,11 @@
         // Toggle mobile burger menu
         function toggleBurgerMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.style.display = (mobileMenu.style.display === 'block') ? 'none' : 'block';
+            if (mobileMenu.style.display === 'flex') {
+                mobileMenu.style.display = 'none'; // Hide mobile menu
+            } else {
+                mobileMenu.style.display = 'flex'; // Show mobile menu
+            }
         }
 
         // Function to load content into the center container and close menu
