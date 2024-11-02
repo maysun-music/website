@@ -43,8 +43,18 @@
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
+            z-index: 20;
+            opacity: 0; /* Start as invisible */
+            visibility: hidden; /* Prevent interaction when invisible */
+            transition: opacity 0.5s ease, visibility 0.5s ease; /* Adjust the duration as needed */
         }
 
+        /* Show the menu when needed */
+        .menu-container.visible {
+            opacity: 1; /* Make visible */
+            visibility: visible; /* Allow interaction */
+        }
+        
         .menu-button {
             background-color: black;
             color: white;
@@ -212,6 +222,25 @@
         function sendEmail() {
             window.location.href = 'mailto:maysun.booking@gmail.com';
         }
+
+        let hideTimeout;
+
+        document.addEventListener('mousemove', () => {
+        const menuContainer = document.querySelector('.menu-container');
+        menuContainer.classList.add('visible'); // Show the "more" button
+        clearTimeout(hideTimeout); // Clear previous timeout
+
+        // Set a new timeout to hide the button after 3 seconds
+        hideTimeout = setTimeout(() => {
+        menuContainer.classList.remove('visible'); // Hide the "more" button
+    }, 3000);
+});
+
+        // Initialize hiding after a brief delay when the page loads
+        hideTimeout = setTimeout(() => {
+        document.querySelector('.menu-container').classList.remove('visible');
+    }, 3000);
+
     </script>
 </body>
 </html>
