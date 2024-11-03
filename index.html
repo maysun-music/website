@@ -310,23 +310,35 @@
             window.location.href = 'mailto:maysun.booking@gmail.com';
         }
     
-        let hideTimeout;
-    
-        document.addEventListener('mousemove', () => {
+                // Initial fade-in on page load
             const menuContainer = document.querySelector('.menu-container');
-            menuContainer.classList.add('visible'); // Show the "more" button
-            clearTimeout(hideTimeout); // Clear previous timeout
-    
-            // Set a new timeout to hide the button after 3 seconds
-            hideTimeout = setTimeout(() => {
-                menuContainer.classList.remove('visible'); // Hide the "more" button
-            }, 3000);
-        });
-    
-        // Initialize hiding after a brief delay when the page loads
-        hideTimeout = setTimeout(() => {
-            document.querySelector('.menu-container').classList.remove('visible');
-        }, 3000);
+            menuContainer.classList.add('visible'); // Show menu on page load
+
+            // Hide the menu after a few seconds
+            setTimeout(() => {
+                menuContainer.classList.remove('visible');
+            }, 3000); // Adjust this time as needed
+
+            let hideTimeout; // Declare hideTimeout only once
+
+            // Mousemove event only near the bottom of the page
+            document.addEventListener('mousemove', (e) => {
+                const triggerHeight = window.innerHeight - 100; // Bottom 100px of viewport
+                
+                // Only trigger if mouse is near the bottom
+                if (e.clientY > triggerHeight) {
+                    menuContainer.classList.add('visible');
+                    
+                    // Clear any existing timeout
+                    clearTimeout(hideTimeout);
+                    
+                    // Hide the menu after 3 seconds of no movement near the menu
+                    hideTimeout = setTimeout(() => {
+                        menuContainer.classList.remove('visible');
+                    }, 3000); // Adjust this time as needed
+                }
+            });
     </script>
     </body>
 </html>
+
