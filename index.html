@@ -180,67 +180,132 @@
             const menuItems = document.getElementById('menuItems');
             menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
         }
-
+    
         // Toggle mobile burger menu visibility
         function toggleBurgerMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.style.display = (mobileMenu.style.display === 'block') ? 'none' : 'block';
         }
-
+    
         // Function to load content into the center container and close menu
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
             const menuItems = document.getElementById('menuItems'); // Reference to desktop menu
             const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
-
+    
             let content = ''; // Content to be displayed based on the clicked menu item
-
+                    
             if (section === 'biography') {
                 content = `
                     <p>Etienne Mason, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
                     <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. His artistic journey is driven by a deep passion for exploring spatial audio, technology and a desire to create meaningful emotional connections through his music.</p>
-                    <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023 and is a proud member of the international artist collective Inland Ocean. He completed the prestigious 2024 ITP/IMA Fellowship at New York University and is currently a mentor at New Inc.</p>`;
+                    <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023 and is a proud member of the international artist collective Inland Ocean. He completed the prestigious 2024 ITP/IMA Fellowship at New York University and is currently a mentor at New Inc.</p>
+                `;
             } else if (section === 'activities') {
-                content = '<p>still working on this website...</p>';
+                content = `
+                    <h3>RESIDENCIES</h3>
+                    <ul>
+                        June 2024 - ITP Camp NYU - Brooklyn, NY, USA
+                        May 2024 - Avaloch Farm Music Institute - Boston, NH, USA
+                        January 2024 - ITP / IMA NYU Fellowship - Brooklyn, NY, USA
+                        October 2023 - Récollets - Paris, FR
+                        October 2023 - Satosphère - Montreal, QC, Canada
+                        March 2023 - Physical Synthesis - Brooklyn, NY, USA
+                        January 2023 - Banff Center BMiR - Banff, AL, Canada
+                        July 2022 - Satosphère - Montreal, QC, Canada
+                    </ul>
+                    <h3>SOUND INSTALLATIONS</h3>
+                    <ul>
+                        May 2024 - Clive Davis Gallery - Downtown Brooklyn, NY, USA
+                    </ul>
+                <div>
+                    <h3>PAST SOLO PERFORMANCES</h3>
+                                <p>26 October 2024 - CuteLab - Brooklyn, NY, USA</p>
+                                <p>11 October 2024 - Iris Cantor Theater - New York, NY, USA</p>
+                                <p>30 August 2024 - Exit Points - Toronto, ON, Canada</p>
+                                <p>20 May 2024 - Garage - Downtown Brooklyn, NY, USA</p>
+                                <p>27 March 2024 - Troy Music Hall - Troy, NY, USA</p>
+                                <p>17 February 2023 - Salle Bourgie - Montreal, QC, Canada</p>
+                                <p>13 January 2023 - Banff Center - Banff, AL, Canada</p>
+                                <p>10 September 2022 - Cloud 9 - Rideau Lakes, ON, Canada</p>
+                                <p>06 July 2022 - Substrat Satosphère - Montreal, QC, Canada</p>
+                                <p>28 November 2021 - Pony Boy - Brooklyn, NY, USA</p>
+                                <p>26 August 2021 - MUTEK - Montreal, QC, Canada</p>
+                            <h4 onclick="togglePerformance('2020')" style="cursor:pointer;">2016 - 2020</h4>
+                            <div id="performance-2020" style="display:none;">
+                                <p>01 February 2020 - Aussenwelt</p>
+                                <p>11 December 2019 - Sotterenea - Montreal, QC, Canada</p>
+                                <p>28 November 2019 - Sotterenea - Montreal, QC, Canada</p>
+                                <p>27 November 2019 - Brasserie Beaubien - Montreal, QC, Canada</p>
+                                <p>03 November 2019 - Casa Del Popolo - Montreal, QC, Canada</p>
+                                <p>25 September 2019 - Sotterenea - Montreal, QC, Canada</p>
+                                <p>05 July 2019 - Antichambre - Montreal, QC, Canada</p>
+                                <p>27 June 2019 - O Patro Vys - Montreal, QC, Canada</p>
+                                <p>13 June 2019 - WIP - Montreal, QC, Canada</p>
+                                <p>26 April 2018 - Moth Access Center - Montreal, QC, Canada</p>
+                                <p>26 August 2018 - Avant Garde Bar - Ottawa, ON, Canada</p>
+                                <p>24 July 2018 - Antimodele - Montreal, QC, Canada</p>
+                                <p>08 June 2018 - La Plante - Montreal, QC, Canada</p>
+                                <p>19 May 2018 - Le Ministère - Montreal, QC, Canada</p>
+                                <p>08 July 2017 - Fest Off Quebec - Quebec, QC, Canada</p>
+                                <p>10 December 2016 - Le Cagibi - Montreal, QC, Canada</p>
+                                <p>26 November 2016 - Matahari Loft - Montreal, QC, Canada</p>
+                                <p>07 November 2016 - Casa Del Popolo - Montreal, QC, Canada</p>
+                                <p>29 October 2016 - Baron Samedi - Montreal, QC, Canada</p>
+                                <p>06 October 2016 - Divan Orange - Montreal, QC, Canada</p>
+                                <p>26 August 2016 - Secret Loft - Montreal, QC, Canada</p>
+                                <p>17 July 2016 - Divan Orange - Montreal, QC, Canada</p>
+                                <p>30 June 2016 - Divan Orange - Montreal, QC, Canada</p>
+                                <p>03 March 2016 - Studio B - Montreal, QC, Canada</p>
+                                <p>27 February 2016 - Studio Bizz - Montreal, QC, Canada</p>
+                            </div>
+
+    `;
+
             } else if (section === 'works') {
-                content = '<p><a href="https://maysunmusic.bandcamp.com/music">https://maysunmusic.bandcamp.com/music</a></p>';
+                content += '<p><a href="https://maysunmusic.bandcamp.com/music">https://maysunmusic.bandcamp.com/music</a></p>';
+
             } else if (section === 'diy') {
-                content = '<p>Instruments I have built and modified + useful tools.(coming soon)</p>';
+                content = '<p>Instruments I have built and modified + useful tools. (Coming soon)</p>';
             } else if (section === 'contact') {
-                content = '<p><strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong></p>';
+           content = '<p><strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong></p>';
             }
-
-            // Replace the content inside the container
-            contentContainer.innerHTML = content;
-
-            // Close both desktop and mobile menus after an option is selected
-            menuItems.style.display = 'none';
-            mobileMenu.style.display = 'none';
+       
+                // Replace the content inside the container
+                contentContainer.innerHTML = content;
+            
+                // Close both desktop and mobile menus after an option is selected
+                menuItems.style.display = 'none';
+                mobileMenu.style.display = 'none';
+            }
+       
+        function togglePerformance(year) {
+            const element = document.getElementById(`performance-${year}`);
+            element.style.display = (element.style.display === 'block') ? 'none' : 'block';
         }
 
         // Send an email when clicking on the logo
         function sendEmail() {
             window.location.href = 'mailto:maysun.booking@gmail.com';
         }
-
+    
         let hideTimeout;
-
+    
         document.addEventListener('mousemove', () => {
-        const menuContainer = document.querySelector('.menu-container');
-        menuContainer.classList.add('visible'); // Show the "more" button
-        clearTimeout(hideTimeout); // Clear previous timeout
-
-        // Set a new timeout to hide the button after 3 seconds
-        hideTimeout = setTimeout(() => {
-        menuContainer.classList.remove('visible'); // Hide the "more" button
-    }, 2000);
-});
-
+            const menuContainer = document.querySelector('.menu-container');
+            menuContainer.classList.add('visible'); // Show the "more" button
+            clearTimeout(hideTimeout); // Clear previous timeout
+    
+            // Set a new timeout to hide the button after 3 seconds
+            hideTimeout = setTimeout(() => {
+                menuContainer.classList.remove('visible'); // Hide the "more" button
+            }, 3000);
+        });
+    
         // Initialize hiding after a brief delay when the page loads
         hideTimeout = setTimeout(() => {
-        document.querySelector('.menu-container').classList.remove('visible');
-    }, 3000);
-
+            document.querySelector('.menu-container').classList.remove('visible');
+        }, 3000);
     </script>
-</body>
+    </body>
 </html>
