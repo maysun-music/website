@@ -29,6 +29,11 @@
             z-index: 1;
         }
 
+        /* Hide performance list by default */
+        #performance-2020 {
+                display: none; /* Hide the performance list by default */
+        }
+
         /* Responsive logo to avoid cutting off on smaller screens and trigger email on click */
         #content img {
             max-width: 100%;
@@ -66,10 +71,18 @@
         }
 
         .menu-items {
-            display: none;
+            display: none;      /* Keep hidden by default */
+            opacity: 0;        /* Set initial opacity to 0 for the transition effect */
+            transition: opacity 0.5s ease; /* Transition effect for opacity */
             margin-top: 10px;
             background-color: white;
             padding: 10px;
+        }
+
+        /* New class to show menu items */
+        .menu-items.visible {
+            display: block;     /* Show the menu items when the class is added */
+            opacity: 1;        /* Set opacity to 1 when visible */
         }
 
         .menu-items a {
@@ -177,9 +190,10 @@
     <script>
         // Toggle desktop menu visibility
         function toggleMenu() {
-            const menuItems = document.getElementById('menuItems');
-            menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
+            const menuItems = document.querySelector('.menu-items'); // Adjusted to select the menu items
+            menuItems.classList.toggle('visible'); // Toggle the class instead of display
         }
+
     
         // Toggle mobile burger menu visibility
         function toggleBurgerMenu() {
@@ -187,10 +201,22 @@
             mobileMenu.style.display = (mobileMenu.style.display === 'block') ? 'none' : 'block';
         }
     
+            function togglePerformance(year) {
+        const element = document.getElementById(`performance-${year}`);
+        if (element.style.display === 'block') {
+            element.style.transition = 'opacity 0.5s ease';
+            element.style.opacity = '0';
+            setTimeout(() => { element.style.display = 'none'; }, 500);
+        } else {
+            element.style.display = 'block';
+            setTimeout(() => { element.style.opacity = '1'; }, 0);
+        }
+        }
+
         // Function to load content into the center container and close menu
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
-            const menuItems = document.getElementById('menuItems'); // Reference to desktop menu
+            const menuItems = document.querySelector('menuItems'); // Reference to desktop menu
             const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
     
             let content = ''; // Content to be displayed based on the clicked menu item
@@ -206,7 +232,7 @@
                     <h3>RESIDENCIES</h3>
                     <ul>
                         <p>June 2024 - ITP Camp NYU - Brooklyn, NY, USA</p>
-                        <p>May 2024 - Avaloch Farm Music Institute - Boston, NH, USA</p>
+                        <p>May 2024 - Avaloch Farm Music Institute - Boscawen, NH, USA</p>
                         <p>January 2024 - ITP / IMA NYU Fellowship - Brooklyn, NY, USA</p>
                         <p>October 2023 - Récollets - Paris, FR</p>
                         <p>October 2023 - Satosphère - Montreal, QC, Canada</p>
@@ -216,7 +242,7 @@
                     </ul>
                     <h3>SOUND INSTALLATIONS</h3>
                     <ul>
-                        May 2024 - Clive Davis Gallery - Downtown Brooklyn, NY, USA
+                        May 2024 - Clive Davis Gallery - Brooklyn, NY, USA
                     </ul>
                 <div>
                     <h3>PAST SOLO PERFORMANCES</h3>
@@ -275,14 +301,9 @@
                 contentContainer.innerHTML = content;
             
                 // Close both desktop and mobile menus after an option is selected
-                menuItems.style.display = 'none';
+                menuItems.classlist.remove('visible');
                 mobileMenu.style.display = 'none';
             }
-       
-        function togglePerformance(year) {
-            const element = document.getElementById(`performance-${year}`);
-            element.style.display = (element.style.display === 'block') ? 'none' : 'block';
-        }
 
         // Send an email when clicking on the logo
         function sendEmail() {
