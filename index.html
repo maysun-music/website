@@ -105,7 +105,7 @@
             opacity: 1; /* Make visible */
             visibility: visible; /* Allow interaction */
         }
-        
+
         .menu-button {
             background-color: black;
             color: white;
@@ -137,6 +137,7 @@
             display: inline-block; /* Keep as inline-block for horizontal layout */
             color: black;
             text-decoration: none;
+            margin: 5px 10px; /* Space between menu items */
             padding: 2px 08px; /* Space between menu items */
             font-size: 14px;
             padding: 5px;
@@ -196,32 +197,34 @@
           box-sizing: border-box; /* Include padding and border in element's total width and height */
             }
 
-                            @media (max-width: 600px) {
-                    .content-container {
-                        padding: 20px 5%; /* Adjust side padding for mobile */
-                    }
+        /* Media query for Mobile */
+        @media (max-width: 600px) {
+            .menu-container {
+                display: none; /* Hide bottom menu on mobile */
+            }
 
-                    /* Adjust line-height for mobile view */
-                    .activities-content p {
-                        line-height: 1.5; /* Increased line height for better readability */
-                        margin-bottom: 10px; /* Space between paragraphs */
-                    }
+            .burger-menu {
+                display: block; /* Show burger menu on mobile */
+            }
 
-                    #content {
-                        padding: 10px; /* Add padding to the content container */
-                        overflow-y: auto; /* Allow scrolling if content overflows */
-                    }
+            .mobile-menu a {
+                font-size: 18px; /* Larger menu item font size for mobile */
+            }
+        }
 
-                    /* Specific adjustments for the lists in activities */
-                    #content ul {
-                        padding: 0; /* Ensure no padding for lists */
-                        margin: 0; /* Remove margin for lists */
-                    }
+        @media (max-width: 840px) {
+            .content-container {
+            padding: 20px 5%; /* Adjust side padding to give a little space */
+            }
+        }
+       
+        @media (max-width: 600px) {
+            .activities-content p {
+                margin: 10px 0; /* Increase the margin above and below paragraphs */
+                line-height: 1.6; /* Increase line height for better spacing */
+            }
+        }
 
-                    #content ul li {
-                        margin: 5px 0; /* Space between list items */
-                    }
-                }
     </style>
 </head>
 <body>
@@ -242,7 +245,7 @@
             <a href="#" onclick="loadContent('contact')">CONTACT</a>
         </div>
     </div>
-    
+
 
     <!-- Burger Menu for Mobile -->
     <div class="burger-menu" onclick="toggleBurgerMenu()">
@@ -369,7 +372,6 @@
                                 <p>03 March 2016 - Studio B - Montreal, QC, Canada</p>
                                 <p>27 February 2016 - Studio Bizz - Montreal, QC, Canada</p>
                             </div>
-
     `;
 
             } else if (section === 'works') {
@@ -398,15 +400,15 @@
                     </div>
                 `;
 }
-       
+
             contentContainer.innerHTML = content;
-    
+
             // Reset menu state
             isMenuVisible = false; // Close the menu state
             menuItems.classList.remove('visible'); // Hide menu items
             cancelHideTimeout(); // Cancel any hiding timers
 }
-            
+
             function togglePerformance(year) {
             const performanceDiv = document.getElementById(`performance-${year}`);
             performanceDiv.style.display = performanceDiv.style.display === 'none' ? 'block' : 'none';
