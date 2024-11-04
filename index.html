@@ -24,10 +24,22 @@
             text-align: center;
             padding: 20px;
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.2;
             color: black;
             z-index: 1;
+            overflow-y: auto; /* Allow vertical scrolling */
+            max-height: calc(100vh - 200px); /* Leave space for bottom menu */
+            margin-bottom: 20px; /* Add some space to avoid overlap */
+            scrollbar-width: none; /* Hide scrollbar */ /* Firefox */
         }
+        #content::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* Add padding to the bottom to avoid overlap with the menu */
+    .content-container {
+        padding-bottom: 120px; /* Adjust as needed */
+    }
 
         /* Hide performance list by default */
         #performance-2020 {
@@ -50,9 +62,9 @@
 
         /* Bottom Menu Styles for Desktop */
         .menu-container {
-            position: absolute;
-            bottom: 20px;
-            left: 0%;
+            position: fixed;
+            bottom: 0px;
+            left: 0;
             width: 100%;
             text-align: center;
             z-index: 20;
@@ -247,6 +259,7 @@
             } else if (section === 'activities') {
                 content = `
                     <h3>RESIDENCIES</h3>
+                    
                     <ul>
                         <p>June 2024 - ITP Camp NYU - Brooklyn, NY, USA</p>
                         <p>May 2024 - Avaloch Farm Music Institute - Boscawen, NH, USA</p>
@@ -258,11 +271,13 @@
                         <p>July 2022 - Satosphère - Montreal, QC, Canada</p>
                     </ul>
                     <h3>SOUND INSTALLATIONS</h3>
+                    
                     <ul>
                         May 2024 - Clive Davis Gallery - Brooklyn, NY, USA
                     </ul>
                 <div>
                     <h3>PAST SOLO PERFORMANCES</h3>
+                    
                                 <p>26 October 2024 - CuteLab - Brooklyn, NY, USA</p>
                                 <p>11 October 2024 - Iris Cantor Theater - New York, NY, USA</p>
                                 <p>30 August 2024 - Exit Points - Toronto, ON, Canada</p>
@@ -274,8 +289,6 @@
                                 <p>06 July 2022 - Substrat Satosphère - Montreal, QC, Canada</p>
                                 <p>28 November 2021 - Pony Boy - Brooklyn, NY, USA</p>
                                 <p>26 August 2021 - MUTEK - Montreal, QC, Canada</p>
-                            <h4 onclick="togglePerformance('2020')" style="cursor:pointer;">2016 - 2020</h4>
-                            <div id="performance-2020" style="display:none;">
                                 <p>01 February 2020 - Aussenwelt</p>
                                 <p>11 December 2019 - Sotterenea - Montreal, QC, Canada</p>
                                 <p>28 November 2019 - Sotterenea - Montreal, QC, Canada</p>
@@ -340,11 +353,6 @@
     cancelHideTimeout(); // Cancel any hiding timers
 }
 
-function toggleMenu() {
-    const menuItems = document.getElementById('menuItems');
-    isMenuVisible = !isMenuVisible; // Toggle visibility state
-    menuItems.classList.toggle('visible', isMenuVisible); // Add or remove class based on state
-    menuLogo.setAttribute('aria-expanded', isMenuVisible); // Update aria attribute
 
     // Start hiding the menu after 3 seconds if it is visible
     if (isMenuVisible) {
@@ -352,7 +360,7 @@ function toggleMenu() {
             toggleMenu(); // Automatically close the menu after 3 seconds
         }, 3000);
     }
-}
+
             
             function togglePerformance(year) {
             const performanceDiv = document.getElementById(`performance-${year}`);
