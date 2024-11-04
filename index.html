@@ -56,8 +56,8 @@
             width: 100%;
             text-align: center;
             z-index: 20;
-            opacity: 0; /* Start as invisible */
-            visibility: hidden; /* Prevent interaction when invisible */
+            opacity: 1; /* Start as invisible */
+            visibility: visible; /* Prevent interaction when invisible */
             transition: opacity 0.5s ease, visibility 0.5s ease; /* Adjust the duration as needed */
         }
 
@@ -86,7 +86,6 @@
             padding: 10px;
             width: 100%;
             box-sizing: border-box;
-    
             text-align: center; /* Center the text inside */
         }
 
@@ -167,12 +166,12 @@
 <body>
     <!-- Content Container -->
     <div class="content-container" id="content">
-        <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN Logo" onclick="toggleMenu()">
+        <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN Logo">
     </div>
 
     <!-- Bottom Menu for Desktop -->
-    <div class="menu-container">
-        <img src="images/3MAYSUN_clear.png" alt="More" class="menu-logo" onclick="toggleMenu()">
+    <div class="menu-container" id="menuContainer">
+        <img src="images/3MAYSUN_clear.png" alt="More" class="menu-logo" onclick="toggleMenu()" aria-haspopup="true" aria-expanded="false">
         <div class="menu-items" id="menuItems">
             <a href="#" onclick="loadContent('biography')">BIOGRAPHY</a>
             <a href="#" onclick="loadContent('activities')">ACTIVITIES</a>
@@ -199,45 +198,46 @@
     </div>
 
     <script>
-        // Toggle desktop menu visibility
+
+    let hideTimeout, isMenuVisible = false; // Track menu visibility
+        const menuLogo = document.querySelector('.menu-logo');
+
         function toggleMenu() {
-            const menuItems = document.querySelector('.menu-items'); // Adjusted to select the menu items
-            const menuContainer = document.querySelector('.menu-container'); // Select the whole menu container
-            
-            menuItems.classList.toggle('visible'); // Toggle the class instead of display
+            const menuItems = document.getElementById('menuItems');
+            isMenuVisible = !isMenuVisible; // Toggle visibility state
+            menuItems.classList.toggle('visible', isMenuVisible); // Add or remove class based on state
+            menuLogo.setAttribute('aria-expanded', isMenuVisible); // Update aria attribute
+            cancelHideTimeout(); // Cancel hiding if user is interacting
 
-            // Ensure the container is visible and clear any hiding timeout
-            menuContainer.classList.add('visible');
-            clearTimeout(hideTimeout); // Stop any active timeout to hide the menu
-        }
-
-    
-        // Toggle mobile burger menu visibility
-        function toggleBurgerMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.style.display = (mobileMenu.style.display === 'block') ? 'none' : 'block';
-        }
-    
-            function togglePerformance(year) {
-        const element = document.getElementById(`performance-${year}`);
-        if (element.style.display === 'block') {
-            element.style.transition = 'opacity 0.5s ease';
-            element.style.opacity = '0';
-            setTimeout(() => { element.style.display = 'none'; }, 500);
-        } else {
-            element.style.display = 'block';
-            setTimeout(() => { element.style.opacity = '1'; }, 0);
-        }
+            // Start hiding the menu after 3 seconds if it is visible
+            if (isMenuVisible) {
+                hideTimeout = setTimeout(() => {
+                    toggleMenu(); // Automatically close the menu after 3 seconds
+                }, 3000);
+            }
         }
 
-        // Function to load content into the center container and close menu
+        // Cancel the hide timeout if the user is interacting
+        function cancelHideTimeout() {
+            clearTimeout(hideTimeout);
+        }
+
+        // Mouse movement event listener to show menu
+        document.addEventListener('mousemove', (e) => {
+            const triggerHeight = window.innerHeight - 100;
+            const menuContainer = document.getElementById('menuContainer');
+
+            if (e.clientY > triggerHeight) {
+                menuContainer.classList.add('visible');
+                cancelHideTimeout(); // Cancel hide timeout when mouse is in the area
+            } else if (isMenuVisible) {
+                startHideTimer(); // Start timer to hide if menu is visible and mouse goes out
+            }
+        });
+
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
-            const menuItems = document.querySelector('menuItems'); // Reference to desktop menu
-            const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
-    
-            let content = ''; // Content to be displayed based on the clicked menu item
-                    
+            let content = ''; // Content to be displayed based on the clicked menu item                    
             if (section === 'biography') {
                 content = `
                     <p>Etienne Mason, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
@@ -314,42 +314,29 @@
            content = '<p><strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong></p>';
             }
        
-                // Replace the content inside the container
-                contentContainer.innerHTML = content;
-            
-                // Close both desktop and mobile menus after an option is selected
-                menuItems.classlist.remove('visible');
-                mobileMenu.style.display = 'none';
+                    contentContainer.innerHTML = content;
+                menuItems.classList.remove('visible');
+                startHideTimer();
             }
-    
-                // Initial fade-in on page load
-            const menuContainer = document.querySelector('.menu-container');
-            menuContainer.classList.add('visible'); // Show menu on page load
 
-            // Hide the menu after a few seconds
-            setTimeout(() => {
-                menuContainer.classList.remove('visible');
-            }, 3000); // Adjust this time as needed
-
-            let hideTimeout; // Declare hideTimeout only once
-
-            // Mousemove event only near the bottom of the page
             document.addEventListener('mousemove', (e) => {
-                const triggerHeight = window.innerHeight - 100; // Bottom 100px of viewport
-                
-                // Only trigger if mouse is near the bottom
+                const triggerHeight = window.innerHeight - 100;
+                const menuContainer = document.getElementById('menuContainer');
+
                 if (e.clientY > triggerHeight) {
                     menuContainer.classList.add('visible');
-                    
-                    // Clear any existing timeout
                     clearTimeout(hideTimeout);
-                    
-                    // Hide the menu after 3 seconds of no movement near the menu
-                    hideTimeout = setTimeout(() => {
-                        menuContainer.classList.remove('visible');
-                    }, 3000); // Adjust this time as needed
+                    clearTimeout(disappearTimeout);
+                } else {
+                    startHideTimer();
                 }
+
             });
-    </script>
+            
+            function togglePerformance(year) {
+            const performanceDiv = document.getElementById(`performance-${year}`);
+            performanceDiv.style.display = performanceDiv.style.display === 'none' ? 'block' : 'none';
+            }
+        </script>
     </body>
 </html>
