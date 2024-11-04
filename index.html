@@ -181,6 +181,11 @@
             text-decoration: none;
         }
 
+        .mobile-menu.visible {
+    display: block; /* Show the mobile menu when visible */
+        }
+
+
         * {
           box-sizing: border-box; /* Include padding and border in element's total width and height */
             }
@@ -236,13 +241,14 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#" onclick="loadContent('home')">HOME</a>
-        <a href="#" onclick="loadContent('biography')">BIOGRAPHY</a>
-        <a href="#" onclick="loadContent('activities')">ACTIVITIES</a>
-        <a href="#" onclick="loadContent('works')">WORKS</a>
-        <a href="#" onclick="loadContent('diy')">DIY & RESSOURCES</a>
-        <a href="#" onclick="loadContent('contact')">CONTACT</a>
+        <a href="#" onclick="loadContent('home'); toggleBurgerMenu()">HOME</a>
+        <a href="#" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
+        <a href="#" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
+        <a href="#" onclick="loadContent('works'); toggleBurgerMenu()">WORKS</a>
+        <a href="#" onclick="loadContent('diy'); toggleBurgerMenu()">DIY & RESOURCES</a>
+        <a href="#" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
     </div>
+
 
     <script>
 
@@ -256,6 +262,12 @@
             menuLogo.setAttribute('aria-expanded', isMenuVisible); // Update aria attribute
             cancelHideTimeout(); // Cancel hiding if user is interacting
         }
+
+        function toggleBurgerMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('visible'); // Toggle visibility of the mobile menu
+        }
+
 
         // Cancel the hide timeout if the user is interacting
         function cancelHideTimeout() {
