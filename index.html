@@ -217,6 +217,7 @@
     <div class="menu-container" id="menuContainer">
         <img src="images/3MAYSUN_clear.png" alt="More" class="menu-logo" onclick="toggleMenu()" aria-haspopup="true" aria-expanded="false">
         <div class="menu-items" id="menuItems">
+            <a href="#" onclick="loadContent('home')">HOME</a>
             <a href="#" onclick="loadContent('biography')">BIOGRAPHY</a>
             <a href="#" onclick="loadContent('activities')">ACTIVITIES</a>
             <a href="#" onclick="loadContent('works')">WORKS</a>
@@ -235,6 +236,7 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
+        <a href="#" onclick="loadContent('home')">HOME</a>
         <a href="#" onclick="loadContent('biography')">BIOGRAPHY</a>
         <a href="#" onclick="loadContent('activities')">ACTIVITIES</a>
         <a href="#" onclick="loadContent('works')">WORKS</a>
@@ -275,6 +277,9 @@
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
             let content = ''; // Content to be displayed based on the clicked menu item                    
+            if (section === 'home') {
+                content = `<img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN Logo">`;
+            }
             if (section === 'biography') {
                 content = `
                     <p>Etienne Mason, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
@@ -372,10 +377,10 @@
        
             contentContainer.innerHTML = content;
     
-    // Reset menu state
-    isMenuVisible = false; // Close the menu state
-    menuItems.classList.remove('visible'); // Hide menu items
-    cancelHideTimeout(); // Cancel any hiding timers
+            // Reset menu state
+            isMenuVisible = false; // Close the menu state
+            menuItems.classList.remove('visible'); // Hide menu items
+            cancelHideTimeout(); // Cancel any hiding timers
 }
             
             function togglePerformance(year) {
