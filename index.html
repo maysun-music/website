@@ -311,8 +311,25 @@
             } else if (section === 'diy') {
                 content = '<p>Instruments I have built and modified + useful tools. (Coming soon)</p>';
             } else if (section === 'contact') {
-           content = '<p><strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong></p>';
-            }
+                content = `
+                    <p>
+                        <a href="mailto:maysun.booking@gmail.com" style="text-decoration: none;">
+                            <strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong>
+                        </a>
+                    </p>
+                    <div style="display: flex; justify-content: center; margin-top: 10px;">
+                        <a href="https://www.instagram.com/maysun.music/" target="_blank">
+                            <img src="images/ig_logo.png" alt="Instagram" style="width: 30px; height: 30px; margin: 0 10px;">
+                        </a>
+                        <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+                            <img src="images/yt_logo.png" alt="YouTube" style="width: 30px; height: 30px; margin: 0 10px;">
+                        </a>
+                        <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+                            <img src="images/bc_logo.png" alt="Bandcamp" style="width: 30px; height: 30px; margin: 0 10px;">
+                        </a>
+                    </div>
+                `;
+}
        
             contentContainer.innerHTML = content;
     
