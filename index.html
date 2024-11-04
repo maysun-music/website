@@ -13,9 +13,12 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 0;
             background-color: white;
             font-family: Helvetica, Arial, sans-serif;
             position: relative;
+            text-align: center;
+            overflow-x: hidden;
         }
 
         /* Style for the content */
@@ -24,26 +27,42 @@
             text-align: center;
             padding: 20px;
             font-size: 16px;
-            line-height: 1.2;
+            line-height: 1.5;
             color: black;
-            z-index: 1;
-            overflow-y: auto; /* Allow vertical scrolling */
-            max-height: calc(100vh - 200px); /* Leave space for bottom menu */
-            margin-bottom: 20px; /* Add some space to avoid overlap */
-            scrollbar-width: none; /* Hide scrollbar */ /* Firefox */
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+            margin: 0 auto; /* Center content within its container */
         }
+
+        #content ul {
+            list-style-position: inside; /* Center bullets */
+            padding: 0; /* Remove default padding */
+        }
+
+        #content ul li {
+            margin: 5px 0; /* Space between list items */
+        }
+
         #content::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none; /* Hide scrollbar */
+        }
+
+        #content h3 {
+            text-align: center; /* Center the header text */
+            margin: 20px 0; /* Optional: Adjust margins as needed for spacing */
+        }
+
+        #content p {
+            text-align: center; /* Ensure paragraphs are also centered */
         }
 
         /* Add padding to the bottom to avoid overlap with the menu */
-    .content-container {
-        padding-bottom: 120px; /* Adjust as needed */
-    }
-
-        /* Hide performance list by default */
-        #performance-2020 {
-                display: none; /* Hide the performance list by default */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
         }
 
         /* Responsive logo to avoid cutting off on smaller screens and trigger email on click */
@@ -159,6 +178,10 @@
             text-decoration: none;
         }
 
+        * {
+          box-sizing: border-box; /* Include padding and border in element's total width and height */
+            }
+
         /* Media query for Mobile */
         @media (max-width: 600px) {
             .menu-container {
@@ -171,6 +194,12 @@
 
             .mobile-menu a {
                 font-size: 18px; /* Larger menu item font size for mobile */
+            }
+        }
+
+        @media (max-width: 840px) {
+            .content-container {
+            padding: 20px 5%; /* Adjust side padding to give a little space */
             }
         }
     </style>
