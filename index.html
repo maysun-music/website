@@ -314,24 +314,27 @@
            content = '<p><strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong></p>';
             }
        
-                    contentContainer.innerHTML = content;
-                menuItems.classList.remove('visible');
-                startHideTimer();
-            }
+            contentContainer.innerHTML = content;
+    
+    // Reset menu state
+    isMenuVisible = false; // Close the menu state
+    menuItems.classList.remove('visible'); // Hide menu items
+    cancelHideTimeout(); // Cancel any hiding timers
+}
 
-            document.addEventListener('mousemove', (e) => {
-                const triggerHeight = window.innerHeight - 100;
-                const menuContainer = document.getElementById('menuContainer');
+function toggleMenu() {
+    const menuItems = document.getElementById('menuItems');
+    isMenuVisible = !isMenuVisible; // Toggle visibility state
+    menuItems.classList.toggle('visible', isMenuVisible); // Add or remove class based on state
+    menuLogo.setAttribute('aria-expanded', isMenuVisible); // Update aria attribute
 
-                if (e.clientY > triggerHeight) {
-                    menuContainer.classList.add('visible');
-                    clearTimeout(hideTimeout);
-                    clearTimeout(disappearTimeout);
-                } else {
-                    startHideTimer();
-                }
-
-            });
+    // Start hiding the menu after 3 seconds if it is visible
+    if (isMenuVisible) {
+        hideTimeout = setTimeout(() => {
+            toggleMenu(); // Automatically close the menu after 3 seconds
+        }, 3000);
+    }
+}
             
             function togglePerformance(year) {
             const performanceDiv = document.getElementById(`performance-${year}`);
