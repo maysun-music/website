@@ -56,6 +56,11 @@
             text-align: center; /* Ensure paragraphs are also centered */
         }
 
+        .activities-content p {
+        line-height: 0.6; /* or any value you find appropriate */
+        }
+
+
         /* Add padding to the bottom to avoid overlap with the menu */
         .content-container {
             max-width: 800px;
@@ -301,7 +306,7 @@
             } else if (section === 'activities') {
                 content = `
                     <h3>RESIDENCIES</h3>
-                    
+                    <div class="activities-content">
                     <ul>
                         <p>June 2024 - ITP Camp NYU - Brooklyn, NY, USA</p>
                         <p>May 2024 - Avaloch Farm Music Institute - Boscawen, NH, USA</p>
