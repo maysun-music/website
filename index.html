@@ -196,26 +196,32 @@
           box-sizing: border-box; /* Include padding and border in element's total width and height */
             }
 
-        /* Media query for Mobile */
-        @media (max-width: 600px) {
-            .menu-container {
-                display: none; /* Hide bottom menu on mobile */
-            }
+                            @media (max-width: 600px) {
+                    .content-container {
+                        padding: 20px 5%; /* Adjust side padding for mobile */
+                    }
 
-            .burger-menu {
-                display: block; /* Show burger menu on mobile */
-            }
+                    /* Adjust line-height for mobile view */
+                    .activities-content p {
+                        line-height: 1.5; /* Increased line height for better readability */
+                        margin-bottom: 10px; /* Space between paragraphs */
+                    }
 
-            .mobile-menu a {
-                font-size: 18px; /* Larger menu item font size for mobile */
-            }
-        }
+                    #content {
+                        padding: 10px; /* Add padding to the content container */
+                        overflow-y: auto; /* Allow scrolling if content overflows */
+                    }
 
-        @media (max-width: 840px) {
-            .content-container {
-            padding: 20px 5%; /* Adjust side padding to give a little space */
-            }
-        }
+                    /* Specific adjustments for the lists in activities */
+                    #content ul {
+                        padding: 0; /* Ensure no padding for lists */
+                        margin: 0; /* Remove margin for lists */
+                    }
+
+                    #content ul li {
+                        margin: 5px 0; /* Space between list items */
+                    }
+                }
     </style>
 </head>
 <body>
