@@ -41,6 +41,13 @@
             cursor: pointer;
         }
 
+        .menu-logo {
+            width: 100px; /* Set the desired width for the logo */
+            cursor: pointer; /* Change the cursor to indicate it is clickable */
+            margin: 10px 0; /* Adjust margin if needed */
+}
+
+
         /* Bottom Menu Styles for Desktop */
         .menu-container {
             position: absolute;
@@ -160,12 +167,12 @@
 <body>
     <!-- Content Container -->
     <div class="content-container" id="content">
-        <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN Logo" onclick="sendEmail()">
+        <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN Logo" onclick="toggleMenu()">
     </div>
 
     <!-- Bottom Menu for Desktop -->
     <div class="menu-container">
-        <button class="menu-button" onclick="toggleMenu()">more</button>
+        <img src="images/3MAYSUN_clear.png" alt="More" class="menu-logo" onclick="toggleMenu()">
         <div class="menu-items" id="menuItems">
             <a href="#" onclick="loadContent('biography')">BIOGRAPHY</a>
             <a href="#" onclick="loadContent('activities')">ACTIVITIES</a>
@@ -195,7 +202,13 @@
         // Toggle desktop menu visibility
         function toggleMenu() {
             const menuItems = document.querySelector('.menu-items'); // Adjusted to select the menu items
+            const menuContainer = document.querySelector('.menu-container'); // Select the whole menu container
+            
             menuItems.classList.toggle('visible'); // Toggle the class instead of display
+
+            // Ensure the container is visible and clear any hiding timeout
+            menuContainer.classList.add('visible');
+            clearTimeout(hideTimeout); // Stop any active timeout to hide the menu
         }
 
     
@@ -308,11 +321,6 @@
                 menuItems.classlist.remove('visible');
                 mobileMenu.style.display = 'none';
             }
-
-        // Send an email when clicking on the logo
-        function sendEmail() {
-            window.location.href = 'mailto:maysun.booking@gmail.com';
-        }
     
                 // Initial fade-in on page load
             const menuContainer = document.querySelector('.menu-container');
