@@ -212,6 +212,23 @@
             }
         }
 
+            .image-container {
+                 display: inline-block; /* Keeps the image and credit together */
+                 text-align: right; /* Aligns text to the right */
+                 margin-top: 5px; /* Adds some space between the image and the text */
+        }
+
+        .photo-credit {
+            bottom: 5px; /* Adjust as necessary */
+            right: 5px; /* Adjust as necessary */
+            font-size: 08px; /* Adjust size as needed */
+            color: black; /* Change color if needed */
+            background-color: rgba(255, 255, 255, 0.7); /* Optional */
+            padding: 2px 5px; /* Optional */
+            border-radius: 3px; /* Optional */
+        }
+
+
         @media (max-width: 840px) {
             .content-container {
             padding: 20px 5%; /* Adjust side padding to give a little space */
@@ -230,8 +247,12 @@
 <body>
     <!-- Content Container -->
     <div class="content-container" id="content">
-        <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN Logo">
+        <div class="image-container">
+            <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - photo by Chienn Tai">
+            <div class="photo-credit">Photo: Chienn Tai (2024)</div>
+        </div>
     </div>
+    
 
     <!-- Bottom Menu for Desktop -->
     <div class="menu-container" id="menuContainer">
@@ -305,7 +326,7 @@
             const contentContainer = document.getElementById('content');
             let content = ''; // Content to be displayed based on the clicked menu item                    
             if (section === 'home') {
-                content = `<img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN Logo">`;
+                content = `<img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">`;
             }
             if (section === 'biography') {
                 content = `
