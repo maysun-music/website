@@ -63,6 +63,7 @@
 
         /* Add padding to the bottom to avoid overlap with the menu */
         .content-container {
+            transform: scale(1.0); /* scale content area */
             max-width: 800px;
             margin: 0 auto;
             padding: 20px 0;
@@ -227,6 +228,56 @@
             padding: 2px 5px; /* Optional */
             border-radius: 3px; /* Optional */
         }
+
+
+        /* -----------ALBUM GRID------------ */
+        .album-grid {
+            transform: scale(0.8); 
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns */
+            grid-template-rows: auto; /* Ensure rows don't add unnecessary space */
+            gap: 10px; /* Ensures both horizontal and vertical gaps */
+            justify-items: center;
+            margin: 20px auto; /* Center the grid */
+        }
+
+        .album-item img {
+            width: 100%;
+            height: 100%; /* Make sure image height is controlled */
+            object-fit: cover; /* Ensure the image doesn't stretch or squish */
+            display: block;
+        }
+
+        .album-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .album-item::before {
+            content: attr(data-title); /* Display album name and year */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            color: white;
+            font-size: 14px;
+            padding: 5px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .album-item:hover {
+            transform: scale(1.25); /* Slight zoom on hover */
+            z-index: 10; /* Ensures hovered album appears on top */
+        }
+
+        .album-item:hover::before {
+            opacity: 1; /* Show title on hover */
+        }
+
 
 
         @media (max-width: 840px) {
@@ -395,12 +446,46 @@
                             </div>
     `;
 
-            } else if (section === 'works') {
-                content += '<p><a href="https://maysunmusic.bandcamp.com/music">https://maysunmusic.bandcamp.com/music</a></p>';
+            } 
+            
+                                else if (section === 'works') {
+                        content = `
+                            <div class="album-grid">
+                                <a href="https://maysunmusic.bandcamp.com/album/timelines" target="_blank" class="album-item" data-title="Timelines (2023)">
+                                    <img src="images/08_album_cover.png" alt="Timelines">
+                                </a>
+                                <a href="https://maysunmusic.bandcamp.com/album/variations-on-clarity-and-conviction-live-session" target="_blank" class="album-item" data-title="Variations on Clarity and Conviction (2022)">
+                                    <img src="images/07_album_cover.png" alt="Variations on Clarity and Conviction">
+                                </a>
+                                <a href="https://maysunmusic.bandcamp.com/album/wanderlust-ii" target="_blank" class="album-item" data-title="Wanderlust II (2021)">
+                                    <img src="images/06_album_cover.png" alt="Wanderlust II">
+                                </a>
+                                <a href="https://maysunmusic.bandcamp.com/album/waiting-spaces" target="_blank" class="album-item" data-title="Waiting Spaces (2020)">
+                                    <img src="images/05_album_cover.png" alt="Waiting Spaces">
+                                </a>
+                                <a href="https://maysunmusic.bandcamp.com/album/the-after-mountain" target="_blank" class="album-item" data-title="The After Mountain (2020)">
+                                    <img src="images/04_album_cover.png" alt="The After Mountain">
+                                </a>
+                                <a href="https://maysunmusic.bandcamp.com/album/sun-ice" target="_blank" class="album-item" data-title="Sun & Ice (2017)">
+                                    <img src="images/03_album_cover.png" alt="Sun & Ice">
+                                </a>
+                                <a href="https://maysunmusic.bandcamp.com/album/the-field-of-living" target="_blank" class="album-item" data-title="The Field of Living (2016)">
+                                    <img src="images/02_album_cover.png" alt="The Field of Living">
+                                </a>
+                                <a href="https://maysunmusic.bandcamp.com/album/all-these-are-the-days" target="_blank" class="album-item" data-title="All These Are The Days (2016)">
+                                    <img src="images/01_album_cover.png" alt="All These Are The Days">
+                                </a>
+                            </div>
+                           
+                        `;
+                    }
 
-            } else if (section === 'diy') {
+            
+            else if (section === 'diy') {
                 content = '<p>Instruments I have built and modified + useful tools. (Coming soon)</p>';
-            } else if (section === 'contact') {
+            } 
+            
+            else if (section === 'contact') {
                 content = `
                         <strong>Welcoming artistic possibilities</strong> — spatial audio, drums, synths, sound design, scoring, solo performances, touring, and any form of creative collaboration. If you like my sound, let’s work together.
                     <p>
