@@ -79,21 +79,27 @@
         }
 
         .menu-logo {
-            width: 100px; /* Set the desired width for the logo */
-            cursor: pointer; /* Change the cursor to indicate it is clickable */
-            margin: 10px 0; /* Adjust margin if needed */
-}
+            width: 100px;
+            cursor: pointer;
+            margin: 10px 0; /* Center the logo */
+            transition: transform 0.4s ease, margin 0.4s ease;
+        }
 
+        /* When menu is visible, apply a subtle scale effect */
+        .menu-logo.menu-open {
+            transform: scale(0.9); /* Slightly reduce size to make room for the menu */
+            margin-left: 20px; /* Slight nudge to the left if needed */
+        }
 
         /* Bottom Menu Styles for Desktop */
         .menu-container {
             position: fixed;
-            bottom: 0px;
+            bottom: 0;
             left: 0;
             width: 100%;
-            display: flex; /* Change to flex */
-            justify-content: center; /* Center the items horizontally */
-            align-items: center; /* Center the items vertically */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 20;
             opacity: 1;
             visibility: visible;
@@ -117,38 +123,41 @@
             border-radius: 0px;
         }
 
+        /* Menu items are hidden by default */
         .menu-items {
-            display: none; /* Keep hidden by default */
+            display: none;
             opacity: 0;
-            transition: opacity 0.5s ease;
-            background-color: white;
-            padding: 10px;
-            box-sizing: border-box;
-            text-align: center;
+            transition: opacity 0.5s ease 0.5s; /* Fade in with delay */
         }
 
 
-        /* New class to show menu items */
+        /* When menu is visible, fade in the menu items */
         .menu-items.visible {
-            display: block;     /* Show the menu items when the class is added */
-            opacity: 1;        /* Set opacity to 1 when visible */
+            display: block;
+            opacity: 1;
         }
 
+     /* Align items centrally */
         .menu-items a {
-            display: inline-block; /* Keep as inline-block for horizontal layout */
+            display: inline-block;
             color: black;
             text-decoration: none;
-            margin: 5px 10px; /* Space between menu items */
-            padding: 2px 08px; /* Space between menu items */
-            font-size: 14px;
+            margin: 5px 10px;
             padding: 5px;
+            font-size: 14px;
             font-weight: bolder;
             border-radius: 0;
+            transition: transform 0.3s ease; /* Smooth scale transition */
         }
 
 
         .menu-items a:hover {
-            background-color: #f0f0f0;
+            transform: scale(1.4); /* Slightly magnify the menu item */
+        }
+
+        /* Temporarily disable transitions with this class */
+        .no-transition {
+            transition: none !important;
         }
 
         /* Burger Menu for Mobile */
@@ -337,42 +346,47 @@
         <a href="#" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
     </div>
 
-
     <script>
-
-        let hideTimeout, isMenuVisible = false; // Track menu visibility
-        const menuLogo = document.querySelector('.menu-logo');
-        const menuItems = document.getElementById('menuItems'); // Moved outside the function for easier access
-
-        function toggleMenu() {
-            isMenuVisible = !isMenuVisible; // Toggle visibility state
-            menuItems.classList.toggle('visible', isMenuVisible); // Add or remove class based on state
-            menuLogo.setAttribute('aria-expanded', isMenuVisible); // Update aria attribute
-            cancelHideTimeout(); // Cancel hiding if user is interacting
-        }
-
-        function toggleBurgerMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('visible'); // Toggle visibility of the mobile menu
-        }
-
-
-        // Cancel the hide timeout if the user is interacting
-        function cancelHideTimeout() {
-            clearTimeout(hideTimeout);
-        }
-        // Mouse movement event listener to show menu
-        document.addEventListener('mousemove', (e) => {
-            const triggerHeight = window.innerHeight - 100;
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuLogo = document.querySelector('.menu-logo');
+            const menuItems = document.getElementById('menuItems');
             const menuContainer = document.getElementById('menuContainer');
-
-            if (e.clientY > triggerHeight) {
-                menuContainer.classList.add('visible');
-                cancelHideTimeout(); // Cancel hide timeout when mouse is in the area
-            } else if (isMenuVisible) {
-                startHideTimer(); // Start timer to hide if menu is visible and mouse goes out
+            let isMenuVisible = false; // Track menu visibility status globally
+            let hideTimeout;
+    
+            // Initial load - disable transitions briefly
+            menuLogo.classList.add('no-transition');
+            menuItems.classList.add('no-transition');
+            setTimeout(() => {
+                menuLogo.classList.remove('no-transition');
+                menuItems.classList.remove('no-transition');
+            }, 50);
+    
+            // Toggle menu function
+            function toggleMenu() {
+                isMenuVisible = !isMenuVisible;
+                menuItems.classList.toggle('visible', isMenuVisible);
+                menuLogo.classList.toggle('menu-open', isMenuVisible);
+                cancelHideTimeout(); // Clear any hiding timeout when menu toggled
             }
-        });
+    
+            // Function to cancel the hide timeout
+            function cancelHideTimeout() {
+                clearTimeout(hideTimeout);
+            }
+    
+            // Mouse movement event to show the menu when near the bottom
+            document.addEventListener('mousemove', (e) => {
+                const triggerHeight = window.innerHeight - 100;
+                if (e.clientY > triggerHeight) {
+                    menuContainer.classList.add('visible');
+                    cancelHideTimeout();
+                } else if (isMenuVisible) {
+                    hideTimeout = setTimeout(() => {
+                        menuContainer.classList.remove('visible');
+                    }, 3000); // Adjust this timeout as needed
+                }
+            });
 
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
@@ -514,19 +528,19 @@
                 `;
 }
 
-            contentContainer.innerHTML = content;
+contentContainer.innerHTML = content;
             window.location.hash = section;
 
-            // Reset menu state
-            isMenuVisible = false; // Close the menu state
-            menuItems.classList.remove('visible'); // Hide menu items
-            cancelHideTimeout(); // Cancel any hiding timers
-}
+            // Close menu upon navigation
+            isMenuVisible = false;
+            menuItems.classList.remove('visible');
+        }
 
-            function togglePerformance(year) {
-            const performanceDiv = document.getElementById(`performance-${year}`);
-            performanceDiv.style.display = performanceDiv.style.display === 'none' ? 'block' : 'none';
-            }
+        // Expose functions for external usage
+        window.toggleMenu = toggleMenu;
+        window.loadContent = loadContent;
+    });
+    
         </script>
     </body>
 </html>
