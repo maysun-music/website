@@ -351,10 +351,10 @@
             const menuLogo = document.querySelector('.menu-logo');
             const menuItems = document.getElementById('menuItems');
             const menuContainer = document.getElementById('menuContainer');
-            let isMenuVisible = false; // Track menu visibility status globally
+            let isMenuVisible = false;
             let hideTimeout;
     
-            // Initial load - disable transitions briefly
+            // Disable transitions briefly on page load
             menuLogo.classList.add('no-transition');
             menuItems.classList.add('no-transition');
             setTimeout(() => {
@@ -362,31 +362,18 @@
                 menuItems.classList.remove('no-transition');
             }, 50);
     
-            // Toggle menu function
+            // Toggle menu visibility
             function toggleMenu() {
                 isMenuVisible = !isMenuVisible;
                 menuItems.classList.toggle('visible', isMenuVisible);
                 menuLogo.classList.toggle('menu-open', isMenuVisible);
-                cancelHideTimeout(); // Clear any hiding timeout when menu toggled
+                cancelHideTimeout();
             }
     
-            // Function to cancel the hide timeout
+            // Function to cancel any hide timeout
             function cancelHideTimeout() {
                 clearTimeout(hideTimeout);
             }
-    
-            // Mouse movement event to show the menu when near the bottom
-            document.addEventListener('mousemove', (e) => {
-                const triggerHeight = window.innerHeight - 100;
-                if (e.clientY > triggerHeight) {
-                    menuContainer.classList.add('visible');
-                    cancelHideTimeout();
-                } else if (isMenuVisible) {
-                    hideTimeout = setTimeout(() => {
-                        menuContainer.classList.remove('visible');
-                    }, 3000); // Adjust this timeout as needed
-                }
-            });
 
         function loadContent(section) {
             const contentContainer = document.getElementById('content');
@@ -528,19 +515,32 @@
                 `;
 }
 
-contentContainer.innerHTML = content;
-            window.location.hash = section;
+            contentContainer.innerHTML = content;
+                        window.location.hash = section;
 
-            // Close menu upon navigation
-            isMenuVisible = false;
-            menuItems.classList.remove('visible');
-        }
+                        // Reset menu to closed state after loading content
+                        isMenuVisible = false;
+                        menuItems.classList.remove('visible');
+                        menuLogo.classList.remove('menu-open');
+                    }
 
-        // Expose functions for external usage
-        window.toggleMenu = toggleMenu;
-        window.loadContent = loadContent;
-    });
-    
+                    // Expose functions to the global scope if needed
+                    window.toggleMenu = toggleMenu;
+                    window.loadContent = loadContent;
+
+                    // Mouse movement to show menu on hover near the bottom
+                    document.addEventListener('mousemove', (e) => {
+                        const triggerHeight = window.innerHeight - 100;
+                        if (e.clientY > triggerHeight) {
+                            menuContainer.classList.add('visible');
+                            cancelHideTimeout();
+                        } else if (isMenuVisible) {
+                            hideTimeout = setTimeout(() => {
+                                menuContainer.classList.remove('visible');
+                            }, 3000); // Timeout for auto-hide
+                        }
+                    });
+                });
         </script>
     </body>
 </html>
