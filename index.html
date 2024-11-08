@@ -202,6 +202,61 @@
         display: block; /* Show the mobile menu when visible */
         }
 
+            #mobileMenu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #efda19; /* Or any background color you desire */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+
+            #mobileMenu.visible {
+            opacity: 1;
+            visibility: visible;
+            }
+
+            /* Adjust the font size in the mobile menu */
+        #mobileMenu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 6vw; /* This scales the text based on viewport width */
+            color: rgb(0, 0, 0); /* Adjust the text color as needed */
+        }
+        #mobileMenu ul li {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #mobileMenu a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Large font size, adjustable based on viewport */
+        #mobileMenu .menu-item {
+            font-size: calc(100vh / 2); /* Adjust this divisor to control size */
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            line-height: 1; /* Tight line height for more space */
+        }
+
+
 
         * {
           box-sizing: border-box; /* Include padding and border in element's total width and height */
@@ -228,6 +283,7 @@
                  margin-top: 5px; /* Adds some space between the image and the text */
         }
 
+        /* ------PHOTO CREDIT ----- */
         .photo-credit {
             bottom: 5px; /* Adjust as necessary */
             right: 5px; /* Adjust as necessary */
@@ -363,6 +419,14 @@
                 menuItems.classList.remove('no-transition');
             }, 50);
         
+            // Adjust font size dynamically when the mobile menu is opened
+            function adjustMenuFontSize() {
+                    const menuItems = mobileMenu.querySelector('ul');
+                    const fontSize = window.innerWidth * 0.06; // Adjust this ratio as needed
+                    menuItems.style.fontSize = `${fontSize}px`; // Set font size dynamically
+                }
+
+
             // Toggle desktop menu visibility on click
             function toggleDesktopMenu() {
                         isDesktopMenuVisible = !isDesktopMenuVisible;
@@ -372,10 +436,17 @@
         
             // Toggle mobile menu visibility on burger icon click
             function toggleMobileMenu() {
-                isMobileMenuVisible = !isMobileMenuVisible;
-                mobileMenu.classList.toggle('visible', isMobileMenuVisible); // Show/hide mobile menu
-            }
+                        isMobileMenuVisible = !isMobileMenuVisible;
+                        mobileMenu.classList.toggle('visible', isMobileMenuVisible); // Show/hide mobile menu
+
+                        // After the mobile menu is visible, adjust the font size of the menu items
+                        if (isMobileMenuVisible) {
+                            adjustMenuFontSize(); // Adjust font size when mobile menu is opened
+                        }
+                    }
         
+
+
             // Load content and reset both menus
             function loadContent(section) {
                 const contentContainer = document.getElementById('content');
@@ -531,7 +602,7 @@
 
                 // Event listeners
                     burgerMenu.addEventListener('click', toggleMobileMenu); // Click for mobile menu toggle
-                        menuLogo.addEventListener('click', toggleDesktopMenu); // Click for desktop menu toggle
+                    menuLogo.addEventListener('click', toggleDesktopMenu); // Click for desktop menu toggle
 
                     // Expose functions to global scope if needed
                     window.toggleDesktopMenu = toggleDesktopMenu;
