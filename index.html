@@ -349,12 +349,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const menuLogo = document.querySelector('.menu-logo');
-            const menuItems = document.getElementById('menuItems');
-            const menuContainer = document.getElementById('menuContainer');
-            const burgerMenu = document.querySelector('.burger-menu');
-            const mobileMenu = document.getElementById('mobileMenu');
-            let isMenuVisible = false;
-            let hideTimeout;
+            const menuItems = document.getElementById('menuItems'); // Desktop menu
+            const burgerMenu = document.querySelector('.burger-menu'); // Burger icon for mobile
+            const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
+            let isDesktopMenuVisible = false;
+            let isMobileMenuVisible = false;
         
             // Disable transitions briefly on page load
             menuLogo.classList.add('no-transition');
@@ -364,37 +363,25 @@
                 menuItems.classList.remove('no-transition');
             }, 50);
         
-            // Toggle menu visibility
-            function toggleMenu() {
-                isMenuVisible = !isMenuVisible;
-                menuItems.classList.toggle('visible', isMenuVisible);
-                menuLogo.classList.toggle('menu-open', isMenuVisible);
-                cancelHideTimeout();
+            // Toggle desktop menu visibility on click
+            function toggleDesktopMenu() {
+                        isDesktopMenuVisible = !isDesktopMenuVisible;
+                        menuItems.classList.toggle('visible', isDesktopMenuVisible);
+                        menuLogo.classList.toggle('menu-open', isDesktopMenuVisible);
+                    }
+        
+            // Toggle mobile menu visibility on burger icon click
+            function toggleMobileMenu() {
+                isMobileMenuVisible = !isMobileMenuVisible;
+                mobileMenu.classList.toggle('visible', isMobileMenuVisible); // Show/hide mobile menu
             }
         
-            // Click event listener for the burger icon
-            burgerMenu.addEventListener('click', toggleBurgerMenu);
-        
-            // Cancel any hide timeout
-            function cancelHideTimeout() {
-                clearTimeout(hideTimeout);
-            }
-        
-            // Toggle mobile menu visibility
-            function toggleBurgerMenu() {
-                console.log("Burger menu clicked");  // Log when the burger menu is clicked
-                isMenuVisible = !isMenuVisible;
-                mobileMenu.classList.toggle('visible', isMenuVisible); // Show or hide the mobile menu
-                console.log("Mobile menu visibility:", isMenuVisible);  // Log the visibility state
-            }
-        
-            // Load specific content based on the clicked menu item
+            // Load content and reset both menus
             function loadContent(section) {
                 const contentContainer = document.getElementById('content');
-                let content = ''; // Content to be displayed based on the clicked menu item   
-                
-
-            // Define content for each section
+                let content = ''; // Define content for each section as in your code...
+        
+                // Populate content based on section
             if (section === 'home') {
         content = `
             <div class="image-container">
@@ -530,27 +517,27 @@
                 `;
 }
 
-                    // Display content and reset menu state
-                            contentContainer.innerHTML = content;
-                            window.location.hash = section;
-                            isMenuVisible = false;
-                            menuItems.classList.remove('visible');
-                            menuLogo.classList.remove('menu-open');
-                        }
+                // Display content and reset visibility
+                contentContainer.innerHTML = content;
+                        window.location.hash = section;
 
-                        // Optionally, prevent other mouse events from interfering with the burger menu
-                        document.addEventListener('mousemove', (e) => {
-                            const triggerHeight = window.innerHeight - 100;
-                            if (e.clientY > triggerHeight && !isMenuVisible) {
-                                mobileMenu.classList.add('visible'); // Show the menu on hover (if needed)
-                            }
-                        });
+                        // Hide both menus after content load
+                        isDesktopMenuVisible = false;
+                        isMobileMenuVisible = false;
+                        menuItems.classList.remove('visible'); // Hide desktop menu
+                        mobileMenu.classList.remove('visible'); // Hide mobile menu
+                        menuLogo.classList.remove('menu-open');
+                    }
 
-                        // Expose functions to the global scope if needed
-                        window.toggleMenu = toggleMenu;
-                        window.loadContent = loadContent;
+                // Event listeners
+                    burgerMenu.addEventListener('click', toggleMobileMenu); // Click for mobile menu toggle
+                        menuLogo.addEventListener('click', toggleDesktopMenu); // Click for desktop menu toggle
 
-                    });
-            </script>
+                    // Expose functions to global scope if needed
+                    window.toggleDesktopMenu = toggleDesktopMenu;
+                    window.toggleMobileMenu = toggleMobileMenu;
+                    window.loadContent = loadContent;
+                });
+                </script>
     </body>
 </html>
