@@ -167,7 +167,7 @@
             top: 20px;
             left: 20px;
             cursor: pointer;
-            z-index: 10; /* Ensure burger menu is on top */
+            z-index: 9999; /* Ensure burger menu is on top */
         }
 
         .burger-menu div {
@@ -187,7 +187,7 @@
             background-color: white;
             padding: 20px 0;
             text-align: center;
-            z-index: 9; /* Make sure it appears above other elements */
+            z-index: 9998; /* Make sure it appears above other elements */
         }
 
         .mobile-menu a {
@@ -351,9 +351,11 @@
             const menuLogo = document.querySelector('.menu-logo');
             const menuItems = document.getElementById('menuItems');
             const menuContainer = document.getElementById('menuContainer');
+            const burgerMenu = document.querySelector('.burger-menu');
+            const mobileMenu = document.getElementById('mobileMenu');
             let isMenuVisible = false;
             let hideTimeout;
-    
+        
             // Disable transitions briefly on page load
             menuLogo.classList.add('no-transition');
             menuItems.classList.add('no-transition');
@@ -361,7 +363,7 @@
                 menuLogo.classList.remove('no-transition');
                 menuItems.classList.remove('no-transition');
             }, 50);
-    
+        
             // Toggle menu visibility
             function toggleMenu() {
                 isMenuVisible = !isMenuVisible;
@@ -369,17 +371,30 @@
                 menuLogo.classList.toggle('menu-open', isMenuVisible);
                 cancelHideTimeout();
             }
-    
-            // Function to cancel any hide timeout
+        
+            // Click event listener for the burger icon
+            burgerMenu.addEventListener('click', toggleBurgerMenu);
+        
+            // Cancel any hide timeout
             function cancelHideTimeout() {
                 clearTimeout(hideTimeout);
             }
+        
+            // Toggle mobile menu visibility
+            function toggleBurgerMenu() {
+                console.log("Burger menu clicked");  // Log when the burger menu is clicked
+                isMenuVisible = !isMenuVisible;
+                mobileMenu.classList.toggle('visible', isMenuVisible); // Show or hide the mobile menu
+                console.log("Mobile menu visibility:", isMenuVisible);  // Log the visibility state
+            }
+        
+            // Load specific content based on the clicked menu item
+            function loadContent(section) {
+                const contentContainer = document.getElementById('content');
+                let content = ''; // Content to be displayed based on the clicked menu item   
+                
 
-        function loadContent(section) {
-            const contentContainer = document.getElementById('content');
-            let content = ''; // Content to be displayed based on the clicked menu item   
-            
-            
+            // Define content for each section
             if (section === 'home') {
         content = `
             <div class="image-container">
@@ -515,32 +530,27 @@
                 `;
 }
 
-            contentContainer.innerHTML = content;
-                        window.location.hash = section;
-
-                        // Reset menu to closed state after loading content
-                        isMenuVisible = false;
-                        menuItems.classList.remove('visible');
-                        menuLogo.classList.remove('menu-open');
-                    }
-
-                    // Expose functions to the global scope if needed
-                    window.toggleMenu = toggleMenu;
-                    window.loadContent = loadContent;
-
-                    // Mouse movement to show menu on hover near the bottom
-                    document.addEventListener('mousemove', (e) => {
-                        const triggerHeight = window.innerHeight - 100;
-                        if (e.clientY > triggerHeight) {
-                            menuContainer.classList.add('visible');
-                            cancelHideTimeout();
-                        } else if (isMenuVisible) {
-                            hideTimeout = setTimeout(() => {
-                                menuContainer.classList.remove('visible');
-                            }, 3000); // Timeout for auto-hide
+                    // Display content and reset menu state
+                            contentContainer.innerHTML = content;
+                            window.location.hash = section;
+                            isMenuVisible = false;
+                            menuItems.classList.remove('visible');
+                            menuLogo.classList.remove('menu-open');
                         }
+
+                        // Optionally, prevent other mouse events from interfering with the burger menu
+                        document.addEventListener('mousemove', (e) => {
+                            const triggerHeight = window.innerHeight - 100;
+                            if (e.clientY > triggerHeight && !isMenuVisible) {
+                                mobileMenu.classList.add('visible'); // Show the menu on hover (if needed)
+                            }
+                        });
+
+                        // Expose functions to the global scope if needed
+                        window.toggleMenu = toggleMenu;
+                        window.loadContent = loadContent;
+
                     });
-                });
-        </script>
+            </script>
     </body>
 </html>
