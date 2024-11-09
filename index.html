@@ -212,7 +212,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #efda19; /* Or any background color you desire */
+            background-color: #edd500; /* Or any background color you desire */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -223,39 +223,19 @@
             visibility: visible;
             }
 
-            /* Adjust the font size in the mobile menu */
-        #mobileMenu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 6vw; /* This scales the text based on viewport width */
-            color: rgb(0, 0, 0); /* Adjust the text color as needed */
-        }
-        #mobileMenu ul li {
-            margin: 20px 0;
-            text-align: center;
-        }
-
+       
         #mobileMenu a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Large font size, adjustable based on viewport */
-        #mobileMenu .menu-item {
-            font-size: calc(100vh / 2); /* Adjust this divisor to control size */
-            color: #fff;
+            display: block;
+            padding: 15px 0;
+            color: #000000; 
+            font-size: calc(100vh / 20); /* Adjust divisor to control size */
+            font-weight: bold;
             text-align: center;
             text-transform: uppercase;
+            text-decoration: none;
             cursor: pointer;
-            width: 100%;
-            line-height: 1; /* Tight line height for more space */
+            line-height: 1; /* Tight line height */
         }
-
 
 
         * {
