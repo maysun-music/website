@@ -370,6 +370,38 @@
     transform: translateY(-50%);
 }
 
+/* Media query for Mobile */
+@media (max-width: 600px) {
+    .menu-container {
+        display: none; /* Hide bottom menu on mobile */
+    }
+
+    .burger-menu {
+        display: block; /* Show burger menu on mobile */
+    }
+
+    .mobile-menu a {
+        font-size: 18px; /* Larger menu item font size for mobile */
+    }
+
+    /* Hide the date on mobile */
+    .activities-content .date {
+        display: none; /* Hide the date */
+    }
+
+    /* Adjust list layout for mobile without the date */
+    .activities-content li {
+        justify-content: flex-start; /* Align the location to the left */
+        padding: 5px 0; /* Adjust padding if necessary */
+    }
+
+    /* Hide the central line if date is hidden on mobile */
+    .activities-content li::before {
+        display: none; /* Hide the line when date is hidden */
+    }
+}
+
+
 </style>
 </head>
 <body>
