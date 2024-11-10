@@ -57,7 +57,7 @@
         }
 
         .activities-content p {
-        line-height: 0.6; /* or any value you find appropriate */
+        line-height: 1; /* or any value you find appropriate */
         }
 
 
@@ -324,22 +324,53 @@
             opacity: 1; /* Show title on hover */
         }
 
+/* Centering content on desktop */
+.activities-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
 
+.activities-content li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 16px;
+    line-height: 0.2;
+    position: relative;
+}
 
-        @media (max-width: 840px) {
-            .content-container {
-            padding: 20px 5%; /* Adjust side padding to give a little space */
-            }
-        }
-       
-        @media (max-width: 600px) {
-            .activities-content p {
-                margin: 10px 0; /* Increase the margin above and below paragraphs */
-                line-height: 1.6; /* Increase line height for better spacing */
-            }
-        }
+.activities-content .date {
+    font-weight: bold;
+    padding-right: 10px;
+    z-index: 1; /* Layer above the line */
+    background-color: white; /* Optional: match background for a cleaner overlay */
+}
 
-    </style>
+.activities-content .location {
+    padding-left: 10px;
+    text-align: right;
+    z-index: 1; /* Layer above the line */
+    background-color: white; /* Optional: match background for a cleaner overlay */
+}
+
+/* Central line between date and location */
+.activities-content li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: .5px;
+    background-color: #000;
+    z-index: 0; /* Line appears behind the text */
+    transform: translateY(-50%);
+}
+
+</style>
 </head>
 <body>
     <!-- Content Container -->
@@ -451,60 +482,62 @@
                     <h3>RESIDENCIES</h3>
                     <div class="activities-content">
                     <ul>
-                        <p>June 2024 - ITP Camp NYU - Brooklyn, NY, USA</p>
-                        <p>May 2024 - Avaloch Farm Music Institute - Boscawen, NH, USA</p>
-                        <p>January 2024 - ITP / IMA NYU Fellowship - Brooklyn, NY, USA</p>
-                        <p>October 2023 - Récollets - Paris, FR</p>
-                        <p>October 2023 - Satosphère - Montreal, QC, Canada</p>
-                        <p>March 2023 - Physical Synthesis - Brooklyn, NY, USA</p>
-                        <p>January 2023 - Banff Center BMiR - Banff, AL, Canada</p>
-                        <p>July 2022 - Satosphère - Montreal, QC, Canada</p>
+                         <li><span class="date">JUN 2024</span><span class="location">ITP Camp NYU - Brooklyn, NY, USA</span></li>
+                         <li><span class="date">MAY 2024</span><span class="location">Avaloch Farm Music Institute - Boscawen, NH, USA</span></li>
+                        <li><span class="date">JAN 2024</span><span class="location">ITP / IMA NYU Fellowship - Brooklyn, NY, USA</span></li>
+                        <li><span class="date">OCT 2023</span><span class="location">Récollets - Paris, FR</span></li>
+                        <li><span class="date">OCT 2023</span><span class="location">Satosphère - Montreal, QC, Canada</span></li>
+                        <li><span class="date">MAR 2023</span><span class="location">Physical Synthesis - Brooklyn, NY, USA</span></li>
+                         <li><span class="date">JAN 2023</span><span class="location">Banff Center BMiR - Banff, AL, Canada</span></li>
+                         <li><span class="date">JUL 2022</span><span class="location">Satosphère - Montreal, QC, Canada</span></li>
                     </ul>
                     <h3>SOUND INSTALLATIONS</h3>
                     
                     <ul>
-                        May 2024 - Clive Davis Gallery - Brooklyn, NY, USA
+                        <li><span class="date">MAY 2024</span><span class="location">Clive Davis Gallery - Brooklyn, NY, USA</span></li>
                     </ul>
                 <div>
                     <h3>PAST SOLO PERFORMANCES</h3>
+                    <ul>
                     
-                                <p>26 October 2024 - CuteLab - Brooklyn, NY, USA</p>
-                                <p>11 October 2024 - Iris Cantor Theater - New York, NY, USA</p>
-                                <p>30 August 2024 - Exit Points - Toronto, ON, Canada</p>
-                                <p>20 May 2024 - Garage - Downtown Brooklyn, NY, USA</p>
-                                <p>27 March 2024 - Troy Music Hall - Troy, NY, USA</p>
-                                <p>17 February 2023 - Salle Bourgie - Montreal, QC, Canada</p>
-                                <p>13 January 2023 - Banff Center - Banff, AL, Canada</p>
-                                <p>10 September 2022 - Cloud 9 - Rideau Lakes, ON, Canada</p>
-                                <p>06 July 2022 - Substrat Satosphère - Montreal, QC, Canada</p>
-                                <p>28 November 2021 - Pony Boy - Brooklyn, NY, USA</p>
-                                <p>26 August 2021 - MUTEK - Montreal, QC, Canada</p>
-                                <p>01 February 2020 - Aussenwelt</p>
-                                <p>11 December 2019 - Sotterenea - Montreal, QC, Canada</p>
-                                <p>28 November 2019 - Sotterenea - Montreal, QC, Canada</p>
-                                <p>27 November 2019 - Brasserie Beaubien - Montreal, QC, Canada</p>
-                                <p>03 November 2019 - Casa Del Popolo - Montreal, QC, Canada</p>
-                                <p>25 September 2019 - Sotterenea - Montreal, QC, Canada</p>
-                                <p>05 July 2019 - Antichambre - Montreal, QC, Canada</p>
-                                <p>27 June 2019 - O Patro Vys - Montreal, QC, Canada</p>
-                                <p>13 June 2019 - WIP - Montreal, QC, Canada</p>
-                                <p>26 April 2018 - Moth Access Center - Montreal, QC, Canada</p>
-                                <p>26 August 2018 - Avant Garde Bar - Ottawa, ON, Canada</p>
-                                <p>24 July 2018 - Antimodele - Montreal, QC, Canada</p>
-                                <p>08 June 2018 - La Plante - Montreal, QC, Canada</p>
-                                <p>19 May 2018 - Le Ministère - Montreal, QC, Canada</p>
-                                <p>08 July 2017 - Fest Off Quebec - Quebec, QC, Canada</p>
-                                <p>10 December 2016 - Le Cagibi - Montreal, QC, Canada</p>
-                                <p>26 November 2016 - Matahari Loft - Montreal, QC, Canada</p>
-                                <p>07 November 2016 - Casa Del Popolo - Montreal, QC, Canada</p>
-                                <p>29 October 2016 - Baron Samedi - Montreal, QC, Canada</p>
-                                <p>06 October 2016 - Divan Orange - Montreal, QC, Canada</p>
-                                <p>26 August 2016 - Secret Loft - Montreal, QC, Canada</p>
-                                <p>17 July 2016 - Divan Orange - Montreal, QC, Canada</p>
-                                <p>30 June 2016 - Divan Orange - Montreal, QC, Canada</p>
-                                <p>03 March 2016 - Studio B - Montreal, QC, Canada</p>
-                                <p>27 February 2016 - Studio Bizz - Montreal, QC, Canada</p>
-                            </div>
+                                <li><span class="date">26 OCT 2024</span><span class="location">CuteLab - Brooklyn, NY, USA</span></li>
+                                <li><span class="date">11 OCT 2024</span><span class="location">Iris Cantor Theater - New York, NY, USA</span></li>
+                                <li><span class="date">30 AUG 2024</span><span class="location">Exit Points - Toronto, ON, Canada</span></li>
+                                <li><span class="date">20 MAY 2024</span><span class="location">Garage - Downtown Brooklyn, NY, USA</span></li>
+                                <li><span class="date">27 MAR 2024</span><span class="location">Troy Music Hall - Troy, NY, USA</span></li>
+                                <li><span class="date">17 FEB 2023</span><span class="location">Salle Bourgie - Montreal, QC, Canada</span></li>
+                                <li><span class="date">13 JAN 2023</span><span class="location">Banff Center - Banff, AL, Canada</span></li>
+                                <li><span class="date">10 SEP 2022</span><span class="location">Cloud 9 - Rideau Lakes, ON, Canada</span></li>
+                                <li><span class="date">06 JUL 2022</span><span class="location">Substrat Satosphère - Montreal, QC, Canada</span></li>
+                                <li><span class="date">28 NOV 2021</span><span class="location">Pony Boy - Brooklyn, NY, USA</span></li>
+                                <li><span class="date">26 AUG 2021</span><span class="location">MUTEK - Montreal, QC, Canada</span></li>
+                                <li><span class="date">01 FEB 2020</span><span class="location">Aussenwelt - Montreal, QC, Canada</span></li>
+                                <li><span class="date">11 DEC 2019</span><span class="location">Sotterenea - Montreal, QC, Canada</span></li>
+                                <li><span class="date">28 NOV 2019</span><span class="location">Sotterenea - Montreal, QC, Canada</span></li>
+                                <li><span class="date">27 NOV 2019</span><span class="location">Brasserie Beaubien - Montreal, QC, Canada</span></li>
+                                <li><span class="date">03 NOV 2019</span><span class="location">Casa Del Popolo - Montreal, QC, Canada</span></li>
+                                <li><span class="date">25 SEP 2019</span><span class="location">Sotterenea - Montreal, QC, Canada</span></li>
+                                <li><span class="date">05 JUL 2019</span><span class="location">Antichambre - Montreal, QC, Canada</span></li>
+                                <li><span class="date">27 JUN 2019</span><span class="location">O Patro Vys - Montreal, QC, Canada</span></li>
+                                <li><span class="date">13 JUN 2019</span><span class="location">WIP - Montreal, QC, Canada</span></li>
+                                <li><span class="date">26 APR 2018</span><span class="location">Moth Access Center - Montreal, QC, Canada</span></li>
+                                <li><span class="date">26 AUG 2018</span><span class="location">Avant Garde Bar - Ottawa, ON, Canada</span></li>
+                                <li><span class="date">24 JUL 2018</span><span class="location">Antimodele - Montreal, QC, Canada</span></li>
+                                <li><span class="date">08 JUN 2018</span><span class="location">La Plante - Montreal, QC, Canada</span></li>
+                                <li><span class="date">19 MAY 2018</span><span class="location">Le Ministère - Montreal, QC, Canada</span></li>
+                                <li><span class="date">08 JUL 2017</span><span class="location">Fest Off Quebec - Quebec, QC, Canada</span></li>
+                                <li><span class="date">10 DEC 2016</span><span class="location">Le Cagibi - Montreal, QC, Canada</span></li>
+                                <li><span class="date">26 NOV 2016</span><span class="location">Matahari Loft - Montreal, QC, Canada</span></li>
+                                <li><span class="date">07 NOV 2016</span><span class="location">Casa Del Popolo - Montreal, QC, Canada</span></li>
+                                <li><span class="date">29 OCT 2016</span><span class="location">Baron Samedi - Montreal, QC, Canada</span></li>
+                                <li><span class="date">06 OCT 2016</span><span class="location">Divan Orange - Montreal, QC, Canada</span></li>
+                                <li><span class="date">26 AUG 2016</span><span class="location">Secret Loft - Montreal, QC, Canada</span></li>
+                                <li><span class="date">17 JUL 2016</span><span class="location">Divan Orange - Montreal, QC, Canada</span></li>
+                                <li><span class="date">30 JUN 2016</span><span class="location">Divan Orange - Montreal, QC, Canada</span></li>
+                                <li><span class="date">03 MAR 2016</span><span class="location">Studio B - Montreal, QC, Canada</span></li>
+                                <li><span class="date">27 FEB 2016</span><span class="location">Studio Bizz - Montreal, QC, Canada</span></li>
+                    </ul>
+                </div>
     `;
 
             } 
