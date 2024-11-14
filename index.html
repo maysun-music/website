@@ -6,6 +6,7 @@
     <title>MAYSUN</title>
     <link rel="icon" href="images/m_favicon.ico" type="image/x-icon">
     <style>
+        /* Body and Global Styles */
         body {
             display: flex;
             flex-direction: column;
@@ -16,79 +17,63 @@
             padding: 0;
             background-color: white;
             font-family: Helvetica, Arial, sans-serif;
-            position: relative;
             text-align: center;
             overflow-x: hidden;
         }
 
-        /* Style for the content */
+        /* Content Container */
         #content {
             max-width: 800px;
-            text-align: center;
             padding: 20px;
             font-size: 16px;
             line-height: 1.5;
             color: black;
             overflow-y: auto;
             max-height: calc(100vh - 160px);
-            margin: 0 auto; /* Center content within its container */
-        }
-
-        #content ul {
-            list-style-position: inside; /* Center bullets */
-            padding: 0; /* Remove default padding */
-        }
-
-        #content ul li {
-            margin: 5px 0; /* Space between list items */
-        }
-
-        #content::-webkit-scrollbar {
-            display: none; /* Hide scrollbar */
-        }
-
-        #content h3 {
-            text-align: center; /* Center the header text */
-            margin: 20px 0; /* Optional: Adjust margins as needed for spacing */
-        }
-
-        #content p {
-            text-align: center; /* Ensure paragraphs are also centered */
-        }
-
-        .activities-content p {
-        line-height: 1; /* or any value you find appropriate */
-        }
-
-
-        /* Add padding to the bottom to avoid overlap with the menu */
-        .content-container {
-            transform: scale(1.0); /* scale content area */
-            max-width: 800px;
             margin: 0 auto;
-            padding: 20px 0;
             text-align: center;
-            width: 100%;
         }
-
-        /* Responsive logo to avoid cutting off on smaller screens and trigger email on click */
+        #content ul {
+            list-style-position: inside;
+            padding: 0;
+        }
+        #content ul li {
+            margin: 5px 0;
+        }
+        #content h3,
+        #content p {
+            margin: 20px 0;
+        }
         #content img {
             max-width: 100%;
             height: auto;
             cursor: pointer;
         }
 
+        /* Custom Scrollbar for Content */
+        #content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Adjusting Scale for Specific Content */
+        .content-container {
+            transform: scale(1.0);
+            max-width: 800px;
+            padding: 20px 0;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Menu Logo */
         .menu-logo {
             width: 100px;
             cursor: pointer;
-            margin: 10px 0; /* Center the logo */
+            margin: 10px 0;
             transition: transform 0.4s ease, margin 0.4s ease;
         }
-
-        /* When menu is visible, apply a subtle scale effect */
         .menu-logo.menu-open {
-            transform: scale(0.9); /* Slightly reduce size to make room for the menu */
-            margin-left: 20px; /* Slight nudge to the left if needed */
+            transform: scale(0.9);
+            margin-left: 20px;
         }
 
         /* Bottom Menu Styles for Desktop */
@@ -101,18 +86,14 @@
             justify-content: center;
             align-items: center;
             z-index: 20;
-            opacity: 1;
-            visibility: visible;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
-
-
-        /* Show the menu when needed */
         .menu-container.visible {
-            opacity: 1; /* Make visible */
-            visibility: visible; /* Allow interaction */
+            opacity: 1;
+            visibility: visible;
         }
 
+        /* Menu Button */
         .menu-button {
             background-color: black;
             color: white;
@@ -120,24 +101,18 @@
             font-size: 16px;
             cursor: pointer;
             border: none;
-            border-radius: 0px;
         }
 
-        /* Menu items are hidden by default */
+        /* Menu Items */
         .menu-items {
             display: none;
             opacity: 0;
-            transition: opacity 0.5s ease 0.5s; /* Fade in with delay */
+            transition: opacity 0.5s ease 0.5s;
         }
-
-
-        /* When menu is visible, fade in the menu items */
         .menu-items.visible {
             display: block;
             opacity: 1;
         }
-
-     /* Align items centrally */
         .menu-items a {
             display: inline-block;
             color: black;
@@ -145,21 +120,19 @@
             margin: 5px 10px;
             padding: 5px;
             font-size: 14px;
-            font-weight: bolder;
-            border-radius: 0;
-            transition: transform 0.3s ease; /* Smooth scale transition */
+            font-weight: bold;
+            transition: transform 0.3s ease;
         }
-
-
         .menu-items a:hover {
-            transform: scale(1.4); /* Slightly magnify the menu item */
+            transform: scale(1.4);
         }
 
-        /* Temporarily disable transitions with this class */
+        /* Disable Transitions Temporarily */
         .no-transition {
             transition: none !important;
-        }
-
+        }       
+        
+        
         /* Burger Menu for Mobile */
         .burger-menu {
             display: none;
@@ -167,9 +140,8 @@
             top: 20px;
             left: 20px;
             cursor: pointer;
-            z-index: 9999; /* Ensure burger menu is on top */
+            z-index: 9999;
         }
-
         .burger-menu div {
             width: 30px;
             height: 4px;
@@ -177,19 +149,19 @@
             margin: 6px 0;
         }
 
+        /* Mobile Full-Screen Menu */
         .mobile-menu {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%; /* Make the menu fill the whole screen */
+            height: 100%;
             background-color: white;
             padding: 20px 0;
             text-align: center;
-            z-index: 9998; /* Make sure it appears above other elements */
+            z-index: 9998;
         }
-
         .mobile-menu a {
             display: block;
             padding: 15px 0;
@@ -197,12 +169,12 @@
             font-size: 18px;
             text-decoration: none;
         }
-
         .mobile-menu.visible {
-        display: block; /* Show the mobile menu when visible */
+            display: block;
         }
 
-            #mobileMenu {
+        /* Enhanced Mobile Menu Design */
+        #mobileMenu {
             position: absolute;
             top: 0;
             left: 0;
@@ -212,103 +184,98 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #edd500; /* Or any background color you desire */
+            background-color: #edd500;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
-            }
-
-            #mobileMenu.visible {
+        }
+        #mobileMenu.visible {
             opacity: 1;
             visibility: visible;
-            }
-
-       
+        }
         #mobileMenu a {
             display: block;
             padding: 15px 0;
-            color: #000000; 
-            font-size: calc(100vh / 20); /* Adjust divisor to control size */
+            color: #000000;
+            font-size: calc(100vh / 20);
             font-weight: bolder;
             text-align: center;
             text-transform: uppercase;
             text-decoration: none;
-            cursor:help;
-            line-height: 1; /* Tight line height */
+            cursor: help;
+            line-height: 1;
         }
 
-
+        /* Box Sizing */
         * {
-          box-sizing: border-box; /* Include padding and border in element's total width and height */
-            }
+            box-sizing: border-box;
+        }
 
-        /* Media query for Mobile */
+        /* Mobile-Specific Adjustments */
         @media (max-width: 600px) {
             .menu-container {
-                display: none; /* Hide bottom menu on mobile */
+                display: none;
             }
-
             .burger-menu {
-                display: block; /* Show burger menu on mobile */
+                display: block;
             }
-
             .mobile-menu a {
-                font-size: 18px; /* Larger menu item font size for mobile */
+                font-size: 18px;
             }
         }
 
-            .image-container {
-                 display: inline-block; /* Keeps the image and credit together */
-                 text-align: right; /* Aligns text to the right */
-                 margin-top: 5px; /* Adds some space between the image and the text */
+        /* Image Container for Photo Credit */
+        .image-container {
+            display: inline-block;
+            text-align: right;
+            margin-top: 5px;
         }
 
-        /* ------PHOTO CREDIT ----- */
+        /* Photo Credit Style */
         .photo-credit {
-            bottom: 5px; /* Adjust as necessary */
-            right: 5px; /* Adjust as necessary */
-            font-size: 08px; /* Adjust size as needed */
-            color: black; /* Change color if needed */
-            background-color: rgba(255, 255, 255, 0.7); /* Optional */
-            padding: 2px 5px; /* Optional */
-            border-radius: 3px; /* Optional */
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 8px;
+            color: black;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2px 5px;
+            border-radius: 3px;
         }
 
 
         /* -----------ALBUM GRID------------ */
         .album-grid {
-            transform: scale(0.8); 
+            transform: scale(0.8);
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Three columns */
-            gap: 10px; /* Ensures both horizontal and vertical gaps */
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             justify-items: center;
             align-items: start;
             margin-top: 10px;
             margin-bottom: 0;
-            grid-template-rows: repeat(3, auto) auto; /* 4 rows total */
+            grid-template-rows: repeat(3, auto) auto;
         }
 
         .album-item {
-            position: relative; /* Position relative for overlay */
-            overflow: hidden; /* Ensure overlay stays within bounds */
-            transition: transform 0.3s ease; /* Smooth zoom transition */
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
-
         .album-item img {
             width: 100%;
-            height: 100%; /* Make sure image height is controlled */
-            object-fit: cover; /* Ensure the image doesn't stretch or squish */
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: 0.3s ease;
         }
-
         .album-item::before {
-            content: attr(data-title); /* Display album name and year */
+            content: attr(data-title);
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            background: rgba(0, 0, 0, 0.7);
             color: white;
             font-size: 14px;
             padding: 5px;
@@ -316,84 +283,74 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-
         .album-item:hover {
-            transform: scale(1.25); /* Slight zoom on hover */
-            z-index: 10; /* Ensures hovered album appears on top */
+            transform: scale(1.25);
+            z-index: 10;
         }
-
         .album-item:hover::before {
-            opacity: 1; /* Show title on hover */
+            opacity: 1;
         }
 
         /* BANDCAMP LINK STYLE UNDER GRID */
-
         .bandcamp-link-item {
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Stack children vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    grid-column: 2; /* Center the item in the second column */
-    grid-row: 4; /* Place the link in the 4th row, 11th cell */
-    text-align: center; /* Ensure text is centered */
-    padding-top: 15px; /* Add top padding, adjust as needed */
-}
-
-        /* Prevent the ::before pseudo-element from showing on the Bandcamp link item */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            grid-column: 2;
+            grid-row: 4;
+            text-align: center;
+            padding-top: 15px;
+        }
         .bandcamp-link-item::before {
             content: none;
         }
-
         .bandcamp-link-item p, .bandcamp-link-item a {
             margin: 0;
         }
 
+        /* Centering content on desktop */
+        .activities-content {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .activities-content li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 16px;
+            line-height: 0.2;
+            position: relative;
+        }
+        .activities-content .date {
+            font-weight: bold;
+            padding-right: 10px;
+            z-index: 1;
+            background-color: white;
+        }
+        .activities-content .location {
+            padding-left: 10px;
+            text-align: right;
+            z-index: 1;
+            background-color: white;
+        }
 
-/* Centering content on desktop */
-.activities-content {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.activities-content li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    font-size: 16px;
-    line-height: 0.2;
-    position: relative;
-}
-
-.activities-content .date {
-    font-weight: bold;
-    padding-right: 10px;
-    z-index: 1; /* Layer above the line */
-    background-color: white; /* Optional: match background for a cleaner overlay */
-}
-
-.activities-content .location {
-    padding-left: 10px;
-    text-align: right;
-    z-index: 1; /* Layer above the line */
-    background-color: white; /* Optional: match background for a cleaner overlay */
-}
-
-/* Central line between date and location */
-.activities-content li::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    right: 10%;
-    height: .5px;
-    background-color: #000;
-    z-index: 0; /* Line appears behind the text */
-    transform: translateY(-50%);
-}
+        /* Central line between date and location */
+        .activities-content li::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 0.5px;
+            background-color: #000;
+            z-index: 0;
+            transform: translateY(-50%);
+        }
 
 /* Media query for Mobile */
 @media (max-width: 600px) {
@@ -427,74 +384,65 @@
 }
 
 
-/*------- SOCIAL LINKS ON ALL PAGES----------*/
-/* Social media links positioned at top-right */
-.social-links {
-    position: fixed; /* Fix them to the top-right corner */
-    top: 30px; /* Adjust distance from the top edge */
-    right: 30px; /* Adjust distance from the right edge */
-    display: flex; /* To display them in a row */
-    align-items: center; /* Vertically center the icons */
-    z-index: 1000; /* Ensure they stay on top of all content */
-}
+        /*------- SOCIAL LINKS ON ALL PAGES----------*/
+        .social-links {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+        .social-links a {
+            margin: 0 5px;
+        }
+        .social-links img {
+            width: 15px;
+            height: 15px;
+        }
 
-.social-links a {
-    margin: 0 5px; /* Space between the icons */
-}
+        /*---------------- DIY & RESOURCES GRID -------------------*/
+        .diy-section {
+            display: flex;
+            position: relative;
+        }
+        .diy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+        .diy-item img {
+            width: 100%;
+            cursor: pointer;
+        }
 
-.social-links img {
-    width: 15px; /* Width of the icons */
-    height: 15px; /* Height of the icons */
-}
-
-/*---------------- DIY & RESSOURCES GRID -------------------*/
-.diy-section {
-    display: flex;
-    position: relative;
-}
-
-.diy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 10px;
-}
-
-.diy-item img {
-    width: 100%;
-    cursor: pointer;
-}
-
-.diy-details-panel {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 300px;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.diy-details-panel.visible {
-    transform: translateX(0);
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-
-
+        .diy-details-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .diy-details-panel.visible {
+            transform: translateX(0);
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
 </style>
 </head>
 <body>
+    <!-- Social Links Positioned at Top-Right -->
     <div class="social-links">
         <a href="https://www.instagram.com/maysun.music/" target="_blank">
             <img src="images/ig_logo.png" alt="Instagram">
@@ -506,7 +454,7 @@
             <img src="images/bc_logo.png" alt="Bandcamp">
         </a>
     </div>
-    
+
     <!-- Content Container -->
     <div class="content-container" id="content">
         <div class="image-container">
@@ -514,7 +462,6 @@
             <div class="photo-credit">Photo: Chienn Tai (2024)</div>
         </div>
     </div>
-    
 
     <!-- Bottom Menu for Desktop -->
     <div class="menu-container" id="menuContainer">
@@ -528,7 +475,6 @@
             <a href="#contact" onclick="loadContent('contact')">CONTACT</a>
         </div>
     </div>
-
 
     <!-- Burger Menu for Mobile -->
     <div class="burger-menu" onclick="toggleBurgerMenu()">
@@ -547,7 +493,7 @@
         <a href="#" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
     </div>
 
-<!-- -------------------JAVASCRIPT---------------------- -->
+    <!-- -------------------JAVASCRIPT---------------------- -->
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -723,11 +669,23 @@
                                             <div id="diy-section" class="diy-section">
                                 <div class="diy-grid">
                                     <!-- Add DIY project items here -->
-                                    <div class="diy-item" onclick="openDetails('project1')">
-                                        <img src="images/project1_thumb.jpg" alt="Project 1">
+                                    <div class="diy-item" onclick="openDetails('DIY #1')">
+                                        <img src="images/project1_thumb.jpg" alt="DIY #1">
                                     </div>
-                                    <div class="diy-item" onclick="openDetails('project2')">
-                                        <img src="images/project2_thumb.jpg" alt="Project 2">
+                                    <div class="diy-item" onclick="openDetails('DIY #2')">
+                                        <img src="images/project2_thumb.jpg" alt="DIY #2">
+                                    </div>
+                                    <div class="diy-item" onclick="openDetails('DIY #3')">
+                                        <img src="images/project1_thumb.jpg" alt="DIY #3">
+                                    </div>
+                                    <div class="diy-item" onclick="openDetails('DIY #4')">
+                                        <img src="images/project2_thumb.jpg" alt="DIY #4">
+                                    </div>
+                                    <div class="diy-item" onclick="openDetails('DIY #5')">
+                                        <img src="images/project1_thumb.jpg" alt="DIY #5">
+                                    </div>
+                                    <div class="diy-item" onclick="openDetails('DIY #6')">
+                                        <img src="images/project2_thumb.jpg" alt="DIY #">
                                     </div>
                                     <!-- Add more items as needed -->
                                 </div>
