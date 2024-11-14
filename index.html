@@ -447,6 +447,49 @@
     height: 15px; /* Height of the icons */
 }
 
+/*---------------- DIY & RESSOURCES GRID -------------------*/
+.diy-section {
+    display: flex;
+    position: relative;
+}
+
+.diy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.diy-item img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.diy-details-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.diy-details-panel.visible {
+    transform: translateX(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 
 
 </style>
@@ -504,12 +547,15 @@
         <a href="#" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
     </div>
 
+<!-- -------------------JAVASCRIPT---------------------- -->
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const menuLogo = document.querySelector('.menu-logo');
             const menuItems = document.getElementById('menuItems'); // Desktop menu
             const burgerMenu = document.querySelector('.burger-menu'); // Burger icon for mobile
             const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
+            const contentContainer = document.getElementById('content');
             let isDesktopMenuVisible = false;
             let isMobileMenuVisible = false;
         
@@ -536,46 +582,41 @@
                         menuLogo.classList.toggle('menu-open', isDesktopMenuVisible);
                     }
         
-            // Toggle mobile menu visibility on burger icon click
+            // Toggle mobile menu visibility
             function toggleMobileMenu() {
-                        isMobileMenuVisible = !isMobileMenuVisible;
-                        mobileMenu.classList.toggle('visible', isMobileMenuVisible); // Show/hide mobile menu
-
-                        // After the mobile menu is visible, adjust the font size of the menu items
-                        if (isMobileMenuVisible) {
-                            adjustMenuFontSize(); // Adjust font size when mobile menu is opened
-                        }
-                    }
+                isMobileMenuVisible = !isMobileMenuVisible;
+                mobileMenu.classList.toggle('visible', isMobileMenuVisible);
+                if (isMobileMenuVisible) adjustMenuFontSize();
+            }
         
 
 
             // Load content and reset both menus
             function loadContent(section) {
-                const contentContainer = document.getElementById('content');
-                let content = ''; // Define content for each section as in your code...
-        
-                // Populate content based on section
-            if (section === 'home') {
-        content = `
-            <div class="image-container">
-            <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">
-            <div class="photo-credit">Photo: Chienn Tai (2024)</div>
-            </div>`;         
-           }
-            if (section === 'biography') {
+            let content = '';
+            switch (section) {
+                case 'home':
+                    content = `
+                        <div class="image-container">
+                        <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">
+                        <div class="photo-credit">Photo: Chienn Tai (2024)</div>
+                        </div>`;         
+                   break;
+
+                case 'biography':
                 content = `
                     <p>Etienne Mason, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
                     <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. His artistic journey is driven by a deep passion for exploring spatial audio, technology and a desire to create meaningful emotional connections through his music.</p>
-                    <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023 and is a proud member of the international artist collective Inland Ocean. He completed the prestigious 2024 ITP/IMA Fellowship at New York University and is currently a mentor at New Inc.</p>
-                `;
-            } else if (section === 'activities') {
+                    <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023 and is a proud member of the international artist collective Inland Ocean. He completed the prestigious 2024 ITP/IMA Fellowship at New York University and is currently a mentor at New Inc.</p>`;
+                    break;
+                case 'activities':
                 content = `
-                <h3>UPCOMING SHOWS</h3>
-                <div class="activities-content">
-                <ul>
-                <li><span class="date">09 FEB 2024</span><span class="location">New Ear :: - New York, NY, USA</span></li>
-                </ul>
-                </div>
+                    <h3>UPCOMING SHOWS</h3>
+                    <div class="activities-content">
+                    <ul>
+                    <li><span class="date">09 FEB 2024</span><span class="location">New Ear :: - New York, NY, USA</span></li>
+                    </ul>
+                    </div>
 
                     <h3>PAST SOLO PERFORMANCES</h3>
                     <div class="activities-content">
@@ -635,13 +676,10 @@
                     <ul>
                         <li><span class="date">MAY 2024</span><span class="location">Clive Davis Gallery - Brooklyn, NY, USA</span></li>
                     </ul>
-                </div>
-    `;
-
-            } 
-            
-                                else if (section === 'works') {
-                        content = `
+                    </div> `;
+                break;
+            case'works':
+                    content = `
                             <div class="album-grid">
                                 <a href="https://maysunmusic.bandcamp.com/album/timelines" target="_blank" class="album-item" data-title="Timelines (2023)">
                                     <img src="images/08_album_cover.png" alt="Timelines">
@@ -676,58 +714,100 @@
                                         
                                         </a>
                                     </div>
+                                </div>`;
+                            break;
+
+            
+                            case 'diy':
+                                content = `
+                                            <div id="diy-section" class="diy-section">
+                                <div class="diy-grid">
+                                    <!-- Add DIY project items here -->
+                                    <div class="diy-item" onclick="openDetails('project1')">
+                                        <img src="images/project1_thumb.jpg" alt="Project 1">
+                                    </div>
+                                    <div class="diy-item" onclick="openDetails('project2')">
+                                        <img src="images/project2_thumb.jpg" alt="Project 2">
+                                    </div>
+                                    <!-- Add more items as needed -->
                                 </div>
-                                    `;
-                                }
 
+                                <!-- Side panel for project details -->
+                                <div class="diy-details-panel" id="diyDetailsPanel">
+                                    <span class="close-btn" onclick="closeDetails()">&times;</span>
+                                    <div id="diyDetailsContent"></div>
+                                </div>
+                            </div>`;
+                        break;
             
-            else if (section === 'diy') {
-                content = '<p>Instruments I have built and modified + useful tools. (Coming soon)</p>';
-            } 
-            
-            else if (section === 'contact') {
-                content = `
-                        <strong>Welcoming artistic possibilities</strong> — spatial audio, drums, synths, sound design, scoring, solo performances, touring, and any form of creative collaboration. If you like my sound, let’s work together.
-                    <p>
-                        <a href="mailto:maysun.booking@gmail.com" style="text-decoration: none;">
-                            <strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong>
-                        </a>
-                    </p>
-                    <div style="display: flex; justify-content: center; margin-top: 10px;">
-                        <a href="https://www.instagram.com/maysun.music/" target="_blank">
-                            <img src="images/ig_logo.png" alt="Instagram" style="width: 30px; height: 30px; margin: 0 10px;">
-                        </a>
-                        <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
-                            <img src="images/yt_logo.png" alt="YouTube" style="width: 30px; height: 30px; margin: 0 10px;">
-                        </a>
-                        <a href="https://maysunmusic.bandcamp.com/" target="_blank">
-                            <img src="images/bc_logo.png" alt="Bandcamp" style="width: 30px; height: 30px; margin: 0 10px;">
-                        </a>
-                    </div>
-                `;
-}
+                        case'contact':
+                            content = `
+                                    <strong>Welcoming artistic possibilities</strong> — spatial audio, drums, synths, sound design, scoring, solo performances, touring, and any form of creative collaboration. If you like my sound, let’s work together.
+                                <p>
+                                    <a href="mailto:maysun.booking@gmail.com" style="text-decoration: none;">
+                                        <strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong>
+                                    </a>
+                                </p>
+                                <div style="display: flex; justify-content: center; margin-top: 10px;">
+                                    <a href="https://www.instagram.com/maysun.music/" target="_blank">
+                                        <img src="images/ig_logo.png" alt="Instagram" style="width: 30px; height: 30px; margin: 0 10px;">
+                                    </a>
+                                    <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+                                        <img src="images/yt_logo.png" alt="YouTube" style="width: 30px; height: 30px; margin: 0 10px;">
+                                    </a>
+                                    <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+                                        <img src="images/bc_logo.png" alt="Bandcamp" style="width: 30px; height: 30px; margin: 0 10px;">
+                                    </a>
+                                </div>`;
+                            break;
+                        default:
+                            content = '<p>Section not found.</p>';
+                        }
 
-                // Display content and reset visibility
-                contentContainer.innerHTML = content;
-                        window.location.hash = section;
+                            contentContainer.innerHTML = content;
+                            window.location.hash = section;
+                            resetMenuVisibility();
+                            }
 
-                        // Hide both menus after content load
-                        isDesktopMenuVisible = false;
-                        isMobileMenuVisible = false;
-                        menuItems.classList.remove('visible'); // Hide desktop menu
-                        mobileMenu.classList.remove('visible'); // Hide mobile menu
-                        menuLogo.classList.remove('menu-open');
-                    }
+                            // Reset visibility of both menus
+                            function resetMenuVisibility() {
+                            isDesktopMenuVisible = false;
+                            isMobileMenuVisible = false;
+                            menuItems.classList.remove('visible');
+                            mobileMenu.classList.remove('visible');
+                            menuLogo.classList.remove('menu-open');
+                            }
 
-                // Event listeners
-                    burgerMenu.addEventListener('click', toggleMobileMenu); // Click for mobile menu toggle
-                    menuLogo.addEventListener('click', toggleDesktopMenu); // Click for desktop menu toggle
+                            // Open project details in the side panel
+                            function openDetails(projectId) {
+                            const panel = document.getElementById('diyDetailsPanel');
+                            const content = document.getElementById('diyDetailsContent');
+                            if (projectId === 'project1') {
+                                content.innerHTML = `
+                                    <h3>Project 1</h3>
+                                    <p>Details about DIY project 1...</p>
+                                    <img src="images/project1_detail.jpg" alt="Project 1 Detail">`;
+                            } else if (projectId === 'project2') {
+                                content.innerHTML = `
+                                    <h3>Project 2</h3>
+                                    <p>Details about DIY project 2...</p>
+                                    <img src="images/project2_detail.jpg" alt="Project 2 Detail">`;
+                            }
+                            panel.classList.add('visible');
+                            }
 
-                    // Expose functions to global scope if needed
-                    window.toggleDesktopMenu = toggleDesktopMenu;
-                    window.toggleMobileMenu = toggleMobileMenu;
-                    window.loadContent = loadContent;
-                });
-                </script>
-    </body>
+                            // Close the side panel
+                            function closeDetails() {
+                            document.getElementById('diyDetailsPanel').classList.remove('visible');
+                            }
+
+                            // Event listeners
+                            burgerMenu.addEventListener('click', toggleMobileMenu);
+                            menuLogo.addEventListener('click', toggleDesktopMenu);
+                            window.loadContent = loadContent;
+                            window.openDetails = openDetails;
+                            window.closeDetails = closeDetails;
+                            });
+                            </script>
+</body>
 </html>
