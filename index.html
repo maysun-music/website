@@ -280,10 +280,12 @@
             transform: scale(0.8); 
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* Three columns */
-            grid-template-rows: auto; /* Ensure rows don't add unnecessary space */
             gap: 10px; /* Ensures both horizontal and vertical gaps */
             justify-items: center;
-            margin: 20px auto; /* Center the grid */
+            align-items: start;
+            margin-top: 10px;
+            margin-bottom: 0;
+            grid-template-rows: repeat(3, auto) auto; /* 4 rows total */
         }
 
         .album-item {
@@ -323,6 +325,29 @@
         .album-item:hover::before {
             opacity: 1; /* Show title on hover */
         }
+
+        /* BANDCAMP LINK STYLE UNDER GRID */
+
+        .bandcamp-link-item {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    grid-column: 2; /* Center the item in the second column */
+    grid-row: 4; /* Place the link in the 4th row, 11th cell */
+    text-align: center; /* Ensure text is centered */
+    padding-top: 15px; /* Add top padding, adjust as needed */
+}
+
+        /* Prevent the ::before pseudo-element from showing on the Bandcamp link item */
+        .bandcamp-link-item::before {
+            content: none;
+        }
+
+        .bandcamp-link-item p, .bandcamp-link-item a {
+            margin: 0;
+        }
+
 
 /* Centering content on desktop */
 .activities-content {
@@ -608,10 +633,18 @@
                                 <a href="https://maysunmusic.bandcamp.com/album/all-these-are-the-days" target="_blank" class="album-item" data-title="All These Are The Days (2016)">
                                     <img src="images/01_album_cover.png" alt="All These Are The Days">
                                 </a>
-                            </div>
-                           
-                        `;
-                    }
+                         
+                                    <!-- Bandcamp link as a grid item, now positioned at 11th cell -->
+                                    <div class="album-item bandcamp-link-item">
+                                        <p style="margin: 0;">LISTEN ON BANDCAMP</p>
+                                        <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+                                            <img src="images/bc_logo.png" alt="Bandcamp" style="width: 30px; height: 30px; margin: 10px 0;">
+                                        
+                                        </a>
+                                    </div>
+                                </div>
+                                    `;
+                                }
 
             
             else if (section === 'diy') {
