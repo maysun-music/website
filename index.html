@@ -427,9 +427,43 @@
 }
 
 
+/*------- SOCIAL LINKS ON ALL PAGES----------*/
+/* Social media links positioned at top-right */
+.social-links {
+    position: fixed; /* Fix them to the top-right corner */
+    top: 30px; /* Adjust distance from the top edge */
+    right: 30px; /* Adjust distance from the right edge */
+    display: flex; /* To display them in a row */
+    align-items: center; /* Vertically center the icons */
+    z-index: 1000; /* Ensure they stay on top of all content */
+}
+
+.social-links a {
+    margin: 0 5px; /* Space between the icons */
+}
+
+.social-links img {
+    width: 15px; /* Width of the icons */
+    height: 15px; /* Height of the icons */
+}
+
+
+
 </style>
 </head>
 <body>
+    <div class="social-links">
+        <a href="https://www.instagram.com/maysun.music/" target="_blank">
+            <img src="images/ig_logo.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+            <img src="images/yt_logo.png" alt="YouTube">
+        </a>
+        <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+            <img src="images/bc_logo.png" alt="Bandcamp">
+        </a>
+    </div>
+    
     <!-- Content Container -->
     <div class="content-container" id="content">
         <div class="image-container">
