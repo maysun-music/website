@@ -401,43 +401,9 @@
         }
 
 /*---------------- DIY & RESOURCES GRID -------------------*/
-        .diy-section {
-            display: flex;
-            position: relative;
-        }
-        .diy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
-        }
-        .diy-item img {
-            width: 100%;
-            cursor: pointer;
-        }
 
-        .diy-details-panel {
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 300px;
-            height: 100%;
-            background-color: #fff;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .diy-details-panel.visible {
-            transform: translateX(0);
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-        }
+
+
 </style>
 </head>
 
@@ -662,41 +628,6 @@
                                     </div>
                                 </div>`;
                             break;
-
-            
-                            case 'diy':
-                                content = `
-                                            <div id="diy-section" class="diy-section">
-                                <div class="diy-grid">
-                                    <!-- Add DIY project items here -->
-                                    <div class="diy-item" onclick="openDetails('DIY #1')">
-                                        <img src="images/project1_thumb.jpg" alt="DIY #1">
-                                    </div>
-                                    <div class="diy-item" onclick="openDetails('DIY #2')">
-                                        <img src="images/project2_thumb.jpg" alt="DIY #2">
-                                    </div>
-                                    <div class="diy-item" onclick="openDetails('DIY #3')">
-                                        <img src="images/project1_thumb.jpg" alt="DIY #3">
-                                    </div>
-                                    <div class="diy-item" onclick="openDetails('DIY #4')">
-                                        <img src="images/project2_thumb.jpg" alt="DIY #4">
-                                    </div>
-                                    <div class="diy-item" onclick="openDetails('DIY #5')">
-                                        <img src="images/project1_thumb.jpg" alt="DIY #5">
-                                    </div>
-                                    <div class="diy-item" onclick="openDetails('DIY #6')">
-                                        <img src="images/project2_thumb.jpg" alt="DIY #">
-                                    </div>
-                                    <!-- Add more items as needed -->
-                                </div>
-
-                                <!-- Side panel for project details -->
-                                <div class="diy-details-panel" id="diyDetailsPanel">
-                                    <span class="close-btn" onclick="closeDetails()">&times;</span>
-                                    <div id="diyDetailsContent"></div>
-                                </div>
-                            </div>`;
-                        break;
             
                         case'contact':
                             content = `
@@ -719,7 +650,7 @@
                                 </div>`;
                             break;
                         default:
-                            content = '<p>Section not found.</p>';
+                            content = '<p>Coming Soon.</p>';
                         }
 
                             contentContainer.innerHTML = content;
@@ -736,28 +667,6 @@
                             menuLogo.classList.remove('menu-open');
                             }
 
-                            // Open project details in the side panel
-                            function openDetails(projectId) {
-                            const panel = document.getElementById('diyDetailsPanel');
-                            const content = document.getElementById('diyDetailsContent');
-                            if (projectId === 'project1') {
-                                content.innerHTML = `
-                                    <h3>Project 1</h3>
-                                    <p>Details about DIY project 1...</p>
-                                    <img src="images/project1_detail.jpg" alt="Project 1 Detail">`;
-                            } else if (projectId === 'project2') {
-                                content.innerHTML = `
-                                    <h3>Project 2</h3>
-                                    <p>Details about DIY project 2...</p>
-                                    <img src="images/project2_detail.jpg" alt="Project 2 Detail">`;
-                            }
-                            panel.classList.add('visible');
-                            }
-
-                            // Close the side panel
-                            function closeDetails() {
-                            document.getElementById('diyDetailsPanel').classList.remove('visible');
-                            }
 
                             // Event listeners
                             burgerMenu.addEventListener('click', toggleMobileMenu);
