@@ -384,21 +384,46 @@
 
 
 /*-------------- SOCIAL LINKS ON ALL PAGES----------------*/
-        .social-links {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-        }
-        .social-links a {
-            margin: 0 5px;
-        }
-        .social-links img {
-            width: 15px;
-            height: 15px;
-        }
+
+.social-links {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.social-links a {
+    margin: 0 5px;
+    position: relative; /* For positioning the text */
+}
+
+.social-links img {
+    width: 20px; /* Adjust the size of the icons */
+    height: 20px; /* Adjust the size of the icons */
+}
+
+.social-links a span {
+    position: absolute;
+    bottom: -35px; /* Adjust to position the text below the icon */
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg); /* Rotate text to vertical */
+    opacity: 0; /* Hide the text initially */
+    font-size: 10px; /* Adjust text size */
+    color: black; /* Adjust the text color */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition */
+}
+
+.social-links a:hover span {
+    opacity: 1; /* Show the text when hovered */
+}
+
+/* Optional: Adjust the color of the icon on hover */
+.social-links a:hover img {
+    opacity: 0.5; /* Slightly dim the icon when hovered */
+}
+
 
 /*---------------- DIY & RESOURCES GRID -------------------*/
 
@@ -408,18 +433,25 @@
 </head>
 
 <body>
-    <!-- Social Links Positioned at Top-Right -->
-    <div class="social-links">
-        <a href="https://www.instagram.com/maysun.music/" target="_blank">
-            <img src="images/ig_logo.png" alt="Instagram">
-        </a>
-        <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
-            <img src="images/yt_logo.png" alt="YouTube">
-        </a>
-        <a href="https://maysunmusic.bandcamp.com/" target="_blank">
-            <img src="images/bc_logo.png" alt="Bandcamp">
-        </a>
-    </div>
+            <!-- Social Links Positioned at Top-Right -->
+
+        <div class="social-links">
+            <a href="https://www.instagram.com/maysun.music/" target="_blank">
+                <img src="images/ig_logo.png" alt="Instagram">
+                <span>Instagram</span> <!-- Vertical text -->
+            </a>
+
+            <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+                <img src="images/yt_logo.png" alt="YouTube">
+                <span>YouTube</span> <!-- Vertical text -->
+            </a>
+
+            <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+                <img src="images/bc_logo.png" alt="Bandcamp">
+                <span>Bandcamp</span> <!-- Vertical text -->
+            </a>
+        </div>
+
 
     <!-- Content Container -->
     <div class="content-container" id="content">
