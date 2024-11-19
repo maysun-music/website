@@ -494,53 +494,62 @@
     <!-- -------------------JAVASCRIPT---------------------- -->
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuLogo = document.querySelector('.menu-logo');
-            const menuItems = document.getElementById('menuItems'); // Desktop menu
-            const burgerMenu = document.querySelector('.burger-menu'); // Burger icon for mobile
-            const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
-            const contentContainer = document.getElementById('content');
-            let isDesktopMenuVisible = false;
-            let isMobileMenuVisible = false;
-        
-            // Disable transitions briefly on page load
-            menuLogo.classList.add('no-transition');
-            menuItems.classList.add('no-transition');
-            setTimeout(() => {
-                menuLogo.classList.remove('no-transition');
-                menuItems.classList.remove('no-transition');
-            }, 50);
-        
-            // Adjust font size dynamically when the mobile menu is opened
-            function adjustMenuFontSize() {
-                    const menuItems = mobileMenu.querySelector('ul');
-                    const fontSize = window.innerWidth * 0.06; // Adjust this ratio as needed
-                    menuItems.style.fontSize = `${fontSize}px`; // Set font size dynamically
-                }
+document.addEventListener('DOMContentLoaded', () => {
+    const menuLogo = document.querySelector('.menu-logo');
+    const menuItems = document.getElementById('menuItems'); // Desktop menu
+    const burgerMenu = document.querySelector('.burger-menu'); // Burger icon for mobile
+    const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
+    const menuLinks = document.querySelectorAll('#menuItems a, #mobileMenu a'); // Links in both menus
+    const contentContainer = document.getElementById('content'); // Main content container
+    let isDesktopMenuVisible = false;
+    let isMobileMenuVisible = false;
 
+    // Toggle desktop menu visibility
+    function toggleDesktopMenu() {
+        isDesktopMenuVisible = !isDesktopMenuVisible;
+        menuItems.classList.toggle('visible', isDesktopMenuVisible);
 
-            // Toggle desktop menu visibility on click
-            function toggleDesktopMenu() {
-                        isDesktopMenuVisible = !isDesktopMenuVisible;
-                        menuItems.classList.toggle('visible', isDesktopMenuVisible);
-                        menuLogo.classList.toggle('menu-open', isDesktopMenuVisible);
-                    }
-        
-            // Toggle mobile menu visibility
-            function toggleMobileMenu() {
-                isMobileMenuVisible = !isMobileMenuVisible;
-                mobileMenu.classList.toggle('visible', isMobileMenuVisible);
-                if (isMobileMenuVisible) adjustMenuFontSize();
-            }
-        
+        if (isDesktopMenuVisible) {
+            menuLogo.style.opacity = '0';
+        } else {
+            menuLogo.style.opacity = '1';  // Ensure opacity is set to 1 when menu is closed
+        }
 
+    }
 
-            // Load content and reset both menus
-            function loadContent(section) {
-            let content = '';
-            switch (section) {
-                case 'home':
-                    content = `
+    // Toggle mobile menu visibility
+    function toggleMobileMenu() {
+        isMobileMenuVisible = !isMobileMenuVisible;
+        mobileMenu.classList.toggle('visible', isMobileMenuVisible);
+        if (isMobileMenuVisible) {
+            adjustMenuFontSize();
+        }
+    }
+
+    // Adjust font size dynamically for mobile menu
+    function adjustMenuFontSize() {
+        const menuItemsList = mobileMenu.querySelector('ul');
+        if (menuItemsList) {
+            const fontSize = window.innerWidth * 0.06; // Adjust ratio as needed
+            menuItemsList.style.fontSize = `${fontSize}px`;
+        }
+    }
+
+    // Reset menus and restore logo
+    function resetMenus() {
+        isDesktopMenuVisible = false;
+        isMobileMenuVisible = false;
+
+        menuItems.classList.remove('visible');
+        mobileMenu.classList.remove('visible');
+        menuLogo.style.opacity = '1';
+    }
+
+    // Load content dynamically
+    function loadContent(section) {
+        let content = '';
+        switch (section) {
+            case 'home':                    content = `
                         <div class="image-container">
                         <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">
                         <div class="photo-credit">Photo: Chienn Tai (2024)</div>
@@ -697,7 +706,9 @@
                             menuItems.classList.remove('visible');
                             mobileMenu.classList.remove('visible');
                             menuLogo.classList.remove('menu-open');
-                            }
+                            menuLogo.style.opacity = '1';  // Ensure opacity is reset here too
+                        }
+
 
 
                             // Event listeners
