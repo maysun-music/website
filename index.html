@@ -526,6 +526,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDesktopMenuVisible = false;
     let isMobileMenuVisible = false;
 
+    // Function to check for URL parameters
+    function checkMenuParam() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('menu') === 'true') {
+                toggleMobileMenu();  // or toggleDesktopMenu(), depending on what you want to open
+            }
+        }
+
     // Toggle desktop menu visibility
     function toggleDesktopMenu() {
         isDesktopMenuVisible = !isDesktopMenuVisible;
@@ -739,15 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             window.loadContent = loadContent;
                             window.openDetails = openDetails;
                             window.closeDetails = closeDetails;
-                            
-                                // Check URL for the 'menu=true' query parameter
-                            const urlParams = new URLSearchParams(window.location.search);
-                            if (urlParams.get('menu') === 'true') {
-                                // If 'menu=true' is found, open the mobile menu automatically
-                                isMobileMenuVisible = true;
-                                mobileMenu.classList.add('visible');
-                                adjustMenuFontSize();  // Adjust font size as well
-                            }
+
+                             // Check URL for menu=true and open menu if needed
+                            checkMenuParam();  // Call this to check the URL parameter
 
                             });
                             </script>
