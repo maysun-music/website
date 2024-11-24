@@ -69,7 +69,7 @@
             width: 100px;
             cursor: pointer;
             margin: 10px 0;
-            transition: transform 0.4s ease, margin 0.4s ease;
+            transition: transform 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
         }
 
         .menu-logo.hidden {
@@ -78,8 +78,8 @@
     }
 
         .menu-logo.menu-open {
-            transform: scale(0.9);
-            margin-left: 20px;
+        transform: scale(0.9) translateX(20px); /* Combine scaling and translation */
+        margin-left: 0; /* Remove margin-based adjustment */
         }
 
         /* Bottom Menu Styles for Desktop */
@@ -99,6 +99,11 @@
             visibility: visible;
         }
 
+        .menu-button:focus,
+        .menu-items a:focus {
+        outline: 2px solid black; /* Highlight focus for accessibility */
+        }
+
         /* Menu Button */
         .menu-button {
             background-color: black;
@@ -111,19 +116,22 @@
 
         /* Menu Items */
         .menu-items {
-            display: none;
+            visibility: hidden; /* Instead of display: none */
             opacity: 0;
-            transition: opacity 0.5s ease 0.5s;
-            position: absolute; /* Position relative to the menu-container */
-            top: 50%;           /* Vertically center */
-            left: 50%;          /* Horizontally center */
-            transform: translate(-50%, -50%); /* Center with respect to its own size */
+            position: absolute; /* Already correct */
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease, visibility 0.5s ease; /* Add visibility transition */
+            z-index: -1; /* Ensures no accidental interaction */
         }
 
         .menu-items.visible {
-            display: block;
-            opacity: 1;
+        visibility: visible;
+        opacity: 1;
+        z-index: 10; /* Bring items forward when visible */
         }
+
         .menu-items a {
             display: inline-block;
             color: black;
@@ -137,12 +145,6 @@
         .menu-items a:hover {
             transform: scale(1.4);
         }
-
-        /* Disable Transitions Temporarily */
-        .no-transition {
-            transition: none !important;
-        }       
-        
         
         /* Burger Menu for Mobile */
         .burger-menu {
@@ -234,6 +236,14 @@
                 font-size: 18px;
             }
         }
+
+                @media (max-width: 768px) {
+            .menu-container {
+                flex-direction: column; /* Stack elements on small screens */
+                padding: 10px; /* Adjust padding if needed */
+            }
+        }
+
 
         /* Image Container for Photo Credit */
         .image-container {
@@ -484,6 +494,7 @@
             <a href="#contact" onclick="loadContent('contact')">CONTACT</a>
         </div>
     </div>
+    
 
     <!-- Burger Menu for Mobile -->
     <div class="burger-menu" onclick="toggleBurgerMenu()">
