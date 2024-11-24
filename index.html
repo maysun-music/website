@@ -739,6 +739,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             window.loadContent = loadContent;
                             window.openDetails = openDetails;
                             window.closeDetails = closeDetails;
+                            
+                                // Check URL for the 'menu=true' query parameter
+                            const urlParams = new URLSearchParams(window.location.search);
+                            if (urlParams.get('menu') === 'true') {
+                                // If 'menu=true' is found, open the mobile menu automatically
+                                isMobileMenuVisible = true;
+                                mobileMenu.classList.add('visible');
+                                adjustMenuFontSize();  // Adjust font size as well
+                            }
+
                             });
                             </script>
 </body>
