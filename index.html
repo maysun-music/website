@@ -71,6 +71,12 @@
             margin: 10px 0;
             transition: transform 0.4s ease, margin 0.4s ease;
         }
+
+        .menu-logo.hidden {
+        opacity: 0; /* Make the logo invisible */
+        pointer-events: none; /* Prevent interaction when hidden */
+    }
+
         .menu-logo.menu-open {
             transform: scale(0.9);
             margin-left: 20px;
@@ -108,7 +114,12 @@
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease 0.5s;
+            position: absolute; /* Position relative to the menu-container */
+            top: 50%;           /* Vertically center */
+            left: 50%;          /* Horizontally center */
+            transform: translate(-50%, -50%); /* Center with respect to its own size */
         }
+
         .menu-items.visible {
             display: block;
             opacity: 1;
