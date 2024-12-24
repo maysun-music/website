@@ -460,13 +460,10 @@
     opacity: 0.5; /* Slightly dim the icon when hovered */
 }
 
-
-/*---------------- DIY & RESOURCES GRID -------------------*/
-
-
-
 </style>
 </head>
+
+<!-- ------------DIY & RESOURCES GRID -->
 
 <body>
             <!-- Social Links Positioned at Top-Right -->
@@ -540,6 +537,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentContainer = document.getElementById('content'); // Main content container
     let isDesktopMenuVisible = false;
     let isMobileMenuVisible = false;
+
+  
 
     // Function to check for URL parameters
     function checkMenuParam() {
@@ -764,6 +763,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             window.loadContent = loadContent;
                             window.openDetails = openDetails;
                             window.closeDetails = closeDetails;
+
+                            // Event listeners for menu links (for hash-based navigation)
+                            menuLinks.forEach(link => {
+                                link.addEventListener('click', handleMenuLinkClick);
+                            });
+
+                            // Check for initial hash when the page loads and load the corresponding content
+                            const initialHash = window.location.hash.substring(1); // Get initial hash without '#'
+                            if (initialHash) {
+                                loadContent(initialHash); // Load content for the section defined in the hash
+                            } else {
+                                loadContent('home'); // Default content when no hash is present
+}
 
                              // Check URL for menu=true and open menu if needed
                             checkMenuParam();  // Call this to check the URL parameter
