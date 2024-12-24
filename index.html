@@ -538,7 +538,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDesktopMenuVisible = false;
     let isMobileMenuVisible = false;
 
-  
+    if (window.location.hash === '#menu') {
+    toggleMobileMenu();  // Open the mobile menu if the hash is '#menu'
+    }
+
 
     // Function to check for URL parameters
     function checkMenuParam() {
@@ -571,12 +574,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Adjust font size dynamically for mobile menu
-    function adjustMenuFontSize() {
-        const menuItemsList = mobileMenu.querySelector('ul');
-        if (menuItemsList) {
-            const fontSize = window.innerWidth * 0.06; // Adjust ratio as needed
-            menuItemsList.style.fontSize = `${fontSize}px`;
-        }
+        function adjustMenuFontSize() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const links = mobileMenu.getElementsByTagName('a');
+        const fontSize = window.innerWidth < 600 ? `${100 / links.length}vh` : 'calc(100vh / 20)';
+        Array.from(links).forEach(link => {
+            link.style.fontSize = fontSize;
+        });
     }
 
     // Reset menus and restore logo
@@ -761,7 +765,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Event listeners
                             burgerMenu.addEventListener('click', toggleMobileMenu);
                             menuLogo.addEventListener('click', toggleDesktopMenu);
-                            window.loadContent = loadContent;
+                            // window.loadContent = loadContent;
+                            window.addEventListener('resize', adjustMenuFontSize);
+
 
                             // Handle menu link clicks to load content and update the hash
                             function handleMenuLinkClick(event) {
@@ -786,16 +792,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Check URL for menu=true and open menu if needed
                             checkMenuParam();  // Call this to check the URL parameter
 
-                            // Adjust font size of mobile menu links based on window size
-                            function adjustMenuFontSize() {
-                            const mobileMenu = document.getElementById('mobileMenu');
-                            const links = mobileMenu.getElementsByTagName('a');
-                            const fontSize = window.innerWidth < 600 ? `${100 / links.length}vh` : 'calc(100vh / 20)';
-                            Array.from(links).forEach(link => {
-                                link.style.fontSize = fontSize;
-                            });
-                            }
-
+                        
 
                             });
                             </script>
