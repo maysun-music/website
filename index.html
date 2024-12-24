@@ -145,6 +145,20 @@
         .menu-items a:hover {
             transform: scale(1.4);
         }
+
+        a, button {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* Specifically target the menu links if needed */
+        .menu-item:focus, 
+        .menu-item:active {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
         
         /* Burger Menu for Mobile */
         .burger-menu {
@@ -161,6 +175,7 @@
             background-color: black;
             margin: 6px 0;
         }
+
 
         /* Mobile Full-Screen Menu */
         .mobile-menu {
