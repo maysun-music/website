@@ -606,6 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. His artistic journey is driven by a deep passion for exploring spatial audio, technology and a desire to create meaningful emotional connections through his music.</p>
                     <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023 and is a proud member of the international artist collective Inland Ocean. He completed the prestigious 2024 ITP/IMA Fellowship at New York University and is currently a mentor at New Inc.</p>`;
                     break;
+
                 case 'activities':
                 content = `
                     <h3>UPCOMING SHOWS</h3>
@@ -741,8 +742,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
 
                             contentContainer.innerHTML = content;
-                            window.location.hash = section;
-                            resetMenuVisibility();
+                            window.location.hash = section; // Update the URL hash
+                            resetMenus();
                             }
 
                             // Reset visibility of both menus
@@ -761,15 +762,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             burgerMenu.addEventListener('click', toggleMobileMenu);
                             menuLogo.addEventListener('click', toggleDesktopMenu);
                             window.loadContent = loadContent;
-                            window.openDetails = openDetails;
-                            window.closeDetails = closeDetails;
+
+                            // Handle menu link clicks to load content and update the hash
+                            function handleMenuLinkClick(event) {
+                                event.preventDefault();  // Prevent default anchor click behavior
+                                const section = event.target.getAttribute('href').substring(1);  // Get section name from href
+                                loadContent(section);  // Load the content for that section
+                            }
 
                             // Event listeners for menu links (for hash-based navigation)
                             menuLinks.forEach(link => {
                                 link.addEventListener('click', handleMenuLinkClick);
                             });
 
-                            // Check for initial hash when the page loads and load the corresponding content
+                            // Load content based on the initial hash (if present)
                             const initialHash = window.location.hash.substring(1); // Get initial hash without '#'
                             if (initialHash) {
                                 loadContent(initialHash); // Load content for the section defined in the hash
@@ -777,8 +783,19 @@ document.addEventListener('DOMContentLoaded', () => {
                                 loadContent('home'); // Default content when no hash is present
 }
 
-                             // Check URL for menu=true and open menu if needed
+                            // Check URL for menu=true and open menu if needed
                             checkMenuParam();  // Call this to check the URL parameter
+
+                            // Adjust font size of mobile menu links based on window size
+                            function adjustMenuFontSize() {
+                            const mobileMenu = document.getElementById('mobileMenu');
+                            const links = mobileMenu.getElementsByTagName('a');
+                            const fontSize = window.innerWidth < 600 ? `${100 / links.length}vh` : 'calc(100vh / 20)';
+                            Array.from(links).forEach(link => {
+                                link.style.fontSize = fontSize;
+                            });
+                            }
+
 
                             });
                             </script>
