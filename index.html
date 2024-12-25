@@ -566,22 +566,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Toggle mobile menu visibility
     function toggleMobileMenu() {
-        isMobileMenuVisible = !isMobileMenuVisible;
-        mobileMenu.classList.toggle('visible', isMobileMenuVisible);
-        if (isMobileMenuVisible) {
-            adjustMenuFontSize();
-        }
+    isMobileMenuVisible = !isMobileMenuVisible;
+    mobileMenu.classList.toggle('visible', isMobileMenuVisible);
+    
+    if (isMobileMenuVisible) {
+        adjustMenuFontSize();  // Adjust font size when menu opens
     }
+}
 
-    // Adjust font size dynamically for mobile menu
-        function adjustMenuFontSize() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        const links = mobileMenu.getElementsByTagName('a');
-        const fontSize = window.innerWidth < 600 ? `${100 / links.length}vh` : 'calc(100vh / 20)';
-        Array.from(links).forEach(link => {
-            link.style.fontSize = fontSize;
-        });
-    }
+    // Adjust font size of mobile menu items dynamically
+    function adjustMenuFontSize() {
+            const links = mobileMenu.getElementsByTagName('a');
+            
+            // Ensure the font size fits the screen height based on the number of links
+            const fontSize = window.innerWidth < 600 ? `${100 / links.length}vh` : 'calc(100vh / 20)';
+            
+            // Apply the font size to each link
+            Array.from(links).forEach(link => {
+                link.style.fontSize = fontSize;
+            });
+        }
 
     // Reset menus and restore logo
     function resetMenus() {
@@ -765,9 +769,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Event listeners
                             burgerMenu.addEventListener('click', toggleMobileMenu);
                             menuLogo.addEventListener('click', toggleDesktopMenu);
-                            // window.loadContent = loadContent;
-                            window.addEventListener('resize', adjustMenuFontSize);
-
+                            
+                            window.addEventListener('resize', adjustMenuFontSize); // Adjust menu font size on resize
 
                             // Handle menu link clicks to load content and update the hash
                             function handleMenuLinkClick(event) {
