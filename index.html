@@ -548,11 +548,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to check for URL parameters
     function checkMenuParam() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('menu') === 'true') {
-                toggleMobileMenu();  // or toggleDesktopMenu(), depending on what you want to open
-            }
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('menu') === 'true') {
+        toggleMobileMenu(true); // Open the mobile menu explicitly
+    }
+}
 
     // Toggle desktop menu visibility
     function toggleDesktopMenu() {
@@ -568,10 +568,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Toggle mobile menu visibility
-    function toggleMobileMenu() {
-    isMobileMenuVisible = !isMobileMenuVisible;
+    function toggleMobileMenu(show = null) {
+    if (show === null) {
+        // Toggle behavior
+        isMobileMenuVisible = !isMobileMenuVisible;
+    } else {
+        // Set explicit state
+        isMobileMenuVisible = show;
+    }
     mobileMenu.classList.toggle('visible', isMobileMenuVisible);
-    
     if (isMobileMenuVisible) {
         adjustMenuFontSize();  // Adjust font size when menu opens
     }
@@ -600,13 +605,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset menus and restore logo
     function resetMenus() {
-        isDesktopMenuVisible = false;
-        isMobileMenuVisible = false;
-
-        menuItems.classList.remove('visible');
+    isDesktopMenuVisible = false;
+    isMobileMenuVisible = false;
+    menuItems.classList.remove('visible');
+    if (!isMobileMenuVisible) {  // Only hide if not set to visible by other logic
         mobileMenu.classList.remove('visible');
-        menuLogo.style.opacity = '1';
     }
+    menuLogo.style.opacity = '1';
+}
 
     // Load content dynamically
     function loadContent(section) {
@@ -812,3 +818,4 @@ document.addEventListener('DOMContentLoaded', () => {
                             </script>
 </body>
 </html>
+
