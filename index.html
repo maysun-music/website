@@ -517,12 +517,12 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#" onclick="loadContent('home'); toggleBurgerMenu()">HOME</a>
-        <a href="#" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
-        <a href="#" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
-        <a href="#" onclick="loadContent('works'); toggleBurgerMenu()">WORKS</a>
-        <a href="#" onclick="loadContent('diy'); toggleBurgerMenu()">DIY & RESOURCES</a>
-        <a href="#" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
+        <a href="#home" onclick="loadContent('home'); toggleBurgerMenu()">HOME</a>
+        <a href="#biography" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
+        <a href="#activities" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
+        <a href="#works" onclick="loadContent('works'); toggleBurgerMenu()">WORKS</a>
+        <a href="#diy" onclick="loadContent('diy'); toggleBurgerMenu()">DIY & RESOURCES</a>
+        <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
     </div>
 
     <!-- -------------------JAVASCRIPT---------------------- -->
@@ -575,17 +575,25 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
     // Adjust font size of mobile menu items dynamically
-    function adjustMenuFontSize() {
-            const links = mobileMenu.getElementsByTagName('a');
-            
-            // Ensure the font size fits the screen height based on the number of links
-            const fontSize = window.innerWidth < 600 ? `${100 / links.length}vh` : 'calc(100vh / 20)';
-            
-            // Apply the font size to each link
-            Array.from(links).forEach(link => {
-                link.style.fontSize = fontSize;
-            });
-        }
+        function adjustMenuFontSize() {
+        const links = mobileMenu.getElementsByTagName('a');
+        const numberOfLinks = links.length;
+        
+        // Set a maximum font size for the menu items
+        const maxFontSize = 10; // Max font size in vh
+        const minFontSize = 5; // Min font size in vh
+        
+        // Calculate font size dynamically
+        let fontSize = window.innerWidth < 600 ? `${Math.min(maxFontSize, 100 / numberOfLinks)}vh` : 'calc(100vh / 20)';
+
+        // Ensure that the font size does not go below a certain minimum value
+        fontSize = fontSize < `${minFontSize}vh` ? `${minFontSize}vh` : fontSize;
+        
+        // Apply the font size to each link
+        Array.from(links).forEach(link => {
+            link.style.fontSize = fontSize;
+        });
+    }
 
     // Reset menus and restore logo
     function resetMenus() {
