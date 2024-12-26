@@ -538,10 +538,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDesktopMenuVisible = false;
     let isMobileMenuVisible = false;
 
-    if (window.location.hash === '#menu') {
-    toggleMobileMenu();  // Open the mobile menu if the hash is '#menu'
-    }
+    // Check the referrer and open mobile menu only if coming from your Instagram link
+    const referrer = document.referrer;  // Get the referrer URL
 
+    // If coming from Instagram bio link (replace with your actual Instagram link)
+    if (referrer && referrer.includes('instagram.com/')) {
+        toggleMobileMenu();  // Open the mobile menu if coming from the Instagram link
+    }
 
     // Function to check for URL parameters
     function checkMenuParam() {
