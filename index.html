@@ -538,21 +538,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDesktopMenuVisible = false;
     let isMobileMenuVisible = false;
 
+    // Function to check the URL for 'menu=true' parameter
+    function checkMenuParam() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('menu') === 'true') {
+            toggleMobileMenu(true); // Open the mobile menu explicitly
+        }
+    }
+
     // Check the referrer and open mobile menu only if coming from your Instagram link
     const referrer = document.referrer;  // Get the referrer URL
 
     // If coming from Instagram bio link (replace with your actual Instagram link)
     if (referrer && referrer.includes('l.instagram.com/')) {
-        toggleMobileMenu();  // Open the mobile menu if coming from the Instagram link
+        toggleMobileMenu(true);  // Open the mobile menu if coming from the Instagram link
     }
-
-    // Function to check for URL parameters
-    function checkMenuParam() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('menu') === 'true') {
-        toggleMobileMenu(true); // Open the mobile menu explicitly
-    }
-}
 
     // Toggle desktop menu visibility
     function toggleDesktopMenu() {
@@ -564,7 +564,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             menuLogo.style.opacity = '1';  // Ensure opacity is set to 1 when menu is closed
         }
-
     }
 
     // Toggle mobile menu visibility
@@ -818,4 +817,3 @@ document.addEventListener('DOMContentLoaded', () => {
                             </script>
 </body>
 </html>
-
