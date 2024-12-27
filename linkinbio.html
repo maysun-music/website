@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link In Bio</title>
+    <link rel="icon" href="images/m_favicon.ico" type="image/x-icon">
+    <style>
+        /* Ensure the same font from your main site is used */
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Mobile Full-Screen Menu - Same as the mobile menu on your main site */
+        .mobile-menu {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #edd500; /* Use the same background color */
+            padding: 20px 0;
+            text-align: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Menu Links */
+        .mobile-menu a {
+            display: block;
+            padding: 15px 0;
+            color: black;
+            text-decoration: none;
+            font-size: calc(100vh / 20); /* Same font size as in the main website */
+            font-weight: bolder;
+            text-transform: uppercase;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Make menu visible */
+        .mobile-menu.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Box Sizing */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Media Query for Mobile (Max Width 600px) */
+        @media (max-width: 600px) {
+            .mobile-menu a {
+                font-size: calc(100vh / 20); /* Ensures consistent font size across devices */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fullscreen Mobile Menu for Link in Bio -->
+    <div class="mobile-menu visible" id="mobileMenu">
+        <a href="https://www.maysun.zip#home">HOME</a>
+        <a href="https://www.maysun.zip#biography">BIOGRAPHY</a>
+        <a href="https://www.maysun.zip#activities">ACTIVITIES</a>
+        <a href="https://www.maysun.zip#works">WORKS</a>
+        <a href="https://www.maysun.zip#diy">DIY & RESOURCES</a>
+        <a href="https://www.maysun.zip#contact">CONTACT</a>
+    </div>
+
+    <script>
+        // Make sure the mobile menu is visible when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.add('visible');
+        });
+
+        // Placeholder function for menu links
+        function loadContent(section) {
+            console.log('Loading content for: ' + section);
+        }
+    </script>
+</body>
+</html>
