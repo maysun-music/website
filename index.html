@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (section) {
             case 'home':                    content = `
                         <div class="image-container">
-                        <img src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">
+                        <img id="home-image" src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">
                         <div class="photo-credit">Photo: Chienn Tai (2024)</div>
                         </div>`;         
                    break;
@@ -767,6 +767,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             contentContainer.innerHTML = content;
                             window.location.hash = section; // Update the URL hash
+
+                                // Add event listener for the image to open the menu on click (only for home)
+                                if (section === 'home') {
+                                const homeImage = document.getElementById('home-image');
+                                homeImage.addEventListener('click', toggleDesktopMenu);
+                                }
+
+
+
                             resetMenus();
                             }
 
