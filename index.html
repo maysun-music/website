@@ -414,10 +414,9 @@
             transform: translateY(-50%);
         }
 
-/* Media query for Mobile */
-@media (max-width: 600px) {
+@media (max-width: 740px) {
     .menu-container {
-        display: none; /* Hide bottom menu on mobile */
+        display: none; /* Hide bottom menu on smaller screens */
     }
 
     .burger-menu {
@@ -425,23 +424,42 @@
     }
 
     .mobile-menu a {
-        font-size: 18px; /* Larger menu item font size for mobile */
+        font-size: 18px; /* Larger font size for better touch accessibility */
     }
 
-    /* Hide the date on mobile */
-    .activities-content .date {
-        display: none; /* Hide the date */
-    }
-
-    /* Adjust list layout for mobile without the date */
+    /* Stack elements vertically instead of hiding the date */
     .activities-content li {
-        justify-content: flex-start; /* Align the location to the left */
-        padding: 5px 0; /* Adjust padding if necessary */
+        flex-direction: column; /* Stack date, name, and location */
+        align-items: flex-start; /* Align to the left */
+        text-align: left;
+        padding: 10px 0;
+        position: relative;
     }
 
-    /* Hide the central line if date is hidden on mobile */
+    /* Keep the date visible and separate */
+    .activities-content .date {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
+    /* Ensure collaborator name remains clear */
+    .activities-content strong {
+        display: block;
+        margin-bottom: 3px;
+        background-color: white;
+        z-index: 2;
+    }
+
+    /* Keep location readable */
+    .activities-content .location {
+        display: block;
+        padding-left: 0;
+    }
+
+    /* Remove the central line on smaller screens */
     .activities-content li::before {
-        display: none; /* Hide the line when date is hidden */
+        display: none;
     }
 }
 
