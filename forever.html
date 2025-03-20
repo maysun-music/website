@@ -6,21 +6,15 @@
      <title>Forever In Sound</title>
      <style>
          /* Body and Global Styles */
-         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;  /* Align sections at the top */
-            align-items: flex-start;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            font-family: Helvetica, Arial, sans-serif;
-            color: black;
-            text-align: left;
-            overflow-x: hidden;
-            margin-right: 250px;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    color: black;
+    text-align: left;
+    overflow-x: hidden;
+}
  
       /* Dark Mode */
       body.dark-mode {
@@ -52,9 +46,9 @@
  
          /* Container for the entire content */
 .content-container {
-    width: calc(100% - 160px); /* Adjusted to ensure it never goes under */
+    width: calc(100% - 160px); /* Ensures it does not overlap the menu */
     max-width: 1200px;
-    margin-left: 160px; /* Matches the sidebar width */
+    margin-left: 160px; /* Ensures text stays clear of sidebar */
     padding: 20px;
 }
  
@@ -89,7 +83,7 @@
     position: fixed;
     top: 20px;
     left: 0;
-    width: 160px; /* Increased width to match the offset */
+    width: 160px; /* Correct width */
     background-color: #ffffff;
     padding: 10px;
     border-radius: 0px;
