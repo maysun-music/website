@@ -11,7 +11,7 @@
             flex-direction: column;
             justify-content: flex-start;  /* Align sections at the top */
             align-items: flex-start;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             padding: 0;
             background-color: white;
@@ -19,35 +19,8 @@
             color: black;
             text-align: left;
             overflow-x: hidden;
-            margin-right: 250px;
+            padding-right: 250px;
         }
-
-     /* Dark Mode */
-     body.dark-mode {
-            background-color: black;
-            color: white;
-        }
-
-        /* Button Styling */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #000000;
-            color: white;
-            border: none;
-            border-radius: 0px;
-            cursor: pointer;
-            font-size: 0.5rem;
-            transition: background-color 0.3s;
-        }
-
-        .dark-mode-toggle:hover {
-            background-color: #585858;
-        }
-
-
 
 
         /* Container for the entire content */
@@ -59,10 +32,14 @@
         }
 
         /* Styling for the sections */
-        .section {
-            padding: 40px 0;
-            border-bottom: 0px solid #ddd;
-        }
+.section {
+    padding: 40px 0;
+    margin-bottom: 0px;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
 
         /* Section titles */
         .section-title {
