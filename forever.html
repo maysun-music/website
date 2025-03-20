@@ -7,29 +7,28 @@
     <style>
         /* Body and Global Styles */
         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;  /* Align sections at the top */
-            align-items: flex-start;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            font-family: Helvetica, Arial, sans-serif;
-            color: black;
-            text-align: left;
-            overflow-x: hidden;
-            padding-right: 250px;
-        }
+    display: flex;
+    flex-direction: row; /* Aligns menu and content side by side */
+    justify-content: flex-start; 
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    color: black;
+    text-align: left;
+    overflow-x: hidden;
+}
 
 
         /* Container for the entire content */
-        .content-container {
-            width: 80%;
-            max-width: 1200px;
-            margin-left: 140px; /* Offset for the sidebar */
-            padding: 20px;
-        }
+.content-container {
+    width: calc(100% - 150px); /* Prevents overlap */
+    max-width: 1200px;
+    margin-left: 140px; /* Matches side menu width */
+    padding: 20px;
+}
 
         /* Styling for the sections */
 .section {
@@ -61,17 +60,17 @@ p:last-child {
         }
 
         /* Side Menu Styling */
-        .side-menu {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 120px;  /* Increased width to accommodate single-line text */
-            background-color: #ffffff;
-            padding: 10px; /* Reduced padding */
-            border-radius: 0px;
-            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
+.side-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 120px;  /* Fixed width */
+    background-color: #ffffff;
+    padding: 10px; /* Prevents excessive spacing */
+    border-radius: 0px;
+    box-shadow: none;
+    z-index: 1000;
+}
 
         .side-menu a {
             display: block;
