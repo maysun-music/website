@@ -551,7 +551,7 @@
             <a href="#biography" onclick="loadContent('biography')">BIOGRAPHY</a>
             <a href="#activities" onclick="loadContent('activities')">ACTIVITIES</a>
             <a href="#albums" onclick="loadContent('albums')">ALBUMS</a>
-            <a href="forever.html">FOREVER IN SOUND</a>
+            <a href="#forever" onclick="loadContent('forever')">FOREVER IN SOUND</a>
             <a href="#contact" onclick="loadContent('contact')">CONTACT</a>
         </div>
     </div>
@@ -570,7 +570,7 @@
         <a href="#biography" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
         <a href="#activities" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
         <a href="#albums" onclick="loadContent('albums'); toggleBurgerMenu()">ALBUMS</a>
-        <a href="forever.html" onclick="toggleBurgerMenu()">FOREVER IN SOUND</a>
+        <a href="#forever" onclick="loadContent('forever'); toggleBurgerMenu()"FOREVER IN SOUND</a>
         <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
     </div>
 
@@ -797,6 +797,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </div>
                                 </div>`;
                             break;
+                
+                        case 'forever':
+                        window.location.href = 'forever.html'; // Redirect to forever.html
+                            return;
             
                         case'contact':
                             content = `
