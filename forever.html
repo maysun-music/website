@@ -51,12 +51,12 @@
  
  
          /* Container for the entire content */
-         .content-container {
-             width: 80%;
-             max-width: 1200px;
-             margin-left: 250px; /* Offset for the sidebar */
-             padding: 20px;
-         }
+.content-container {
+    width: calc(100% - 160px); /* Adjusted to ensure it never goes under */
+    max-width: 1200px;
+    margin-left: 160px; /* Matches the sidebar width */
+    padding: 20px;
+}
  
          /* Styling for the sections */
          .section {
@@ -85,17 +85,17 @@
          }
  
          /* Side Menu Styling */
-         .side-menu {
-             position: fixed;
-             top: 20px;
-             left: 20px;
-             width: 120px;  /* Increased width to accommodate single-line text */
-             background-color: #ffffff;
-             padding: 10px; /* Reduced padding */
-             border-radius: 0px;
-             box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
-             z-index: 1000;
-         }
+.side-menu {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 160px; /* Increased width to match the offset */
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
  
          .side-menu a {
              display: block;
