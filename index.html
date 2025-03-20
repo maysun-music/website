@@ -551,7 +551,7 @@
             <a href="#biography" onclick="loadContent('biography')">BIOGRAPHY</a>
             <a href="#activities" onclick="loadContent('activities')">ACTIVITIES</a>
             <a href="#albums" onclick="loadContent('albums')">ALBUMS</a>
-            <a href="forever.html">FOREVER IN SOUND</a>
+            <a href="forever.html" onclick="event.stopPropagation();">FOREVER IN SOUND</a>
             <a href="#contact" onclick="loadContent('contact')">CONTACT</a>
         </div>
     </div>
@@ -570,7 +570,7 @@
         <a href="#biography" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
         <a href="#activities" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
         <a href="#albums" onclick="loadContent('albums'); toggleBurgerMenu()">ALBUMS</a>
-        <a href="forever.html" onclick="toggleBurgerMenu()">FOREVER IN SOUND</a>
+        <a href="forever.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">FOREVER IN SOUND</a>
         <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
     </div>
 
@@ -859,10 +859,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             window.addEventListener('resize', adjustMenuFontSize); // Adjust menu font size on resize
 
                             // Handle menu link clicks to load content and update the hash
-                            function handleMenuLinkClick(event) {
-                                event.preventDefault();  // Prevent default anchor click behavior
-                                const section = event.target.getAttribute('href').substring(1);  // Get section name from href
-                                loadContent(section);  // Load the content for that section
+                          function handleMenuLinkClick(event) {
+                                const href = event.target.getAttribute('href');
+
+                            // If the link is to an external page (contains ".html"), let it navigate normally
+                            if (href.includes('.html')) {
+                            return; 
+                            }
+
+                            event.preventDefault();  // Prevent hash-based navigation
+                            const section = href.substring(1);
+                            loadContent(section);
                             }
 
                             // Event listeners for menu links (for hash-based navigation)
