@@ -90,13 +90,14 @@
 .burger {
     display: none;
     position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1100;
+    top: 10px;
+    left: 10px;
+    font-size: 32px;
+    color: black;
     background: none;
     border: none;
+    cursor: pointer;
+    z-index: 1100;
 }
 
 @media (max-width: 768px) {
@@ -121,10 +122,12 @@
         display: block;
     }
 
-    .content-container {
-        margin-left: 0;
-        width: 100%;
-    }
+.content-container {
+    margin-left: 0;
+    width: 100vw;
+    padding-right: 20px; /* prevents text cutoff */
+    box-sizing: border-box;
+}
 
     body {
         margin-right: 0;
@@ -839,11 +842,21 @@
              </p>
     </div>
  
- <script>
+<script>
     function toggleMenu() {
         const menu = document.querySelector('.side-menu');
         menu.classList.toggle('show');
     }
+
+    // Close menu after link is clicked (on mobile)
+    document.querySelectorAll('.side-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            const menu = document.querySelector('.side-menu');
+            if (window.innerWidth <= 768) {
+                menu.classList.remove('show');
+            }
+        });
+    });
 </script>
      
  </body>
