@@ -200,6 +200,31 @@
   }
 }
 
+    /* Top Right Social Links */
+.social-links {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 10000;
+}
+
+.social-links a {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin: 5px 0;
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: rotate(180deg) scale(1.15);
+}
     
     </style>
 </head>
@@ -957,6 +982,12 @@
     });
   });
 </script>
+     <!-- Social Links (Top Right) -->
+<div class="social-links">
+  <a href="https://instagram.com/YOURUSERNAME" target="_blank">instagram</a>
+  <a href="https://youtube.com/YOURCHANNEL" target="_blank">youtube</a>
+  <a href="https://maysunmusic.bandcamp.com" target="_blank">bandcamp</a>
+</div>
      
  </body>
  </html>
