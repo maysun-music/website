@@ -1,993 +1,876 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forever In Sound</title>
-    <style>
-        /* Body and Global Styles */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;  /* Align sections at the top */
-            align-items: flex-start;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            font-family: Helvetica, Arial, sans-serif;
-            color: black;
-            text-align: left;
-            overflow-x: hidden;
-            margin-right: 250px;
-        }
-
-        /* Container for the entire content */
-        .content-container {
-            width: 80%;
-            max-width: 1200px;
-            margin-left: 250px; /* Offset for the sidebar */
-            padding: 20px;
-        }
-
-        .section {
-            padding: 30px 0 20px 0; /* reduced vertical padding */
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2px; /* tighter spacing under the title */
-        }
-
-        /* Styling for the embedded YouTube video */
-        .video-container {
-            display: flex;
-            gap: 20px;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        iframe {
-            width: 48%;
-            height: 315px;
-        }
-
-        /* Side Menu Styling */
-        .side-menu {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 120px;  /* Increased width to accommodate single-line text */
-            background-color: #ffffff;
-            padding: 10px; /* Reduced padding */
-            border-radius: 0px;
-            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        .side-menu a {
-            display: block;
-            padding: 3px 5px;
-            text-decoration: none;
-            color: rgb(0, 0, 0);
-            font-size: 0.75rem;
-            margin: 4px 0;
-            transition: transform 0.2s ease, background-color 0.3s;
-            white-space: nowrap;
-        }
-
-        .side-menu a:hover {
-            transform: scale(1.15);
-            background-color: #ffffff; /* Optional: subtle highlight */
-        }
-
-        /* Smooth Scroll Effect */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Responsive: Hide side menu and show burger icon on smaller screens */
-    .burger {
-    display: none;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    font-size: 32px;
-    color: black;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
-}
-
-@media (max-width: 768px) {
- .side-menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: white;
-    overflow-y: auto;
-    padding: 60px 20px 20px 20px;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-
-    .side-menu.show {
-        display: block;
-    }
-
-    .burger {
-        display: block;
-    }
-
-.content-container {
-    margin-left: 0;
-    width: 100vw;
-    padding-right: 20px; /* prevents text cutoff */
-    box-sizing: border-box;
-}
-
-    body {
-        margin-right: 0;
-    }
-
-
-.burger-menu {
-  display: none;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 9999;
-}
-.burger-menu div {
-  width: 30px;
-  height: 4px;
-  background-color: black;
-  margin: 6px 0;
-}
-
-/* Full-screen Mobile Menu */
-#mobileMenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 9998;
-  padding: 20px;
-  overflow-y: auto;
-  box-sizing: border-box;
-}
-
-#mobileMenu.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-#mobileMenu a {
-  display: block;
-  padding: 15px 0;
-  color: black;
-  font-size: 1.1rem;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Adjust layout on mobile */
-@media (max-width: 768px) {
-  .burger-menu {
-    display: block;
-  }
-
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Forever In Sound</title>
+     <style>
+         /* Body and Global Styles */
+         body {
+             display: flex;
+             flex-direction: column;
+             justify-content: flex-start;  /* Align sections at the top */
+             align-items: flex-start;
+             height: 100vh;
+             margin: 0;
+             padding: 0;
+             background-color: white;
+             font-family: Helvetica, Arial, sans-serif;
+             color: black;
+             text-align: left;
+             overflow-x: hidden;
+             margin-right: 250px;
+         }
+ 
+         /* Container for the entire content */
+         .content-container {
+             width: 80%;
+             max-width: 1200px;
+             margin-left: 250px; /* Offset for the sidebar */
+             padding: 20px;
+         }
+ 
+         .section {
+             padding: 30px 0 20px 0; /* reduced vertical padding */
+         }
+ 
+         .section-title {
+             font-size: 2rem;
+             margin-bottom: 2px; /* tighter spacing under the title */
+         }
+ 
+         /* Styling for the embedded YouTube video */
+         .video-container {
+             display: flex;
+             gap: 20px;
+             justify-content: space-between;
+             margin-bottom: 20px;
+         }
+ 
+         iframe {
+             width: 48%;
+             height: 315px;
+         }
+ 
+         /* Side Menu Styling */
+         .side-menu {
+             position: fixed;
+             top: 20px;
+             left: 20px;
+             width: 120px;  /* Increased width to accommodate single-line text */
+             background-color: #ffffff;
+             padding: 10px; /* Reduced padding */
+             border-radius: 0px;
+             box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+             z-index: 1000;
+         }
+ 
+         .side-menu a {
+             display: block;
+             padding: 3px 5px;
+             text-decoration: none;
+             color: rgb(0, 0, 0);
+             font-size: 0.75rem;
+             margin: 4px 0;
+             transition: transform 0.2s ease, background-color 0.3s;
+             white-space: nowrap;
+         }
+ 
+         .side-menu a:hover {
+             transform: scale(1.15);
+             background-color: #ffffff; /* Optional: subtle highlight */
+         }
+ 
+         /* Smooth Scroll Effect */
+         html {
+             scroll-behavior: smooth;
+         }
+ 
+         /* Responsive: Hide side menu and show burger icon on smaller screens */
+ .burger {
+     display: none;
+     position: fixed;
+     top: 10px;
+     left: 10px;
+     font-size: 32px;
+     color: black;
+     background: none;
+     border: none;
+     cursor: pointer;
+     z-index: 1100;
+ }
+ 
+ @media (max-width: 768px) {
+     .side-menu {
+         display: none;
+         position: fixed;
+         top: 60px;
+         left: 20px;
+         background-color: white;
+         padding: 8px;
+         box-shadow: none;
+         width: 160px;
+         z-index: 1000;
+         border-radius: 4px;
+     }
   .side-menu {
-    display: none !important;
-  }
-
-  .content-container {
-    padding-top: 80px; /* So content doesn't overlap burger */
-  }
-}
-
-    /* Top Right Social Links */
-.social-links {
-  position: fixed;
-  top: 20px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  z-index: 10000;
-}
-
-.social-links a {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  margin: 5px 0;
-  color: black;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.social-links a:hover {
-  transform: rotate(180deg) scale(1.15);
-}
-    
-    </style>
-</head>
- <body>
-     <!-- Burger Icon -->
-<div class="burger-menu" onclick="toggleMenu()">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
-
-     <!-- Mobile Menu -->
-<div id="mobileMenu">
-    <a href="#introduction">01. INTRODUCTION</a>
-         <a href="#early-years">02. EARLY YEARS</a>
-         <a href="#insomnia-learning">03. INSOMNIA LEARNING</a>
-         <a href="#composition-recording">04. COMPOSITION AND VIDEOS</a>
-         <a href="#school">05. SCHOOL</a>
-         <a href="#after-school">06. AFTER SCHOOL</a>
-         <a href="#jazz-indie">07. FROM JAZZ TO INDIE</a>
-         <a href="#creative-limitations">08. CREATIVE LIMITATIONS</a>
-         <a href="#turning-point">09. TURNING POINT</a>  
-         <a href="#ep1">10. EP1: TAPE DEGRADATION</a>
-         <a href="#live-setup">11. LIVE SETUP</a>
-         <a href="#ep2">12. EP2: EMBEDDING SPACE</a>
-         <a href="#more-live">13. MORE LIVE SESSIONS</a>
-         <a href="#portability">14. PORTABILITY</a>
-         <a href="#ep3">15. EP3: CONTINUOUS SOUND</a>
-         <a href="#another-session">16. ANOTHER LIVE SESSION</a>
-         <a href="#drum-festival">17. DRUM FESTIVAL</a>
-         <a href="#night-improvs">18. NIGHT IMPROVS</a>
-         <a href="#repetition">19. REPETITION</a>
-         <a href="#building-audience">20. BUILDING AN AUDIENCE</a>
-         <a href="#systems">21. SYSTEMS</a>
-         <a href="#refining-setup">22. REFINING MY SETUP</a>
-         <a href="#sensory-percussion">23. SENSORY PERCUSSION</a>
-         <a href="#365">24. 365 VIDEOS</a>
-         <a href="#tape-cassette">25. TAPE CASSETTE</a>
-    </div>
- 
-     <div class="side-menu">
-         <a href="#introduction">01. INTRODUCTION</a>
-         <a href="#early-years">02. EARLY YEARS</a>
-         <a href="#insomnia-learning">03. INSOMNIA LEARNING</a>
-         <a href="#composition-recording">04. COMPOSITION AND VIDEOS</a>
-         <a href="#school">05. SCHOOL</a>
-         <a href="#after-school">06. AFTER SCHOOL</a>
-         <a href="#jazz-indie">07. FROM JAZZ TO INDIE</a>
-         <a href="#creative-limitations">08. CREATIVE LIMITATIONS</a>
-         <a href="#turning-point">09. TURNING POINT</a>  
-         <a href="#ep1">10. EP1: TAPE DEGRADATION</a>
-         <a href="#live-setup">11. LIVE SETUP</a>
-         <a href="#ep2">12. EP2: EMBEDDING SPACE</a>
-         <a href="#more-live">13. MORE LIVE SESSIONS</a>
-         <a href="#portability">14. PORTABILITY</a>
-         <a href="#ep3">15. EP3: CONTINUOUS SOUND</a>
-         <a href="#another-session">16. ANOTHER LIVE SESSION</a>
-         <a href="#drum-festival">17. DRUM FESTIVAL</a>
-         <a href="#night-improvs">18. NIGHT IMPROVS</a>
-         <a href="#repetition">19. REPETITION</a>
-         <a href="#building-audience">20. BUILDING AN AUDIENCE</a>
-         <a href="#systems">21. SYSTEMS</a>
-         <a href="#refining-setup">22. REFINING MY SETUP</a>
-         <a href="#sensory-percussion">23. SENSORY PERCUSSION</a>
-         <a href="#365">24. 365 VIDEOS</a>
-         <a href="#tape-cassette">25. TAPE CASSETTE</a>
- 
-     </div>
+     display: none;
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     background-color: white;
+     overflow-y: auto;
+     padding: 60px 20px 20px 20px;
+     z-index: 1000;
+     box-sizing: border-box;
+ }
  
+     .side-menu.show {
+         display: block;
+     }
  
+     .burger {
+         display: block;
+     }
+ 
+ .content-container {
+     margin-left: 0;
+     width: 100vw;
+     padding-right: 20px; /* prevents text cutoff */
+     box-sizing: border-box;
+ }
+ 
+     body {
+         margin-right: 0;
+     }
+ 
+     </style>
+ </head>
+  <body>
+      <button class="burger" onclick="toggleMenu()">☰</button>
+ 
+      <div class="side-menu">
+          <a href="#introduction">01. INTRODUCTION</a>
+          <a href="#early-years">02. EARLY YEARS</a>
+          <a href="#insomnia-learning">03. INSOMNIA LEARNING</a>
+          <a href="#composition-recording">04. COMPOSITION AND VIDEOS</a>
+          <a href="#school">05. SCHOOL</a>
+          <a href="#after-school">06. AFTER SCHOOL</a>
+          <a href="#jazz-indie">07. FROM JAZZ TO INDIE</a>
+          <a href="#creative-limitations">08. CREATIVE LIMITATIONS</a>
+          <a href="#turning-point">09. TURNING POINT</a>  
+          <a href="#ep1">10. EP1: TAPE DEGRADATION</a>
+          <a href="#live-setup">11. LIVE SETUP</a>
+          <a href="#ep2">12. EP2: EMBEDDING SPACE</a>
+          <a href="#more-live">13. MORE LIVE SESSIONS</a>
+          <a href="#portability">14. PORTABILITY</a>
+          <a href="#ep3">15. EP3: CONTINUOUS SOUND</a>
+          <a href="#another-session">16. ANOTHER LIVE SESSION</a>
+          <a href="#drum-festival">17. DRUM FESTIVAL</a>
+          <a href="#night-improvs">18. NIGHT IMPROVS</a>
+          <a href="#repetition">19. REPETITION</a>
+          <a href="#building-audience">20. BUILDING AN AUDIENCE</a>
+          <a href="#systems">21. SYSTEMS</a>
+          <a href="#refining-setup">22. REFINING MY SETUP</a>
+          <a href="#sensory-percussion">23. SENSORY PERCUSSION</a>
+          <a href="#365">24. 365 VIDEOS</a>
+          <a href="#tape-cassette">25. TAPE CASSETTE</a>
+ 
+      </div>
  
  
  
  
-     <div class="content-container">
-         <h1 style="font-size: 60px;">FOREVER IN SOUND</h1>
-     
  
  
-         <!-- Section 1 -->
-         <div id="introduction" class="section">
-             <h2 class="section-title">INTRODUCTION</h2>
-         </div>
+      <div class="content-container">
+          <h1 style="font-size: 60px;">FOREVER IN SOUND</h1>
  
-             <p>This page is as a backwards journal. A look at everything I've created and how it shaped the artist I am today. 
-                 Part reflection, part guide, it breaks down my process, the tools I've used, and the events that have influenced my work.</p>
  
-             <p>Over the years, my research and experiments have pushed me to explore different aspects of sound, immersive experiences, performance, and instrument design. 
-                 Most of all, they have taught me how to generate ideas quickly, remove filters, and embrace imperfection.</p> 
  
+          <!-- Section 1 -->
+          <div id="introduction" class="section">
+              <h2 class="section-title">INTRODUCTION</h2>
+          </div>
  
+              <p>This page is as a backwards journal. A look at everything I've created and how it shaped the artist I am today. 
+                  Part reflection, part guide, it breaks down my process, the tools I've used, and the events that have influenced my work.</p>
  
-         <!-- Section 2 -->
-         <div id="early-years" class="section">
-         <h2 class="section-title">EARLY YEARS</h2>
-         </div>
+              <p>Over the years, my research and experiments have pushed me to explore different aspects of sound, immersive experiences, performance, and instrument design. 
+                  Most of all, they have taught me how to generate ideas quickly, remove filters, and embrace imperfection.</p> 
  
-             <p>There are videos of me banging on pots and pans at age 2, but it is around age 8 that I started asking for a drum set. 
-             I felt a special connection to the instrument after a college jazz band performed at my school, and I could feel the bass drum in my chest. 
-             Two years later, my parents gifted me a snare, a hi-hat, and a cardboard box, which my father rigged with a bass drum pedal.</p>
  
-             <p>We had a family computer in the room next to the play area, and when I was 12, my parents let me run an audio extension cable so the cheap Logitech computer mic could reach the ceiling above the drums. 
-             This became my first recording setup, where I would layer drums over electric piano using Audacity.</p>
  
-             <p>I wasn't drawn to any specific style of music, but I knew I loved the feeling of sound. 
-             The music that filled my household was mostly '70s funk and the soundtracks from our weekly movie rentals. 
-             I was especially drawn to cinematic scores and later realized that many of them were composed by Philip Glass.</p>
+          <!-- Section 2 -->
+          <div id="early-years" class="section">
+          <h2 class="section-title">EARLY YEARS</h2>
+          </div>
  
+              <p>There are videos of me banging on pots and pans at age 2, but it is around age 8 that I started asking for a drum set. 
+              I felt a special connection to the instrument after a college jazz band performed at my school, and I could feel the bass drum in my chest. 
+              Two years later, my parents gifted me a snare, a hi-hat, and a cardboard box, which my father rigged with a bass drum pedal.</p>
  
+              <p>We had a family computer in the room next to the play area, and when I was 12, my parents let me run an audio extension cable so the cheap Logitech computer mic could reach the ceiling above the drums. 
+              This became my first recording setup, where I would layer drums over electric piano using Audacity.</p>
  
-         <!-- Section 3 -->
-         <div id="insomnia-learning" class="section">
-         <h2 class="section-title">INSOMNIA LEARNING</h2>
-         </div>
+              <p>I wasn't drawn to any specific style of music, but I knew I loved the feeling of sound. 
+              The music that filled my household was mostly '70s funk and the soundtracks from our weekly movie rentals. 
+              I was especially drawn to cinematic scores and later realized that many of them were composed by Philip Glass.</p>
  
-             <p>I had insomnia in my teens and tried to use it as a power. 
-             I spent hours at night on forums like Drummerworld, memorizing every drummer's bio, setup, playing style, and exercises. 
-             I also became active on Cymbalholics and Ghostnote, which focused on cymbal making and drum building.</p>
  
-             <p>In 2005, YouTube arrived, and I started searching for live performances, jumping from video to video. 
-             A turning point was discovering The Bad Plus. 
-             I had never seen a drummer like Dave King who placed small cymbals and objects on drums, and used kids' toys as part of his setup. 
-             On top of that, their music felt free, with constantly shifting beats, everything seeming to fall apart yet staying strongly connected. 
-             It was chaotic and structured at the same time. It felt like the music was about the bigger picture, not just the individual parts.</p>
  
-             <p>That YouTube recommendation led me into jazz, where I found my most influential drummers like Brian Blade and Dan Weiss. 
-             I also became obsessed with piano trios like Tigran Hamasyan, Shai Maestro, and Brad Mehldau. 
-             I would go deep into entire discographies, listening to them on repeat for months, trying to absorb the vocabulary. 
-             The Smalls Live audio archive became an important tool for hearing raw sessions from these musicians.</p>
+          <!-- Section 3 -->
+          <div id="insomnia-learning" class="section">
+          <h2 class="section-title">INSOMNIA LEARNING</h2>
+          </div>
  
+              <p>I had insomnia in my teens and tried to use it as a power. 
+              I spent hours at night on forums like Drummerworld, memorizing every drummer's bio, setup, playing style, and exercises. 
+              I also became active on Cymbalholics and Ghostnote, which focused on cymbal making and drum building.</p>
  
-         <!-- Section 4 -->
-         <div id="composition-recording" class="section">
-         <h2 class="section-title">COMPOSITION, RECORDING & VIDEOS</h2>
-         </div>
+              <p>In 2005, YouTube arrived, and I started searching for live performances, jumping from video to video. 
+              A turning point was discovering The Bad Plus. 
+              I had never seen a drummer like Dave King who placed small cymbals and objects on drums, and used kids' toys as part of his setup. 
+              On top of that, their music felt free, with constantly shifting beats, everything seeming to fall apart yet staying strongly connected. 
+              It was chaotic and structured at the same time. It felt like the music was about the bigger picture, not just the individual parts.</p>
  
-             <p>Around 2006, my parents bought a MacBook for the family. It had GarageBand, iMovie, and a webcam. 
-             It had everything I needed to start documenting my drumming. 
-             I shared videos on the forums I frequented to get feedback on my playing.</p>
+              <p>That YouTube recommendation led me into jazz, where I found my most influential drummers like Brian Blade and Dan Weiss. 
+              I also became obsessed with piano trios like Tigran Hamasyan, Shai Maestro, and Brad Mehldau. 
+              I would go deep into entire discographies, listening to them on repeat for months, trying to absorb the vocabulary. 
+              The Smalls Live audio archive became an important tool for hearing raw sessions from these musicians.</p>
  
-             <p>I later bought a cheap M-Audio interface off eBay, paired with MXL 990 and 2001 microphones. 
-             By 2007, I was writing and recording full compositions, layering drums, piano, and MIDI bass.</p>
  
-             <p>Later, I found Jack Conte's VideoSongs on YouTube. 
-             He was one of the first people to creating music sessions from his home studio, performing every instrument with no lip-syncing or hidden sounds. 
-             His high output and creative video approach stood out to me. 
-             His music leaned more pop than what I typically allowed myself to listen to, but I loved the intricate harmonies, raw sound, and how the production process was fully visible.</p>
+          <!-- Section 4 -->
+          <div id="composition-recording" class="section">
+          <h2 class="section-title">COMPOSITION, RECORDING & VIDEOS</h2>
+          </div>
  
-         <!-- Section 5 -->
-         <div id="school" class="section">
-         <h2 class="section-title">SCHOOL</h2>
-         </div>
+              <p>Around 2006, my parents bought a MacBook for the family. It had GarageBand, iMovie, and a webcam. 
+              It had everything I needed to start documenting my drumming. 
+              I shared videos on the forums I frequented to get feedback on my playing.</p>
  
-             <p>Despite my jazz mindset, I enrolled in a three-year CEGEP (college) program for pop music. 
-             This trained musicians to learn quickly, sight-read with confidence, and write efficient lead sheets. 
-             Most graduates aimed to become TV set musicians, play in top 40 bands, or work cruise ship gigs.</p>
+              <p>I later bought a cheap M-Audio interface off eBay, paired with MXL 990 and 2001 microphones. 
+              By 2007, I was writing and recording full compositions, layering drums, piano, and MIDI bass.</p>
  
-             <p>My playing was soft and textural, and I was obsessed with odd meters, odd groupings, and quintuplets. None of which were popular with people in that program. 
-             Since I had already covered most of the drum curriculum in private lessons between ages 16 and 17, my drum teachers let me guide my own studies, giving me opportunities outside the standard curriculum.</p>
+              <p>Later, I found Jack Conte's VideoSongs on YouTube. 
+              He was one of the first people to creating music sessions from his home studio, performing every instrument with no lip-syncing or hidden sounds. 
+              His high output and creative video approach stood out to me. 
+              His music leaned more pop than what I typically allowed myself to listen to, but I loved the intricate harmonies, raw sound, and how the production process was fully visible.</p>
  
-             <p>They placed me in the Big Band and the Musical Theatre pit orchestra, making my degree more intensive. 
-             While the program was designed to prepare students for the industry, I planned to continue my studies at a university.</p>
+          <!-- Section 5 -->
+          <div id="school" class="section">
+          <h2 class="section-title">SCHOOL</h2>
+          </div>
  
-             <p>I eventually moved to Montreal to start a bachelor's degree in Jazz Performance. 
-             For the first time, I had no space to practice drums and had to rely on the school's rarely available practice rooms. 
-             The academic environment pressured me to write complex music, which led to a creative blockage. This drained the fun out of music, and I dropped out after a year.</p>
+              <p>Despite my jazz mindset, I enrolled in a three-year CEGEP (college) program for pop music. 
+              This trained musicians to learn quickly, sight-read with confidence, and write efficient lead sheets. 
+              Most graduates aimed to become TV set musicians, play in top 40 bands, or work cruise ship gigs.</p>
  
+              <p>My playing was soft and textural, and I was obsessed with odd meters, odd groupings, and quintuplets. None of which were popular with people in that program. 
+              Since I had already covered most of the drum curriculum in private lessons between ages 16 and 17, my drum teachers let me guide my own studies, giving me opportunities outside the standard curriculum.</p>
  
+              <p>They placed me in the Big Band and the Musical Theatre pit orchestra, making my degree more intensive. 
+              While the program was designed to prepare students for the industry, I planned to continue my studies at a university.</p>
  
+              <p>I eventually moved to Montreal to start a bachelor's degree in Jazz Performance. 
+              For the first time, I had no space to practice drums and had to rely on the school's rarely available practice rooms. 
+              The academic environment pressured me to write complex music, which led to a creative blockage. This drained the fun out of music, and I dropped out after a year.</p>
  
-         <!-- Section 6 -->
-         <div id="after-school" class="section">
-         <h2 class="section-title">AFTER SCHOOL</h2>
-         </div>
  
-             <p>After dropping out of school, I rented a tiny rehearsal space just big enough for a drum kit and a few mics. 
-             The walls were thin, and loud bands rehearsed around me, making it difficult to practice or record. 
-             To work around this, I started going in early mornings or late at night.</p>
  
-             <p>This is where I first experimented with electronics and drums, running an SM57 on the floor tom through an EHX Memory Man delay pedal, with a Microkorg for extra sounds. 
-             This is one of my earliest videos combining drums and electronics.</p>
  
-             <div class="video-container">
-                 <iframe src="https://www.youtube.com/embed/tBX2OAECRB4" title="Ambient Improv"></iframe>
-             </div> 
+          <!-- Section 6 -->
+          <div id="after-school" class="section">
+          <h2 class="section-title">AFTER SCHOOL</h2>
+          </div>
  
-         <!-- Section 7 -->
-         <div id="jazz-indie" class="section">
-         <h2 class="section-title">FROM JAZZ TO INDIE</h2>
-         </div>
+              <p>After dropping out of school, I rented a tiny rehearsal space just big enough for a drum kit and a few mics. 
+              The walls were thin, and loud bands rehearsed around me, making it difficult to practice or record. 
+              To work around this, I started going in early mornings or late at night.</p>
  
-             <p>I spent a significant amount of time studying Miles Okazaki's work, particularly his Four Pulse Study, which explored subdivisions and groupings. 
-             His mathematical and visual approach to rhythm fascinated me.</p>
- 
-             <p>I applied for a Canadian grant to study in New York City with Dan Weiss, a longtime collaborator of Okazaki. 
-             The grant was denied. That rejection forced me to reassess my career path and rather than focusing on jazz, I decided to aim to make my name locally as a creative, textural drummer in the indie scene.</p>
- 
-             <p>One of the drummers who stood out in this style was Robbie Kuster, Patrick Watson's drummer. 
-             I liked that he rarely played a traditional backbeat on the snare, instead using crashes, floor toms, and unconventional objects to mark time. 
-             Without realizing it, I was becoming more interested in sound design.</p>
- 
-             <p>I was already playing in a few indie/rock bands, and before long, I started accompanying the bands we opened for and the bands that opened for us. 
-             I'd offer to play with as many people as I could, running between venues to play multiple shows in a night. 
-             It felt like the right direction.</p>
- 
-             <p>I was playing so much that it soon made sense to move into a better shared rehearsal space with some of my bandmates. 
-             I spent nearly all my time there, rotating between different projects. 
-             I would record synth tracks at home in Logic and add drums to them between rehearsals. 
-             Over time, I set up my Microkorg, Boss RC-3, and a small mixer, which gave me more routing options for looping. 
-             This brought me back into experimenting with electronics and drums together.</p>
- 
-             <div class="video-container">
-                 <iframe src="https://www.youtube.com/embed/NHxIv9ecsEo" title="Dignity"></iframe>
-                 <iframe src="https://www.youtube.com/embed/KMbXBd6xY20" title="Liquid Days"></iframe>
-             </div>
- 
-         <!-- Section 8 -->
-         <div id="creative-limitations" class="section">
-         <h2 class="section-title">CREATIVE LIMITATIONS</h2>
-         </div>
- 
-         <p>I pushed myself to unlearn everything I had picked up in school. 
-         Being a trained musician seemed frowned upon in the indie scene. 
-         I created a set of strict rules to break my habits, like limiting myself to eight notes, no fills allowed, and never playing more than two consecutive notes with the same hand. 
-         I detuned my snare to finger-tight, eliminating rebound for ghost notes and removed the rack tom to block muscle-memory fills. 
-         I wanted my playing to be raw and minimalist, moving away from my more technical and intricate playing. I fell in love with flams and slow tempos.</p>
- 
-         <p>I believed that if I played with everyone, something would eventually work out. 
-         At one point, I was in about 25 different projects. Some bands started signing with labels, but every time that happened, I would lose the gig. Labels pushed them into duos or trios to open for their main acts, and drums were cut. 
-         This pattern kept repeating. To adapt, I started playing bass synth while drumming, hoping to make myself more indispensable. 
-         I swapped my Microkorg for a DSI Mopho X4.</p>
- 
-         <p>A sound engineer friend reached out, offering a free studio session to practice mic'ing drums. 
-         Without much planning, I asked two friends with cameras to capture the session. 
-         That day made me realize how important it was to understand every aspect of production. 
-         I wanted full control over my output, so I could work faster and maintain visibility.</p>
- 
-         <p>I continued experimenting with running my floor tom mic through effects, using an A/B pedal to switch the input on and off through a Dr. Scientist Reverberator and an EHX Memory Man Deluxe. 
-         On the Mopho X4, I maxed out the envelope's sustain, making notes last until I played four new ones. This meant I had to repeat triads to ensure no unwanted notes carried over. It also freed up my left hand to play drums. 
-         I could add weight to the sound by slowly opening the filter.</p>
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/NtttR3fhw7o" title="Green Frame"></iframe>
-                 </div>
- 
-             <p>I began focusing on building independence between my left hand on synths and my drumming, recording those practice sessions with my iPod Touch. 
-                 I was also searching for ways to make the sound evolve within the one-hand limitation I was facing.
- 
-                 The EHX Pog2 became a key solution, allowing me to layer sounds by doubling them up to two octaves higher and lower. 
-                 It also introduced a warbly, organ-like tone. I placed pedals on my snare for easy access while playing, which also dampened the snare sound.</p>
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/xFIuHy7DYhk" title="2015 Practice"></iframe>
-                 </div>
- 
-         <!-- Section 9 -->
-         <div id="turning-point" class="section">
-         <h2 class="section-title">TURNING POINT</h2>
-         </div>
-             
-                 <p>In 2015, live sessions were starting to pick up on YouTube. 
-                 I wanted the bands I was in to take advantage of this, suggesting we record weekly sessions and put them online. 
-                 I saw this as a better investment than the traditional route of playing local shows (pay to play), applying to contests and festivals (pay to play), or recording EPs (pay to record) in hopes of getting label attention. 
-                 The local scene was small, and it felt like access to “the industry” was controlled by an exclusive group of people. 
-                 The internet seemed like a way to bypass all of that and connect directly with fans.</p>
- 
-                 <p>I wasn't supported in this idea, and it was pushed aside. 
-                 This was when I started feeling artistically stuck, and realized I couldn't put more effort into a project than the bandleader. 
-                 After all, these projects weren't actually mine. I existed in a gray area between an unpaid session musician and a core band member. 
-                 That, combined with burnout, made me step away.</p>
-
- 
- 
-          <!-- Section 10 -->
-         <div id="ep1" class="section">
-         <h2 class="section-title">EP1: TAPE DEGRADATION</h2>
-         </div>
- 
-                 <p>After leaving most of those projects, I shifted my focus to my creating my own music, seeing it as a way to build a portfolio for more serious opportunities. 
-                  It was also a way to develop production skills and take full control over my sound, style, and visibility.</p>
- 
-                 <p>I recorded my first EP, All These Are the Days, using only a Zoom H6, except for the drums which were done in a studio. 
-                 For this EP, I experimented with cassette tapes, scratching them with a utility knife and recording over the damaged tape. 
-                 This introduced degraded sounds, artifacts from previous recordings, shifting stereo fields, and saturation. 
-                 It also broke my tape machine.</p>
- 
-                 <p>To record drums, I went to an audio engineer friend's studio and brought back the tracks into logic.
-                 I had no knowledge of how to mix and knew nothing of plugins but figured it was more about the long run than this single project. 
-                 I wanted the skills for the future. </p>
- 
-                 <p>Working with synths and production brought back the fun in composing. 
-                 I no longer felt the pressure of harmonic, melodic, or rhythmic complexity. 
-                 It became about texture, tone, and feeling.</p>
-
-         <iframe style="border: 0; width: 400px; height: 340px;" src="https://bandcamp.com/EmbeddedPlayer/album=3851653569/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://maysunmusic.bandcamp.com/album/all-these-are-the-days">All These Are The Days by MAYSUN</a></iframe>
- 
-         <!-- Section 11 -->
-         <div id="live-setup" class="section">
-         <h2 class="section-title">LIVE SETUP</h2>
-         </div>
- 
-                 <p>I wanted to find a way to perform my compositions live. Since I wasn't fully satisfied with the video released the year before, 
-                 I started searching for ways to free up my hands to control more sound.
-                 Quitting my bands also meant losing access to a rehearsal space. 
-                 To be able to practice in my apartment, I sampled my own drum sounds from that previous studio session and loaded them into a Roland SPD-S. 
-                 I combined this with a Keith McMillen 12 Step MIDI foot controller, which fit next to my hi-hat stand and allowed me to trigger full chords with a single hit. 
-                 This freed my hands to focus on drums, synths, and manipulating pedals. 
-                 The EHX POG2 remained, allowing me to expand layers by shifting multiple octaves with a single slider.</p>
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/R1vzGrtb3Ig" title="Compassion"></iframe>
-                 </div>
- 
- 
-         <!-- Section 12 -->
-         <div id="ep2" class="section">
-         <h2 class="section-title">EP2: EMBEDDING SPACE</h2>
-         </div>
- 
- 
-             <p>I immediately started working on my second EP, The Field of Living, planning my releases as a triptych.</p>
- 
-             <p>This was when I first integrated field recordings into my music. I heard a street-cleaning truck from my window emitting a long drone and used it as the foundation for "Dark Room". 
-             The metallic light fixture in my apartment became the intro for "Phases". "Tall Woman" featured water from the drain outside my parents' house and streetcars from my apartment window. 
-             I saw this as a way for me to remember where I was during all of this. A kind of proof of existence by injecting space and time details into the recording.</p>
- 
-             <p>I also started experimenting with re-amping. Not being into plugins at the time, I looked for ways to physically alter sounds. 
-             Playing audio through my phone inside a box and mic'ing it from the outside for a muffled effect, or to create multiple versions of the same sound and layering them in the mix. 
-             Around this time, I bought external preamps, though they made little sense with my Zoom H6 as an interface. Since the Zoom was still the weak link, I ended up cranking the preamps for distortion rather than fidelity. 
-             The drums were once again recorded at my friend's studio.</p>
- 
-             <p>This is also the birth of MAY SUN, as announced in the fifth track. Although not my project name yet.</p>
-
-         <iframe style="border: 0; width: 400px; height: 340px;" src="https://bandcamp.com/EmbeddedPlayer/album=1986244298/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://maysunmusic.bandcamp.com/album/the-field-of-living">The Field of Living by MAYSUN</a></iframe>
- 
- 
-         <!-- Section 13 -->
-         <div id="more-live" class="section">
-         <h2 class="section-title">MORE LIVE SESSIONS</h2>      
-         </div>
- 
- 
-             <p>Meanwhile, I was still refining my live setup. 
-             My downstairs landlord had complained about vibrations from the SPD-SX, which pushed me to think of recording live sessions in regular spaces rather than my apartment. 
-             My setups were always hypothetical until I had a show. 
-             I would only find out about technical limitations while performing. 
-             Progress felt very slow.</p>
- 
-             <p>I took advantage of a visit to my parents' house, and recorded another session. 
-             By then, my setup had evolved into two distinct stations. Synths on my left and drums on my right. 
-             I added a double pedal so I could play bass drum while fully pivoted at the synth station and introduced a Waldorf Blofeld alongside the Mopho X4.</p> 
+              <p>This is where I first experimented with electronics and drums, running an SM57 on the floor tom through an EHX Memory Man delay pedal, with a Microkorg for extra sounds. 
+              This is one of my earliest videos combining drums and electronics.</p>
  
               <div class="video-container">
-                 <iframe src="https://www.youtube.com/embed/-c3em2hh2vU" title="May Sun"></iframe>
-             </div>
+                  <iframe src="https://www.youtube.com/embed/tBX2OAECRB4" title="Ambient Improv"></iframe>
+              </div> 
+ 
+          <!-- Section 7 -->
+          <div id="jazz-indie" class="section">
+          <h2 class="section-title">FROM JAZZ TO INDIE</h2>
+          </div>
+ 
+              <p>I spent a significant amount of time studying Miles Okazaki's work, particularly his Four Pulse Study, which explored subdivisions and groupings. 
+              His mathematical and visual approach to rhythm fascinated me.</p>
+ 
+              <p>I applied for a Canadian grant to study in New York City with Dan Weiss, a longtime collaborator of Okazaki. 
+              The grant was denied. That rejection forced me to reassess my career path and rather than focusing on jazz, I decided to aim to make my name locally as a creative, textural drummer in the indie scene.</p>
+ 
+              <p>One of the drummers who stood out in this style was Robbie Kuster, Patrick Watson's drummer. 
+              I liked that he rarely played a traditional backbeat on the snare, instead using crashes, floor toms, and unconventional objects to mark time. 
+              Without realizing it, I was becoming more interested in sound design.</p>
+ 
+              <p>I was already playing in a few indie/rock bands, and before long, I started accompanying the bands we opened for and the bands that opened for us. 
+              I'd offer to play with as many people as I could, running between venues to play multiple shows in a night. 
+              It felt like the right direction.</p>
+ 
+              <p>I was playing so much that it soon made sense to move into a better shared rehearsal space with some of my bandmates. 
+              I spent nearly all my time there, rotating between different projects. 
+              I would record synth tracks at home in Logic and add drums to them between rehearsals. 
+              Over time, I set up my Microkorg, Boss RC-3, and a small mixer, which gave me more routing options for looping. 
+              This brought me back into experimenting with electronics and drums together.</p>
+ 
+              <div class="video-container">
+                  <iframe src="https://www.youtube.com/embed/NHxIv9ecsEo" title="Dignity"></iframe>
+                  <iframe src="https://www.youtube.com/embed/KMbXBd6xY20" title="Liquid Days"></iframe>
+              </div>
+ 
+          <!-- Section 8 -->
+          <div id="creative-limitations" class="section">
+          <h2 class="section-title">CREATIVE LIMITATIONS</h2>
+          </div>
+ 
+          <p>I pushed myself to unlearn everything I had picked up in school. 
+          Being a trained musician seemed frowned upon in the indie scene. 
+          I created a set of strict rules to break my habits, like limiting myself to eight notes, no fills allowed, and never playing more than two consecutive notes with the same hand. 
+          I detuned my snare to finger-tight, eliminating rebound for ghost notes and removed the rack tom to block muscle-memory fills. 
+          I wanted my playing to be raw and minimalist, moving away from my more technical and intricate playing. I fell in love with flams and slow tempos.</p>
  
-         <!-- Section 14 -->
-         <div id="portability" class="section">
-         <h2 class="section-title">PORTABILITY</h2>    
-         </div>
+          <p>I believed that if I played with everyone, something would eventually work out. 
+          At one point, I was in about 25 different projects. Some bands started signing with labels, but every time that happened, I would lose the gig. Labels pushed them into duos or trios to open for their main acts, and drums were cut. 
+          This pattern kept repeating. To adapt, I started playing bass synth while drumming, hoping to make myself more indispensable. 
+          I swapped my Microkorg for a DSI Mopho X4.</p>
  
+          <p>A sound engineer friend reached out, offering a free studio session to practice mic'ing drums. 
+          Without much planning, I asked two friends with cameras to capture the session. 
+          That day made me realize how important it was to understand every aspect of production. 
+          I wanted full control over my output, so I could work faster and maintain visibility.</p>
  
-             <p>I aimed to record one video per month in different locations. 
-             I negotiated a two-hour rental at a nearby church, which required several trips with my Rock-N-Roller R2 cart to transport drums, synths, mics, my Zoom H6, a speaker and a camera. 
-             I set up as quickly as possible, recorded in one take, and packed up as I was running out of time. 
-             Before leaving, I played back the recording in the room. 
-             I felt it was important to tie sounds to a space and its characteristics.</p>
+          <p>I continued experimenting with running my floor tom mic through effects, using an A/B pedal to switch the input on and off through a Dr. Scientist Reverberator and an EHX Memory Man Deluxe. 
+          On the Mopho X4, I maxed out the envelope's sustain, making notes last until I played four new ones. This meant I had to repeat triads to ensure no unwanted notes carried over. It also freed up my left hand to play drums. 
+          I could add weight to the sound by slowly opening the filter.</p>
  
-             <p>For this setup, I replaced my bass drum with a kick pad, used the Mopho X4 and Blofeld for synths, the KMI 12 Step for MIDI control, and the SPD-SX to launch samples of sounds I couldn't recreate with a synth. 
-             Losing the acoustic bass drum meant I could now walk and commute more easily to gigs with my cart.</p>
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/NtttR3fhw7o" title="Green Frame"></iframe>
+                  </div>
  
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/CT8uNonQcxk" title="Honesty"></iframe>
-                 </div>
+              <p>I began focusing on building independence between my left hand on synths and my drumming, recording those practice sessions with my iPod Touch. 
+                  I was also searching for ways to make the sound evolve within the one-hand limitation I was facing.
  
+                  The EHX Pog2 became a key solution, allowing me to layer sounds by doubling them up to two octaves higher and lower. 
+                  It also introduced a warbly, organ-like tone. I placed pedals on my snare for easy access while playing, which also dampened the snare sound.</p>
  
-         <!-- Section 15 -->
-         <div id="ep3" class="section">
-         <h2 class="section-title">EP3: CONTINUOUS SOUND</h2>    
-         </div>
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/xFIuHy7DYhk" title="2015 Practice"></iframe>
+                  </div>
  
+          <!-- Section 9 -->
+          <div id="turning-point" class="section">
+          <h2 class="section-title">TURNING POINT</h2>
+          </div>
  
-             <p>With EP2 released, I started working on my third EP, Sun & Ice. 
-             I wanted to upgrade my recording setup, so I sold the Mopho X4 and purchased an RME Babyface interface.</p>
+                  <p>In 2015, live sessions were starting to pick up on YouTube. 
+                  I wanted the bands I was in to take advantage of this, suggesting we record weekly sessions and put them online. 
+                  I saw this as a better investment than the traditional route of playing local shows (pay to play), applying to contests and festivals (pay to play), or recording EPs (pay to record) in hopes of getting label attention. 
+                  The local scene was small, and it felt like access to “the industry” was controlled by an exclusive group of people. 
+                  The internet seemed like a way to bypass all of that and connect directly with fans.</p>
  
-             <p>For this EP, I wanted the sound to be continuous, with each song seamlessly flowing into the next. 
-             I had also started personifying the mix. Drums represented me, while synths represented life events. 
-             Mixing became an extension of composition, shaping the narrative just as much as the melodies and textures.</p>
+                  <p>I wasn't supported in this idea, and it was pushed aside. 
+                  This was when I started feeling artistically stuck, and realized I couldn't put more effort into a project than the bandleader. 
+                  After all, these projects weren't actually mine. I existed in a gray area between an unpaid session musician and a core band member. 
+                  That, combined with burnout, made me step away.</p>
  
-             <p>While creating the music, I pictured walking across a frozen lake being blinded by the sun, yet still trusting the forward direction. 
-             I took this literally in Black Silver, where I recorded myself walking on ice for the full duration of the track.</p>
  
-             <p>This was the first project where I recorded everything myself, including drums. 
-             I borrowed mics from friends and recorded drums in my parents' basement. With more time to experiment, I used objects to prepare the drums. 
-             On White Peafowl, I slowly dropped a steel chain onto the snare before striking it. 
-             The drum sound was also heavily muffled, and I did not use any toms as I had to work within the limitations of the Babyface's few inputs. 
-             I create a different drum sound for each track.</p>
-
-         <iframe style="border: 0; width: 400px; height: 307px;" src="https://bandcamp.com/EmbeddedPlayer/album=2975113346/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://maysunmusic.bandcamp.com/album/sun-ice">Sun &amp; Ice by MAYSUN</a></iframe>
  
+           <!-- Section 10 -->
+          <div id="ep1" class="section">
+          <h2 class="section-title">EP1: TAPE DEGRADATION</h2>
+          </div>
  
+                  <p>After leaving most of those projects, I shifted my focus to my creating my own music, seeing it as a way to build a portfolio for more serious opportunities. 
+                   It was also a way to develop production skills and take full control over my sound, style, and visibility.</p>
  
-         <!-- Section 16 -->
-         <div id="another-session" class="section">
-         <h2 class="section-title">ANOTHER LIVE SESSION</h2> 
-         </div>
+                  <p>I recorded my first EP, All These Are the Days, using only a Zoom H6, except for the drums which were done in a studio. 
+                  For this EP, I experimented with cassette tapes, scratching them with a utility knife and recording over the damaged tape. 
+                  This introduced degraded sounds, artifacts from previous recordings, shifting stereo fields, and saturation. 
+                  It also broke my tape machine.</p>
  
-             <p>During that same week at my parents' house, I recorded a drum solo and submitted it to two online drum contests. 
-             Both reached out to say I had been selected.</p>
+                  <p>To record drums, I went to an audio engineer friend's studio and brought back the tracks into logic.
+                  I had no knowledge of how to mix and knew nothing of plugins but figured it was more about the long run than this single project. 
+                  I wanted the skills for the future. </p>
  
-             <p>The prize of the first contest was a drum demo session at a music shop. 
-                 I negotiated extra time to record a video for myself. 
-                 At this stage, my setup included a Zoom 70CDR for stereo reverb, a Micro POG for additional octaves since a fader on my POG2 had broken, a Waldorf Blofeld where I had programmed extra layers to be brought in with the mod wheel, a KMI 12-Step foot controller, and an SPD-SX. 
-                 I was also testing a new layout with the synths directly in front of me and the drums placed to the side.</p>
+                  <p>Working with synths and production brought back the fun in composing. 
+                  I no longer felt the pressure of harmonic, melodic, or rhythmic complexity. 
+                  It became about texture, tone, and feeling.</p>
  
-             <p>I split melodies across the SPD-SX, sometimes assigning full chords to a single pad when a section required more drumming. 
-                 The MIDI keys handled more delicate parts. 
-                 I felt like I was finally getting closer to a live setup that worked.</p>
+          <iframe style="border: 0; width: 400px; height: 340px;" src="https://bandcamp.com/EmbeddedPlayer/album=3851653569/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://maysunmusic.bandcamp.com/album/all-these-are-the-days">All These Are The Days by MAYSUN</a></iframe>
  
-             <p>I also started seeing social media as a serious tool for building an audience. 
-                 Anytime I had access to drums, I'd record clips to post online. 
-                 Outside of my solo project, I was still touring and recording with different bands, so I'd take advantage of soundchecks and rehearsal breaks to capture quick drum clips.</p>
+          <!-- Section 11 -->
+          <div id="live-setup" class="section">
+          <h2 class="section-title">LIVE SETUP</h2>
+          </div>
  
+                  <p>I wanted to find a way to perform my compositions live. Since I wasn't fully satisfied with the video released the year before, 
+                  I started searching for ways to free up my hands to control more sound.
+                  Quitting my bands also meant losing access to a rehearsal space. 
+                  To be able to practice in my apartment, I sampled my own drum sounds from that previous studio session and loaded them into a Roland SPD-S. 
+                  I combined this with a Keith McMillen 12 Step MIDI foot controller, which fit next to my hi-hat stand and allowed me to trigger full chords with a single hit. 
+                  This freed my hands to focus on drums, synths, and manipulating pedals. 
+                  The EHX POG2 remained, allowing me to expand layers by shifting multiple octaves with a single slider.</p>
  
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/SXgfMPxLcgA" title="One Sky"></iframe>
-                 </div>
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/R1vzGrtb3Ig" title="Compassion"></iframe>
+                  </div>
  
-         <!-- Section 17 -->
-         <div id="drum-festival" class="section">
-         <h2 class="section-title">DRUM FESTIVAL</h2>
-         </div>
  
-             <p>The second contest flew me to Victoria, BC, to perform at a drum festival. 
-             While it felt like a sign to keep posting videos, I was extremely intimidated. 
-             The other performers were all drummer drummers with chops and prepared solos, and I didn't even have a space to practice. 
-             I was always only rehearsing in my head. To make things more difficult, I wasn't allowed to use my own cymbals, which threw me off.</p>
+          <!-- Section 12 -->
+          <div id="ep2" class="section">
+          <h2 class="section-title">EP2: EMBEDDING SPACE</h2>
+          </div>
  
-             <p>I didn't feel like I belonged there, but I got on stage and improvised. 
-             Playing in a huge, empty room without close mics made me realize how much I relied on mic'ing techniques to bring out the body of my playing. 
-             In my videos, I had full control over the audio, but here, my sound didn't project at all. 
-             I felt extremely self-conscious throughout the performance.</p>
  
-             <p>Later, during a hang with the organizer, he told me that if I really wanted to play drums and practice, I'd make it a priority to find a way to do it.</p>
+              <p>I immediately started working on my second EP, The Field of Living, planning my releases as a triptych.</p>
  
+              <p>This was when I first integrated field recordings into my music. I heard a street-cleaning truck from my window emitting a long drone and used it as the foundation for "Dark Room". 
+              The metallic light fixture in my apartment became the intro for "Phases". "Tall Woman" featured water from the drain outside my parents' house and streetcars from my apartment window. 
+              I saw this as a way for me to remember where I was during all of this. A kind of proof of existence by injecting space and time details into the recording.</p>
  
-             <p>When I got back from the festival, I felt like I had been wasting so much time. 
-             I knew I could improve much faster if I had a dedicated space to practice and record. 
-             But having an independent rehearsal space, without sharing gear, was really expensive and hard to come by. 
-             The only income I had was from playing shows with other projects, and it wasn't enough to afford a space.</p>
+              <p>I also started experimenting with re-amping. Not being into plugins at the time, I looked for ways to physically alter sounds. 
+              Playing audio through my phone inside a box and mic'ing it from the outside for a muffled effect, or to create multiple versions of the same sound and layering them in the mix. 
+              Around this time, I bought external preamps, though they made little sense with my Zoom H6 as an interface. Since the Zoom was still the weak link, I ended up cranking the preamps for distortion rather than fidelity. 
+              The drums were once again recorded at my friend's studio.</p>
  
-             <p>Still, this festival motivated me to go all in.</p>
+              <p>This is also the birth of MAY SUN, as announced in the fifth track. Although not my project name yet.</p>
  
+          <iframe style="border: 0; width: 400px; height: 340px;" src="https://bandcamp.com/EmbeddedPlayer/album=1986244298/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://maysunmusic.bandcamp.com/album/the-field-of-living">The Field of Living by MAYSUN</a></iframe>
  
-             <div class="video-container">
-                 <iframe src="https://www.youtube.com/embed/9mQF6DUgWUo?si=Mi-ElIdPrpsKfLje" title="Drum Solo"></iframe>
-             </div>
  
+          <!-- Section 13 -->
+          <div id="more-live" class="section">
+          <h2 class="section-title">MORE LIVE SESSIONS</h2>      
+          </div>
  
-         <!-- Section 18 -->
-         <div id="night-improvs" class="section">
-         <h2 class="section-title">NIGHT IMPROVS</h2>
-         </div>
  
-             <p>I committed to finding a space where I could practice and record every day. 
-             I wanted to make up for lost time. 
-             Inspired by daily vloggers on YouTube, I was confident this project would create enough visibility for me to find the right people. 
-             I would make videos every day for a year, no matter what.</p>
+              <p>Meanwhile, I was still refining my live setup. 
+              My downstairs landlord had complained about vibrations from the SPD-SX, which pushed me to think of recording live sessions in regular spaces rather than my apartment. 
+              My setups were always hypothetical until I had a show. 
+              I would only find out about technical limitations while performing. 
+              Progress felt very slow.</p>
  
-             <p>Finding a space to practice and record every day was nearly impossible. 
-             Most rehearsal spots only allowed one or two weekly time slots. 
-             I negotiated my way into a space with overnight slot, 1am to 9am. 
-             The space was small and already shared by multiple projects which meant I couldn't keep my own drums there or leave anything set up.
+              <p>I took advantage of a visit to my parents' house, and recorded another session. 
+              By then, my setup had evolved into two distinct stations. Synths on my left and drums on my right. 
+              I added a double pedal so I could play bass drum while fully pivoted at the synth station and introduced a Waldorf Blofeld alongside the Mopho X4.</p> 
  
-             <p>My initial plan was to record a month's worth of videos before posting. 
-             This is not how it happened.</p>
+               <div class="video-container">
+                  <iframe src="https://www.youtube.com/embed/-c3em2hh2vU" title="May Sun"></iframe>
+              </div>
  
-             <p>On the first night, I packed my gear. Cymbals, Zoom H6, laptop, Roland JU-06, MIDI controller, some mics and a camera. 
-             I skateboarded down to the studio and setup. One hour and forty-five minutes is how long it took me that first day.
+          <!-- Section 14 -->
+          <div id="portability" class="section">
+          <h2 class="section-title">PORTABILITY</h2>    
+          </div>
  
-             <p>I hit record, improvised some music, packed everything up, and left. 
-             Once home, I mixed the audio, synced the video, and done.</p> 
  
-             <p>Too excited, I posted it immediately and captioned it: “A video a day, forever.”</p>
+              <p>I aimed to record one video per month in different locations. 
+              I negotiated a two-hour rental at a nearby church, which required several trips with my Rock-N-Roller R2 cart to transport drums, synths, mics, my Zoom H6, a speaker and a camera. 
+              I set up as quickly as possible, recorded in one take, and packed up as I was running out of time. 
+              Before leaving, I played back the recording in the room. 
+              I felt it was important to tie sounds to a space and its characteristics.</p>
  
-             <p>Without a backlog of videos, I had locked myself into making one every day for real. 
-             To save on setup time, I would hide surrounding gear in darkness instead of moving instruments.
-             I used flashlights in mic stands to focus light on me, and projected visuals an audio reactive pedal, the ETC by Critter & Guitari. 
-             I also allowed myself to record more than one video per night so I could take breaks. 
-             I aso always wore a black t-shirt so no one could tell if I was batch recording or not.</p>
+              <p>For this setup, I replaced my bass drum with a kick pad, used the Mopho X4 and Blofeld for synths, the KMI 12 Step for MIDI control, and the SPD-SX to launch samples of sounds I couldn't recreate with a synth. 
+              Losing the acoustic bass drum meant I could now walk and commute more easily to gigs with my cart.</p>
  
-             <p>I used desktop synths because they fit in my backpack. At that time it was a Roland JU-06 and Waldorf Blofeld. 
-             I removed the hi-hat to make more space for the KMI 12-step foot controller.</p>
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/CT8uNonQcxk" title="Honesty"></iframe>
+                  </div>
  
-             <p>Mixing and editing myself every day made me aware of my habits and patterns. 
-             The videos became an exercise in creativity.</p>
  
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/zuVehMp6kX4" title="001"></iframe>
-                     <iframe src="https://www.youtube.com/embed/_5w3KWWZU3I" title="024"></iframe>
-                     <iframe src="https://www.youtube.com/embed/rAdl6wKZt4c" title="064"></iframe>
-                 </div>
+          <!-- Section 15 -->
+          <div id="ep3" class="section">
+          <h2 class="section-title">EP3: CONTINUOUS SOUND</h2>    
+          </div>
  
-         <!-- Section 19 -->
-         <div id="repetition" class="section">
-         <h2 class="section-title">LEANING INTO REPETITION</h2>
-         </div>
  
-             <p>After about fifty videos, I felt like they were becoming redundant.  
-             I accepted that change could be slow. My priority became removing self-doubt and if an idea felt repetitive, I would complete it anyway. 
-             The daily result didn't matter.</p>
+              <p>With EP2 released, I started working on my third EP, Sun & Ice. 
+              I wanted to upgrade my recording setup, so I sold the Mopho X4 and purchased an RME Babyface interface.</p>
  
-             <p>I leaned into repetition and asked myself: How many ways can I shift the same idea? How many ways can I do exactly the same thing? 
-             In hindsight, the biggest factor in my progress was exhausting ideas. By repeating the same process over and over, subtle shifts would emerge. 
-             Some phases lasted a few days, others months. 
-             Repetition always led to something new. 
-             The most important part was completing the work.</p>
+              <p>For this EP, I wanted the sound to be continuous, with each song seamlessly flowing into the next. 
+              I had also started personifying the mix. Drums represented me, while synths represented life events. 
+              Mixing became an extension of composition, shaping the narrative just as much as the melodies and textures.</p>
  
-             <p>After two months, I started feeling exhausted. 
-             Dragging my gear on a skateboard every night, setting everything up, recording, walking back home, mixing, editing, power napping before life obligations, and starting over was a lot. 
-             A DJ also started using the studio at the same time as me, blasting music in the room above mine. 
-             A building with sixty rehearsal spaces, and somehow, the only two people there at night ended up right next to each other. 
-             The bass frequencies were overwhelming, making it difficult to concentrate. Winter was also coming. I wouldn't be able to skateboard on snow, and there were no night buses running to that area.
+              <p>While creating the music, I pictured walking across a frozen lake being blinded by the sun, yet still trusting the forward direction. 
+              I took this literally in Black Silver, where I recorded myself walking on ice for the full duration of the track.</p>
  
-             <p>I decided to move out of Montreal and back in with my family. 
-             I was fully committed to completing this project. 
-             Coincidentally, the band I had been touring with for a few years was taking a break. 
-             Video 072 is the last one I recorded before leaving.</p>
+              <p>This was the first project where I recorded everything myself, including drums. 
+              I borrowed mics from friends and recorded drums in my parents' basement. With more time to experiment, I used objects to prepare the drums. 
+              On White Peafowl, I slowly dropped a steel chain onto the snare before striking it. 
+              The drum sound was also heavily muffled, and I did not use any toms as I had to work within the limitations of the Babyface's few inputs. 
+              I create a different drum sound for each track.</p>
  
+          <iframe style="border: 0; width: 400px; height: 307px;" src="https://bandcamp.com/EmbeddedPlayer/album=2975113346/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://maysunmusic.bandcamp.com/album/sun-ice">Sun &amp; Ice by MAYSUN</a></iframe>
  
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/nPhkOfMffSY" title="072"></iframe>
-                 </div>
  
  
-         <!-- Section 20 -->
-         <div id="building-audience" class="section">
-         <h2 class="section-title">BUILDING AN AUDIENCE</h2>
-         </div>
+          <!-- Section 16 -->
+          <div id="another-session" class="section">
+          <h2 class="section-title">ANOTHER LIVE SESSION</h2> 
+          </div>
  
-             <p>My videos started gaining attention on Instagram. 
-             I realized engagement was stronger when targeting actual fans rather than friends or peers. 
-             Facebook had little reach unless posts were shared, while Instagram's algorithm was great at finding the right audience through hashtags. 
-             I started gaining followers from the drum and synth community.</p>
+              <p>During that same week at my parents' house, I recorded a drum solo and submitted it to two online drum contests. 
+              Both reached out to say I had been selected.</p>
  
-             <p>A few other drummers trying to grow their social media formed a group called Drummers Alliance. 
-             The idea was to like and comment on each other's videos to boost engagement. In practice, most were only there to receive likes, not to support others. 
-             The group quickly shrank to about five people but was still helpful.</p>
+              <p>The prize of the first contest was a drum demo session at a music shop. 
+                  I negotiated extra time to record a video for myself. 
+                  At this stage, my setup included a Zoom 70CDR for stereo reverb, a Micro POG for additional octaves since a fader on my POG2 had broken, a Waldorf Blofeld where I had programmed extra layers to be brought in with the mod wheel, a KMI 12-Step foot controller, and an SPD-SX. 
+                  I was also testing a new layout with the synths directly in front of me and the drums placed to the side.</p>
  
-             <p>Back then, Instagram repost accounts were a major factor in growth. 
-             These curated pages had 50K-100K followers, and getting reposted by the right one could bring in 200-300 new followers overnight. 
-             This happened to me a few times. (This also no longer works with the shift to duets and the FYP.)</p>
+              <p>I split melodies across the SPD-SX, sometimes assigning full chords to a single pad when a section required more drumming. 
+                  The MIDI keys handled more delicate parts. 
+                  I felt like I was finally getting closer to a live setup that worked.</p>
  
-             <p>Having a permanent space allowed to refine my drum, synth, and recording setup. 
-             I added a second Sony a6000 for multiple angles, built DIY acoustic panels, and set up lighting so the back wall was dark enough for projections while keeping the drums visible. 
-             I moved on from the Zoom H6, and bought a Midas XL48 for eight additional channels to use with my RME Babyface. With 10 inputs, I could now fully mic my drum set and run DIs for synths.</p>
+              <p>I also started seeing social media as a serious tool for building an audience. 
+                  Anytime I had access to drums, I'd record clips to post online. 
+                  Outside of my solo project, I was still touring and recording with different bands, so I'd take advantage of soundchecks and rehearsal breaks to capture quick drum clips.</p>
  
-             <p>My approach remained the same: complete everything. 
-             From the very first note or hit, I had to finish, produce, and post. 
-             Whether or not I liked the result could not matter. Skipping or deleting a session was not permitted.</p>
  
-             <p>A rumor spread online that the Roland JU-06 was being discontinued, causing prices to triple on Reverb. 
-             I took the opportunity to sell mine and picked up a Moog Mother 32. My first semi-modular synth. 
-             It had a built-in sequencer and introduced me to modular synthesis.</p>
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/SXgfMPxLcgA" title="One Sky"></iframe>
+                  </div>
  
+          <!-- Section 17 -->
+          <div id="drum-festival" class="section">
+          <h2 class="section-title">DRUM FESTIVAL</h2>
+          </div>
  
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/-OZbQ-47iQ0" title="133"></iframe>
-                     <iframe src="https://www.youtube.com/embed/zxPhC4VDcDA" title="144"></iframe>
-                 </div>
+              <p>The second contest flew me to Victoria, BC, to perform at a drum festival. 
+              While it felt like a sign to keep posting videos, I was extremely intimidated. 
+              The other performers were all drummer drummers with chops and prepared solos, and I didn't even have a space to practice. 
+              I was always only rehearsing in my head. To make things more difficult, I wasn't allowed to use my own cymbals, which threw me off.</p>
  
+              <p>I didn't feel like I belonged there, but I got on stage and improvised. 
+              Playing in a huge, empty room without close mics made me realize how much I relied on mic'ing techniques to bring out the body of my playing. 
+              In my videos, I had full control over the audio, but here, my sound didn't project at all. 
+              I felt extremely self-conscious throughout the performance.</p>
  
-         <!-- Section 21 -->
-         <div id="systems" class="section">
-         <h2 class="section-title">SYSTEMS</h2>
-         </div>
+              <p>Later, during a hang with the organizer, he told me that if I really wanted to play drums and practice, I'd make it a priority to find a way to do it.</p>
  
-             <p>Releasing a video per day while gigging required extreme organization. I structured everything in a calendar, keeping track of which videos were completed, in progress, or scheduled for release. 
-             I mapped out how many I needed in  bank before shows or tours, so I wouldn't fall behind. Each video was cut down to 60 seconds for Instagram, with captions and hashtags pre-written in my notes for quick posting.</p>
  
-             <p>My computer struggled with video editing. I couldn't even preview edits. 
-             I blindly cut between two camera angles, added my intro logo with the video number, and placed a small watermark at the bottom which was important for repost accounts that didn't always include credits.</p>
+              <p>When I got back from the festival, I felt like I had been wasting so much time. 
+              I knew I could improve much faster if I had a dedicated space to practice and record. 
+              But having an independent rehearsal space, without sharing gear, was really expensive and hard to come by. 
+              The only income I had was from playing shows with other projects, and it wasn't enough to afford a space.</p>
  
-             <p>I aimed to record three to four videos per day as a buffer, but sometimes had to rush through ten just to catch up. 
-             There was no time for second-guessing. 
-             After completing one, I switched camera angles quickly, threw random percussions on the drums to change the sound, and moved forward without hesitation.</p>
+              <p>Still, this festival motivated me to go all in.</p>
  
-             <p>Through constant trial and error, I found workarounds for many problems. 
-             Forgetting to open a mic channels, botching gain staging, cameras running out of battery and my computer crashing forced me to adapt. 
-             For example, I once forgot to arm the bass drum track, so I EQed a room mic, gated it, manually removed non-kick hits, and shaped it into a makeshift kick drum sound. 
-             For each session, I was experimenting with both conventional and unconventional techniques, often inspired by Ryan Earnhardt's YouTube channel, Creative Sound Lab. 
-             Unintentionally, I was moving deeper into sound design.</p>
  
-             <p>After over 100 videos, I realized I was relying on cymbals too much to fill in space. 
-             It became a crutch. As a new creative constraint, I banned cymbals entirely from my setup for a few months.</p>
+              <div class="video-container">
+                  <iframe src="https://www.youtube.com/embed/9mQF6DUgWUo?si=Mi-ElIdPrpsKfLje" title="Drum Solo"></iframe>
+              </div>
  
-             <p>I also noticed the pull of social media engagement influencing my choices. Fast drumming, distorted beats, and arpeggiated synths consistently got more likes, but I didn't want to create for algorithms. 
-             I made a conscious effort to ignore those pressures and stay open to whatever direction my creativity wanted to take.</p>
  
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/gP7IHXJBk2c" title="173"></iframe>
-                 </div>
+          <!-- Section 18 -->
+          <div id="night-improvs" class="section">
+          <h2 class="section-title">NIGHT IMPROVS</h2>
+          </div>
  
+              <p>I committed to finding a space where I could practice and record every day. 
+              I wanted to make up for lost time. 
+              Inspired by daily vloggers on YouTube, I was confident this project would create enough visibility for me to find the right people. 
+              I would make videos every day for a year, no matter what.</p>
  
-     <!-- Section 22 -->
-     <div id="refining-setup" class="section">
-     <h2 class="section-title">REFINING MY SETUP</h2>
+              <p>Finding a space to practice and record every day was nearly impossible. 
+              Most rehearsal spots only allowed one or two weekly time slots. 
+              I negotiated my way into a space with overnight slot, 1am to 9am. 
+              The space was small and already shared by multiple projects which meant I couldn't keep my own drums there or leave anything set up.
+ 
+              <p>My initial plan was to record a month's worth of videos before posting. 
+              This is not how it happened.</p>
+ 
+              <p>On the first night, I packed my gear. Cymbals, Zoom H6, laptop, Roland JU-06, MIDI controller, some mics and a camera. 
+              I skateboarded down to the studio and setup. One hour and forty-five minutes is how long it took me that first day.
+ 
+              <p>I hit record, improvised some music, packed everything up, and left. 
+              Once home, I mixed the audio, synced the video, and done.</p> 
+ 
+              <p>Too excited, I posted it immediately and captioned it: “A video a day, forever.”</p>
+ 
+              <p>Without a backlog of videos, I had locked myself into making one every day for real. 
+              To save on setup time, I would hide surrounding gear in darkness instead of moving instruments.
+              I used flashlights in mic stands to focus light on me, and projected visuals an audio reactive pedal, the ETC by Critter & Guitari. 
+              I also allowed myself to record more than one video per night so I could take breaks. 
+              I aso always wore a black t-shirt so no one could tell if I was batch recording or not.</p>
+ 
+              <p>I used desktop synths because they fit in my backpack. At that time it was a Roland JU-06 and Waldorf Blofeld. 
+              I removed the hi-hat to make more space for the KMI 12-step foot controller.</p>
+ 
+              <p>Mixing and editing myself every day made me aware of my habits and patterns. 
+              The videos became an exercise in creativity.</p>
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/zuVehMp6kX4" title="001"></iframe>
+                      <iframe src="https://www.youtube.com/embed/_5w3KWWZU3I" title="024"></iframe>
+                      <iframe src="https://www.youtube.com/embed/rAdl6wKZt4c" title="064"></iframe>
+                  </div>
+ 
+          <!-- Section 19 -->
+          <div id="repetition" class="section">
+          <h2 class="section-title">LEANING INTO REPETITION</h2>
+          </div>
+ 
+              <p>After about fifty videos, I felt like they were becoming redundant.  
+              I accepted that change could be slow. My priority became removing self-doubt and if an idea felt repetitive, I would complete it anyway. 
+              The daily result didn't matter.</p>
+ 
+              <p>I leaned into repetition and asked myself: How many ways can I shift the same idea? How many ways can I do exactly the same thing? 
+              In hindsight, the biggest factor in my progress was exhausting ideas. By repeating the same process over and over, subtle shifts would emerge. 
+              Some phases lasted a few days, others months. 
+              Repetition always led to something new. 
+              The most important part was completing the work.</p>
+ 
+              <p>After two months, I started feeling exhausted. 
+              Dragging my gear on a skateboard every night, setting everything up, recording, walking back home, mixing, editing, power napping before life obligations, and starting over was a lot. 
+              A DJ also started using the studio at the same time as me, blasting music in the room above mine. 
+              A building with sixty rehearsal spaces, and somehow, the only two people there at night ended up right next to each other. 
+              The bass frequencies were overwhelming, making it difficult to concentrate. Winter was also coming. I wouldn't be able to skateboard on snow, and there were no night buses running to that area.
+ 
+              <p>I decided to move out of Montreal and back in with my family. 
+              I was fully committed to completing this project. 
+              Coincidentally, the band I had been touring with for a few years was taking a break. 
+              Video 072 is the last one I recorded before leaving.</p>
+ 
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/nPhkOfMffSY" title="072"></iframe>
+                  </div>
+ 
+ 
+          <!-- Section 20 -->
+          <div id="building-audience" class="section">
+          <h2 class="section-title">BUILDING AN AUDIENCE</h2>
+          </div>
+ 
+              <p>My videos started gaining attention on Instagram. 
+              I realized engagement was stronger when targeting actual fans rather than friends or peers. 
+              Facebook had little reach unless posts were shared, while Instagram's algorithm was great at finding the right audience through hashtags. 
+              I started gaining followers from the drum and synth community.</p>
+ 
+              <p>A few other drummers trying to grow their social media formed a group called Drummers Alliance. 
+              The idea was to like and comment on each other's videos to boost engagement. In practice, most were only there to receive likes, not to support others. 
+              The group quickly shrank to about five people but was still helpful.</p>
+ 
+              <p>Back then, Instagram repost accounts were a major factor in growth. 
+              These curated pages had 50K-100K followers, and getting reposted by the right one could bring in 200-300 new followers overnight. 
+              This happened to me a few times. (This also no longer works with the shift to duets and the FYP.)</p>
+ 
+              <p>Having a permanent space allowed to refine my drum, synth, and recording setup. 
+              I added a second Sony a6000 for multiple angles, built DIY acoustic panels, and set up lighting so the back wall was dark enough for projections while keeping the drums visible. 
+              I moved on from the Zoom H6, and bought a Midas XL48 for eight additional channels to use with my RME Babyface. With 10 inputs, I could now fully mic my drum set and run DIs for synths.</p>
+ 
+              <p>My approach remained the same: complete everything. 
+              From the very first note or hit, I had to finish, produce, and post. 
+              Whether or not I liked the result could not matter. Skipping or deleting a session was not permitted.</p>
+ 
+              <p>A rumor spread online that the Roland JU-06 was being discontinued, causing prices to triple on Reverb. 
+              I took the opportunity to sell mine and picked up a Moog Mother 32. My first semi-modular synth. 
+              It had a built-in sequencer and introduced me to modular synthesis.</p>
+ 
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/-OZbQ-47iQ0" title="133"></iframe>
+                      <iframe src="https://www.youtube.com/embed/zxPhC4VDcDA" title="144"></iframe>
+                  </div>
+ 
+ 
+          <!-- Section 21 -->
+          <div id="systems" class="section">
+          <h2 class="section-title">SYSTEMS</h2>
+          </div>
+ 
+              <p>Releasing a video per day while gigging required extreme organization. I structured everything in a calendar, keeping track of which videos were completed, in progress, or scheduled for release. 
+              I mapped out how many I needed in  bank before shows or tours, so I wouldn't fall behind. Each video was cut down to 60 seconds for Instagram, with captions and hashtags pre-written in my notes for quick posting.</p>
+ 
+              <p>My computer struggled with video editing. I couldn't even preview edits. 
+              I blindly cut between two camera angles, added my intro logo with the video number, and placed a small watermark at the bottom which was important for repost accounts that didn't always include credits.</p>
+ 
+              <p>I aimed to record three to four videos per day as a buffer, but sometimes had to rush through ten just to catch up. 
+              There was no time for second-guessing. 
+              After completing one, I switched camera angles quickly, threw random percussions on the drums to change the sound, and moved forward without hesitation.</p>
+ 
+              <p>Through constant trial and error, I found workarounds for many problems. 
+              Forgetting to open a mic channels, botching gain staging, cameras running out of battery and my computer crashing forced me to adapt. 
+              For example, I once forgot to arm the bass drum track, so I EQed a room mic, gated it, manually removed non-kick hits, and shaped it into a makeshift kick drum sound. 
+              For each session, I was experimenting with both conventional and unconventional techniques, often inspired by Ryan Earnhardt's YouTube channel, Creative Sound Lab. 
+              Unintentionally, I was moving deeper into sound design.</p>
+ 
+              <p>After over 100 videos, I realized I was relying on cymbals too much to fill in space. 
+              It became a crutch. As a new creative constraint, I banned cymbals entirely from my setup for a few months.</p>
+ 
+              <p>I also noticed the pull of social media engagement influencing my choices. Fast drumming, distorted beats, and arpeggiated synths consistently got more likes, but I didn't want to create for algorithms. 
+              I made a conscious effort to ignore those pressures and stay open to whatever direction my creativity wanted to take.</p>
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/gP7IHXJBk2c" title="173"></iframe>
+                  </div>
+ 
+ 
+      <!-- Section 22 -->
+      <div id="refining-setup" class="section">
+      <h2 class="section-title">REFINING MY SETUP</h2>
+      </div>
+ 
+              <p>My setup was getting large. Multiple synths, controllers, pedals, and drums. 
+              As I started thinking about live solo shows, I shifted my focus toward making it more compact. 
+              I sold my Poly600, to help pay for a refurbished OP-1. 
+              I also wanted more interaction with visuals and picked up a Keith McMillen BopPad, which could send out CC messages to control parameters on the Critter & Guitari ETC pedal.</p>
+ 
+              <p>I also struggled with the limitations of social media. 
+              I wanted to make long improvised sessions, but platforms were built for short content. 
+              I would post full-length versions on YouTube, but they didn't get many views. 
+              The most popular music channels leaned toward synthfluencer-style content, where people talked about new gear. 
+              I wanted to stay focused on music itself. 
+              A few companies reached out for sponsorships, but I turned them all down. 
+              I wanted to create like I create, with instruments I like. 
+              Not review gear, and especially not influence anyone to buy stuff.</p>
+ 
+              <p>The OP-1 was the first synth that let me record myself live and manipulate playback speed, opening up new possibilities for ambient looping based on the live sound. 
+              I also got an Eventide Pitchfactor to transform the monophonic voice of the Mother 32 into chords. 
+              At that time, I was avoiding computers in live performance and focused on recreating end-of-chain processing with hardware. 
+              I got an OTO Bam Reverb and a mixer with three FX sends, allowing me to mix my synths live and record the stereo signal in my computer. 
+              This was also about speeding up the mixing process as sounds were locked in together. 
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/DY40H5Q60Ko" title="194"></iframe>
+                      <iframe src="https://www.youtube.com/embed/9ZAUbgn2hKs" title="239"></iframe>
+                  </div>
+ 
+ 
+          <!-- Section 23 -->
+          <div id="sensory-percussion" class="section">
+          <h2 class="section-title">SENSORY PERCUSSION & MODULAR SYNTH</h2>
+          </div>
+ 
+              <p>My Instagram was gaining traction in the drum world, particularly in the niche of drums and electronics. 
+              Players like Mason Self, Arthur Hnatek, and Ian Chang were part of this growing community. 
+              It was a generous and open space where people shared ideas and answered questions about gear and setups.</p>
+ 
+              <p>Around my 250th video, a well-known drummer referred me for a major gig. 
+              It would be a two-year high profile world tour that required playing Sensory Percussion. 
+              At the time, Sensory Percussion was still relatively new. It's a system of drum sensors that transform any drum into a highly customizable MIDI controller.</p>
+ 
+              <p>It felt like proof that my daily videos were leading me exactly where I needed to be. With the tour on the horizon, I immersed myself in learning everything I could about Sensory Percussion, preparing to integrate it into my playing.</p>
+ 
+              <p>Sensory Percussion allowed me to add even more layers to my sound. 
+              I built sample packs out of household objects and used them in my daily sessions, making them available on my dedicated sample Bandcamp page. 
+              I also built a custom drum set specifically for Sensory Percussion, cutting cheap toms in half and wrapping them in black sparkle.</p>
+ 
+              <p>I could trigger samples from different drum zones while layering drones with the Mother 32 and playing the OP-1 manually. 
+              I also experimented with magnetic contact mics, sending the sound of steel percussion into effects. 
+              I wanted a setup that could go in any direction.</p>
+ 
+              <p> Wanted to continue in a more portable solution, I picked up a cheap 84hp modular rack, placed the Mother 32 inside, and impulsively ordered an Intellijel Azimuth II for panning and an Erica Synths Black Mixer for compact mixing. 
+              I didn't have a clear plan or knew anything about modular synth, but connecting modules at random let me create unpredictable, chaotic sounds while keeping my setup small and portable.</p>
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/vhrwygf1C7Y" title="269"></iframe>
+                      <iframe src="https://www.youtube.com/embed/CHYiDEt2Irc" title="305"></iframe>
+                  </div>
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/HrxUhgSWFcA" title="324"></iframe>
+                      <iframe src="https://www.youtube.com/embed/jVpX9KPXi5c" title="342"></iframe>
+                  </div>
+ 
+ 
+              <!-- Section 24 -->
+              <div id="365" class="section">
+              <h2 class="section-title">365 VIDEOS</h2>
+              </div>
+ 
+                  <p>The final months of the daily video project overlapped with more live shows and it became increasingly difficult to keep up. 
+                  I also felt mounting pressure for the 365th video, as if it needed to be a grandiose ending.</p>
+ 
+                  <p>I wished I could have ended the series by announcing my departure for the two-year tour, but I was still waiting on the manager to confirm dates. 
+                  Only the bands I played with knew, as I had already told them to start looking for a replacement.</p>
+ 
+                  <p>I felt conflicted. While I enjoyed making videos online, some peers labeled me an “Instagram drummer,” a term used to diminish what I was building. 
+                  Instead of support, I sensed quiet resentment from those around me, as if recognition or progress only counted if it followed an unspoken order. 
+                  Despite gaining traction in a niche online community, this project had not created any local opportunities for me.</p>
+ 
+                  <p>My 365th video was longer, 11 minutes instead of 2-5, and served as an announcement that I would be shifting towards more complete works, moving away from the short-form content social media encouraged.</p>
+ 
+                  <p>I have a habit of announcing my next project within the final piece of a work. The last song of every album hints at what's coming next. 
+                  Video 365 was no different. 
+                  I posted it from the airport while leaving for a series of shows in China.</p>
+ 
+                  <p>At this point, my setup had evolved further. 
+                  I added two oscillators, Mutable Instruments Plaits and 2hp Pluck, as well as a Squarp Instruments Hermod for MIDI-to-CV conversion. 
+                  The OP-1 became the heart of my setup, sending MIDI to the Hermod, which split the notes between different voices. Using the OP-1's endless sequencer combined with MIDI chance effects allowed for a degree of controlled randomness. 
+                  The system being semi-autonomous while I focused on drums, making my role more about live mixing the voices rather than controlling every sound. 
+                  I leaned into more experimental and aggressive sonic territory, inspired by power ambient artists like Tim Hecker.</p>
+ 
+                  <p>In the caption of video 365, I announced that I would continue making sessions, but at a slower pace. 
+                  I wanted to focus on quality over quantity, breaking out of the patterns I had relied on to complete the year-long project. 
+                  In the following three months, I released ten new sessions.</p>
+ 
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/srhb0H7DJQk" title="365"></iframe>
+                  </div>
+ 
+ 
+              <!-- Section 25 -->
+              <div id="tape-cassette" class="section">
+              <h2 class="section-title">TAPE CASSETTE</h2>
+              </div>
+ 
+                  <p>I found a Tascam Porta-05 4-track cassette recorder at a flea market and started experimenting with it without posting any videos. 
+                  My focus was on pitch manipulation, inspired by Hainbach, but approached cyclically.</p>
+ 
+                  <p>I recorded five minutes of sound using my modular synth and OP-1, pitched it down an octave to double the length, and repeated the process three more times. 
+                  This left me with five, ten, twenty, and forty-minute versions. Since this had to be done in real time, it forced me to sit with the playback process and think ahead, recording ideas a few octaves higher to anticipate the final form.</p>
+ 
+                  <p>Around this time, Cuckoo launched Jamuary, a daily synth video challenge, and I wanted to participate. 
+                  It was the perfect opportunity to refine this tape process. 
+                  I did the pitch manipulation off-camera, but performed with the results in real time, shaping them through my modular synth and adding sounds with my drums and op-1.</p>
+ 
+                  <p>Having 20 to 40 minute tracks meant I couldn't afford to start over, and like the 365-video project, I wasn't allowed to delete anything if I didn't like the result. 
+                  Every piece had to be completed and posted. It became an exercise in patience. 
+                  If I felt I had already reached a peak with drums and nothing more needed to be said, I would simply sit on the floor or walk out of frame, letting the textures continue until they faded out naturally. 
+                  Dealing with tape allowed me to experiment with Izotope RX to tame hiss sounds and artifacts. 
+                  By the end of the month, I had recorded and published over ten hours of music. </p>
+ 
+                  <p>For the last video, I spent the final 15 minutes slowly tearing down my drums, removing all gear, and walking around with the OP-1 in my hands, its built-in speaker playing into the room's mics. 
+                  This approach of moving sound through space would unknowingly become central to my artistic process years later.</p>
+ 
+ 
+                  <div class="video-container">
+                      <iframe src="https://www.youtube.com/embed/FwHDKh-v9JI" title="406"></iframe>
+                  </div>
+ 
+ 
+              <p style="text-align: center; font-style: italic; margin-top: 50px;">
+                  This page is a work in progress. Thank you for reading. More to come.
+              </p>
      </div>
  
-             <p>My setup was getting large. Multiple synths, controllers, pedals, and drums. 
-             As I started thinking about live solo shows, I shifted my focus toward making it more compact. 
-             I sold my Poly600, to help pay for a refurbished OP-1. 
-             I also wanted more interaction with visuals and picked up a Keith McMillen BopPad, which could send out CC messages to control parameters on the Critter & Guitari ETC pedal.</p>
+ <script>
+     function toggleMenu() {
+         const menu = document.querySelector('.side-menu');
+         menu.classList.toggle('show');
+     }
  
-             <p>I also struggled with the limitations of social media. 
-             I wanted to make long improvised sessions, but platforms were built for short content. 
-             I would post full-length versions on YouTube, but they didn't get many views. 
-             The most popular music channels leaned toward synthfluencer-style content, where people talked about new gear. 
-             I wanted to stay focused on music itself. 
-             A few companies reached out for sponsorships, but I turned them all down. 
-             I wanted to create like I create, with instruments I like. 
-             Not review gear, and especially not influence anyone to buy stuff.</p>
+     // Close menu after link is clicked (on mobile)
+     document.querySelectorAll('.side-menu a').forEach(link => {
+         link.addEventListener('click', () => {
+             const menu = document.querySelector('.side-menu');
+             if (window.innerWidth <= 768) {
+                 menu.classList.remove('show');
+             }
+         });
+     });
+ </script>
  
-             <p>The OP-1 was the first synth that let me record myself live and manipulate playback speed, opening up new possibilities for ambient looping based on the live sound. 
-             I also got an Eventide Pitchfactor to transform the monophonic voice of the Mother 32 into chords. 
-             At that time, I was avoiding computers in live performance and focused on recreating end-of-chain processing with hardware. 
-             I got an OTO Bam Reverb and a mixer with three FX sends, allowing me to mix my synths live and record the stereo signal in my computer. 
-             This was also about speeding up the mixing process as sounds were locked in together. 
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/DY40H5Q60Ko" title="194"></iframe>
-                     <iframe src="https://www.youtube.com/embed/9ZAUbgn2hKs" title="239"></iframe>
-                 </div>
- 
- 
-         <!-- Section 23 -->
-         <div id="sensory-percussion" class="section">
-         <h2 class="section-title">SENSORY PERCUSSION & MODULAR SYNTH</h2>
-         </div>
- 
-             <p>My Instagram was gaining traction in the drum world, particularly in the niche of drums and electronics. 
-             Players like Mason Self, Arthur Hnatek, and Ian Chang were part of this growing community. 
-             It was a generous and open space where people shared ideas and answered questions about gear and setups.</p>
- 
-             <p>Around my 250th video, a well-known drummer referred me for a major gig. 
-             It would be a two-year high profile world tour that required playing Sensory Percussion. 
-             At the time, Sensory Percussion was still relatively new. It's a system of drum sensors that transform any drum into a highly customizable MIDI controller.</p>
- 
-             <p>It felt like proof that my daily videos were leading me exactly where I needed to be. With the tour on the horizon, I immersed myself in learning everything I could about Sensory Percussion, preparing to integrate it into my playing.</p>
- 
-             <p>Sensory Percussion allowed me to add even more layers to my sound. 
-             I built sample packs out of household objects and used them in my daily sessions, making them available on my dedicated sample Bandcamp page. 
-             I also built a custom drum set specifically for Sensory Percussion, cutting cheap toms in half and wrapping them in black sparkle.</p>
- 
-             <p>I could trigger samples from different drum zones while layering drones with the Mother 32 and playing the OP-1 manually. 
-             I also experimented with magnetic contact mics, sending the sound of steel percussion into effects. 
-             I wanted a setup that could go in any direction.</p>
- 
-             <p> Wanted to continue in a more portable solution, I picked up a cheap 84hp modular rack, placed the Mother 32 inside, and impulsively ordered an Intellijel Azimuth II for panning and an Erica Synths Black Mixer for compact mixing. 
-             I didn't have a clear plan or knew anything about modular synth, but connecting modules at random let me create unpredictable, chaotic sounds while keeping my setup small and portable.</p>
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/vhrwygf1C7Y" title="269"></iframe>
-                     <iframe src="https://www.youtube.com/embed/CHYiDEt2Irc" title="305"></iframe>
-                 </div>
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/HrxUhgSWFcA" title="324"></iframe>
-                     <iframe src="https://www.youtube.com/embed/jVpX9KPXi5c" title="342"></iframe>
-                 </div>
-            
- 
-             <!-- Section 24 -->
-             <div id="365" class="section">
-             <h2 class="section-title">365 VIDEOS</h2>
-             </div>
- 
-                 <p>The final months of the daily video project overlapped with more live shows and it became increasingly difficult to keep up. 
-                 I also felt mounting pressure for the 365th video, as if it needed to be a grandiose ending.</p>
- 
-                 <p>I wished I could have ended the series by announcing my departure for the two-year tour, but I was still waiting on the manager to confirm dates. 
-                 Only the bands I played with knew, as I had already told them to start looking for a replacement.</p>
- 
-                 <p>I felt conflicted. While I enjoyed making videos online, some peers labeled me an “Instagram drummer,” a term used to diminish what I was building. 
-                 Instead of support, I sensed quiet resentment from those around me, as if recognition or progress only counted if it followed an unspoken order. 
-                 Despite gaining traction in a niche online community, this project had not created any local opportunities for me.</p>
- 
-                 <p>My 365th video was longer, 11 minutes instead of 2-5, and served as an announcement that I would be shifting towards more complete works, moving away from the short-form content social media encouraged.</p>
- 
-                 <p>I have a habit of announcing my next project within the final piece of a work. The last song of every album hints at what's coming next. 
-                 Video 365 was no different. 
-                 I posted it from the airport while leaving for a series of shows in China.</p>
- 
-                 <p>At this point, my setup had evolved further. 
-                 I added two oscillators, Mutable Instruments Plaits and 2hp Pluck, as well as a Squarp Instruments Hermod for MIDI-to-CV conversion. 
-                 The OP-1 became the heart of my setup, sending MIDI to the Hermod, which split the notes between different voices. Using the OP-1's endless sequencer combined with MIDI chance effects allowed for a degree of controlled randomness. 
-                 The system being semi-autonomous while I focused on drums, making my role more about live mixing the voices rather than controlling every sound. 
-                 I leaned into more experimental and aggressive sonic territory, inspired by power ambient artists like Tim Hecker.</p>
- 
-                 <p>In the caption of video 365, I announced that I would continue making sessions, but at a slower pace. 
-                 I wanted to focus on quality over quantity, breaking out of the patterns I had relied on to complete the year-long project. 
-                 In the following three months, I released ten new sessions.</p>
- 
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/srhb0H7DJQk" title="365"></iframe>
-                 </div>
- 
- 
-             <!-- Section 25 -->
-             <div id="tape-cassette" class="section">
-             <h2 class="section-title">TAPE CASSETTE</h2>
-             </div>
- 
-                 <p>I found a Tascam Porta-05 4-track cassette recorder at a flea market and started experimenting with it without posting any videos. 
-                 My focus was on pitch manipulation, inspired by Hainbach, but approached cyclically.</p>
- 
-                 <p>I recorded five minutes of sound using my modular synth and OP-1, pitched it down an octave to double the length, and repeated the process three more times. 
-                 This left me with five, ten, twenty, and forty-minute versions. Since this had to be done in real time, it forced me to sit with the playback process and think ahead, recording ideas a few octaves higher to anticipate the final form.</p>
- 
-                 <p>Around this time, Cuckoo launched Jamuary, a daily synth video challenge, and I wanted to participate. 
-                 It was the perfect opportunity to refine this tape process. 
-                 I did the pitch manipulation off-camera, but performed with the results in real time, shaping them through my modular synth and adding sounds with my drums and op-1.</p>
- 
-                 <p>Having 20 to 40 minute tracks meant I couldn't afford to start over, and like the 365-video project, I wasn't allowed to delete anything if I didn't like the result. 
-                 Every piece had to be completed and posted. It became an exercise in patience. 
-                 If I felt I had already reached a peak with drums and nothing more needed to be said, I would simply sit on the floor or walk out of frame, letting the textures continue until they faded out naturally. 
-                 Dealing with tape allowed me to experiment with Izotope RX to tame hiss sounds and artifacts. 
-                 By the end of the month, I had recorded and published over ten hours of music. </p>
- 
-                 <p>For the last video, I spent the final 15 minutes slowly tearing down my drums, removing all gear, and walking around with the OP-1 in my hands, its built-in speaker playing into the room's mics. 
-                 This approach of moving sound through space would unknowingly become central to my artistic process years later.</p>
- 
- 
-                 <div class="video-container">
-                     <iframe src="https://www.youtube.com/embed/FwHDKh-v9JI" title="406"></iframe>
-                 </div>
-             
- 
-             <p style="text-align: center; font-style: italic; margin-top: 50px;">
-                 This page is a work in progress. Thank you for reading. More to come.
-             </p>
-    </div>
- 
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    menu.classList.toggle("visible");
-  }
-
-  // Close mobile menu when link is clicked
-  document.querySelectorAll('#mobileMenu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById("mobileMenu").classList.remove("visible");
-    });
-  });
-</script>
-     <!-- Social Links (Top Right) -->
-<div class="social-links">
-  <a href="https://instagram.com/YOURUSERNAME" target="_blank">instagram</a>
-  <a href="https://youtube.com/YOURCHANNEL" target="_blank">youtube</a>
-  <a href="https://maysunmusic.bandcamp.com" target="_blank">bandcamp</a>
-</div>
-     
- </body>
- </html>
+  </body>
+  </html>
