@@ -87,7 +87,7 @@
         }
 
         /* Responsive: Hide side menu and show burger icon on smaller screens */
-.burger {
+    .burger {
     display: none;
     position: fixed;
     top: 10px;
@@ -134,10 +134,111 @@
         margin-right: 0;
     }
 
+
+.burger-menu {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.burger-menu div {
+  width: 30px;
+  height: 4px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+/* Full-screen Mobile Menu */
+#mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 9998;
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+#mobileMenu.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#mobileMenu a {
+  display: block;
+  padding: 15px 0;
+  color: black;
+  font-size: 1.1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Adjust layout on mobile */
+@media (max-width: 768px) {
+  .burger-menu {
+    display: block;
+  }
+
+  .side-menu {
+    display: none !important;
+  }
+
+  .content-container {
+    padding-top: 80px; /* So content doesn't overlap burger */
+  }
+}
+
+    
     </style>
 </head>
  <body>
-     <button class="burger" onclick="toggleMenu()">☰</button>
+     <!-- Burger Icon -->
+<div class="burger-menu" onclick="toggleMenu()">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+     <!-- Mobile Menu -->
+<div id="mobileMenu">
+    <a href="#introduction">01. INTRODUCTION</a>
+         <a href="#early-years">02. EARLY YEARS</a>
+         <a href="#insomnia-learning">03. INSOMNIA LEARNING</a>
+         <a href="#composition-recording">04. COMPOSITION AND VIDEOS</a>
+         <a href="#school">05. SCHOOL</a>
+         <a href="#after-school">06. AFTER SCHOOL</a>
+         <a href="#jazz-indie">07. FROM JAZZ TO INDIE</a>
+         <a href="#creative-limitations">08. CREATIVE LIMITATIONS</a>
+         <a href="#turning-point">09. TURNING POINT</a>  
+         <a href="#ep1">10. EP1: TAPE DEGRADATION</a>
+         <a href="#live-setup">11. LIVE SETUP</a>
+         <a href="#ep2">12. EP2: EMBEDDING SPACE</a>
+         <a href="#more-live">13. MORE LIVE SESSIONS</a>
+         <a href="#portability">14. PORTABILITY</a>
+         <a href="#ep3">15. EP3: CONTINUOUS SOUND</a>
+         <a href="#another-session">16. ANOTHER LIVE SESSION</a>
+         <a href="#drum-festival">17. DRUM FESTIVAL</a>
+         <a href="#night-improvs">18. NIGHT IMPROVS</a>
+         <a href="#repetition">19. REPETITION</a>
+         <a href="#building-audience">20. BUILDING AN AUDIENCE</a>
+         <a href="#systems">21. SYSTEMS</a>
+         <a href="#refining-setup">22. REFINING MY SETUP</a>
+         <a href="#sensory-percussion">23. SENSORY PERCUSSION</a>
+         <a href="#365">24. 365 VIDEOS</a>
+         <a href="#tape-cassette">25. TAPE CASSETTE</a>
+    </div>
  
      <div class="side-menu">
          <a href="#introduction">01. INTRODUCTION</a>
@@ -844,20 +945,17 @@
     </div>
  
 <script>
-    function toggleMenu() {
-        const menu = document.querySelector('.side-menu');
-        menu.classList.toggle('show');
-    }
+  function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("visible");
+  }
 
-    // Close menu after link is clicked (on mobile)
-    document.querySelectorAll('.side-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            const menu = document.querySelector('.side-menu');
-            if (window.innerWidth <= 768) {
-                menu.classList.remove('show');
-            }
-        });
+  // Close mobile menu when link is clicked
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById("mobileMenu").classList.remove("visible");
     });
+  });
 </script>
      
  </body>
