@@ -80,39 +80,35 @@
              transform: scale(1.15);
              background-color: #ffffff; /* Optional: subtle highlight */
          }
- 
+
+.burger-menu {
+  display: none; /* default for desktop */
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.burger-menu div {
+  width: 30px;
+  height: 4px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+      
          /* Smooth Scroll Effect */
          html {
              scroll-behavior: smooth;
          }
  
-         /* Responsive: Hide side menu and show burger icon on smaller screens */
- .burger {
-     display: none;
-     position: fixed;
-     top: 10px;
-     left: 10px;
-     font-size: 32px;
-     color: black;
-     background: none;
-     border: none;
-     cursor: pointer;
-     z-index: 1100;
- }
+@media (max-width: 768px) {
+  .burger-menu {
+    display: block;
+  }
+}
  
  @media (max-width: 768px) {
-     .side-menu {
-         display: none;
-         position: fixed;
-         top: 60px;
-         left: 20px;
-         background-color: white;
-         padding: 8px;
-         box-shadow: none;
-         width: 160px;
-         z-index: 1000;
-         border-radius: 4px;
-     }
   .side-menu {
      display: none;
      position: fixed;
@@ -135,31 +131,19 @@
          display: block;
      }
  
- .content-container {
-     margin-left: 0;
-     width: 100vw;
-     padding-right: 20px; /* prevents text cutoff */
-     box-sizing: border-box;
- }
+@media (max-width: 768px) {
+  .content-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+}
  
      body {
          margin-right: 0;
      }
 
-.burger-menu {
-  display: none;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 9999;
-}
-.burger-menu div {
-  width: 30px;
-  height: 4px;
-  background-color: black;
-  margin: 6px 0;
-}
 
 #mobileMenu {
   position: absolute;
@@ -935,10 +919,6 @@
      </div>
  
  <script>
-     function toggleMenu() {
-         const menu = document.querySelector('.side-menu');
-         menu.classList.toggle('show');
-     }
 
 
   function toggleMobileMenu() {
@@ -946,15 +926,12 @@
     menu.classList.toggle("visible");
   }
  
-     // Close menu after link is clicked (on mobile)
-     document.querySelectorAll('.side-menu a').forEach(link => {
-         link.addEventListener('click', () => {
-             const menu = document.querySelector('.side-menu');
-             if (window.innerWidth <= 768) {
-                 menu.classList.remove('show');
-             }
-         });
-     });
+    // Close mobile menu after clicking a link
+document.querySelectorAll('#mobileMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.remove('visible');
+  });
+});
  </script>
  
   </body>
