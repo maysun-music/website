@@ -22,12 +22,13 @@
          }
  
          /* Container for the entire content */
-         .content-container {
-             width: 80%;
-             max-width: 1200px;
-             margin-left: 250px; /* Offset for the sidebar */
-             padding: 20px;
-         }
+.content-container {
+    width: calc(100% - 180px);         /* 100% minus sidebar width + gap */
+    max-width: 1000px;                 /* or 1200px if you prefer */
+    margin-left: calc(120px + 40px);   /* 120px sidebar + 20px left + 20px buffer */
+    padding: 20px;                     /* adds breathing room inside the container */
+    box-sizing: border-box;           /* ensures padding doesn't expand total width */
+}
  
          .section {
              padding: 30px 0 20px 0; /* reduced vertical padding */
