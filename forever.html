@@ -145,11 +145,69 @@
      body {
          margin-right: 0;
      }
- 
+
+.burger-menu {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.burger-menu div {
+  width: 30px;
+  height: 4px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+#mobileMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #edd500;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#mobileMenu.visible {
+  opacity: 1;
+  visibility: visible;
+}
+#mobileMenu a {
+  display: block;
+  padding: 15px 0;
+  color: #000000;
+  font-size: calc(100vh / 20);
+  font-weight: bolder;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: help;
+  line-height: 1;
+}
+
+  
      </style>
  </head>
   <body>
-      <button class="burger" onclick="toggleMenu()">☰</button>
+      <div class="burger-menu" onclick="toggleMobileMenu()">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+<div id="mobileMenu">
+  <a href="/">HOME</a>
+  <a href="/videos.html">VIDEOS</a>
+  <a href="/about.html">ABOUT</a>
+  <a href="/contact.html">CONTACT</a>
+</div>
  
       <div class="side-menu">
           <a href="#introduction">01. INTRODUCTION</a>
@@ -860,6 +918,12 @@
          const menu = document.querySelector('.side-menu');
          menu.classList.toggle('show');
      }
+
+
+  function toggleMobileMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("visible");
+  }
  
      // Close menu after link is clicked (on mobile)
      document.querySelectorAll('.side-menu a').forEach(link => {
