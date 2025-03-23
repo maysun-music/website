@@ -41,12 +41,21 @@
          }
  
          /* Styling for the embedded YouTube video */
-         .video-container {
-             display: flex;
-             gap: 20px;
-             justify-content: space-between;
-             margin-bottom: 20px;
-         }
+.video-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  line-height: 0; /* helps remove inline gap effect */
+}
+
+      .video-container iframe {
+  display: block;
+  border: none;
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
+}
 
 .youtube-placeholder {
   display: block;
