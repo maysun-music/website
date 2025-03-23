@@ -49,8 +49,10 @@
          }
 
 .youtube-placeholder {
+  display: block;
   position: relative;
   width: 100%;
+  height: auto;
   background-color: #000;
   cursor: pointer;
   overflow: hidden;
@@ -59,8 +61,10 @@
 .youtube-thumb {
   width: 100%;
   height: auto;
-  object-fit: cover;
   display: block;
+  object-fit: cover;
+  line-height: 0;
+  vertical-align: bottom;
 }
 
 .play-button {
