@@ -1131,14 +1131,23 @@
 <script>
   // Mobile Menu Toggle
   function toggleMobileMenu() {
-    const menu = document.querySelector('.side-menu');
-    menu.classList.toggle('show');
+    try {
+      const menu = document.querySelector('.side-menu');
+      if (menu) {
+        menu.classList.toggle('show');
+      }
+    } catch (e) {
+      console.error("Menu toggle error:", e);
+    }
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll('.side-menu a').forEach(link => {
+  // Close mobile menu on link click
+  document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll('.side-menu a');
+    const menu = document.querySelector('.side-menu');
+
+    links.forEach(link => {
       link.addEventListener('click', () => {
-        const menu = document.querySelector('.side-menu');
         if (window.innerWidth <= 768 && menu.classList.contains('show')) {
           menu.classList.remove('show');
         }
@@ -1146,7 +1155,7 @@
     });
   });
 
-  // YouTube IFrame API
+  // YouTube IFrame API Setup
   let players = [];
 
   function onYouTubeIframeAPIReady() {
@@ -1163,7 +1172,7 @@
   function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
       players.forEach(player => {
-        if (player !== event.target) {
+        if (player !== event.target && player.pauseVideo) {
           player.pauseVideo();
         }
       });
