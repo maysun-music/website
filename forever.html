@@ -48,21 +48,23 @@
              margin-bottom: 20px;
          }
 
-  .youtube-placeholder {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background-color: #000;
-    cursor: pointer;
-    overflow: hidden;
-  }
+.youtube-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  cursor: pointer;
+  overflow: hidden;
+  display: block;
+  max-width: 100vw; /* Ensure it stretches fully */
+}
 
-  .youtube-thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+.youtube-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
   .play-button {
     position: absolute;
