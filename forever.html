@@ -181,6 +181,19 @@
   background: transparent;
 }
 
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  z-index: 1001; /* above side menu */
+  padding: 5px;
+}
+    
     .bandcamp-embed {
       width: 100%;
       max-width: 400px;
@@ -300,9 +313,10 @@ html, body {
     <div></div>
     <div></div>
   </div>
+
+<a class="back-button" href="https://maysun.zip">← BACK</a>
  
       <div class="side-menu">
-          <a href="https://maysun.zip" style="font-weight: bold; margin-bottom: 10px;">← BACK</a>
           <a href="#introduction">01. INTRODUCTION</a>
           <a href="#early-years">02. EARLY YEARS</a>
           <a href="#insomnia-learning">03. INSOMNIA LEARNING</a>
