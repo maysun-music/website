@@ -184,14 +184,16 @@
 .back-button {
   position: fixed;
   top: 20px;
-  left: 20px;
+  left: 0;
+  width: 240px;               /* exact width of the side menu */
+  padding-left: 20px;         /* match internal padding of .side-menu */
   font-weight: bold;
   font-size: 0.75rem;
   text-decoration: none;
   color: black;
   background-color: white;
-  z-index: 1001; /* above side menu */
-  padding: 5px;
+  z-index: 1001;
+  box-sizing: border-box;
 }
     
     .bandcamp-embed {
