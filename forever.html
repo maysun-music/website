@@ -141,9 +141,10 @@
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 
-  max-height: calc(100vh - 40px); 
+  max-height: calc(100vh - 40px);
   overflow-y: auto;
-  box-sizing: content-box; /* So padding doesn't shrink content area */
+  box-sizing: content-box;
+  padding-right: 12px;
 }
 
     .side-menu a {
@@ -162,13 +163,15 @@
       background-color: #ffffff;
     }
 
-    .side-menu::-webkit-scrollbar {
-  width: 6px;
+.side-menu::-webkit-scrollbar {
+  width: 8px;
 }
+
 .side-menu::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
+
 .side-menu::-webkit-scrollbar-track {
   background: transparent;
 }
