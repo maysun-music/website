@@ -265,20 +265,24 @@ html, body {
         z-index: 9999;
       }
 
-      .side-menu {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: white;
-        overflow-y: auto;
-        padding: 60px 20px 20px 20px;
-        z-index: 1000;
-        box-sizing: border-box;
-        transition: transform 0.3s ease;
-      }
+.side-menu {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 210px;
+  background-color: #ffffff;
+  border-radius: 0px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+
+  /* FIXED PADDING */
+  padding: 40px 12px 80px 10px; /* top, right, bottom, left */
+}
 
       .side-menu a {
         font-size: 1rem;
@@ -386,8 +390,6 @@ html, body {
                   <a href="#mutek">56. (CYCLICAL PROCESSING)</a>
                   <a href="#mutek">57. (NOW?)</a>
                   <div class="side-menu-buffer"></div>
-
-          
       </div>
  
  
