@@ -145,8 +145,6 @@
   overflow-y: auto;                 /* Allow scrolling */
   overflow-x: hidden;               /* Prevent sideways scroll */
   padding-right: 12px;/* So text isn't cut off behind scrollbar */
-  padding-top: 40px;
-  padding-bottom: 100px;
   scrollbar-width: none;           /* Firefox */
 }
 
@@ -292,6 +290,11 @@ html, body {
         display: block;
       }
 
+      .side-menu-buffer {
+        height: 80px;  /* or adjust to whatever feels right */
+        content: "";
+      }
+
         .back-button {
         display: none;
       }
@@ -382,6 +385,7 @@ html, body {
                   <a href="#mutek">55. (LIVE PROCESSING)</a>
                   <a href="#mutek">56. (CYCLICAL PROCESSING)</a>
                   <a href="#mutek">57. (NOW?)</a>
+                  <div class="side-menu-buffer"></div>
 
           
       </div>
