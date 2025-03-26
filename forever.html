@@ -253,16 +253,17 @@ html, body {
     /* Mobile styles */
 
 @media (max-width: 768px) {
-  .burger-background {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 60px; /* or match the actual height of your burger section */
-    background-color: white; /* or whatever you want */
-    z-index: 900; /* lower than .burger-menu (9999) but above content */
-  }
+.burger-background {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 70px;
+  background-color: white;
+  z-index: 9998; /* lower than burger-menu (9999) but higher than side-menu (1000) */
+  pointer-events: none; /* so it doesn't interfere with clicks */
+}
 
       .burger-menu {
         display: block;
