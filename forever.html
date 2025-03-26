@@ -266,6 +266,7 @@ html, body {
       }
 
 .side-menu {
+  display: none; /* hide by default */
   position: fixed;
   top: 20px;
   left: 20px;
@@ -280,8 +281,11 @@ html, body {
   overflow-x: hidden;
   scrollbar-width: none;
 
-  /* FIXED PADDING */
   padding: 40px 12px 80px 10px; /* top, right, bottom, left */
+}
+
+.side-menu.show {
+  display: block;
 }
 
       .side-menu a {
@@ -290,9 +294,7 @@ html, body {
         line-height: 1.4;
       }
 
-      .side-menu.show {
-        display: block;
-      }
+
 
       .side-menu-buffer {
         height: 80px;  /* or adjust to whatever feels right */
