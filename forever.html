@@ -146,6 +146,9 @@
   overflow-x: hidden;               /* Prevent sideways scroll */
   padding-right: 12px;/* So text isn't cut off behind scrollbar */
   scrollbar-width: none;           /* Firefox */
+
+  display: flex;
+  flex-direction: column;
 }
 
 /* .side-menu::-webkit-scrollbar {
@@ -250,6 +253,12 @@ html, body {
   display: none;
 }
     
+.side-menu-buffer {
+      height: 600px;
+      flex-shrink: 0;
+    }
+
+
     /* Mobile styles */
 
 @media (max-width: 768px) {
@@ -295,12 +304,6 @@ html, body {
         line-height: 1.4;
       }
 
-
-
-      .side-menu-buffer {
-        height: 200px;  /* or adjust to whatever feels right */
-        content: "";
-      }
 
         .back-button {
         display: none;
