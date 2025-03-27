@@ -298,13 +298,27 @@ html, body {
 
 
       .side-menu-buffer {
-        height: 80px;  /* or adjust to whatever feels right */
+        height: 200px;  /* or adjust to whatever feels right */
         content: "";
       }
 
         .back-button {
         display: none;
       }
+
+      .now-button {
+      display: block;
+      padding: 0;
+      margin: 0;
+      background: none;
+      border: none;
+      color: inherit;
+      text-decoration: none;
+      font: inherit;
+      cursor: pointer;
+}
+
+
 
       .content-container {
         margin: 0 auto !important;
@@ -385,13 +399,13 @@ html, body {
                   <a href="#mutek">48. (BANFF CENTER)</a>
                   <a href="#mutek">49. (LP4)</a>
                   <a href="#mutek">50. (NEW YORK)</a>
-                  <a href="#mutek">51. (RESIDENCIES</a>
-                  <a href="#mutek">52. (ARDUINO</a>
+                  <a href="#mutek">51. (RESIDENCIES)</a>
+                  <a href="#mutek">52. (ARDUINO)</a>
                   <a href="#mutek">53. (IMMERSIVE MEDIA ARTS)</a>
                   <a href="#mutek">54. (MORE SPATIAL AUDIO)</a>
                   <a href="#mutek">55. (LIVE PROCESSING)</a>
                   <a href="#mutek">56. (CYCLICAL PROCESSING)</a>
-                  <a href="#mutek">57. (NOW?)</a>
+                  <a href="#" id="now-button" class="now-button">57. (NOW?)</a>
                   <div class="side-menu-buffer"></div>
       </div>
  
@@ -1702,98 +1716,136 @@ html, body {
                                 This page is a work in progress. Thank you for reading. More to come.
                             </p>
 
-      <script src="https://www.youtube.com/iframe_api"></script>
-      <script>
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-          try {
-            const menu = document.querySelector('.side-menu');
-            if (menu) {
-              menu.classList.toggle('show');
-            }
-          } catch (e) {
-            console.error("Menu toggle error:", e);
-          }
-        }
-      
-        document.addEventListener("DOMContentLoaded", function () {
-          const links = document.querySelectorAll('.side-menu a');
-          const menu = document.querySelector('.side-menu');
-      
-          // Smooth scroll and close menu on link click
-          links.forEach(link => {
-            link.addEventListener('click', (e) => {
-              const href = link.getAttribute('href');
-              const target = document.querySelector(href);
-      
-              if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
-              }
-      
-              if (window.innerWidth <= 768 && menu.classList.contains('show')) {
-                menu.classList.remove('show');
-              }
-            });
-          });
-      
-          // Lazy load YouTube videos
-          const placeholders = document.querySelectorAll(".youtube-placeholder");
-      
-          const loadIframe = div => {
-            const id = div.getAttribute("data-id");
-            const iframe = document.createElement("iframe");
-            iframe.src = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
-            iframe.frameBorder = "0";
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-            iframe.allowFullscreen = true;
-            iframe.loading = "lazy";
-            iframe.width = "100%";
-            iframe.height = "100%";
-            div.innerHTML = "";
-            div.appendChild(iframe);
-            observer.unobserve(div);
-          };
-      
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) loadIframe(entry.target);
-            });
-          }, { rootMargin: "200px" });
-      
-          placeholders.forEach(div => observer.observe(div));
-        });
-      
-        // YouTube IFrame API Setup
-        let players = [];
-      
-        function onYouTubeIframeAPIReady() {
-          const checkInterval = setInterval(() => {
-            const iframes = document.querySelectorAll('iframe[src*="youtube.com/embed/"]');
-            if (iframes.length > 0) {
-              clearInterval(checkInterval);
-              iframes.forEach((iframe, index) => {
-                players[index] = new YT.Player(iframe, {
-                  events: {
-                    'onStateChange': onPlayerStateChange
-                  }
-                });
-              });
-            }
-          }, 500);
-        }
-      
-        function onPlayerStateChange(event) {
-          if (event.data === YT.PlayerState.PLAYING) {
-            players.forEach(player => {
-              if (player !== event.target && player.pauseVideo) {
-                player.pauseVideo();
-              }
-            });
-          }
-        }
-      </script>
+                            <script src="https://www.youtube.com/iframe_api"></script>
+                            <script>
+                              // Mobile Menu Toggle
+                              function toggleMobileMenu() {
+                                try {
+                                  const menu = document.querySelector('.side-menu');
+                                  if (menu) {
+                                    menu.classList.toggle('show');
+                                  }
+                                } catch (e) {
+                                  console.error("Menu toggle error:", e);
+                                }
+                              }
+                            
+                              document.addEventListener("DOMContentLoaded", function () {
+                                const links = document.querySelectorAll('.side-menu a');
+                                const menu = document.querySelector('.side-menu');
+                            
+                                // Smooth scroll and close menu on link click
+                                links.forEach(link => {
+                                  link.addEventListener('click', (e) => {
+                                    const href = link.getAttribute('href');
+                                    const target = document.querySelector(href);
+                            
+                                    if (target) {
+                                      e.preventDefault();
+                                      target.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                            
+                                    if (window.innerWidth <= 768 && menu.classList.contains('show')) {
+                                      menu.classList.remove('show');
+                                    }
+                                  });
+                                });
+                            
+                                // Lazy load YouTube videos
+                                const placeholders = document.querySelectorAll(".youtube-placeholder");
+                            
+                                const loadIframe = div => {
+                                  const id = div.getAttribute("data-id");
+                                  const iframe = document.createElement("iframe");
+                                  iframe.src = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
+                                  iframe.frameBorder = "0";
+                                  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                                  iframe.allowFullscreen = true;
+                                  iframe.loading = "lazy";
+                                  iframe.width = "100%";
+                                  iframe.height = "100%";
+                                  div.innerHTML = "";
+                                  div.appendChild(iframe);
+                                  observer.unobserve(div);
+                                };
+                            
+                                const observer = new IntersectionObserver((entries) => {
+                                  entries.forEach(entry => {
+                                    if (entry.isIntersecting) loadIframe(entry.target);
+                                  });
+                                }, { rootMargin: "200px" });
+                            
+                                placeholders.forEach(div => observer.observe(div));
+                              });
+                            
+                              // YouTube IFrame API Setup
+                              let players = [];
+                            
+                              function onYouTubeIframeAPIReady() {
+                                const checkInterval = setInterval(() => {
+                                  const iframes = document.querySelectorAll('iframe[src*="youtube.com/embed/"]');
+                                  if (iframes.length > 0) {
+                                    clearInterval(checkInterval);
+                                    iframes.forEach((iframe, index) => {
+                                      players[index] = new YT.Player(iframe, {
+                                        events: {
+                                          'onStateChange': onPlayerStateChange
+                                        }
+                                      });
+                                    });
+                                  }
+                                }, 500);
+                              }
+                            
+                              function onPlayerStateChange(event) {
+                                if (event.data === YT.PlayerState.PLAYING) {
+                                  players.forEach(player => {
+                                    if (player !== event.target && player.pauseVideo) {
+                                      player.pauseVideo();
+                                    }
+                                  });
+                                }
+                              }
+                      
+// NOW? button
+let nowClickCount = 0;
+
+document.getElementById("now-button").addEventListener("click", () => {
+  nowClickCount++;
+
+  degradePage(nowClickCount);
+
+  if (nowClickCount >= 50) {
+    window.location.href = "mailto:youremail@example.com?subject=NOW&body=Hello MAYSUN, I'd like to work with you.";
+  }
+});
+
+function degradePage(count) {
+    const elements = document.querySelectorAll("p");
+
+    if (elements.length > 0) {
+      const shuffled = [...elements].sort(() => 0.5 - Math.random());
+      const toClone = shuffled.slice(0, Math.min(10, shuffled.length));
+
+      toClone.forEach(original => {
+        const clone = original.cloneNode(true);
+        clone.style.position = "absolute";
+        clone.style.left = `${Math.random() * window.innerWidth}px`;  // FULL horizontal spread
+        clone.style.top = `${Math.random() * window.innerHeight}px`;
+        clone.style.pointerEvents = "none";
+        clone.style.opacity = 0.3 + Math.random() * 0.4;
+        clone.style.transform = `scale(1)`;
+        clone.style.zIndex = 9999;
+        clone.style.color = "black";
+        clone.style.width = `${original.offsetWidth}px`;
+        clone.style.height = `${original.offsetHeight}px`;
+
+        document.body.appendChild(clone);
+      });
+    }
+  }
+                    
+</script>
  
   </body>
   </html>  
-
