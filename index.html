@@ -685,12 +685,23 @@ function toggleBurgerMenu() {
                         
                         if (section === 'home') {
                             setTimeout(() => {
-                                const homeImage = document.getElementById('home-image');
-                                if (homeImage) {
-                                    homeImage.addEventListener('click', toggleDesktopMenu);
-                                }
-                                startOverlay(); // Reset and restart overlay
-                                }, 0);
+    const homeImage = document.getElementById('home-image');
+    if (homeImage) {
+        homeImage.addEventListener('click', toggleDesktopMenu);
+    }
+
+    // Add full-area click reset for home section
+    contentContainer.addEventListener('click', (e) => {
+        if (window.location.hash === '#home') {
+            overlayActive = false;
+            cancelAnimationFrame(overlayRequestId);
+            document.querySelectorAll('.overlay-text').forEach(el => el.remove());
+            startOverlay(); // restart it cleanly
+        }
+    });
+
+    startOverlay(); // initial start
+}, 0);
 }
                         
                    break;
