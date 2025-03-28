@@ -957,6 +957,8 @@ function addOverlayText() {
 }
 
 function startOverlay() {
+    if (window.location.hash !== '#home') return;
+
   if (overlayRequestId !== null) {
     cancelAnimationFrame(overlayRequestId);
     document.querySelectorAll('.overlay-text').forEach(el => el.remove());
@@ -967,7 +969,7 @@ function startOverlay() {
   let lastLayerCount = 0;
 
   function animate() {
-  if (!overlayActive) return;
+    if (!overlayActive || window.location.hash !== '#home') return;
 
   const now = performance.now();
   if (now > overlayStartTime) {
