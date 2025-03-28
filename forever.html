@@ -1811,46 +1811,44 @@ html, body {
                               }
                       
 // NOW? button
-let nowClickCount = 0;
 let rawClickCount = 0;
 
 document.getElementById("now-button").addEventListener("click", () => {
   rawClickCount++;
 
-  // Fixed exponential progression
-  nowClickCount += Math.floor(rawClickCount ** 1.5);
+  const layersToAdd = 2 ** (rawClickCount - 1); // exponential growth
+  degradePage(layersToAdd);
 
-  degradePage(nowClickCount);
-
-  if (nowClickCount >= 372) {
+  // Accumulate total layers if you want to email after a threshold
+  if (layersToAdd >= 256) {
     window.location.href = "mailto:maysun.booking@gmail.com?subject=NOW&body=Hello MAYSUN,%0D%0A%0D%0AI trust the process and am reaching out to work with you.";
   }
 });
 
-function degradePage(count) {
-    const elements = document.querySelectorAll("p");
+function degradePage(layersToAdd) {
+  const elements = document.querySelectorAll("p");
 
-    if (elements.length > 0) {
-      const shuffled = [...elements].sort(() => 0.5 - Math.random());
-      const toClone = shuffled.slice(0, Math.min(10, shuffled.length));
+  if (elements.length > 0) {
+    const shuffled = [...elements].sort(() => 0.5 - Math.random());
 
-      toClone.forEach(original => {
-        const clone = original.cloneNode(true);
-        clone.style.position = "absolute";
-        clone.style.left = `${Math.random() * window.innerWidth}px`;  // FULL horizontal spread
-        clone.style.top = `${Math.random() * window.innerHeight}px`;
-        clone.style.pointerEvents = "none";
-        clone.style.opacity = 0.3 + Math.random() * 0.4;
-        clone.style.transform = `scale(1)`;
-        clone.style.zIndex = 9999;
-        clone.style.color = "black";
-        clone.style.width = `${original.offsetWidth}px`;
-        clone.style.height = `${original.offsetHeight}px`;
+    for (let i = 0; i < layersToAdd; i++) {
+      const original = shuffled[i % shuffled.length];
+      const clone = original.cloneNode(true);
+      clone.style.position = "absolute";
+      clone.style.left = `${Math.random() * window.innerWidth}px`;
+      clone.style.top = `${Math.random() * window.innerHeight}px`;
+      clone.style.pointerEvents = "none";
+      clone.style.opacity = 0.3 + Math.random() * 0.4;
+      clone.style.transform = `scale(1)`;
+      clone.style.zIndex = 9999;
+      clone.style.color = "black";
+      clone.style.width = `${original.offsetWidth}px`;
+      clone.style.height = `${original.offsetHeight}px`;
 
-        document.body.appendChild(clone);
-      });
+      document.body.appendChild(clone);
     }
   }
+}
                     
 </script>
  
