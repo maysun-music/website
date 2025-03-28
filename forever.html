@@ -1819,11 +1819,11 @@ document.getElementById("now-button").addEventListener("click", () => {
 
   // Exponential progression: make each click add more to nowClickCount
   // You can adjust the multiplier curve as needed
-  nowClickCount += Math.floor(rawClickCount / 2) + 1;
+  nowClickCount += Math.floor(rawClickCount 1.5));
 
   degradePage(nowClickCount);
 
-  if (nowClickCount >= 50) {
+  if (nowClickCount >= 372) {
     window.location.href = "mailto:maysun.booking@gmail.com?subject=NOW&body=Hello MAYSUN,%0D%0A%0D%0AI trust the process and am reaching out to work with you.";
   }
 });
