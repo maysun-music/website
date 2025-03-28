@@ -940,8 +940,10 @@ function addOverlayText() {
 
   // Fade in
   requestAnimationFrame(() => {
-    clone.style.opacity = 0.35 + Math.random() * 0.15;
-  });
+  const finalOpacity = 0.35 + Math.random() * 0.15;
+  clone.style.opacity = finalOpacity;
+  clone.dataset.defaultOpacity = finalOpacity.toFixed(2);
+});
 
   // Decide whether this one decays
   const decay = Math.random() < 0.45; // 45% will disappear
@@ -996,25 +998,28 @@ function startOverlay() {
   animate();
 }
 
-function overlayClickHandler() {
-  overlayActive = false;
-  if (overlayRequestId) cancelAnimationFrame(overlayRequestId);
-  document.querySelectorAll('.overlay-text').forEach(el => el.remove());
-  overlayRequestId = null;
-}
+document.addEventListener('mousemove', (e) => {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
 
-// Trigger on click if hash is #home
-document.addEventListener('click', () => {
-  if (window.location.hash === '#home') {
-    overlayClickHandler();
-    startOverlay();
-  }
+  document.querySelectorAll('.overlay-text').forEach(logo => {
+    const rect = logo.getBoundingClientRect();
+    const logoX = rect.left + rect.width / 2;
+    const logoY = rect.top + rect.height / 2;
+
+    const dx = mouseX - logoX;
+    const dy = mouseY - logoY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    const maxDistance = 30; // pixels
+    const fadeAmount = Math.max(0.1, 1 - distance / maxDistance); // 0.1 (min) to 1 (max)
+    
+    const baseOpacity = parseFloat(logo.dataset.defaultOpacity) || 0.4;
+    const adjustedOpacity = Math.max(0.1, baseOpacity * fadeAmount);
+
+    logo.style.opacity = adjustedOpacity.toFixed(2);
+  });
 });
-
-// Auto-start if page loads on #home
-if (window.location.hash === '#home') {
-  startOverlay();
-}
 
 </script>
 </body>
