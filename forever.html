@@ -1817,9 +1817,8 @@ let rawClickCount = 0;
 document.getElementById("now-button").addEventListener("click", () => {
   rawClickCount++;
 
-  // Exponential progression: make each click add more to nowClickCount
-  // You can adjust the multiplier curve as needed
-  nowClickCount += Math.floor(rawClickCount 1.5));
+  // Fixed exponential progression
+  nowClickCount += Math.floor(rawClickCount ** 1.5);
 
   degradePage(nowClickCount);
 
