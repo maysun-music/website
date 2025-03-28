@@ -577,7 +577,7 @@
     <!-- -------------------JAVASCRIPT---------------------- -->
 
     <script>
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
     const menuLogo = document.querySelector('.menu-logo');
     const menuItems = document.getElementById('menuItems'); // Desktop menu
     const burgerMenu = document.querySelector('.burger-menu'); // Burger icon for mobile
@@ -586,6 +586,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentContainer = document.getElementById('content'); // Main content container
     let isDesktopMenuVisible = false;
     let isMobileMenuVisible = false;
+
+    document.addEventListener('click', () => {
+    if (window.location.hash === '#home' && !overlayActive) {
+        startOverlay();
+    }
+});
 
     // Function to check the URL for 'menu=true' parameter
     function checkMenuParam() {
@@ -615,8 +621,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Toggle mobile menu visibility
-    function toggleMobileMenu(show = null) {
+// Toggle mobile menu visibility
+function toggleMobileMenu(show = null) {
     if (show === null) {
         // Toggle behavior
         isMobileMenuVisible = !isMobileMenuVisible;
@@ -628,6 +634,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isMobileMenuVisible) {
         adjustMenuFontSize();  // Adjust font size when menu opens
     }
+}
+
+// Define the burger menu toggle separately
+function toggleBurgerMenu() {
+    toggleMobileMenu(); // wrapper for clarity
 }
 
     // Adjust font size of mobile menu items dynamically
@@ -670,7 +681,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="image-container">
                         <img id="home-image" src="images/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">
                         <div class="photo-credit">Photo: Chienn Tai (2024)</div>
-                        </div>`;         
+                        </div>`;      
+                        
+                        if (section === 'home') {
+                            setTimeout(() => {
+                                const homeImage = document.getElementById('home-image');
+                                if (homeImage) {
+                                    homeImage.addEventListener('click', toggleDesktopMenu);
+                                }
+                                startOverlay(); // Reset and restart overlay
+                                }, 0);
+}
+                        
                    break;
 
                 case 'biography':
@@ -831,11 +853,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             contentContainer.innerHTML = content;
                             window.location.hash = section; // Update the URL hash
 
-                                // Add event listener for the image to open the menu on click (only for home)
-                                if (section === 'home') {
-                                const homeImage = document.getElementById('home-image');
-                                homeImage.addEventListener('click', toggleDesktopMenu);
-                                }
+
 
 
 
@@ -895,78 +913,106 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
 
  // overlay
+ let overlayRequestId = null;
+let overlayActive = false;
 
- document.addEventListener('DOMContentLoaded', () => {
-  let overlayActive = true;
-  let overlayStartTime = performance.now() + 3000; // 3 second delay
-  let lastLayerCount = 0;
-  let requestId = null;
+function addOverlayText() {
+  const currentOverlays = document.querySelectorAll('.overlay-text').length;
+  if (currentOverlays > 300) return;
 
-  function addOverlayText() {
-    const menuLinks = document.querySelectorAll('.menu-items a, #mobileMenu a');
-    const samples = Array.from(menuLinks).map(link => link.textContent);
-    const chosenText = samples[Math.floor(Math.random() * samples.length)];
+  const clone = document.createElement('img');
+  clone.src = 'images/3MAYSUN_clear.png';
+  clone.classList.add('overlay-text');
 
-    const clone = document.createElement('div');
-    clone.textContent = chosenText;
-    clone.classList.add('overlay-text');
+  clone.style.position = 'absolute';
+  clone.style.left = `${Math.random() * window.innerWidth}px`;
+  clone.style.top = `${Math.random() * window.innerHeight}px`;
+  clone.style.pointerEvents = 'none';
+  clone.style.opacity = 0;
+  clone.style.width = `300px`;
+  clone.style.height = `auto`;
+  clone.style.zIndex = 9999;
+  clone.style.userSelect = 'none';
+  clone.style.transition = 'opacity 4s ease';
+  clone.style.mixBlendMode = 'multiply';
 
-// Static styles
-clone.style.position = 'absolute';
-clone.style.left = `${Math.random() * window.innerWidth}px`;
-clone.style.top = `${Math.random() * window.innerHeight}px`;
-clone.style.pointerEvents = 'none';
-clone.style.opacity = 0; // Start fully transparent
-clone.style.fontSize = `${13 + Math.random() * 4}px`; // Slight variation
-clone.style.fontWeight = 'bold';
-clone.style.fontFamily = 'Helvetica, Arial, sans-serif';
-clone.style.color = 'black';
-clone.style.zIndex = 9999;
-clone.style.userSelect = 'none';
-clone.style.transition = 'opacity 3s ease'; // Fade in only
-clone.style.textShadow = 'none';
-clone.style.mixBlendMode = 'multiply';
-clone.style.webkitFontSmoothing = 'antialiased';
-clone.style.MozOsxFontSmoothing = 'grayscale';
+  document.body.appendChild(clone);
 
-document.body.appendChild(clone);
+  // Fade in
+  requestAnimationFrame(() => {
+    clone.style.opacity = 0.35 + Math.random() * 0.15;
+  });
 
-// Trigger fade-in (no fade-out)
-requestAnimationFrame(() => {
-  clone.style.opacity = 0.35 + Math.random() * 0.15; // Controlled range: 0.35 to 0.5
-});
+  // Decide whether this one decays
+  const decay = Math.random() < 0.3; // 30% will disappear
+  if (decay) {
+    setTimeout(() => {
+      clone.style.transition = 'opacity 4s ease';
+      clone.style.opacity = 0;
+    }, 8000);
+    setTimeout(() => {
+      clone.remove();
+    }, 12000);
+  }
+}
+
+function startOverlay() {
+  if (overlayRequestId !== null) {
+    cancelAnimationFrame(overlayRequestId);
+    document.querySelectorAll('.overlay-text').forEach(el => el.remove());
   }
 
+  overlayActive = true;
+  let overlayStartTime = performance.now() + 5000;
+  let lastLayerCount = 0;
+
   function animate() {
-    if (!overlayActive) return;
+  if (!overlayActive) return;
 
-    const now = performance.now();
-    if (now > overlayStartTime) {
-      const timeSinceStart = now - overlayStartTime;
-      const rampSpeed = 0.0025; // tweak this value to control curve
-      const layersToAdd = Math.min(Math.floor((timeSinceStart ** 1.3) * rampSpeed), 1600);
+  const now = performance.now();
+  if (now > overlayStartTime) {
+    const timeSinceStart = now - overlayStartTime;
+    const rampSpeed = 0.0012;
+    const layersToAdd = Math.min(
+      Math.floor((timeSinceStart ** 1.3) * rampSpeed),
+      1600
+    );
 
-      if (layersToAdd > lastLayerCount) {
-        const newLayers = layersToAdd - lastLayerCount;
-        const layersThisFrame = Math.min(newLayers, Math.ceil(layersToAdd / 200));
-        for (let i = 0; i < layersThisFrame; i++) {
-          addOverlayText();
-        }
-        lastLayerCount += layersThisFrame;
+    if (layersToAdd > lastLayerCount) {
+      const newLayers = layersToAdd - lastLayerCount;
+      const layersThisFrame = Math.min(newLayers, Math.ceil(layersToAdd / 200));
+      for (let i = 0; i < layersThisFrame; i++) {
+        addOverlayText();
       }
+      lastLayerCount += layersThisFrame;
     }
+  }
 
-    requestId = requestAnimationFrame(animate);
+    overlayRequestId = requestAnimationFrame(animate);
   }
 
   animate();
+}
 
-  document.addEventListener('click', () => {
-    overlayActive = false;
-    if (requestId) cancelAnimationFrame(requestId);
-    document.querySelectorAll('.overlay-text').forEach(el => el.remove());
-  });
+function overlayClickHandler() {
+  overlayActive = false;
+  if (overlayRequestId) cancelAnimationFrame(overlayRequestId);
+  document.querySelectorAll('.overlay-text').forEach(el => el.remove());
+  overlayRequestId = null;
+}
+
+// Trigger on click if hash is #home
+document.addEventListener('click', () => {
+  if (window.location.hash === '#home') {
+    overlayClickHandler();
+    startOverlay();
+  }
 });
+
+// Auto-start if page loads on #home
+if (window.location.hash === '#home') {
+  startOverlay();
+}
 
 </script>
 </body>
