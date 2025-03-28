@@ -893,6 +893,81 @@ document.addEventListener('DOMContentLoaded', () => {
                         
 
                             });
-                            </script>
+
+ // overlay
+
+ document.addEventListener('DOMContentLoaded', () => {
+  let overlayActive = true;
+  let overlayStartTime = performance.now() + 3000; // 3 second delay
+  let lastLayerCount = 0;
+  let requestId = null;
+
+  function addOverlayText() {
+    const menuLinks = document.querySelectorAll('.menu-items a, #mobileMenu a');
+    const samples = Array.from(menuLinks).map(link => link.textContent);
+    const chosenText = samples[Math.floor(Math.random() * samples.length)];
+
+    const clone = document.createElement('div');
+    clone.textContent = chosenText;
+    clone.classList.add('overlay-text');
+
+// Static styles
+clone.style.position = 'absolute';
+clone.style.left = `${Math.random() * window.innerWidth}px`;
+clone.style.top = `${Math.random() * window.innerHeight}px`;
+clone.style.pointerEvents = 'none';
+clone.style.opacity = 0; // Start fully transparent
+clone.style.fontSize = `${13 + Math.random() * 4}px`; // Slight variation
+clone.style.fontWeight = 'bold';
+clone.style.fontFamily = 'Helvetica, Arial, sans-serif';
+clone.style.color = 'black';
+clone.style.zIndex = 9999;
+clone.style.userSelect = 'none';
+clone.style.transition = 'opacity 3s ease'; // Fade in only
+clone.style.textShadow = 'none';
+clone.style.mixBlendMode = 'multiply';
+clone.style.webkitFontSmoothing = 'antialiased';
+clone.style.MozOsxFontSmoothing = 'grayscale';
+
+document.body.appendChild(clone);
+
+// Trigger fade-in (no fade-out)
+requestAnimationFrame(() => {
+  clone.style.opacity = 0.35 + Math.random() * 0.15; // Controlled range: 0.35 to 0.5
+});
+  }
+
+  function animate() {
+    if (!overlayActive) return;
+
+    const now = performance.now();
+    if (now > overlayStartTime) {
+      const timeSinceStart = now - overlayStartTime;
+      const rampSpeed = 0.0025; // tweak this value to control curve
+      const layersToAdd = Math.min(Math.floor((timeSinceStart ** 1.3) * rampSpeed), 1600);
+
+      if (layersToAdd > lastLayerCount) {
+        const newLayers = layersToAdd - lastLayerCount;
+        const layersThisFrame = Math.min(newLayers, Math.ceil(layersToAdd / 200));
+        for (let i = 0; i < layersThisFrame; i++) {
+          addOverlayText();
+        }
+        lastLayerCount += layersThisFrame;
+      }
+    }
+
+    requestId = requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  document.addEventListener('click', () => {
+    overlayActive = false;
+    if (requestId) cancelAnimationFrame(requestId);
+    document.querySelectorAll('.overlay-text').forEach(el => el.remove());
+  });
+});
+
+</script>
 </body>
 </html>
