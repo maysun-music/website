@@ -88,6 +88,38 @@
         margin-left: 0; /* Remove margin-based adjustment */
         }
 
+        
+        /* biography degradation */
+        .glitch-char {
+        display: inline-block;
+        position: relative;
+        transition: transform 0.4s cubic-bezier(0.33, 0, 0.1, 1), opacity 0.4s ease;
+        transform: translate(var(--dx, 0px)) translateY(var(--dy, 0px)) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+        opacity: 0.9;
+        filter: blur(0.0px);
+        }
+
+        @keyframes crumble {
+        0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(
+            calc(var(--dx, 0px)),
+            calc(var(--dy, 0px))
+            )
+            rotate(calc(var(--rot, 0deg)))
+            scale(calc(var(--scale, 1)));
+            opacity: 0.5;
+        }
+        }
+
+        .glitch-char-wrapper.fade-clone {
+        will-change: opacity;
+        transition: opacity 6s ease-out;
+        }
+
         /* Bottom Menu Styles for Desktop */
         .menu-container {
             position: fixed;
@@ -716,14 +748,18 @@ function toggleBurgerMenu() {
 
                     <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023. 
                         He completed the 2024 ITP/IMA Fellowship at New York University, is currently a mentor at New Inc., and is a participant in the New Amsterdam Composers' Lab.</p>`;
-                    break;
+                    
+                        setTimeout(() => {
+                        wrapBiographyChars();
+                        enableBiographyGlitch();
+                        }, 10);
+                        break;
 
                 case 'activities':
                 content = `
                     <h3>UPCOMING SHOWS</h3>
                     <div class="activities-content">
                     <ul>
-                    <li><span class="date">28 MAR 2025</span><span class="location">Overdrive Festival - Brooklyn, NY, USA</span></li>
                     <li><span class="date">15 APR 2025</span><span class="location">Cassette - Brooklyn, NY, USA</span></li>
                     </ul>
                     </div>
@@ -731,6 +767,7 @@ function toggleBurgerMenu() {
                     <h3>PAST PERFORMANCES</h3>
                     <div class="activities-content">
                     <ul>
+                                <li><span class="date">28 MAR 2025</span><span class="location">Overdrive Festival - Brooklyn, NY, USA</span></li>
                                 <li><span class="date">26 MAR 2025</span><strong> w/ Kengchakaj Kengkarnka</strong><span class="location">ONX - New York, NY, USA</span></li>
                                 <li><span class="date">14 MAR 2025</span><strong> w/ Kengchakaj Kengkarnka</strong><span class="location">Fort Hamilton Distillery - Brooklyn, NY, USA</span></li>
                                 <li><span class="date">21 FEB 2025</span><span class="location">Moon Calf - Brooklyn, NY, USA</span></li>
@@ -1031,6 +1068,96 @@ document.addEventListener('mousemove', (e) => {
     logo.style.opacity = adjustedOpacity.toFixed(2);
   });
 });
+
+function wrapBiographyChars() {
+  const content = document.getElementById('content');
+  const bioSection = content.querySelectorAll('p');
+  bioSection.forEach(p => {
+    if (!p.classList.contains('glitch-processed')) {
+      p.classList.add('glitch-processed');
+      const chars = p.textContent.split('');
+      const spanWrapped = chars.map(char => `<span class="glitch-char-wrapper">${char}</span>`).join('');
+      p.innerHTML = spanWrapped;
+    }
+  });
+}
+
+function glitchCharacter(el, mouseX, mouseY) {
+  const rect = el.getBoundingClientRect();
+  const charX = rect.left + rect.width / 2;
+  const charY = rect.top + rect.height / 2;
+
+  const dx = mouseX - charX;
+  const dy = mouseY - charY;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  const maxDist = 100;
+  const proximity = Math.max(0, 1 - distance / maxDist);
+
+  const baseX = ((Math.random() - 0.5) * 12 * proximity).toFixed(2) + 'px';
+  const baseY = ((Math.random() - 0.5) * 12 * proximity).toFixed(2) + 'px';
+  // const baseRot = ((Math.random() - 0.5) * 20 * proximity).toFixed(2) + 'deg';
+
+
+  // Main character animates too
+  el.style.setProperty('--dx', baseX);
+  el.style.setProperty('--dy', baseY);
+  // el.style.setProperty('--rot', baseRot);
+  el.classList.remove('restore');
+  el.classList.add('glitch-char');
+
+// Create 4–8 ghost trails with gentle fade-out
+const trailCount = Math.floor(Math.random() * 5) + 4;
+for (let i = 0; i < trailCount; i++) {
+  const clone = el.cloneNode(true);
+  clone.classList.add('fade-clone');
+  clone.style.position = 'absolute';
+  clone.style.left = el.offsetLeft + 'px';
+  clone.style.top = el.offsetTop + 'px';
+  clone.style.pointerEvents = 'none';
+
+  const spreadX = 80; // Less wide
+  const spreadY = 80; // More vertical
+  const offsetX = ((Math.random() - 0.5) * spreadX).toFixed(2) + 'px';
+  const offsetY = ((Math.random() - 0.5) * spreadY).toFixed(2) + 'px';
+  // const rot = ((Math.random() - 0.5) * 60).toFixed(2) + 'deg';
+  const opacity = 0.2 + Math.random() * 0.1;
+
+  clone.style.transform = `translate(${offsetX}, ${offsetY})`; //rotate(${rot})`;
+  clone.style.opacity = opacity.toFixed(2);
+
+  el.parentElement.appendChild(clone);
+
+  // Trigger fade on next animation frame
+  requestAnimationFrame(() => {
+    clone.style.opacity = '0';
+  });
+
+  // Clean up after fade completes
+  setTimeout(() => clone.remove(), 13000);
+}
+
+  // Slow restore with transition
+// Smooth and slow restore
+setTimeout(() => {
+  el.style.transition = 'transform 2.5s ease, opacity 2s ease'; // softened easing
+  el.style.setProperty('--dx', '0px');
+  el.style.setProperty('--dy', '0px');
+  el.style.setProperty('--rot', '0deg');
+  el.style.opacity = '0.4';
+}, 6000);
+}
+
+function enableBiographyGlitch() {
+  const content = document.getElementById('content');
+  content.addEventListener('mousemove', (e) => {
+    if (window.location.hash !== '#biography') return;
+
+    const target = e.target;
+    if (target.classList.contains('glitch-char-wrapper')) {
+      glitchCharacter(target, e.clientX, e.clientY); // <-- important update
+    }
+  });
+}
 
 </script>
 </body>
