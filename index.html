@@ -707,6 +707,15 @@ function toggleBurgerMenu() {
 
     // Load content dynamically
     function loadContent(section) {
+
+        // If leaving the home section, kill the overlay
+        if (section !== 'home') {
+        overlayActive = false;
+        cancelAnimationFrame(overlayRequestId);
+        fadeOutOverlay();
+    }
+
+
         let content = '';
         switch (section) {
             case 'home':                    content = `
@@ -715,12 +724,15 @@ function toggleBurgerMenu() {
                         <div class="photo-credit">Photo: Chienn Tai (2024)</div>
                         </div>`;      
                         
+
+
                         if (section === 'home') {
                             setTimeout(() => {
     const homeImage = document.getElementById('home-image');
     if (homeImage) {
         homeImage.addEventListener('click', toggleDesktopMenu);
     }
+
 
     // Add full-area click reset for home section
     contentContainer.addEventListener('click', (e) => {
@@ -961,7 +973,7 @@ function toggleBurgerMenu() {
                             });
 
  // overlay
- let overlayRequestId = null;
+let overlayRequestId = null;
 let overlayActive = false;
 
 function addOverlayText() {
@@ -993,6 +1005,8 @@ function addOverlayText() {
   clone.dataset.defaultOpacity = finalOpacity.toFixed(2);
 });
 
+
+
   // Decide whether this one decays
   const decay = Math.random() < 0.45; // 45% will disappear
   if (decay) {
@@ -1006,8 +1020,22 @@ function addOverlayText() {
   }
 }
 
+function fadeOutOverlay() {
+  const overlays = document.querySelectorAll('.overlay-text');
+  overlays.forEach(el => {
+    el.style.transition = 'opacity 3s ease';
+    el.style.opacity = 0;
+    setTimeout(() => {
+      if (el.parentNode) el.remove();
+    }, 3500); // a bit quicker
+  });
+}
+
 function startOverlay() {
-    if (window.location.hash !== '#home') return;
+  if (window.location.hash !== '#home') {
+    fadeOutOverlay(); // fades them out if user is no longer on home
+    return;
+  }
 
   if (overlayRequestId !== null) {
     cancelAnimationFrame(overlayRequestId);
