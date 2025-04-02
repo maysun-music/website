@@ -410,7 +410,7 @@ html, body {
           <a href="#ima">51. INTERACTIVE MEDIA ARTS</a>
           <a href="#processing-space">52. PROCESSING SPACE</a>
           <a href="#streaming">53. AWAY FROM STREAMING</a>
-          <a href="#mutek">54. CYCLICAL PROCESSING</a>
+          <a href="#cyclical-processing">54. CYCLICAL PROCESSING</a>
     
 
           <a href="#" id="now-button" class="now-button">00. <b>NOW?</b></a>
@@ -2330,7 +2330,7 @@ html, body {
                           const clone = original.cloneNode(true);
                           clone.style.position = "absolute";
                           clone.style.left = `${Math.random() * window.innerWidth}px`;
-                          clone.style.top = `${Math.random() * window.innerHeight}px`;
+                          clone.style.top = `${window.scrollY + Math.random() * window.innerHeight}px`;
                           clone.style.pointerEvents = "none";
                           clone.style.opacity = 0.3 + Math.random() * 0.4;
                           clone.style.transform = `scale(1)`;
@@ -2369,7 +2369,7 @@ html, body {
                 
                     placeholders.forEach(div => observer.observe(div));
                   });
-                </script>
+        </script>
  
   </body>
   </html>  
