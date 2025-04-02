@@ -8,19 +8,14 @@
 
     /* Body and Global Styles */
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      font-family: Helvetica, Arial, sans-serif;
-      color: black;
-      text-align: left;
-      overflow-x: hidden;
-    }
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  color: black;
+  text-align: left;
+  overflow-x: hidden;
+}
 
 .content-container {
   width: calc(100% - 240px);
@@ -127,6 +122,16 @@
       width: 100%;
       height: auto;
     }
+
+    /* section group loading */
+      .section-group {
+        opacity: 0;
+        transition: opacity 3s ease;
+      }
+
+      .section-group[data-loaded="true"] {
+        opacity: 1;
+      }
 
     /* Side Menu Styling */
 .side-menu {
@@ -421,7 +426,7 @@ html, body {
           <h1 style="font-size: 60px;">FOREVER IN SOUND</h1>
  
  
- 
+          <div class="section-group" data-section="1">
           <!-- Section 1 -->
           <div id="introduction" class="section">
               <h2 class="section-title">INTRODUCTION</h2>
@@ -624,6 +629,8 @@ html, body {
                   This was when I started feeling artistically stuck, and realized I couldn't put more effort into a project than the bandleader. 
                   After all, these projects weren't actually mine. I existed in a gray area between an unpaid session musician and a core band member. 
                   That, combined with burnout, made me step away.</p>
+
+
  
  
  
@@ -650,6 +657,12 @@ html, body {
  <div class="bandcamp-embed">
           <iframe style="border: 0; width: 400px; height: 340px;" src="https://bandcamp.com/EmbeddedPlayer/album=3851653569/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://maysunmusic.bandcamp.com/album/all-these-are-the-days">All These Are The Days by MAYSUN</a></iframe>
  </div>
+
+
+
+</div>  <!-- group div-->
+ <div class="section-group" data-section="2">
+
           <!-- Section 11 -->
           <div id="live-setup" class="section">
           <h2 class="section-title">LIVE SETUP</h2>
@@ -905,6 +918,9 @@ html, body {
     <img class="youtube-thumb" src="https://img.youtube.com/vi/nPhkOfMffSY/hqdefault.jpg" alt="YouTube thumbnail">
     <div class="play-button"></div>
 </div> 
+
+</div>  <!-- group div-->
+ <div class="section-group" data-section="3">
  
           <!-- Section 20 -->
           <div id="building-audience" class="section">
@@ -1277,20 +1293,23 @@ html, body {
 </div>
 
 
+</div>  <!-- group div-->
+<div class="section-group" data-section="4">
+
 
             <!-- Section 30 -->
             <div id="no-tour" class="section">
             <h2 class="section-title">NO TOUR</h2>
             </div>
-              <p>The artist I’d been waiting on announced the tour and album release on Instagram. 
-               I hadn’t been notified. I reached out to the agent, and they told me they’d decided to use local musicians instead.</p>
+              <p>The artist I'd been waiting on announced the tour and album release on Instagram. 
+               I hadn't been notified. I reached out to the agent, and they told me they'd decided to use local musicians instead.</p>
 
               <p>After nearly two years of back-and-forth, testing their music with Sensory Percussion and being told the tour was just around the corner, they chose someone else without even letting me know. 
                I was devastated.</p>
 
-             <p>In that moment, I decided I’d no longer rely on others. 
-              I couldn’t keep standing still, waiting on promises. Music would no longer be my job. 
-              I’d get a 9 to 5 to fund my work and take full control of my career.</p>
+             <p>In that moment, I decided I'd no longer rely on others. 
+              I couldn't keep standing still, waiting on promises. Music would no longer be my job. 
+              I'd get a 9 to 5 to fund my work and take full control of my career.</p>
 
 
 
@@ -1597,6 +1616,9 @@ html, body {
         </div>
         </div>
 
+
+</div>  <!-- group div-->
+<div class="section-group" data-section="5">
 
     <!-- Section 40 -->
     <div id="mutek" class="section">
@@ -1960,17 +1982,17 @@ html, body {
             But I ended up focusing more on finding events, listening, and learning.</p>
           
           <p>Still, I recorded many small experiments at Physical Synthesis. 
-          I tried different objects as bridges between the CICADA’s wing and soundboard. 
+          I tried different objects as bridges between the CICADA's wing and soundboard. 
           They gave me spare soundboard parts, which I completed with a steel plate. 
           I also made a custom CICADA wing with a wooden tip for a more percussive sound.</p>
           
-          <p>I really didn’t want to leave. 
+          <p>I really didn't want to leave. 
           I kept extending my stay, moving between Airbnbs. What was supposed to be three weeks turned into six. 
           Everything felt like it had momentum, but I had to return to real life eventually.</p>
           
           <p>As I was preparing to leave, I was also planning my return. 
           Through Instagram, someone sent me a link to an Interactive Media Arts Fellowship. 
-          I wasn’t even fully sure what that meant, but the deadline landed on my birthday. 
+          I wasn't even fully sure what that meant, but the deadline landed on my birthday. 
           I took that as a sign to apply.</p>
 
 
@@ -1986,6 +2008,8 @@ html, body {
       </div>
     </div>
 
+</div>  <!-- group div-->
+<div class="section-group" data-section="6">
 
 <!-- Section 50 -->
     <div id="paris" class="section">
@@ -2144,7 +2168,7 @@ html, body {
           
           <p>Instead of deciding what sounds will be used, I focus on building the containers that will shape those sounds.</p>
           
-          <p>It’s a system I can use anywhere, as a solo artist or in collaborations.
+          <p>It's a system I can use anywhere, as a solo artist or in collaborations.
           My instrument is the shaping of space.</p>
           
           <p>It is responsive and alive.</p>
@@ -2163,7 +2187,8 @@ html, body {
   <h2 class="section-title">
     <a href="#" class="now-trigger" style="text-decoration: none;">57. <b>NOW?</b></a>
   </h2>
-</div>    
+</div>
+</div> <!-- group div-->    
 
         
 
@@ -2178,68 +2203,12 @@ html, body {
         
                 <script src="https://www.youtube.com/iframe_api"></script>
                 <script>
-                  // Mobile Menu Toggle
-                  function toggleMobileMenu() {
-                    try {
-                      const menu = document.querySelector('.side-menu');
-                      if (menu) {
-                        menu.classList.toggle('show');
-                      }
-                    } catch (e) {
-                      console.error("Menu toggle error:", e);
-                    }
-                  }
-                
-                  document.addEventListener("DOMContentLoaded", function () {
-                    const links = document.querySelectorAll('.side-menu a');
-                    const menu = document.querySelector('.side-menu');
-                
-                    // Smooth scroll and close menu on link click
-                    links.forEach(link => {
-                      link.addEventListener('click', (e) => {
-                        const href = link.getAttribute('href');
-                        const target = document.querySelector(href);
-                
-                        if (target) {
-                          e.preventDefault();
-                          target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                
-                        if (window.innerWidth <= 768 && menu.classList.contains('show')) {
-                          menu.classList.remove('show');
-                        }
-                      });
-                    });
-                
-                    // Lazy load YouTube videos
-                    const placeholders = document.querySelectorAll(".youtube-placeholder");
-                
-                    const loadIframe = div => {
-                      const id = div.getAttribute("data-id");
-                      const iframe = document.createElement("iframe");
-                      iframe.src = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
-                      iframe.frameBorder = "0";
-                      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-                      iframe.allowFullscreen = true;
-                      iframe.loading = "lazy";
-                      iframe.width = "100%";
-                      iframe.height = "100%";
-                      div.innerHTML = "";
-                      div.appendChild(iframe);
-                      observer.unobserve(div);
-                    };
-                
-                    const observer = new IntersectionObserver((entries) => {
-                      entries.forEach(entry => {
-                        if (entry.isIntersecting) loadIframe(entry.target);
-                      });
-                    }, { rootMargin: "200px" });
-                
-                    placeholders.forEach(div => observer.observe(div));
-                  });
-                
-                  // YouTube IFrame API Setup
                   let players = [];
+                
+                  function toggleMobileMenu() {
+                    const menu = document.querySelector('.side-menu');
+                    if (menu) menu.classList.toggle('show');
+                  }
                 
                   function onYouTubeIframeAPIReady() {
                     const checkInterval = setInterval(() => {
@@ -2266,51 +2235,141 @@ html, body {
                       });
                     }
                   }
-                      
-// NOW? button
-let rawClickCount = 0;
-
-// Apply to both the menu button and the h2 link
-document.querySelectorAll("#now-button, .now-trigger").forEach(button => {
-  button.addEventListener("click", (e) => {
-    e.preventDefault();
-    rawClickCount++;
-
-    const layersToAdd = 2 ** (rawClickCount - 1);
-    degradePage(layersToAdd);
-
-    if (layersToAdd >= 256) {
-      window.location.href = "mailto:maysun.booking@gmail.com?subject=NOW&body=Hello MAYSUN,%0D%0A%0D%0AI trust the process and am reaching out to collaborate with you.";
-    }
-  });
-});
-
-function degradePage(layersToAdd) {
-  const elements = document.querySelectorAll("p");
-
-  if (elements.length > 0) {
-    const shuffled = [...elements].sort(() => 0.5 - Math.random());
-
-    for (let i = 0; i < layersToAdd; i++) {
-      const original = shuffled[i % shuffled.length];
-      const clone = original.cloneNode(true);
-      clone.style.position = "absolute";
-      clone.style.left = `${Math.random() * window.innerWidth}px`;
-      clone.style.top = `${Math.random() * window.innerHeight}px`;
-      clone.style.pointerEvents = "none";
-      clone.style.opacity = 0.3 + Math.random() * 0.4;
-      clone.style.transform = `scale(1)`;
-      clone.style.zIndex = 9999;
-      clone.style.color = "black";
-      clone.style.width = `${original.offsetWidth}px`;
-      clone.style.height = `${original.offsetHeight}px`;
-
-      document.body.appendChild(clone);
-    }
-  }
-}
-                    
-</script>
+                
+                  let rawClickCount = 0;
+                
+                  document.addEventListener("DOMContentLoaded", () => {
+                    const sectionGroups = document.querySelectorAll('.section-group[data-section]');
+                    const maxSectionGroup = 6;
+                    let currentSectionGroup = 1;
+                
+                    // Make sure group 1 is visible initially
+                    document.querySelectorAll('.section-group[data-section="1"]').forEach(group => {
+                      group.setAttribute("data-loaded", "true");
+                    });
+                
+                    // Reveal function
+                    const revealGroup = (groupNum) => {
+                      for (let i = 1; i <= groupNum; i++) {
+                        document.querySelectorAll(`.section-group[data-section="${i}"]`).forEach(group => {
+                          group.setAttribute("data-loaded", "true");
+                        });
+                      }
+                      currentSectionGroup = Math.max(currentSectionGroup, groupNum);
+                    };
+                
+                    // Scroll-based loader
+                    function checkScrollPosition() {
+                      const loadedGroups = [...document.querySelectorAll('.section-group[data-section]')]
+                      .filter(g => g.getAttribute('data-loaded') === 'true');
+                      const last = loadedGroups[loadedGroups.length - 1];
+                      if (!last) return;
+                
+                      const rect = last.getBoundingClientRect();
+                      const threshold = window.innerHeight + 200;
+                
+                      if (rect.bottom < threshold && currentSectionGroup < maxSectionGroup) {
+                        currentSectionGroup++;
+                        revealGroup(currentSectionGroup);
+                        setTimeout(checkScrollPosition, 100);
+                      }
+                    }
+                
+                    window.addEventListener("scroll", checkScrollPosition);
+                    window.addEventListener("resize", checkScrollPosition);
+                    window.addEventListener("load", checkScrollPosition);
+                    checkScrollPosition();
+                
+                    // Side menu links
+                    const menu = document.querySelector('.side-menu');
+                    document.querySelectorAll('.side-menu a').forEach(link => {
+                      link.addEventListener('click', (e) => {
+                        const href = link.getAttribute('href');
+                        if (!href || !href.startsWith('#')) return;
+                        const target = document.querySelector(href);
+                        if (!target) return;
+                
+                        e.preventDefault();
+                        const group = target.closest('.section-group');
+                        if (group && group.dataset.section) {
+                          revealGroup(parseInt(group.dataset.section));
+                        }
+                
+                        setTimeout(() => {
+                          target.scrollIntoView({ behavior: 'smooth' });
+                        }, 50);
+                
+                        if (window.innerWidth <= 768 && menu.classList.contains('show')) {
+                          menu.classList.remove('show');
+                        }
+                      });
+                    });
+                
+                    // NOW? button logic
+                    const nowButtons = document.querySelectorAll("#now-button, .now-trigger");
+                    nowButtons.forEach(button => {
+                      button.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        rawClickCount++;
+                
+                        const layersToAdd = 2 ** (rawClickCount - 1);
+                        degradePage(layersToAdd);
+                
+                        if (layersToAdd >= 256) {
+                          window.location.href = "mailto:maysun.booking@gmail.com?subject=NOW&body=Hello MAYSUN,%0D%0A%0D%0AI trust the process and am reaching out to collaborate with you.";
+                        }
+                      });
+                    });
+                
+                    function degradePage(layersToAdd) {
+                      const elements = document.querySelectorAll("p");
+                      if (elements.length > 0) {
+                        const shuffled = [...elements].sort(() => 0.5 - Math.random());
+                        for (let i = 0; i < layersToAdd; i++) {
+                          const original = shuffled[i % shuffled.length];
+                          const clone = original.cloneNode(true);
+                          clone.style.position = "absolute";
+                          clone.style.left = `${Math.random() * window.innerWidth}px`;
+                          clone.style.top = `${Math.random() * window.innerHeight}px`;
+                          clone.style.pointerEvents = "none";
+                          clone.style.opacity = 0.3 + Math.random() * 0.4;
+                          clone.style.transform = `scale(1)`;
+                          clone.style.zIndex = 9999;
+                          clone.style.color = "black";
+                          clone.style.width = `${original.offsetWidth}px`;
+                          clone.style.height = `${original.offsetHeight}px`;
+                          document.body.appendChild(clone);
+                        }
+                      }
+                    }
+                
+                    // Lazy YouTube loader
+                    const placeholders = document.querySelectorAll(".youtube-placeholder");
+                
+                    const loadIframe = div => {
+                      const id = div.getAttribute("data-id");
+                      const iframe = document.createElement("iframe");
+                      iframe.src = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
+                      iframe.frameBorder = "0";
+                      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                      iframe.allowFullscreen = true;
+                      iframe.loading = "lazy";
+                      iframe.width = "100%";
+                      iframe.height = "100%";
+                      div.innerHTML = "";
+                      div.appendChild(iframe);
+                      observer.unobserve(div);
+                    };
+                
+                    const observer = new IntersectionObserver((entries) => {
+                      entries.forEach(entry => {
+                        if (entry.isIntersecting) loadIframe(entry.target);
+                      });
+                    }, { rootMargin: "200px" });
+                
+                    placeholders.forEach(div => observer.observe(div));
+                  });
+                </script>
  
   </body>
   </html>  
