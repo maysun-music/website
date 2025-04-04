@@ -390,16 +390,12 @@
             text-align: center;
             padding: 0 20px;
         }
-        .activities-content li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            font-size: 16px;
-            line-height: 0.2;
-            position: relative;
-            flex-wrap: wrap; /* Allow text to wrap to the next line */
-        }
+            .activities-content li {
+              position: relative;
+              padding: 10px 0;
+              font-size: 16px;
+              line-height: 0.2;
+            }
 
         /* Adjust the central line so it doesn't overlap the text */
         .activities-content li::before {
@@ -444,6 +440,23 @@
             background-color: #000;
             z-index: 0;
             transform: translateY(-50%);
+        }
+
+        .activities-content li a {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          text-decoration: none;
+          color: inherit;
+          width: 100%;
+          z-index: 2;
+        }
+        
+        ..activities-content li a:hover {
+          filter: blur(0.8px);
+          opacity: 0.7;
+          transition: all 0.3s ease;
         }
 
 @media (max-width: 740px) {
