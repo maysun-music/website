@@ -32,6 +32,8 @@
              max-height: calc(100vh - 160px);
              margin: 0 auto;
              text-align: center;
+             position: relative;
+             
          }
          #content ul {
              list-style-position: inside;
@@ -119,6 +121,39 @@
          will-change: opacity;
          transition: opacity 6s ease-out;
          }
+
+
+
+         #bio-visible-container {
+        position: relative;
+        }
+
+        #copy-bio-container {
+        position: absolute;
+        font-size: 12px;
+        z-index: 10;
+        }
+
+        #copy-bio-button {
+            position: absolute;
+            right: 100px; /* <-- this adds the padding on the right */
+            bottom: -10px;
+            background: none;
+            border: none;
+            font-size: 8px;
+            color: black;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+            padding: 0;
+            margin: 0;
+            transform: translateY(10px);
+        }
+
+        #copy-bio-button:hover {
+        opacity: 1;
+        }
+
  
          /* Bottom Menu Styles for Desktop */
          .menu-container {
@@ -750,22 +785,47 @@
  
                     break;
  
-                 case 'biography':
-                 content = `
-                     <p><strong>Etienne Mason</strong>, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. 
-                         With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
- 
-                     <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. 
-                         His work explores spatial audio, technology, and the emotional impact of sound.</p>
- 
-                     <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023. 
-                         He completed the 2024 ITP/IMA Fellowship at New York University, is currently a mentor at New Inc., and is a participant in the New Amsterdam Composers' Lab.</p>`;
- 
-                         setTimeout(() => {
-                         wrapBiographyChars();
-                         enableBiographyGlitch();
-                         }, 10);
-                         break;
+                    case 'biography':
+                        content = `
+                            <div id="bio-wrapper" style="position: relative; display: inline-block; width: 100%;">
+                                <div id="bio-clean" style="display: none;">
+                                    <p><strong>Etienne Mason</strong>, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. 
+                                    With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
+
+                                    <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. 
+                                    His work explores spatial audio, technology, and the emotional impact of sound.</p>
+
+                                    <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023. 
+                                    He completed the 2024 ITP/IMA Fellowship at New York University, is currently a mentor at New Inc., and is a participant in the New Amsterdam Composers' Lab.</p>
+                                </div>
+
+                                <div id="bio-visible">
+                                    <p><strong>Etienne Mason</strong>, known professionally as <strong>MAYSUN</strong>, is a composer and sound artist known for his unique blend of drumming expertise and sound design, creating immersive atmospheric soundscapes. 
+                                    With a focus on the use of physical space to shape and manipulate sounds, he crafts compositions that serve as soundtracks to his life events.</p>
+
+                                    <p><strong>MAYSUN</strong>'s work is characterized by an innovative approach that transforms real-life sounds into musical tones, skillfully interweaving the dimensions of time and space within his compositions. 
+                                    His work explores spatial audio, technology, and the emotional impact of sound.</p>
+
+                                    <p>In addition to his artistic pursuits, <strong>MAYSUN</strong> has been serving on the Board of Directors of the Canadian Electroacoustic Community (CEC) since 2023. 
+                                    He completed the 2024 ITP/IMA Fellowship at New York University, is currently a mentor at New Inc., and is a participant in the New Amsterdam Composers' Lab.</p>
+                                </div>
+
+                                <button id="copy-bio-button">copy bio to clipboard.</button>
+                            </div>
+                        `;
+                        contentContainer.innerHTML = content;
+
+                        // Clean up old button
+                        const oldCopy = document.getElementById('copy-bio-container');
+                        if (oldCopy) oldCopy.remove();
+
+                        setTimeout(() => {
+                            wrapBiographyChars();
+                            enableBiographyGlitch();
+                            setupCopyBioButton();
+                        }, 10);
+                        break;
+
  
                  case 'activities':
                  content = `
@@ -1189,6 +1249,22 @@
      }
    });
  }
+
+ function setupCopyBioButton() {
+    const button = document.getElementById('copy-bio-button');
+    if (!button) return;
+
+    button.addEventListener('click', () => {
+        const paragraphs = document.querySelectorAll('#bio-clean p');
+        const fullText = Array.from(paragraphs).map(p => p.innerText).join('\n\n');
+        navigator.clipboard.writeText(fullText).then(() => {
+            button.innerText = 'copied';
+            setTimeout(() => {
+                button.innerText = 'copy bio to clipboard.';
+            }, 2000);
+        });
+    });
+}
  
  </script>
  </body>
