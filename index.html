@@ -810,7 +810,7 @@
                                     He completed the 2024 ITP/IMA Fellowship at New York University, is currently a mentor at New Inc., and is a participant in the New Amsterdam Composers' Lab.</p>
                                 </div>
 
-                                <button id="copy-bio-button">copy bio to clipboard.</button>
+                                <button id="copy-bio-button">copy unaffected bio to clipboard.</button>
                             </div>
                         `;
                         contentContainer.innerHTML = content;
@@ -1260,7 +1260,7 @@
         navigator.clipboard.writeText(fullText).then(() => {
             button.innerText = 'copied';
             setTimeout(() => {
-                button.innerText = 'copy bio to clipboard.';
+                button.innerText = 'copy unaffected bio to clipboard.';
             }, 2000);
         });
     });
