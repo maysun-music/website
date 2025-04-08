@@ -351,6 +351,20 @@
              border-radius: 3px;
          }
  
+         .activities-content a {
+            color: black;
+            text-decoration: none;
+            background-color: white;
+            z-index: 2;
+            position: relative;
+            border-bottom: 1px dotted black;
+            transition: color 0.3s ease, border-color 0.3s ease;
+            }
+
+            .activities-content a:hover {
+            color: #edd500; /* soft yellow */
+            border-bottom-color: #edd500;
+            }
  
  /* -------------------ALBUM GRID--------------------- */
          .album-grid {
@@ -827,89 +841,27 @@
                         break;
 
  
-                 case 'activities':
-                 content = `
-                     <h3>UPCOMING SHOWS</h3>
-                     <div class="activities-content">
-                     <ul>
-                         <li><span class="date">07 APR 2025</span><strong> w/ Ipek Eginli</strong><span class="location">Sisters - Brooklyn, NY, USA</span></li>
-                         <li><span class="date">15 APR 2025</span><span class="location">Cassette - Brooklyn, NY, USA</span></li>
-                         <li><span class="date">08 MAY 2025</span><strong> w/ Alex Koi & Kengchakaj</strong><span class="location">CuteLab - Brooklyn, NY, USA</span></li>
-                         <li><span class="date">10 MAY 2025</span><strong> w/ Joy Guidry & SCRAAATCH</strong><span class="location">Fridman Gallery - New York, NY, USA</span></li>
-                     </ul>
-                     </div>
- 
-                     <h3>PAST PERFORMANCES</h3>
-                     <div class="activities-content">
-                     <ul>
-                                 <li><span class="date">28 MAR 2025</span><span class="location">Overdrive Festival - Brooklyn, NY, USA</span></li>    
-                                 <li><span class="date">26 MAR 2025</span><strong> w/ Kengchakaj</strong><span class="location">ONX - New York, NY, USA</span></li>
-                                 <li><span class="date">14 MAR 2025</span><strong> w/ Kengchakaj</strong><span class="location">Fort Hamilton Distillery - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">21 FEB 2025</span><span class="location">Moon Calf - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">09 FEB 2025</span><span class="location">New Ear :: - New York, NY, USA</span></li>
-                                 <li><span class="date">01 FEB 2025</span><span class="location">CuteLab - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">01 FEB 2025</span><span class="location">CuteLab - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">19 JAN 2025</span><span class="location">Threes Brewing - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">15 DEC 2024</span><span class="location">Transmitter Brewing - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">26 OCT 2024</span><span class="location">CuteLab - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">11 OCT 2024</span><span class="location">Iris Cantor Theater - New York, NY, USA</span></li>
-                                 <li><span class="date">30 AUG 2024</span><span class="location">Exit Points - Toronto, ON, Canada</span></li>
-                                 <li><span class="date">20 MAY 2024</span><span class="location">Garage - Downtown Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">27 MAR 2024</span><span class="location">Troy Music Hall - Troy, NY, USA</span></li>
-                                 <li><span class="date">17 FEB 2023</span><span class="location">Salle Bourgie - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">13 JAN 2023</span><span class="location">Banff Center - Banff, AL, Canada</span></li>
-                                 <li><span class="date">10 SEP 2022</span><span class="location">Cloud 9 - Rideau Lakes, ON, Canada</span></li>
-                                 <li><span class="date">06 JUL 2022</span><span class="location">Substrat Satosphère - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">28 NOV 2021</span><span class="location">Pony Boy - Brooklyn, NY, USA</span></li>
-                                 <li><span class="date">26 AUG 2021</span><span class="location">MUTEK - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">01 FEB 2020</span><span class="location">Aussenwelt - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">11 DEC 2019</span><span class="location">Sotterenea - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">28 NOV 2019</span><span class="location">Sotterenea - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">27 NOV 2019</span><span class="location">Brasserie Beaubien - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">03 NOV 2019</span><span class="location">Casa Del Popolo - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">25 SEP 2019</span><span class="location">Sotterenea - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">05 JUL 2019</span><span class="location">Antichambre - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">27 JUN 2019</span><span class="location">O Patro Vys - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">13 JUN 2019</span><span class="location">WIP - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">26 APR 2018</span><span class="location">Moth Access Center - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">26 AUG 2018</span><span class="location">Avant Garde Bar - Ottawa, ON, Canada</span></li>
-                                 <li><span class="date">24 JUL 2018</span><span class="location">Antimodele - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">08 JUN 2018</span><span class="location">La Plante - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">19 MAY 2018</span><span class="location">Le Ministère - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">08 JUL 2017</span><span class="location">Fest Off Quebec - Quebec, QC, Canada</span></li>
-                                 <li><span class="date">10 DEC 2016</span><span class="location">Le Cagibi - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">26 NOV 2016</span><span class="location">Matahari Loft - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">07 NOV 2016</span><span class="location">Casa Del Popolo - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">29 OCT 2016</span><span class="location">Baron Samedi - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">06 OCT 2016</span><span class="location">Divan Orange - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">26 AUG 2016</span><span class="location">Secret Loft - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">17 JUL 2016</span><span class="location">Divan Orange - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">30 JUN 2016</span><span class="location">Divan Orange - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">03 MAR 2016</span><span class="location">Studio B - Montreal, QC, Canada</span></li>
-                                 <li><span class="date">27 FEB 2016</span><span class="location">Studio Bizz - Montreal, QC, Canada</span></li>
-                     </ul>
-                     
-                     <h3>RESIDENCIES</h3>
-                     <div class="activities-content">
-                     <ul>
-                          <li><span class="date">FEB 2025</span><span class="location">New Amsterdam Composer's Lab - Brooklyn, NY, USA</span></li>
-                          <li><span class="date">AUG 2024</span><span class="location">Banff Center Jazz & Sonic Arts - Banff, AL, Canada</span></li>
-                          <li><span class="date">JUN 2024</span><span class="location">ITP Camp NYU - Brooklyn, NY, USA</span></li>
-                          <li><span class="date">MAY 2024</span><span class="location">Avaloch Farm Music Institute - Boscawen, NH, USA</span></li>
-                         <li><span class="date">JAN 2024</span><span class="location">ITP / IMA NYU Fellowship - Brooklyn, NY, USA</span></li>
-                         <li><span class="date">OCT 2023</span><span class="location">Centre Récollets - Paris, FR</span></li>
-                         <li><span class="date">OCT 2023</span><span class="location">Satosphère - Montreal, QC, Canada</span></li>
-                         <li><span class="date">MAR 2023</span><span class="location">Physical Synthesis - Brooklyn, NY, USA</span></li>
-                          <li><span class="date">JAN 2023</span><span class="location">Banff Center BMiR - Banff, AL, Canada</span></li>
-                          <li><span class="date">JUL 2022</span><span class="location">Satosphère - Montreal, QC, Canada</span></li>
-                     </ul>
-                     <h3>SOUND INSTALLATIONS</h3>
-                     
-                     <ul>
-                         <li><span class="date">MAY 2024</span><span class="location">Clive Davis Gallery - Brooklyn, NY, USA</span></li>
-                     </ul>
-                     </div> `;
-                 break;
+                        case 'activities':
+                            content = `
+                            <h3>UPCOMING SHOWS</h3>
+                            <div class="activities-content">
+                                <ul id="upcoming-shows"></ul>
+                            </div>
+
+                            <h3>PAST PERFORMANCES</h3>
+                            <div class="activities-content">
+                                <ul id="past-shows"></ul>
+                            </div>
+                                  <h3>RESIDENCIES</h3>
+                            <div class="activities-content">
+                                <ul id="residencies"></ul>
+                            </div>
+                            `;
+                            setTimeout(() => {
+                            fetchShows();
+                            fetchResidencies(); // call to load this new section
+                            }, 0);
+                            break;
              case'albums':
                      content = `
                              <div class="album-grid">
@@ -1265,6 +1217,55 @@
             }, 2000);
         });
     });
+}
+
+// ACTIVITIES FORMAT
+function formatDate(dateStr) {
+  const options = { day: '2-digit', month: 'short', year: 'numeric' };
+  return new Date(dateStr).toLocaleDateString('en-GB', options).toUpperCase().replace(/ /g, ' ');
+}
+
+function renderShow(show) {
+  const date = `<span class="date">${formatDate(show.date)}</span>`;
+  const collab = show.collaborators ? `<strong> ${show.collaborators}</strong>` : '';
+  const location = `<span class="location">${show.venue} - ${show.city}</span>`;
+  const content = `${date}${collab} ${location}`;
+  
+  // Only wrap the location part in a link
+  return `<li>${date}${collab}${show.url ? ` <a href="${show.url}" target="_blank">${location}</a>` : location}</li>`;
+}
+
+// GETTING SHOW INFO
+async function fetchShows() {
+  try {
+    const res = await fetch('shows.json');
+    const shows = await res.json();
+
+    const upcoming = shows.filter(s => s.type === 'upcoming');
+    const past = shows.filter(s => s.type === 'past');
+
+    document.getElementById("upcoming-shows").innerHTML = upcoming.map(renderShow).join('');
+    document.getElementById("past-shows").innerHTML = past.map(renderShow).join('');
+  } catch (err) {
+    console.error("Failed to load shows.json:", err);
+  }
+}
+
+// GETTING RESIDENCY INFO
+async function fetchResidencies() {
+  try {
+    const res = await fetch('residencies.json');
+    const residencies = await res.json();
+
+    const list = document.getElementById("residencies");
+    list.innerHTML = residencies.map(item => {
+      const date = `<span class="date">${formatDate(item.date)}</span>`;
+      const location = `<span class="location">${item.venue} - ${item.city}</span>`;
+      return `<li>${date} ${location}</li>`;
+    }).join('');
+  } catch (err) {
+    console.error("Failed to load residencies.json:", err);
+  }
 }
  
  </script>
