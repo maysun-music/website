@@ -6,591 +6,541 @@
      <title>MAYSUN</title>
      <link rel="icon" href="images/m_favicon.ico" type="image/x-icon">
      <style>
-         /* Body and Global Styles */
-         body {
-             display: flex;
-             flex-direction: column;
-             justify-content: center;
-             align-items: center;
-             height: 100vh;
-             margin: 0;
-             padding: 0;
-             background-color: white;
-             font-family: Helvetica, Arial, sans-serif;
-             text-align: center;
-             overflow-x: hidden;
-         }
- 
-         /* Content Container */
-         #content {
-             max-width: 800px;
-             padding: 20px;
-             font-size: 16px;
-             line-height: 1.5;
-             color: black;
-             overflow-y: auto;
-             max-height: calc(100vh - 160px);
-             margin: 0 auto;
-             text-align: center;
-             position: relative;
-             
-         }
-         #content ul {
-             list-style-position: inside;
-             padding: 0;
-         }
-         #content ul li {
-             margin: 5px 0;
-         }
-         #content h3,
-         #content p {
-             margin: 20px 0;
-         }
-         #content img {
-             max-width: 100%;
-             height: auto;
-             cursor: pointer;
-         }
- 
-         /* Custom Scrollbar for Content */
-         #content::-webkit-scrollbar {
-             display: none;
-         }
- 
-         /* Adjusting Scale for Specific Content */
-         .content-container {
-             transform: scale(1.0);
-             max-width: 800px;
-             padding: 20px 0;
-             width: 100%;
-             margin: 0 auto;
-         }
- 
-         /* Menu Logo */
-         .menu-logo {  
-             width: 100px;
-             cursor: pointer;
-             margin: 10px 0;
-             transition: transform 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
-         }
- 
- 
-         /* Hover effect for menu logo */
-         .menu-logo:hover {
-         transform: scale(1.1); /* Expand the logo on hover */
- }
- 
-         .menu-logo.hidden {
-         opacity: 0; /* Make the logo invisible */
-         pointer-events: none; /* Prevent interaction when hidden */
-     }
- 
-         .menu-logo.menu-open {
-         transform: scale(0.9) translateX(20px); /* Combine scaling and translation */
-         margin-left: 0; /* Remove margin-based adjustment */
-         }
- 
- 
-         /* biography degradation */
-         .glitch-char {
-         display: inline-block;
-         position: relative;
-         transition: transform 0.4s cubic-bezier(0.33, 0, 0.1, 1), opacity 0.4s ease;
-         transform: translate(var(--dx, 0px)) translateY(var(--dy, 0px)) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
-         opacity: 0.9;
-         filter: blur(0.0px);
-         }
- 
-         @keyframes crumble {
-         0% {
-             transform: translate(0, 0) rotate(0deg) scale(1);
-             opacity: 1;
-         }
-         100% {
-             transform: translate(
-             calc(var(--dx, 0px)),
-             calc(var(--dy, 0px))
-             )
-             rotate(calc(var(--rot, 0deg)))
-             scale(calc(var(--scale, 1)));
-             opacity: 0.5;
-         }
-         }
- 
-         .glitch-char-wrapper.fade-clone {
-         will-change: opacity;
-         transition: opacity 6s ease-out;
-         }
-
-
-
-         #bio-visible-container {
-        position: relative;
+        /* ------------------- BODY & LAYOUT ------------------- */
+        body {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          padding: 0;
+          background-color: white;
+          font-family: Helvetica, Arial, sans-serif;
+          text-align: center;
+          overflow-x: hidden;
         }
-
+      
+        * {
+          box-sizing: border-box;
+        }
+      
+        /* ------------------- CONTENT AREA ------------------- */
+        #content {
+          max-width: 800px;
+          padding: 20px;
+          font-size: 16px;
+          line-height: 1.5;
+          color: black;
+          overflow-y: auto;
+          max-height: calc(100vh - 160px);
+          margin: 0 auto;
+          text-align: center;
+          position: relative;
+        }
+      
+        #content ul {
+          list-style-position: inside;
+          padding: 0;
+        }
+      
+        #content ul li {
+          margin: 5px 0;
+        }
+      
+        #content h3,
+        #content p {
+          margin: 20px 0;
+        }
+      
+        #content img {
+          max-width: 100%;
+          height: auto;
+          cursor: pointer;
+        }
+      
+        #content::-webkit-scrollbar {
+          display: none;
+        }
+      
+        .content-container {
+          transform: scale(1.0);
+          max-width: 800px;
+          padding: 20px 0;
+          width: 100%;
+          margin: 0 auto;
+        }
+      
+        /* ------------------- MENU LOGO ------------------- */
+        .menu-logo {
+          width: 100px;
+          cursor: pointer;
+          margin: 10px 0;
+          transition: transform 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
+        }
+      
+        .menu-logo:hover {
+          transform: scale(1.1);
+        }
+      
+        .menu-logo.hidden {
+          opacity: 0;
+          pointer-events: none;
+        }
+      
+        .menu-logo.menu-open {
+          transform: scale(0.9) translateX(20px);
+          margin-left: 0;
+        }
+      
+        /* ------------------- BIOGRAPHY DEGRADATION ------------------- */
+        .glitch-char {
+          display: inline-block;
+          position: relative;
+          transition: transform 0.4s cubic-bezier(0.33, 0, 0.1, 1), opacity 0.4s ease;
+          transform: translate(var(--dx, 0px)) translateY(var(--dy, 0px)) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+          opacity: 0.9;
+          filter: blur(0.0px);
+        }
+      
+        @keyframes crumble {
+          0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(calc(var(--dx, 0px)), calc(var(--dy, 0px))) rotate(calc(var(--rot, 0deg))) scale(calc(var(--scale, 1)));
+            opacity: 0.5;
+          }
+        }
+      
+        .glitch-char-wrapper.fade-clone {
+          will-change: opacity;
+          transition: opacity 6s ease-out;
+        }
+      
+        #bio-visible-container {
+          position: relative;
+        }
+      
         #copy-bio-container {
-        position: absolute;
-        font-size: 12px;
-        z-index: 10;
+          position: absolute;
+          font-size: 12px;
+          z-index: 10;
         }
-
+      
         #copy-bio-button {
-            position: absolute;
-            right: 100px; /* <-- this adds the padding on the right */
-            bottom: -10px;
-            background: none;
-            border: none;
-            font-size: 8px;
-            color: black;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: opacity 0.2s ease;
-            padding: 0;
-            margin: 0;
-            transform: translateY(10px);
+          position: absolute;
+          right: 100px;
+          bottom: -10px;
+          background: none;
+          border: none;
+          font-size: 8px;
+          color: black;
+          cursor: pointer;
+          opacity: 0.6;
+          transition: opacity 0.2s ease;
+          padding: 0;
+          margin: 0;
+          transform: translateY(10px);
         }
-
+      
         #copy-bio-button:hover {
-        opacity: 1;
+          opacity: 1;
         }
-
- 
-         /* Bottom Menu Styles for Desktop */
-         .menu-container {
-             position: fixed;
-             bottom: 0;
-             left: 0;
-             width: 100%;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             z-index: 20;
-             transition: opacity 0.5s ease, visibility 0.5s ease;
-         }
-         .menu-container.visible {
-             opacity: 1;
-             visibility: visible;
-         }
- 
-         .menu-button:focus,
-         .menu-items a:focus {
-         outline: 2px solid black; /* Highlight focus for accessibility */
-         }
- 
-         /* Menu Button */
-         .menu-button {
-             background-color: black;
-             color: white;
-             padding: 5px 30px;
-             font-size: 16px;
-             cursor: pointer;
-             border: none;
-         }
- 
-         /* Menu Items */
-         .menu-items {
-             visibility: hidden; /* Instead of display: none */
-             opacity: 0;
-             position: absolute; /* Already correct */
-             top: 50%; 
-             left: 50%; 
-             transform: translate(-50%, -50%);
-             transition: opacity 0.5s ease, visibility 0.5s ease; /* Add visibility transition */
-             z-index: -1; /* Ensures no accidental interaction */
-         }
- 
-         .menu-items.visible {
-         visibility: visible;
-         opacity: 1;
-         z-index: 10; /* Bring items forward when visible */
-         }
- 
-         .menu-items a {
-             display: inline-block;
-             color: black;
-             text-decoration: none;
-             margin: 5px 10px;
-             padding: 5px;
-             font-size: 14px;
-             font-weight: bold;
-             transition: transform 0.3s ease;
-         }
-         .menu-items a:hover {
-             transform: scale(1.4);
-         }
- 
-         a, button {
-             outline: none !important;
-             box-shadow: none !important;
-             border: none !important;
-         }
- 
-         /* Specifically target the menu links if needed */
-         .menu-item:focus, 
-         .menu-item:active {
-             outline: none !important;
-             box-shadow: none !important;
-             border: none !important;
-         }
- 
-         /* Burger Menu for Mobile */
-         .burger-menu {
-             display: none;
-             position: absolute;
-             top: 20px;
-             left: 20px;
-             cursor: pointer;
-             z-index: 9999;
-         }
-         .burger-menu div {
-             width: 30px;
-             height: 4px;
-             background-color: black;
-             margin: 6px 0;
-         }
- 
- 
-         /* Mobile Full-Screen Menu */
-         .mobile-menu {
-             display: none;
-             position: fixed;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             background-color: white;
-             padding: 20px 0;
-             text-align: center;
-             z-index: 9998;
-         }
-         .mobile-menu a {
-             display: block;
-             padding: 15px 0;
-             color: black;
-             font-size: 18px;
-             text-decoration: none;
-         }
-         .mobile-menu.visible {
-             display: block;
-         }
- 
-         /* Enhanced Mobile Menu Design */
-         #mobileMenu {
-             position: absolute;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             display: flex;
-             flex-direction: column;
-             justify-content: center;
-             align-items: center;
-             background-color: #edd500;
-             opacity: 0;
-             visibility: hidden;
-             transition: opacity 0.3s ease, visibility 0.3s ease;
-         }
-         #mobileMenu.visible {
-             opacity: 1;
-             visibility: visible;
-         }
-         #mobileMenu a {
-             display: block;
-             padding: 15px 0;
-             color: #000000;
-             font-size: calc(100vh / 20);
-             font-weight: bolder;
-             text-align: center;
-             text-transform: uppercase;
-             text-decoration: none;
-             cursor: help;
-             line-height: 1;
-         }
- 
-         /* Box Sizing */
-         * {
-             box-sizing: border-box;
-         }
- 
-         /* Mobile-Specific Adjustments */
-         @media (max-width: 600px) {
-             .menu-container {
-                 display: none;
-             }
-             .burger-menu {
-                 display: block;
-             }
-             .mobile-menu a {
-                 font-size: 18px;
-             }
-         }
- 
-                 @media (max-width: 768px) {
-             .menu-container {
-                 flex-direction: column; /* Stack elements on small screens */
-                 padding: 10px; /* Adjust padding if needed */
-             }
-         }
- 
- 
-         /* Image Container for Photo Credit */
-         .image-container {
-             display: inline-block;
-             text-align: right;
-             margin-top: 5px;
-         }
- 
-         /* Photo Credit Style */
-         .photo-credit {
-             bottom: 5px;
-             right: 5px;
-             font-size: 8px;
-             color: black;
-             background-color: rgba(255, 255, 255, 0.7);
-             padding: 2px 5px;
-             border-radius: 3px;
-         }
- 
-         .activities-content a {
-            color: black;
-            text-decoration: none;
+      
+        /* ------------------- MENU (DESKTOP & MOBILE) ------------------- */
+        .menu-container {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 20;
+          transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+      
+        .menu-container.visible {
+          opacity: 1;
+          visibility: visible;
+        }
+      
+        .menu-button {
+          background-color: black;
+          color: white;
+          padding: 5px 30px;
+          font-size: 16px;
+          cursor: pointer;
+          border: none;
+        }
+      
+        .menu-items {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          transition: opacity 0.5s ease, visibility 0.5s ease;
+          z-index: -1;
+        }
+      
+        .menu-items.visible {
+          visibility: visible;
+          opacity: 1;
+          z-index: 10;
+        }
+      
+        .menu-items a {
+          display: inline-block;
+          color: black;
+          text-decoration: none;
+          margin: 5px 10px;
+          padding: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          transition: transform 0.3s ease;
+        }
+      
+        .menu-items a:hover {
+          transform: scale(1.4);
+        }
+      
+        a, button,
+        .menu-item:focus,
+        .menu-item:active {
+          outline: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+      
+        /* ------------------- BURGER MENU ------------------- */
+        .burger-menu {
+          display: none;
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          cursor: pointer;
+          z-index: 9999;
+        }
+      
+        .burger-menu div {
+          width: 30px;
+          height: 4px;
+          background-color: black;
+          margin: 6px 0;
+        }
+      
+        .mobile-menu {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+          padding: 20px 0;
+          text-align: center;
+          z-index: 9998;
+        }
+      
+        .mobile-menu a {
+          display: block;
+          padding: 15px 0;
+          color: black;
+          font-size: 18px;
+          text-decoration: none;
+        }
+      
+        .mobile-menu.visible {
+          display: block;
+        }
+      
+        #mobileMenu {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: #edd500;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+      
+        #mobileMenu.visible {
+          opacity: 1;
+          visibility: visible;
+        }
+      
+        #mobileMenu a {
+          display: block;
+          padding: 15px 0;
+          color: #000;
+          font-size: calc(100vh / 20);
+          font-weight: bolder;
+          text-align: center;
+          text-transform: uppercase;
+          text-decoration: none;
+          cursor: help;
+          line-height: 1;
+        }
+      
+        /* ------------------- IMAGE CREDIT ------------------- */
+        .image-container {
+          display: inline-block;
+          text-align: right;
+          margin-top: 5px;
+        }
+      
+        .photo-credit {
+          bottom: 5px;
+          right: 5px;
+          font-size: 8px;
+          color: black;
+          background-color: rgba(255, 255, 255, 0.7);
+          padding: 2px 5px;
+          border-radius: 3px;
+        }
+      
+        /* ------------------- ACTIVITIES SECTION ------------------- */
+        .activities-content {
+          width: 100%;
+          max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+          padding: 0 20px;
+        }
+      
+        .activities-content li {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px 0;
+          font-size: 16px;
+          line-height: 0.2;
+          position: relative;
+          flex-wrap: wrap;
+        }
+      
+        .activities-content li::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 10%;
+          right: 10%;
+          height: 0.5px;
+          background-color: #000;
+          z-index: 0;
+          transform: translateY(-50%);
+        }
+      
+        .activities-content strong {
+          z-index: 2;
+          background-color: white;
+          padding: 0 5px;
+        }
+      
+        .activities-content .date {
+          font-weight: bold;
+          padding-right: 10px;
+          z-index: 1;
+          background-color: white;
+        }
+      
+        .activities-content .location {
+          padding-left: 10px;
+          text-align: right;
+          z-index: 1;
+          background-color: white;
+        }
+      
+        .activities-content a {
+          color: black;
+          text-decoration: none;
+          background-color: white;
+          z-index: 2;
+          position: relative;
+          border-bottom: 1px dotted black;
+          transition: color 0.3s ease, border-color 0.3s ease;
+        }
+      
+        .activities-content a:hover {
+          color: #edd500;
+          border-bottom-color: #edd500;
+        }
+      
+        /* ------------------- ALBUM GRID ------------------- */
+        .album-grid {
+          transform: scale(0.8);
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(3, auto) auto;
+          gap: 10px;
+          justify-items: center;
+          align-items: start;
+          margin: 10px 0 0 0;
+        }
+      
+        .album-item {
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.3s ease;
+        }
+      
+        .album-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: 0.3s ease;
+        }
+      
+        .album-item::before {
+          content: attr(data-title);
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background: rgba(0, 0, 0, 0.7);
+          color: white;
+          font-size: 14px;
+          padding: 5px;
+          text-align: center;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+      
+        .album-item:hover {
+          transform: scale(1.25);
+          z-index: 10;
+        }
+      
+        .album-item:hover::before {
+          opacity: 1;
+        }
+      
+        .bandcamp-link-item {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          grid-column: 2;
+          grid-row: 4;
+          text-align: center;
+          padding-top: 15px;
+        }
+      
+        .bandcamp-link-item::before {
+          content: none;
+        }
+      
+        .bandcamp-link-item p,
+        .bandcamp-link-item a {
+          margin: 0;
+        }
+      
+        /* ------------------- SOCIAL LINKS ------------------- */
+        .social-links {
+          position: fixed;
+          top: 30px;
+          right: 30px;
+          display: flex;
+          align-items: center;
+          z-index: 1000;
+        }
+      
+        .social-links a {
+          margin: 0 5px;
+          position: relative;
+        }
+      
+        .social-links img {
+          width: 20px;
+          height: 20px;
+        }
+      
+        .social-links a span {
+          position: absolute;
+          bottom: -35px;
+          left: 50%;
+          transform: translateX(-50%) rotate(90deg);
+          opacity: 0;
+          font-size: 10px;
+          color: black;
+          transition: opacity 0.3s ease-in-out;
+        }
+      
+        .social-links a:hover span {
+          opacity: 1;
+        }
+      
+        .social-links a:hover img {
+          opacity: 0.5;
+        }
+      
+        /* ------------------- MEDIA QUERIES ------------------- */
+        @media (max-width: 768px) {
+          .menu-container {
+            flex-direction: column;
+            padding: 10px;
+          }
+        }
+      
+        @media (max-width: 740px) {
+          .menu-container {
+            display: none;
+          }
+      
+          .burger-menu {
+            display: block;
+          }
+      
+          .mobile-menu a {
+            font-size: 18px;
+          }
+      
+          .activities-content li {
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            padding: 10px 0;
+            position: relative;
+          }
+      
+          .activities-content .date {
+            display: block;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 3px;
+          }
+      
+          .activities-content strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 16px;
+            line-height: 1.1;
             background-color: white;
             z-index: 2;
-            position: relative;
-            border-bottom: 1px dotted black;
-            transition: color 0.3s ease, border-color 0.3s ease;
-            }
-
-            .activities-content a:hover {
-            color: #edd500; /* soft yellow */
-            border-bottom-color: #edd500;
-            }
- 
- /* -------------------ALBUM GRID--------------------- */
-         .album-grid {
-             transform: scale(0.8);
-             display: grid;
-             grid-template-columns: repeat(3, 1fr);
-             gap: 10px;
-             justify-items: center;
-             align-items: start;
-             margin-top: 10px;
-             margin-bottom: 0;
-             grid-template-rows: repeat(3, auto) auto;
-         }
- 
-         .album-item {
-             position: relative;
-             overflow: hidden;
-             transition: transform 0.3s ease;
-         }
-         .album-item img {
-             width: 100%;
-             height: 100%;
-             object-fit: cover;
-             display: block;
-             transition: 0.3s ease;
-         }
-         .album-item::before {
-             content: attr(data-title);
-             position: absolute;
-             bottom: 0;
-             left: 0;
-             width: 100%;
-             background: rgba(0, 0, 0, 0.7);
-             color: white;
-             font-size: 14px;
-             padding: 5px;
-             text-align: center;
-             opacity: 0;
-             transition: opacity 0.3s;
-         }
-         .album-item:hover {
-             transform: scale(1.25);
-             z-index: 10;
-         }
-         .album-item:hover::before {
-             opacity: 1;   
-         }
- 
-         /* BANDCAMP LINK STYLE UNDER GRID */
-         .bandcamp-link-item {
-             display: flex;
-             flex-direction: column;
-             justify-content: center;
-             align-items: center;
-             grid-column: 2;
-             grid-row: 4;
-             text-align: center;
-             padding-top: 15px;
-         }
-         .bandcamp-link-item::before {
-             content: none;
-         }
-         .bandcamp-link-item p, .bandcamp-link-item a {
-             margin: 0;
-         }
- 
-         /* Centering content on desktop */
-         .activities-content {
-             width: 100%;
-             max-width: 800px;
-             margin: 0 auto;
-             text-align: center;
-             padding: 0 20px;
-         }
-         .activities-content li {
-             display: flex;
-             align-items: center;
-             justify-content: space-between;
-             padding: 10px 0;
-             font-size: 16px;
-             line-height: 0.2;
-             position: relative;
-             flex-wrap: wrap; /* Allow text to wrap to the next line */
-         }
- 
-         /* Adjust the central line so it doesn't overlap the text */
-         .activities-content li::before {
-         content: '';
-         position: absolute;
-         top: 50%;
-         left: 10%;
-         right: 10%;
-         height: 0.5px;
-         background-color: #000;
-         z-index: 0;
-         transform: translateY(-50%);
-         }
- 
-         /* Ensure the collaborator’s name stays above the line */
-         .activities-content strong {
-         z-index: 2;
-         background-color: white;
-         padding: 0 5px;
-         }
-         .activities-content .date {
-             font-weight: bold;
-             padding-right: 10px;
-             z-index: 1;
-             background-color: white;
-         }
-         .activities-content .location {
-             padding-left: 10px;
-             text-align: right;
-             z-index: 1;
-             background-color: white;
-         }
- 
-         /* Central line between date and location */
-         .activities-content li::before {
-             content: '';
-             position: absolute;
-             top: 50%;
-             left: 10%;
-             right: 10%;
-             height: 0.5px;
-             background-color: #000;
-             z-index: 0;
-             transform: translateY(-50%);
-         }
- 
- @media (max-width: 740px) {
-     .menu-container {
-         display: none; /* Hide bottom menu on smaller screens */
-     }
- 
-     .burger-menu {
-         display: block; /* Show burger menu on mobile */
-     }
- 
-     .mobile-menu a {
-         font-size: 18px; /* Larger font size for better touch accessibility */
-     }
- 
-     /* Stack elements vertically instead of hiding the date */
-     .activities-content li {
-         flex-direction: column; /* Stack date, name, and location */
-         align-items: flex-start; /* Align to the left */
-         text-align: left;
-         padding: 10px 0;
-         position: relative;
-     }
- 
-     /* Keep the date visible and separate */
-     .activities-content .date {
-         display: block;
-         font-weight: bold;
-         line-height: 1.1;
-         margin-bottom: 3px;
-     }
- 
-     /* Ensure collaborator name remains clear */
-     .activities-content strong {
-         display: block;
-         margin-bottom: 3px; /* Add spacing between stacked elements */
-         font-size: 16px; /* Keep text readable */
-         line-height: 1.1;
-         background-color: white;
-         z-index: 2;
-     }
- 
-     /* Keep location readable */
-     .activities-content .location {
-         display: block;
-         line-height: 1.1;
-         padding-left: 0;
-     }
- 
-     /* Remove the central line on smaller screens */
-     .activities-content li::before {
-         display: none;
-     }
- }
- 
- 
- /*-------------- SOCIAL LINKS ON ALL PAGES----------------*/
- 
- .social-links {
-     position: fixed;
-     top: 30px;
-     right: 30px;
-     display: flex;
-     align-items: center;
-     z-index: 1000;
- }
- 
- .social-links a {
-     margin: 0 5px;
-     position: relative; /* For positioning the text */
- }
- 
- .social-links img {
-     width: 20px; /* Adjust the size of the icons */
-     height: 20px; /* Adjust the size of the icons */
- }
- 
- .social-links a span {
-     position: absolute;
-     bottom: -35px; /* Adjust to position the text below the icon */
-     left: 50%;
-     transform: translateX(-50%) rotate(90deg); /* Rotate text to vertical */
-     opacity: 0; /* Hide the text initially */
-     font-size: 10px; /* Adjust text size */
-     color: black; /* Adjust the text color */
-     transition: opacity 0.3s ease-in-out; /* Smooth transition */
- }
- 
- .social-links a:hover span {
-     opacity: 1; /* Show the text when hovered */
- }
- 
- /* Optional: Adjust the color of the icon on hover */
- .social-links a:hover img {
-     opacity: 0.5; /* Slightly dim the icon when hovered */
- }
- 
- </style>
+          }
+      
+          .activities-content .location {
+            display: block;
+            line-height: 1.1;
+            padding-left: 0;
+          }
+      
+          .activities-content li::before {
+            display: none;
+          }
+        }
+      </style>
  </head>
  
  <!-- ------------FOREVER IN SOUND GRID -->
