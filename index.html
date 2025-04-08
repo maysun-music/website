@@ -6,7 +6,7 @@
      <title>MAYSUN</title>
      <link rel="icon" href="images/m_favicon.ico" type="image/x-icon">
      <style>
-        /* ------------------- BODY & GLOBAL ------------------- */
+        /* ------------------- GLOBAL ------------------- */
         * {
           box-sizing: border-box;
         }
@@ -25,17 +25,28 @@
           overflow-x: hidden;
         }
       
+        a, button,
+        .menu-item:focus,
+        .menu-item:active {
+          outline: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+      
         /* ------------------- CONTENT ------------------- */
-        #content {
+        #content, .content-container {
           max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+        }
+      
+        #content {
           padding: 20px;
           font-size: 16px;
           line-height: 1.5;
           color: black;
           overflow-y: auto;
           max-height: calc(100vh - 160px);
-          margin: 0 auto;
-          text-align: center;
           position: relative;
         }
       
@@ -48,8 +59,7 @@
           margin: 5px 0;
         }
       
-        #content h3,
-        #content p {
+        #content h3, #content p {
           margin: 20px 0;
         }
       
@@ -64,11 +74,9 @@
         }
       
         .content-container {
-          transform: scale(1);
-          max-width: 800px;
           padding: 20px 0;
+          transform: scale(1.0);
           width: 100%;
-          margin: 0 auto;
         }
       
         /* ------------------- MENU LOGO ------------------- */
@@ -93,23 +101,38 @@
           margin-left: 0;
         }
       
-        /* ------------------- BIO DEGRADATION ------------------- */
+        /* ------------------- PHOTO CREDIT ------------------- */
+        .image-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; /* aligns credit to the right */
+        margin: 0;
+        }
+
+        .photo-credit {
+        font-size: 8px;
+        color: black;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 2px 4px;
+        border-radius: 3px;
+        margin-top: 3px;
+        }
+
+        /* ------------------- BIO / GLITCH ------------------- */
         .glitch-char {
           display: inline-block;
           position: relative;
           transition: transform 0.4s cubic-bezier(0.33, 0, 0.1, 1), opacity 0.4s ease;
-          transform: translate(var(--dx, 0)) translateY(var(--dy, 0)) rotate(var(--rot, 0)) scale(var(--scale, 1));
+          transform: translate(var(--dx, 0px)) translateY(var(--dy, 0px)) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
           opacity: 0.9;
-          filter: blur(0);
+          filter: blur(0px);
         }
       
         @keyframes crumble {
-          0% {
-            transform: translate(0, 0) rotate(0) scale(1);
-            opacity: 1;
-          }
+          0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
           100% {
-            transform: translate(calc(var(--dx, 0)), calc(var(--dy, 0))) rotate(calc(var(--rot, 0))) scale(calc(var(--scale, 1)));
+            transform: translate(calc(var(--dx)), calc(var(--dy)))
+                       rotate(calc(var(--rot))) scale(calc(var(--scale)));
             opacity: 0.5;
           }
         }
@@ -119,9 +142,7 @@
           transition: opacity 6s ease-out;
         }
       
-        #bio-visible-container {
-          position: relative;
-        }
+        #bio-visible-container { position: relative; }
       
         #copy-bio-container {
           position: absolute;
@@ -133,15 +154,12 @@
           position: absolute;
           right: 100px;
           bottom: -10px;
+          background: none;
           font-size: 8px;
           color: black;
           cursor: pointer;
           opacity: 0.6;
           transition: opacity 0.2s ease;
-          background: none;
-          border: none;
-          padding: 0;
-          margin: 0;
           transform: translateY(10px);
         }
       
@@ -173,7 +191,6 @@
           padding: 5px 30px;
           font-size: 16px;
           cursor: pointer;
-          border: none;
         }
       
         .menu-items {
@@ -208,15 +225,7 @@
           transform: scale(1.4);
         }
       
-        a, button,
-        .menu-item:focus,
-        .menu-item:active {
-          outline: none !important;
-          box-shadow: none !important;
-          border: none !important;
-        }
-      
-        /* ------------------- BURGER MENU ------------------- */
+        /* ------------------- BURGER & MOBILE MENU ------------------- */
         .burger-menu {
           display: none;
           position: absolute;
@@ -280,33 +289,15 @@
         }
       
         #mobileMenu a {
-          display: block;
           padding: 15px 0;
           color: black;
           font-size: calc(100vh / 20);
-          font-weight: bold;
+          font-weight: bolder;
           text-align: center;
           text-transform: uppercase;
           text-decoration: none;
           cursor: help;
           line-height: 1;
-        }
-      
-        /* ------------------- PHOTO CREDIT ------------------- */
-        .image-container {
-          display: inline-block;
-          text-align: right;
-          margin-top: 5px;
-        }
-      
-        .photo-credit {
-          bottom: 5px;
-          right: 5px;
-          font-size: 8px;
-          color: black;
-          background: rgba(255, 255, 255, 0.7);
-          padding: 2px 5px;
-          border-radius: 3px;
         }
       
         /* ------------------- ACTIVITIES ------------------- */
@@ -366,10 +357,10 @@
         .activities-content a {
           color: black;
           text-decoration: none;
-          background: white;
-          border-bottom: 1px dotted black;
           position: relative;
           z-index: 2;
+          border-bottom: 1px dotted black;
+          background: white;
           transition: color 0.3s ease, border-color 0.3s ease;
         }
       
@@ -487,7 +478,7 @@
           opacity: 0.5;
         }
       
-        /* ------------------- RESPONSIVE ------------------- */
+        /* ------------------- MEDIA QUERIES ------------------- */
         @media (max-width: 768px) {
           .menu-container {
             flex-direction: column;
@@ -520,7 +511,6 @@
           .activities-content .location {
             display: block;
             line-height: 1.1;
-            background: white;
           }
       
           .activities-content .date {
@@ -529,8 +519,8 @@
           }
       
           .activities-content strong {
-            font-size: 16px;
             margin-bottom: 3px;
+            font-size: 16px;
             z-index: 2;
           }
       
