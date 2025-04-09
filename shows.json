@@ -23,13 +23,6 @@
     "url": "https://dice.fm/event/nvgq3q-cassandra-croft-maysun-will-hayes-cole-blue-15th-apr-cassette-new-york-city-tickets?lng=en-US"
   },
   {
-  "date": "2025-04-07",
-  "collaborators": "w/ Ipek Eginli",
-  "venue": "Sisters",
-  "city": "Brooklyn, NY, USA",
-  "type": "past"
-  },
-  {
     "date": "2025-03-28",
     "venue": "Overdrive Festival",
     "city": "Brooklyn, NY, USA",
@@ -59,6 +52,12 @@
     "date": "2025-02-09",
     "venue": "New Ear ::",
     "city": "New York, NY, USA",
+    "type": "past"
+  },
+  {
+    "date": "2025-02-01",
+    "venue": "CuteLab",
+    "city": "Brooklyn, NY, USA",
     "type": "past"
   },
   {
@@ -129,7 +128,7 @@
   },
   {
     "date": "2022-07-06",
-    "venue": "Substrat Satosph\u00e8re",
+    "venue": "Substrat Satosphère",
     "city": "Montreal, QC, Canada",
     "type": "past"
   },
@@ -219,7 +218,7 @@
   },
   {
     "date": "2018-05-19",
-    "venue": "Le Minist\u00e8re",
+    "venue": "Le Ministère",
     "city": "Montreal, QC, Canada",
     "type": "past"
   },
