@@ -1122,7 +1122,7 @@
    setTimeout(() => clone.remove(), 13000);
  }
  
-   // Slow restore with transition
+  // Slow restore with transition
  // Smooth and slow restore
  setTimeout(() => {
    el.style.transition = 'transform 2.5s ease, opacity 2s ease'; // softened easing
@@ -1162,18 +1162,33 @@
 }
 
 // ACTIVITIES FORMAT
+// ACTIVITIES FORMAT
 function formatDate(dateStr) {
-  const options = { day: '2-digit', month: 'short', year: 'numeric' };
-  return new Date(dateStr).toLocaleDateString('en-GB', options).toUpperCase().replace(/ /g, ' ');
+  const parts = dateStr.split('-');
+  
+  if (parts.length === 3) {
+    // Handles full dates: YYYY-MM-DD
+    const [year, month, day] = parts;
+    const date = new Date(Number(year), Number(month) - 1, Number(day)); // JS months are 0-based
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    return date.toLocaleDateString('en-GB', options).toUpperCase().replace(/ /g, ' ');
+    
+  } else if (parts.length === 2) {
+    // Handles partial dates: YYYY-MM (for residencies)
+    const [year, month] = parts;
+    const date = new Date(Number(year), Number(month) - 1, 1);
+    const options = { month: 'short', year: 'numeric' };
+    return date.toLocaleDateString('en-GB', options).toUpperCase().replace(/ /g, ' ');
+    
+  } else {
+    return dateStr; // fallback for malformed inputs
+  }
 }
 
 function renderShow(show) {
   const date = `<span class="date">${formatDate(show.date)}</span>`;
   const collab = show.collaborators ? `<strong> ${show.collaborators}</strong>` : '';
   const location = `<span class="location">${show.venue} - ${show.city}</span>`;
-  const content = `${date}${collab} ${location}`;
-  
-  // Only wrap the location part in a link
   return `<li>${date}${collab}${show.url ? ` <a href="${show.url}" target="_blank">${location}</a>` : location}</li>`;
 }
 
