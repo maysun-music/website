@@ -321,17 +321,19 @@
         }
       
         .activities-content li::before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 10%;
-          right: 10%;
-          height: 0.5px;
-          background: black;
-          z-index: 0;
-          transform: translateY(-50%);
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%; /* keep width fixed */
+        height: 0.5px;
+        background: black;
+        z-index: 0;
+        opacity: 1;
+        transition: opacity 2s ease;
         }
-      
+
         .activities-content strong,
         .activities-content .date,
         .activities-content .location {
@@ -368,7 +370,50 @@
           color: #edd500;
           border-bottom-color: #edd500;
         }
-      
+
+        /* ---- WORD DRIFT IN ACTIVITIES ---- */
+        .word-drift {
+        display: inline-block;
+        position: relative;
+        transition: transform 120s ease-in-out, opacity 30s ease-in-out;
+        will-change: transform, opacity;
+        z-index: 3; /* ⬅️ ensure it's above the ::before line */
+        }
+
+        li.drifting {
+        background: transparent !important;
+        border: none !important;
+        }
+
+        li.drifting .date,
+        li.drifting .location,
+        li.drifting strong,
+        li.drifting a {
+        background: transparent !important;
+        border: none !important;
+        z-index: 3 !important; /* stays above the line as it fades */
+        }
+
+        @keyframes cloudPulse {
+        0%, 100% { opacity: 0.35; transform: translate(var(--tx), var(--ty)) scale(var(--scale)); }
+        50% { opacity: 0.5; }
+        }
+        .word-drift.pulsing {
+        animation: cloudPulse 6s ease-in-out infinite;
+        }
+
+        .activities-content li.drifting-line-fade::before {
+        opacity: 0;
+        pointer-events: none;
+        height: 0;
+        transition: opacity 15s ease, height 15s ease;
+        }
+        .activities-content li.drifting::before {
+        content: none;
+        }
+
+
+
         /* ------------------- ALBUM GRID ------------------- */
         .album-grid {
           transform: scale(0.8);
@@ -800,8 +845,11 @@
                             </div>
                             `;
                             setTimeout(() => {
-                            fetchShows();
-                            fetchResidencies(); // call to load this new section
+                                fetchShows().then(() => {
+                            fetchResidencies().then(() => {
+                                startWordDriftAnimation(); // this now works cleanly
+                            });
+                            });
                             }, 0);
                             break;
              case'albums':
@@ -1162,7 +1210,6 @@
 }
 
 // ACTIVITIES FORMAT
-// ACTIVITIES FORMAT
 function formatDate(dateStr) {
   const parts = dateStr.split('-');
   
@@ -1222,6 +1269,87 @@ async function fetchResidencies() {
     }).join('');
   } catch (err) {
     console.error("Failed to load residencies.json:", err);
+  }
+}
+
+// ACTIVITY GLITCH
+
+function startWordDriftAnimation() {
+  const clusterTarget = getClusterTarget();
+
+  // Wrap words in spans (non-destructive to layout)
+  const listItems = document.querySelectorAll('#past-shows li, #residencies li');
+  listItems.forEach(item => wrapWordsRecursively(item));
+
+    // Phase 1: Fade lines, then remove them cleanly
+    setTimeout(() => {
+    listItems.forEach(item => {
+        item.classList.add('drifting-line-fade'); // begin fading
+        setTimeout(() => {
+        item.classList.add('drifting'); // then remove line
+        }, 15000); // matches CSS transition time
+    });
+    }, 2000);
+
+// Phase 2: Begin word drift at 8 seconds
+setTimeout(() => {
+  const words = document.querySelectorAll('#past-shows .word-drift, #residencies .word-drift');
+
+  words.forEach(span => {
+    const rect = span.getBoundingClientRect();
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
+
+    const dx = clusterTarget.x - startX;
+    const dy = clusterTarget.y - startY;
+
+    const offsetX = dx + (Math.random() - 0.5) * 320;
+    const offsetY = dy + (Math.random() - 0.5) * 180;
+    const scale = 0.8 + Math.random() * 0.5;
+
+    span.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    span.style.opacity = (0.55 + Math.random() * 0.15).toFixed(2); 
+  });
+
+  // 🌘 Fade out headings over 40s
+  const pastHeader = document.querySelector('h3:nth-of-type(2)');
+  const residenciesHeader = document.querySelector('h3:nth-of-type(3)');
+  [pastHeader, residenciesHeader].forEach(header => {
+    if (header) {
+      header.style.transition = 'opacity 40s ease-out';
+      header.style.opacity = '0';
+    }
+  });
+
+}, 5000);
+}
+
+
+function getClusterTarget() {
+  const anchor = document.querySelector('#upcoming-shows');
+  const rect = anchor.getBoundingClientRect();
+  return {
+    x: rect.left + rect.width / 2,
+    y: rect.bottom + 112
+  };
+}
+
+function wrapWordsRecursively(node) {
+  if (node.nodeType === Node.TEXT_NODE) {
+    const words = node.textContent.trim().split(/\s+/);
+    const fragment = document.createDocumentFragment();
+
+    words.forEach((word, index) => {
+      const span = document.createElement('span');
+      span.className = 'word-drift';
+      span.textContent = word;
+      fragment.appendChild(span);
+      if (index < words.length - 1) fragment.appendChild(document.createTextNode(' '));
+    });
+
+    node.replaceWith(fragment);
+  } else if (node.nodeType === Node.ELEMENT_NODE) {
+    [...node.childNodes].forEach(wrapWordsRecursively);
   }
 }
  
