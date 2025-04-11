@@ -7,7 +7,7 @@
   <link rel="icon" href="images/m_favicon.ico" type="image/x-icon" />
   <style>
     body {
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       background-color: white;
       margin: 0;
       padding: 0;
@@ -24,7 +24,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #edd500;
+      background-color: #ffffff;
       padding: 20px 0;
       text-align: center;
       z-index: 9998;
@@ -48,16 +48,32 @@
       text-transform: uppercase;
       cursor: pointer;
       line-height: 1;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+
+    .mobile-menu a:active,
+    .mobile-menu a:hover,
+    #upcoming-links a:active,
+    #upcoming-links a:hover {
+      opacity: 0.7;
+      transform: scale(0.98);
     }
 
     #upcoming-links {
-      margin-bottom: 10px;
+      margin-bottom: 2em;
+      border-bottom: 1px solid black;
+      padding-bottom: 1em;
     }
 
     #upcoming-links a {
-      color: black;
-      text-decoration: none;
-      font-weight: bolder;
+    display: block;
+    font-weight: bolder;
+    color: black;
+    margin: 0.75em auto;
+    width: 90vw;
+    font-size: clamp(1.1rem, 4vw, 1.75rem); /* scales with screen size */
+    white-space: nowrap;
+    overflow: hidden;
     }
 
     * {
@@ -106,13 +122,14 @@
           }
 
           upcoming.forEach(show => {
-            const link = document.createElement('a');
             const [year, month, day] = show.date.split('-').map(Number);
             const dateObj = new Date(year, month - 1, day); // month is 0-based
             const dateFormatted = dateObj.toLocaleDateString('en-US', {
               month: 'short',
               day: 'numeric'
             }).toUpperCase();
+
+            const link = document.createElement('a');
             link.href = show.url;
             link.textContent = `${dateFormatted} @ ${show.venue}`;
             container.appendChild(link);
