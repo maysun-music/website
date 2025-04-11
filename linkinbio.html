@@ -108,7 +108,8 @@
 
           upcoming.forEach(show => {
             const link = document.createElement('a');
-            const dateObj = new Date(show.date);
+            const [year, month, day] = show.date.split('-').map(Number);
+            const dateObj = new Date(year, month - 1, day); // month is 0-based
             const dateFormatted = dateObj.toLocaleDateString('en-US', {
               month: 'short',
               day: 'numeric'
