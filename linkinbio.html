@@ -1,97 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link In Bio</title>
-    <link rel="icon" href="images/m_favicon.ico" type="image/x-icon">
-    <style>
-        /* Ensure the same font from your main site is used */
-        body {
-            font-family: Helvetica, Arial, sans-serif;
-            background-color: white;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Link In Bio</title>
+  <link rel="icon" href="images/m_favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: white;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* Mobile Full-Screen Menu - Same as the mobile menu on your main site */
-        .mobile-menu {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #edd500; /* Use the same background color */
-            padding: 20px 0;
-            text-align: center;
-            z-index: 9998;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
+    .mobile-menu {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #edd500;
+      padding: 20px 0;
+      text-align: center;
+      z-index: 9998;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
 
-        /* Menu Links */
-        .mobile-menu a {
-            display: block;
-            padding: 15px 0;
-            color: black;
-            text-decoration: none;
-            font-size: calc(100vh / 20); /* Same font size as in the main website */
-            font-weight: bolder;
-            text-transform: uppercase;
-            cursor: pointer;
-            line-height: 1;
-        }
+    .mobile-menu.visible {
+      opacity: 1;
+      visibility: visible;
+    }
 
-        /* Make menu visible */
-        .mobile-menu.visible {
-            opacity: 1;
-            visibility: visible;
-        }
+    .mobile-menu a {
+      display: block;
+      padding: 15px 0;
+      color: black;
+      text-decoration: none;
+      font-size: calc(100vh / 20);
+      font-weight: bolder;
+      text-transform: uppercase;
+      cursor: pointer;
+      line-height: 1;
+    }
 
-        /* Box Sizing */
-        * {
-            box-sizing: border-box;
-        }
+    #upcoming-links {
+      margin-bottom: 10px;
+    }
 
-        /* Media Query for Mobile (Max Width 600px) */
-        @media (max-width: 600px) {
-            .mobile-menu a {
-                font-size: calc(100vh / 20); /* Ensures consistent font size across devices */
-            }
-        }
-    </style>
+    #upcoming-links a {
+      color: black;
+      text-decoration: none;
+      font-weight: bolder;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 600px) {
+      .mobile-menu a {
+        font-size: calc(100vh / 20);
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Fullscreen Mobile Menu for Link in Bio -->
-    <div class="mobile-menu visible" id="mobileMenu">
-        <br>
-        <a href="https://dice.fm/event/nvgq3q-cassandra-croft-maysun-will-hayes-cole-blue-15th-apr-cassette-new-york-city-tickets">APRIL 15 @ CASSETTE</a>
-        <a href="https://www.maysun.zip#home">WEBSITE</a>
-        <a href="https://www.maysun.zip#activities">PERFORMANCES</a>
-        <a href="https://maysunmusic.bandcamp.com/">BANDCAMP</a>
-        <a href="https://www.youtube.com/@MAYSUNmusic">YOUTUBE</a>
-        <a href="https://www.maysun.zip/forever.html">FOREVER IN SOUND</a>
-        ↓
-        <a href="https://www.maysun.zip#contact">CONTACT</a>
+  <div class="mobile-menu visible" id="mobileMenu">
+    <br />
+    <div id="upcoming-links">
+      <!-- Upcoming shows will appear here -->
     </div>
+    <a href="https://www.maysun.zip#home">WEBSITE</a>
+    <a href="https://www.maysun.zip#activities">PERFORMANCES</a>
+    <a href="https://maysunmusic.bandcamp.com/">BANDCAMP</a>
+    <a href="https://www.youtube.com/@MAYSUNmusic">YOUTUBE</a>
+    <a href="https://www.maysun.zip/forever.html">FOREVER IN SOUND</a>
+    ↓
+    <a href="https://www.maysun.zip#contact">CONTACT</a>
+  </div>
 
-    <script>
-        // Make sure the mobile menu is visible when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.add('visible');
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const container = document.getElementById('upcoming-links');
+      mobileMenu.classList.add('visible');
+
+      fetch('shows.json')
+        .then(response => response.json())
+        .then(shows => {
+          const upcoming = shows
+            .filter(show => show.type === "upcoming")
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+          if (upcoming.length === 0) {
+            const msg = document.createElement('div');
+            msg.textContent = 'No upcoming shows.';
+            container.appendChild(msg);
+            return;
+          }
+
+          upcoming.forEach(show => {
+            const link = document.createElement('a');
+            const dateObj = new Date(show.date);
+            const dateFormatted = dateObj.toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric'
+            }).toUpperCase();
+            link.href = show.url;
+            link.textContent = `${dateFormatted} @ ${show.venue}`;
+            container.appendChild(link);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching shows:', error);
+          const msg = document.createElement('div');
+          msg.textContent = 'Error loading shows.';
+          container.appendChild(msg);
         });
-
-        // Placeholder function for menu links
-        function loadContent(section) {
-            console.log('Loading content for: ' + section);
-        }
-    </script>
+    });
+  </script>
 </body>
 </html>
