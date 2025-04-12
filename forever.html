@@ -35,6 +35,43 @@
       line-height: 1.2;
     }
 
+    /* music player */
+    .audio-track {
+      font-size: 0.9rem;
+      color: black;
+      margin: 1.2rem 0;
+    }
+
+    .track-top-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-style: italic;
+    }
+
+    .audio-track button {
+      background: none;
+      border: 1px solid black;
+      color: black;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .audio-track button:hover {
+      background: black;
+      color: white;
+    }
+
+    .track-instruments {
+      font-size: 0.65rem;
+      font-style: italic;
+      color: #444;
+      margin-top: 0.2rem;
+      margin-left: 0;
+      /* ensure no indent */
+    }
+
     /* Styling for the embedded YouTube video */
     .video-container {
       display: flex;
@@ -486,7 +523,7 @@
         I was especially drawn to cinematic scores and later realized that many of them were composed by Philip Glass.
       </p>
 
-  <img src="images/first_drums.jpg" alt="Factory" class="factory-photo">
+
 
       <!-- Section 3 -->
       <div id="insomnia-learning" class="section">
@@ -533,6 +570,18 @@
         His high output and creative video approach stood out to me.
         His music leaned more pop than what I typically allowed myself to listen to, but I loved the intricate
         harmonies, raw sound, and how the production process was fully visible.</p>
+
+      <div class="audio-track">
+        <div class="track-top-line">
+          <i>Everything Is Something (2010)</i>
+          <button onclick="document.getElementById('eis-audio').play()">play</button>
+          <button onclick="document.getElementById('eis-audio').pause()">stop</button>
+        </div>
+        <div class="track-instruments">
+          drums, electronic piano, and electric bass
+        </div>
+        <audio id="eis-audio" src="old_music/everything_is_something.mp3"></audio>
+      </div>
 
       <!-- Section 5 -->
       <div id="school" class="section">
@@ -2565,9 +2614,6 @@
     <p style="text-align: center; font-style: italic; margin-top: 50px;">
       This page is a work in progress. Thank you for reading. More to come.
     </p>
-
-
-
 
 
 
