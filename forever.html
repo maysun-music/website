@@ -2586,11 +2586,15 @@
           if (iframes.length > 0) {
             clearInterval(checkInterval);
             iframes.forEach((iframe, index) => {
-              players[index] = new YT.Player(iframe, {
-                events: {
-                  'onStateChange': onPlayerStateChange
-                }
-              });
+              // Add small delay here to ensure DOM and API are fully ready
+              setTimeout(() => {
+                const player = new YT.Player(iframe, {
+                  events: {
+                    'onStateChange': onPlayerStateChange
+                  }
+                });
+                players.push(player);
+              }, 100);
             });
           }
         }, 500);
@@ -2729,6 +2733,14 @@
           div.innerHTML = "";
           div.appendChild(iframe);
           observer.unobserve(div);
+          setTimeout(() => {
+            const player = new YT.Player(iframe, {
+              events: {
+                'onStateChange': onPlayerStateChange
+              }
+            });
+            players.push(player);
+          }, 100);
         };
 
         const observer = new IntersectionObserver((entries) => {
