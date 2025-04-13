@@ -2830,32 +2830,35 @@
         placeholders.forEach(div => observer.observe(div));
       });
     </script>
-    <p id="visit-count" style="text-align: center; font-size: 0.9rem; margin-top: 2rem;">
-      Loading visit count...
-    </p>
 
-    <script type="module">
-      const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
-      const SUPABASE_KEY = "YOUR_PUBLIC_ANON_KEY";
+<!-- Place this above the script -->
+<p id="visit-count" style="text-align: center; font-size: 0.9rem; margin-top: 2rem;">
+  Loading visit count...
+</p>
 
-      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+<script type="module">
+  const SUPABASE_URL = "https://tupreoifmuxbfbeeofvo.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1cHJvZWlmbXVieGZiZW9vZnZvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDU3NzI4NCwiZXhwIjoyMDYwMTUzMjg0fQ.3rPMR3irtk7Zz934aJoWxDdNvGV9Ep65i1t2gQeGKcE";
 
-      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-      async function updateVisitorCount() {
-        const { data, error } = await supabase.rpc("increment_counter");
-        const el = document.getElementById("visit-count");
-        if (error) {
-          console.error("Visit count error:", error);
-          el.textContent = "Could not load visit count.";
-        } else {
-          const count = data[0]?.count ?? 0;
-          el.textContent = `${count.toLocaleString()} people have visited this page.`;
-        }
-      }
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-      updateVisitorCount();
-    </script>
+  async function updateVisitorCount() {
+    const { data, error } = await supabase.rpc("increment_counter");
+    const el = document.getElementById("visit-count");
+    if (error) {
+      console.error("Visit count error:", error);
+      el.textContent = "Could not load visit count.";
+    } else {
+      const count = data[0]?.count ?? 0;
+      el.textContent = `${count.toLocaleString()} people have visited this page.`;
+      el.style.opacity = 1;
+    }
+  }
+
+  updateVisitorCount();
+</script>
 </body>
 
 </html>
