@@ -2836,29 +2836,30 @@
       Loading visit count...
     </p>
 
-    <!-- Supabase CDN (UMD version, browser-friendly) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+<!-- Load Supabase JS library FIRST -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
 
-    <script>
-      const SUPABASE_URL = "https://tupreoifmuxbfbeeofvo.supabase.co";
-      const SUPABASE_KEY = "P5dUTZ+P/VdF2xJRowUzG6gyQAJbbI4NSKN27bNE1sob/uBVNxInLzoo/BkTInGfsx+jgON2VmtRKxP9TT/E/A==";
+<!-- THEN your custom script -->
+<script>
+  const SUPABASE_URL = "https://tupreoifmuxbfbeeofvo.supabase.co";
+  const SUPABASE_KEY = "your-new-anon-key-here"; // paste your fresh key here
 
-      const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-      async function updateVisitorCount() {
-        const { data, error } = await supabase.rpc("increment_counter");
-        const el = document.getElementById("visit-count");
-        if (error) {
-          console.error("Visit count error:", error);
-          el.textContent = "Could not load visit count.";
-        } else {
-          const count = data[0]?.count ?? 0;
-          el.textContent = `${count.toLocaleString()} people have visited this page.`;
-        }
-      }
+  async function updateVisitorCount() {
+    const { data, error } = await supabase.rpc("increment_counter");
+    const el = document.getElementById("visit-count");
+    if (error) {
+      console.error("Visit count error:", error);
+      el.textContent = "Could not load visit count.";
+    } else {
+      const count = data[0]?.count ?? 0;
+      el.textContent = `${count.toLocaleString()} people have visited this page.`;
+    }
+  }
 
-      updateVisitorCount();
-    </script>
+  updateVisitorCount();
+</script>
 </body>
 
 </html>
