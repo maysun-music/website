@@ -45,6 +45,7 @@
   {
     "date": "2025-02-21",
     "venue": "Moon Calf",
+    "collaborators": "w/ Melissa Almager & Samantha Kochis",
     "city": "Brooklyn, NY, USA",
     "type": "past"
   },
@@ -57,12 +58,7 @@
   {
     "date": "2025-02-01",
     "venue": "CuteLab",
-    "city": "Brooklyn, NY, USA",
-    "type": "past"
-  },
-  {
-    "date": "2025-02-01",
-    "venue": "CuteLab",
+    "collaborators": "w/ Ethan Cohn",
     "city": "Brooklyn, NY, USA",
     "type": "past"
   },
