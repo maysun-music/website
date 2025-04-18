@@ -608,6 +608,17 @@
       .activities-content li::before {
         display: none;
       }
+
+      .activities-content .collaborators {
+        display: block;
+        margin-bottom: 0px;
+        font-size: 12px;
+        line-height: 1.2;
+        word-break: break-word;
+        white-space: normal;
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   </style>
 </head>
@@ -1346,7 +1357,7 @@
           span.style.opacity = (0.55 + Math.random() * 0.15).toFixed(2);
         });
 
-        // 🌘 Fade out headings over 40s
+        // Fade out headings over 40s
         const pastHeader = document.querySelector('h3:nth-of-type(2)');
         const residenciesHeader = document.querySelector('h3:nth-of-type(3)');
         [pastHeader, residenciesHeader].forEach(header => {
