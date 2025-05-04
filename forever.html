@@ -134,6 +134,7 @@
       object-fit: cover;
       line-height: 0;
       vertical-align: bottom;
+
     }
 
     .video-row {
@@ -2636,7 +2637,7 @@
       </div>
 
 
-        <!--
+      <!--
         <div id="now?" class="section">
           <h2 class="section-title">
             <a href="#" class="now-trigger" style="text-decoration: none;"><b>NOW?</b></a>
@@ -2828,34 +2829,34 @@
     </script>
 
 
-<!-- Visit counter display -->
-<p id="visit-count" style="text-align: center; font-size: 0.9rem; margin-top: 2rem;">
-  Loading visit count...
-</p>
+    <!-- Visit counter display -->
+    <p id="visit-count" style="text-align: center; font-size: 0.9rem; margin-top: 2rem;">
+      Loading visit count...
+    </p>
 
-<!-- Supabase CDN (UMD version) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
-<script>
-const SUPABASE_URL = "https://gnihredmlvptzaotudsh.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImduaWhyZWRtbHZwdHphb3R1ZHNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1ODYzOTksImV4cCI6MjA2MDE2MjM5OX0.tZa-POm0ce-QYgEhfjPwFnJCT5QnsIQs0TuVm2NhjCM";
+    <!-- Supabase CDN (UMD version) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.min.js"></script>
+    <script>
+      const SUPABASE_URL = "https://gnihredmlvptzaotudsh.supabase.co";
+      const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImduaWhyZWRtbHZwdHphb3R1ZHNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ1ODYzOTksImV4cCI6MjA2MDE2MjM5OX0.tZa-POm0ce-QYgEhfjPwFnJCT5QnsIQs0TuVm2NhjCM";
 
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-async function updateVisitorCount() {
-  const { data, error } = await client.rpc("increment_counter");
-  const el = document.getElementById("visit-count");
+      async function updateVisitorCount() {
+        const { data, error } = await client.rpc("increment_counter");
+        const el = document.getElementById("visit-count");
 
-  if (error) {
-    console.error("Visit count error:", error);
-    el.textContent = "Could not load visit count.";
-  } else {
-    const count = data?.[0]?.count ?? 0;
-    el.textContent = `${count.toLocaleString()} people have visited this work in progress. More to come soon. `;
-  }
-}
+        if (error) {
+          console.error("Visit count error:", error);
+          el.textContent = "Could not load visit count.";
+        } else {
+          const count = data?.[0]?.count ?? 0;
+          el.textContent = `${count.toLocaleString()} people have visited this work in progress. More to come soon. `;
+        }
+      }
 
-updateVisitorCount();
-</script>
+      updateVisitorCount();
+    </script>
 </body>
 
 </html>
