@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rooms — Hut 9</title>
+  <link rel="stylesheet" href="rooms-assets/style.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: white;
+      font-family: Helvetica, Arial, sans-serif;
+      text-align: left;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 style="margin: 1em;">BANFF CENTRE - HUT 9</h1>
+
+  <p style="margin: 1em; max-width: 600px;">
+    Over three weeks, I developed two independent sound setups inside Hut 9 at the Banff Centre for Arts and Creativity.
+    Each station captured, processed, and sent sound back into the space. They also cross-fed, creating shifting
+    landscapes between balance and chaos. I used grand piano, drums, synths, and movement to activate the systems,
+    then sat in the room and listened until it felt right to respond.
+  </p>
+
+  <p style="margin: 1em; max-width: 600px;">
+    This process generated hours of recordings. This page offers a glimpse into that experience.
+  </p>
+
+  <div style="margin: 1em;">
+    <button onclick="loadSoundscape(1)">The Forest Dies With You</button>
+    <button onclick="loadSoundscape(2)">Disturb The Dust</button>
+    <button onclick="loadSoundscape(3)">The Bird And The Light</button>
+  </div>
+
+  <div id="space-map">
+    <img id="background-map" src="rooms-assets/images/background-room1.png" />
+  </div>
+
+  <script src="rooms-assets/script.js"></script>
+</body>
+
+</html>

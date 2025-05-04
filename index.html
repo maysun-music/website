@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAYSUN</title>
+  <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon">
+  <style>
+    /* ------------------- GLOBAL ------------------- */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: white;
+      font-family: Helvetica, Arial, sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    a,
+    button,
+    .menu-item:focus,
+    .menu-item:active {
+      outline: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    /* ------------------- CONTENT ------------------- */
+    #content,
+    .content-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #content {
+      padding: 20px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: black;
+      overflow-y: auto;
+      max-height: calc(100vh - 160px);
+      position: relative;
+    }
+
+    #content ul {
+      list-style-position: inside;
+      padding: 0;
+    }
+
+    #content ul li {
+      margin: 5px 0;
+    }
+
+    #content h3,
+    #content p {
+      margin: 20px 0;
+    }
+
+    #content img {
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    #content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .content-container {
+      padding: 20px 0;
+      transform: scale(1.0);
+      width: 100%;
+    }
+
+    /* ------------------- MENU LOGO ------------------- */
+    .menu-logo {
+      width: 100px;
+      cursor: pointer;
+      margin: 10px 0;
+      transition: transform 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
+    }
+
+    .menu-logo:hover {
+      transform: scale(1.1);
+    }
+
+    .menu-logo.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .menu-logo.menu-open {
+      transform: scale(0.9) translateX(20px);
+      margin-left: 0;
+    }
+
+    /* ------------------- PHOTO CREDIT ------------------- */
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      /* aligns credit to the right */
+      margin: 0;
+    }
+
+    .photo-credit {
+      font-size: 8px;
+      color: black;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 2px 4px;
+      border-radius: 3px;
+      margin-top: 3px;
+    }
+
+    /* ------------------- BIO / GLITCH ------------------- */
+    .glitch-char {
+      display: inline-block;
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.33, 0, 0.1, 1), opacity 0.4s ease;
+      transform: translate(var(--dx, 0px)) translateY(var(--dy, 0px)) rotate(var(--rot, 0deg)) scale(var(--scale, 1));
+      filter: blur(0px);
+    }
+
+    .glitch-char-wrapper.fade-clone {
+      will-change: opacity;
+      transition: opacity 6s ease-out;
+    }
+
+    #bio-visible-container {
+      position: relative;
+    }
+
+    #copy-bio-container {
+      position: absolute;
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    /* ------------------- MENU ------------------- */
+    .menu-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .menu-container.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-button {
+      background: black;
+      color: white;
+      padding: 5px 30px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .menu-items {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      z-index: -1;
+    }
+
+    .menu-items.visible {
+      visibility: visible;
+      opacity: 1;
+      z-index: 10;
+    }
+
+    .menu-items a {
+      display: inline-block;
+      color: black;
+      text-decoration: none;
+      margin: 5px 10px;
+      padding: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-items a:hover {
+      transform: scale(1.4);
+    }
+
+    /* ------------------- BURGER & MOBILE MENU ------------------- */
+    .burger-menu {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    .burger-menu div {
+      width: 30px;
+      height: 4px;
+      background: black;
+      margin: 6px 0;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      padding: 20px 0;
+      text-align: center;
+      z-index: 9998;
+    }
+
+    .mobile-menu.visible {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 15px 0;
+      color: black;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    #mobileMenu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #edd500;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #mobileMenu.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #mobileMenu a {
+      padding: 15px 0;
+      color: black;
+      font-size: calc(100vh / 20);
+      font-weight: bolder;
+      text-align: center;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: help;
+      line-height: 1;
+    }
+
+    /* ------------------- ACTIVITIES ------------------- */
+    .activities-content {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .activities-content li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 16px;
+      line-height: 0.2;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .activities-content li::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      /* keep width fixed */
+      height: 0.5px;
+      background: black;
+      z-index: 0;
+      opacity: 1;
+      transition: opacity 2s ease;
+    }
+
+    .activities-content strong,
+    .activities-content .date,
+    .activities-content .location {
+      background: white;
+      z-index: 1;
+    }
+
+    .activities-content strong {
+      padding: 0 5px;
+      z-index: 2;
+    }
+
+    .activities-content .date {
+      font-weight: bold;
+      padding-right: 10px;
+    }
+
+    .activities-content .location {
+      padding-left: 10px;
+      text-align: right;
+    }
+
+    .activities-content a {
+      color: black;
+      text-decoration: none;
+      position: relative;
+      z-index: 2;
+      border-bottom: 1px dotted black;
+      background: white;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .activities-content a:hover {
+      color: #edd500;
+      border-bottom-color: #edd500;
+    }
+
+    .activities-content .collaborators {
+      text-transform: uppercase;
+      font-size: 8px;
+      opacity: 1;
+      background: white;
+      padding: 0 5px;
+      z-index: 1;
+    }
+
+    /* ---- WORD DRIFT IN ACTIVITIES ---- */
+    .word-drift {
+      display: inline-block;
+      position: relative;
+      transition: transform 120s ease-in-out, opacity 30s ease-in-out;
+      will-change: transform, opacity;
+      z-index: 3;
+      /* ⬅️ ensure it's above the ::before line */
+    }
+
+    li.drifting {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    li.drifting .date,
+    li.drifting .location,
+    li.drifting strong,
+    li.drifting a {
+      background: transparent !important;
+      border: none !important;
+      z-index: 3 !important;
+      /* stays above the line as it fades */
+    }
+
+    @keyframes cloudPulse {
+
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: translate(var(--tx), var(--ty)) scale(var(--scale));
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .word-drift.pulsing {
+      animation: cloudPulse 6s ease-in-out infinite;
+    }
+
+    .activities-content li.drifting-line-fade::before {
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      transition: opacity 15s ease, height 15s ease;
+    }
+
+    .activities-content li.drifting::before {
+      content: none;
+    }
+
+
+
+    /* ------------------- ALBUM GRID ------------------- */
+    .album-grid {
+      transform: scale(0.8);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, auto) auto;
+      gap: 10px;
+      justify-items: center;
+      align-items: start;
+      margin: 10px 0 0;
+    }
+
+    .album-item {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .album-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: 0.3s ease;
+    }
+
+    .album-item::before {
+      content: attr(data-title);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 14px;
+      padding: 5px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .album-item:hover {
+      transform: scale(1.25);
+      z-index: 10;
+    }
+
+    .album-item:hover::before {
+      opacity: 1;
+    }
+
+    .bandcamp-link-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      grid-column: 2;
+      grid-row: 4;
+      text-align: center;
+      padding-top: 15px;
+    }
+
+    .bandcamp-link-item::before {
+      content: none;
+    }
+
+    .bandcamp-link-item p,
+    .bandcamp-link-item a {
+      margin: 0;
+    }
+
+    /* ------------------- SOCIAL LINKS ------------------- */
+    .social-links {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .social-links a {
+      margin: 0 5px;
+      position: relative;
+    }
+
+    .social-links img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .social-links a span {
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%) rotate(90deg);
+      opacity: 0;
+      font-size: 10px;
+      color: black;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .social-links a:hover span {
+      opacity: 1;
+    }
+
+    .social-links a:hover img {
+      opacity: 0.5;
+    }
+
+    /* ------------------- BIOGRAPHY PAGE IMPROVEMENTS ------------------- */
+    #bio-wrapper {
+      max-width: 750px;
+      margin: 80px auto 100px;
+      padding: 0 20px;
+      text-align: left;
+      /* Align text left for bio */
+    }
+
+    #bio-visible {
+      font-size: 1rem;
+      line-height: 1.2;
+      color: black;
+    }
+
+    #bio-visible h3 {
+      text-align: left;
+      font-size: 2rem;
+      margin: 50px 0 20px 0;
+      letter-spacing: 0.05em;
+      font-weight: bold;
+    }
+
+    #bio-visible p {
+      margin-bottom: 1.6em;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    /* Slight stagger for a soft load-in */
+    #bio-visible p:nth-of-type(1) {
+      animation-delay: 0.2s;
+    }
+
+    #bio-visible p:nth-of-type(2) {
+      animation-delay: 0.4s;
+    }
+
+    #bio-visible p:nth-of-type(3) {
+      animation-delay: 0.6s;
+    }
+
+    #bio-visible p:nth-of-type(4) {
+      animation-delay: 0.8s;
+    }
+
+    #bio-visible p:nth-of-type(5) {
+      animation-delay: 1s;
+    }
+
+    #bio-visible p:nth-of-type(6) {
+      animation-delay: 1.2s;
+    }
+
+    #bio-title,
+    #statement-title {
+      cursor: pointer;
+    }
+
+    /* you can extend if you have more */
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ------------------- MEDIA QUERIES ------------------- */
+    @media (max-width: 768px) {
+      .menu-container {
+        flex-direction: column;
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .menu-container {
+        display: none;
+      }
+
+      .burger-menu {
+        display: block;
+      }
+
+      .mobile-menu a {
+        font-size: 18px;
+      }
+
+      .activities-content li {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 10px 0;
+      }
+
+      .activities-content .date,
+      .activities-content strong,
+      .activities-content .location {
+        display: block;
+        line-height: 1.1;
+      }
+
+      .activities-content .date {
+        font-weight: bold;
+        margin-bottom: 3px;
+      }
+
+      .activities-content strong {
+        margin-bottom: 3px;
+        font-size: 16px;
+        z-index: 2;
+      }
+
+      .activities-content .location {
+        padding-left: 0;
+      }
+
+      .activities-content li::before {
+        display: none;
+      }
+
+      .activities-content .collaborators {
+        display: block;
+        margin-bottom: 0px;
+        font-size: 12px;
+        line-height: 1.2;
+        word-break: break-word;
+        white-space: normal;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  </style>
+</head>
+
+<!-- ------------FOREVER IN SOUND GRID -->
+
+<body>
+  <!-- Social Links Positioned at Top-Right -->
+
+  <div class="social-links">
+    <a href="https://www.instagram.com/maysun.music/" target="_blank">
+      <img src="assets/images/logos/ig_logo.png" alt="Instagram">
+      <span>Instagram</span> <!-- Vertical text -->
+    </a>
+
+    <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+      <img src="assets/images/logos/yt_logo.png" alt="YouTube">
+      <span>YouTube</span> <!-- Vertical text -->
+    </a>
+
+    <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+      <img src="assets/images/logos/bc_logo.png" alt="Bandcamp">
+      <span>Bandcamp</span> <!-- Vertical text -->
+    </a>
+  </div>
+
+
+  <!-- Content Container -->
+  <div class="content-container" id="content">
+    <div class="image-container">
+      <img src="assets/images/misc/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - photo by Chienn Tai">
+      <div class="photo-credit">Photo: Chienn Tai (2024)</div>
+    </div>
+  </div>
+
+  <!-- Bottom Menu for Desktop -->
+  <div class="menu-container" id="menuContainer">
+    <img src="assets/images/logos/3MAYSUN_clear.png" alt="More" class="menu-logo" onclick="toggleMenu()" aria-haspopup="true"
+      aria-expanded="false">
+    <div class="menu-items" id="menuItems">
+      <a href="#home" class="home-link" onclick="loadContent('home')">HOME</a>
+      <a href="#biography" onclick="loadContent('biography')">BIOGRAPHY</a>
+      <a href="#activities" onclick="loadContent('activities')">ACTIVITIES</a>
+      <a href="#albums" onclick="loadContent('albums')">ALBUMS</a>
+      <a href="forever.html" onclick="event.stopPropagation();">FOREVER IN SOUND</a>
+      <a href="#contact" onclick="loadContent('contact')">CONTACT</a>
+    </div>
+  </div>
+
+
+  <!-- Burger Menu for Mobile -->
+  <div class="burger-menu" onclick="toggleBurgerMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="loadContent('home'); toggleBurgerMenu()">HOME</a>
+    <a href="#biography" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
+    <a href="#activities" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
+    <a href="#albums" onclick="loadContent('albums'); toggleBurgerMenu()">ALBUMS</a>
+    <a href="forever.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">FOREVER IN SOUND</a>
+    <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
+  </div>
+
+  <!-- -------------------JAVASCRIPT---------------------- -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuLogo = document.querySelector('.menu-logo');
+      const menuItems = document.getElementById('menuItems'); // Desktop menu
+      const burgerMenu = document.querySelector('.burger-menu'); // Burger icon for mobile
+      const mobileMenu = document.getElementById('mobileMenu'); // Mobile menu
+      const menuLinks = document.querySelectorAll('#menuItems a, #mobileMenu a'); // Links in both menus
+      const contentContainer = document.getElementById('content'); // Main content container
+      let isDesktopMenuVisible = false;
+      let isMobileMenuVisible = false;
+
+      document.addEventListener('click', () => {
+        if (window.location.hash === '#home' && !overlayActive) {
+          startOverlay();
+        }
+      });
+
+      // Function to check the URL for 'menu=true' parameter
+      function checkMenuParam() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('menu') === 'true') {
+          toggleMobileMenu(true); // Open the mobile menu explicitly
+        }
+      }
+
+      // Check the referrer and open mobile menu only if coming from your Instagram link
+      const referrer = document.referrer;  // Get the referrer URL
+
+      // If coming from Instagram bio link (replace with your actual Instagram link)
+      if (referrer && referrer.includes('l.instagram.com/')) {
+        toggleMobileMenu(true);  // Open the mobile menu if coming from the Instagram link
+      }
+
+      // Toggle desktop menu visibility
+      function toggleDesktopMenu() {
+        isDesktopMenuVisible = !isDesktopMenuVisible;
+        menuItems.classList.toggle('visible', isDesktopMenuVisible);
+
+        if (isDesktopMenuVisible) {
+          menuLogo.style.opacity = '0';
+        } else {
+          menuLogo.style.opacity = '1';  // Ensure opacity is set to 1 when menu is closed
+        }
+      }
+
+      // Toggle mobile menu visibility
+      function toggleMobileMenu(show = null) {
+        if (show === null) {
+          // Toggle behavior
+          isMobileMenuVisible = !isMobileMenuVisible;
+        } else {
+          // Set explicit state
+          isMobileMenuVisible = show;
+        }
+        mobileMenu.classList.toggle('visible', isMobileMenuVisible);
+        if (isMobileMenuVisible) {
+          adjustMenuFontSize();  // Adjust font size when menu opens
+        }
+      }
+
+      // Define the burger menu toggle separately
+      function toggleBurgerMenu() {
+        toggleMobileMenu(); // wrapper for clarity
+      }
+
+      // Adjust font size of mobile menu items dynamically
+      function adjustMenuFontSize() {
+        const links = mobileMenu.getElementsByTagName('a');
+        const numberOfLinks = links.length;
+
+        // Set a maximum font size for the menu items
+        const maxFontSize = 10; // Max font size in vh
+        const minFontSize = 5; // Min font size in vh
+
+        // Calculate font size dynamically
+        let fontSize = window.innerWidth < 600 ? `${Math.min(maxFontSize, 100 / numberOfLinks)}vh` : 'calc(100vh / 20)';
+
+        // Ensure that the font size does not go below a certain minimum value
+        fontSize = fontSize < `${minFontSize}vh` ? `${minFontSize}vh` : fontSize;
+
+        // Apply the font size to each link
+        Array.from(links).forEach(link => {
+          link.style.fontSize = fontSize;
+        });
+      }
+
+      // Reset menus and restore logo
+      function resetMenus() {
+        isDesktopMenuVisible = false;
+        isMobileMenuVisible = false;
+        menuItems.classList.remove('visible');
+        if (!isMobileMenuVisible) {  // Only hide if not set to visible by other logic
+          mobileMenu.classList.remove('visible');
+        }
+        menuLogo.style.opacity = '1';
+      }
+
+      // Load content dynamically
+      function loadContent(section) {
+
+        // If leaving the home section, kill the overlay
+        if (section !== 'home') {
+          overlayActive = false;
+          cancelAnimationFrame(overlayRequestId);
+          fadeOutOverlay();
+        }
+
+
+        let content = '';
+        switch (section) {
+          case 'home': content = `
+                         <div class="image-container">
+                         <img id="home-image" src="assets/images/misc/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - Photo by Chienn Tai">
+                         <div class="photo-credit">Photo: Chienn Tai (2024)</div>
+                         </div>`;
+
+
+
+            if (section === 'home') {
+              setTimeout(() => {
+                const homeImage = document.getElementById('home-image');
+                if (homeImage) {
+                  homeImage.addEventListener('click', toggleDesktopMenu);
+                }
+
+
+                // Add full-area click reset for home section
+                contentContainer.addEventListener('click', (e) => {
+                  if (window.location.hash === '#home') {
+                    overlayActive = false;
+                    cancelAnimationFrame(overlayRequestId);
+                    document.querySelectorAll('.overlay-text').forEach(el => el.remove());
+                    startOverlay(); // restart it cleanly
+                  }
+                });
+
+                startOverlay(); // initial start
+              }, 0);
+            }
+
+            break;
+
+          case 'biography':
+            loadBiography(); // <-- new function
+            break;
+
+          case 'activities':
+            content = `
+                            <h3>UPCOMING SHOWS</h3>
+                            <div class="activities-content">
+                                <ul id="upcoming-shows"></ul>
+                            </div>
+
+                            <h3>PAST PERFORMANCES</h3>
+                            <div class="activities-content">
+                                <ul id="past-shows"></ul>
+                            </div>
+                                  <h3>RESIDENCIES</h3>
+                            <div class="activities-content">
+                                <ul id="residencies"></ul>
+                            </div>
+                            `;
+            setTimeout(() => {
+              fetchShows().then(() => {
+                fetchResidencies().then(() => {
+                  startWordDriftAnimation(); // this now works cleanly
+                });
+              });
+            }, 0);
+            break;
+
+
+          case 'albums':
+            content = `
+                             <div class="album-grid">
+                                 <a href="https://maysunmusic.bandcamp.com/album/timelines" target="_blank" class="album-item" data-title="Timelines (2023)">
+                                     <img src="assets/images/album_covers/08_album_cover.png" alt="Timelines">
+                                 </a>
+                                 <a href="https://maysunmusic.bandcamp.com/album/wanderlust-ii" target="_blank" class="album-item" data-title="Wanderlust II (2021)">
+                                     <img src="assets/images/album_covers/06_album_cover.png" alt="Wanderlust II">
+                                 </a>
+                                 <a href="https://maysunmusic.bandcamp.com/album/waiting-spaces" target="_blank" class="album-item" data-title="Waiting Spaces (2020)">
+                                     <img src="assets/images/album_covers/05_album_cover.png" alt="Waiting Spaces">
+                                 </a>
+                                 <a href="https://maysunmusic.bandcamp.com/album/the-after-mountain" target="_blank" class="album-item" data-title="The After Mountain (2020)">
+                                     <img src="assets/images/album_covers/04_album_cover.png" alt="The After Mountain">
+                                 </a>
+                                 <a href="https://maysunmusic.bandcamp.com/album/sun-ice" target="_blank" class="album-item" data-title="Sun & Ice (2017)">
+                                     <img src="assets/images/album_covers/03_album_cover.png" alt="Sun & Ice">
+                                 </a>
+                                 <a href="https://maysunmusic.bandcamp.com/album/the-field-of-living" target="_blank" class="album-item" data-title="The Field of Living (2016)">
+                                     <img src="assets/images/album_covers/02_album_cover.png" alt="The Field of Living">
+                                 </a>
+                                 <a href="https://maysunmusic.bandcamp.com/album/all-these-are-the-days" target="_blank" class="album-item" data-title="All These Are The Days (2016)">
+                                     <img src="assets/images/album_covers/01_album_cover.png" alt="All These Are The Days">
+                                 </a>
+                          
+                                     <!-- Bandcamp link as a grid item, now positioned at 11th cell -->
+                                     <div class="album-item bandcamp-link-item">
+                                         <p style="margin: 0;"><a href="https://maysunmusic.bandcamp.com/" target="_blank">LISTEN ON BANDCAMP</a></p>
+                                         <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+                                             <img src="assets/images/logos/bc_logo.png" alt="Bandcamp" style="width: 30px; height: 30px; margin: 10px 0;">
+                                         
+                                         </a>
+                                     </div>
+                                 </div>`;
+            break;
+
+          case 'forever':
+            window.location.href = 'forever.html'; // Redirect to forever.html
+            return;
+
+          case 'contact':
+            content = `
+                                     <strong>Welcoming artistic possibilities</strong> — spatial audio, drums, synths, sound design, scoring, solo performances, touring, and any form of creative collaboration. If you like my sound, let’s work together.
+                                 <p>
+                                     <a href="mailto:maysun.booking@gmail.com" style="text-decoration: none;">
+                                         <strong>maysun</strong> [dot] <strong>booking</strong> [at] <strong>gmail</strong> [dot] <strong>com</strong>
+                                     </a>
+                                 </p>
+                                 <div style="display: flex; justify-content: center; margin-top: 10px;">
+                                     <a href="https://www.instagram.com/maysun.music/" target="_blank">
+                                         <img src="assets/images/logos/ig_logo.png" alt="Instagram" style="width: 30px; height: 30px; margin: 0 10px;">
+                                     </a>
+                                     <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+                                         <img src="assets/images/logos/yt_logo.png" alt="YouTube" style="width: 30px; height: 30px; margin: 0 10px;">
+                                     </a>
+                                     <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+                                         <img src="assets/images/logos/bc_logo.png" alt="Bandcamp" style="width: 30px; height: 30px; margin: 0 10px;">
+                                     </a>
+                                 </div>`;
+            break;
+          default:
+            content = '<p>Coming Soon.</p>';
+        }
+
+        contentContainer.innerHTML = content;
+        window.location.hash = section; // Update the URL hash
+
+
+
+
+
+        resetMenus();
+      }
+
+      // Reset visibility of both menus
+      function resetMenuVisibility() {
+        isDesktopMenuVisible = false;
+        isMobileMenuVisible = false;
+        menuItems.classList.remove('visible');
+        mobileMenu.classList.remove('visible');
+        menuLogo.classList.remove('menu-open');
+        menuLogo.style.opacity = '1';  // Ensure opacity is reset here too
+      }
+
+
+
+      // Event listeners
+      burgerMenu.addEventListener('click', toggleMobileMenu);
+      menuLogo.addEventListener('click', toggleDesktopMenu);
+
+      window.addEventListener('resize', adjustMenuFontSize); // Adjust menu font size on resize
+
+      // Handle menu link clicks to load content and update the hash
+      function handleMenuLinkClick(event) {
+        const href = event.target.getAttribute('href');
+
+        // If the link is to an external page (contains ".html"), let it navigate normally
+        if (href.includes('.html')) {
+          return;
+        }
+
+        event.preventDefault();  // Prevent hash-based navigation
+        const section = href.substring(1);
+        loadContent(section);
+      }
+
+      // Event listeners for menu links (for hash-based navigation)
+      menuLinks.forEach(link => {
+        link.addEventListener('click', handleMenuLinkClick);
+      });
+
+      // Load content based on the initial hash (if present)
+      const initialHash = window.location.hash.substring(1); // Get initial hash without '#'
+      if (initialHash) {
+        loadContent(initialHash); // Load content for the section defined in the hash
+      } else {
+        loadContent('home'); // Default content when no hash is present
+      }
+
+      // Check URL for menu=true and open menu if needed
+      checkMenuParam();  // Call this to check the URL parameter
+
+
+
+    });
+
+    // overlay
+    let overlayRequestId = null;
+    let overlayActive = false;
+
+    function addOverlayText() {
+      const currentOverlays = document.querySelectorAll('.overlay-text').length;
+      if (currentOverlays > 300) return;
+
+      const clone = document.createElement('img');
+      clone.src = 'images/3MAYSUN_clear.png';
+      clone.classList.add('overlay-text');
+
+      clone.style.position = 'absolute';
+      clone.style.left = `${Math.random() * window.innerWidth}px`;
+      clone.style.top = `${Math.random() * window.innerHeight}px`;
+      clone.style.pointerEvents = 'none';
+      clone.style.opacity = 0;
+      clone.style.width = `300px`;
+      clone.style.height = `auto`;
+      clone.style.zIndex = 9999;
+      clone.style.userSelect = 'none';
+      clone.style.transition = 'opacity 4s ease';
+      clone.style.mixBlendMode = 'multiply';
+
+      document.body.appendChild(clone);
+
+      // Fade clone opacity slowly
+      requestAnimationFrame(() => {
+        clone.style.transition = 'opacity 2.5s ease'; // <-- add this
+        clone.style.opacity = '0';
+      });
+
+      // Remove after full fade-out
+      setTimeout(() => clone.remove(), 3000); // you can keep 3s or 3200ms
+
+
+
+      // Decide whether this one decays
+      const decay = Math.random() < 0.45; // 45% will disappear
+      if (decay) {
+        setTimeout(() => {
+          clone.style.transition = 'opacity 4s ease';
+          clone.style.opacity = 0;
+        }, 8000);
+        setTimeout(() => {
+          clone.remove();
+        }, 12000);
+      }
+    }
+
+    function fadeOutOverlay() {
+      const overlays = document.querySelectorAll('.overlay-text');
+      overlays.forEach(el => {
+        el.style.transition = 'opacity 3s ease';
+        el.style.opacity = 0;
+        setTimeout(() => {
+          if (el.parentNode) el.remove();
+        }, 3500); // a bit quicker
+      });
+    }
+
+    function startOverlay() {
+      if (window.location.hash !== '#home') {
+        fadeOutOverlay(); // fades them out if user is no longer on home
+        return;
+      }
+
+      if (overlayRequestId !== null) {
+        cancelAnimationFrame(overlayRequestId);
+        document.querySelectorAll('.overlay-text').forEach(el => el.remove());
+      }
+
+      overlayActive = true;
+      let overlayStartTime = performance.now() + 5000;
+      let lastLayerCount = 0;
+
+      function animate() {
+        if (!overlayActive || window.location.hash !== '#home') return;
+
+        const now = performance.now();
+        if (now > overlayStartTime) {
+          const timeSinceStart = now - overlayStartTime;
+          const rampSpeed = 0.0012;
+          const layersToAdd = Math.min(
+            Math.floor((timeSinceStart ** 1.3) * rampSpeed),
+            1600
+          );
+
+          if (layersToAdd > lastLayerCount) {
+            const newLayers = layersToAdd - lastLayerCount;
+            const layersThisFrame = Math.min(newLayers, Math.ceil(layersToAdd / 200));
+            for (let i = 0; i < layersThisFrame; i++) {
+              addOverlayText();
+            }
+            lastLayerCount += layersThisFrame;
+          }
+        }
+
+        overlayRequestId = requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      document.querySelectorAll('.overlay-text').forEach(logo => {
+        const rect = logo.getBoundingClientRect();
+        const logoX = rect.left + rect.width / 2;
+        const logoY = rect.top + rect.height / 2;
+
+        const dx = mouseX - logoX;
+        const dy = mouseY - logoY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        const maxDistance = 30; // pixels
+        const fadeAmount = Math.max(0.1, 1 - distance / maxDistance); // 0.1 (min) to 1 (max)
+
+        const baseOpacity = parseFloat(logo.dataset.defaultOpacity) || 0.4;
+        const adjustedOpacity = Math.max(0.1, baseOpacity * fadeAmount);
+
+        logo.style.opacity = adjustedOpacity.toFixed(2);
+      });
+    });
+
+    function wrapBiographyChars() {
+      const content = document.getElementById('content');
+      const bioSection = content.querySelectorAll('p');
+      bioSection.forEach(p => {
+        if (!p.classList.contains('glitch-processed')) {
+          p.classList.add('glitch-processed');
+          const chars = p.textContent.split('');
+          const spanWrapped = chars.map(char => `<span class="glitch-char-wrapper">${char}</span>`).join('');
+          p.innerHTML = spanWrapped;
+        }
+      });
+    }
+
+    function glitchCharacter(el, mouseX, mouseY) {
+      const rect = el.getBoundingClientRect();
+      const charX = rect.left + rect.width / 2;
+      const charY = rect.top + rect.height / 2;
+
+      const dx = mouseX - charX;
+      const dy = mouseY - charY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      const maxDist = 30;
+      if (distance > maxDist) {
+        return;
+      }
+
+      const proximity = Math.max(0, 1 - distance / maxDist);
+
+      const baseX = ((Math.random() - 0.5) * 12 * proximity).toFixed(2) + 'px';
+      const baseY = ((Math.random() - 0.5) * 12 * proximity).toFixed(2) + 'px';
+
+      // SET transform without re-adding class
+      el.style.setProperty('--dx', baseX);
+      el.style.setProperty('--dy', baseY);
+      el.style.opacity = '0.2'; // lower temporarily
+
+      // Clear any previous restore
+      clearTimeout(el.restoreTimeout);
+
+      // Smoothly restore back
+      el.restoreTimeout = setTimeout(() => {
+        el.style.transition = 'transform 1s ease, opacity 1s ease';
+        el.style.setProperty('--dx', '0px');
+        el.style.setProperty('--dy', '0px');
+        el.style.opacity = '0.9'; // <-- higher, much more readable
+        delete el.restoreTimeout;
+      }, 400); // faster restore trigger
+
+      // Ghost trails
+      const trailCount = Math.floor(Math.random() * 2) + 1;
+      for (let i = 0; i < trailCount; i++) {
+        const clone = el.cloneNode(true);
+        clone.classList.add('fade-clone');
+        clone.style.position = 'absolute';
+        clone.style.left = el.offsetLeft + 'px';
+        clone.style.top = el.offsetTop + 'px';
+        clone.style.pointerEvents = 'none';
+
+        const spreadX = 80;
+        const spreadY = 76;
+        const offsetX = ((Math.random() - 0.5) * spreadX).toFixed(2) + 'px';
+        const offsetY = ((Math.random() - 0.5) * spreadY).toFixed(2) + 'px';
+        const opacity = 0.1 + Math.random() * 0.3;
+
+        clone.style.transform = `translate(${offsetX}, ${offsetY})`;
+        clone.style.opacity = opacity.toFixed(2);
+
+        el.parentElement.appendChild(clone);
+
+        requestAnimationFrame(() => {
+          clone.style.transition = 'opacity 2.5s ease';
+          clone.style.opacity = '0';
+        });
+
+        setTimeout(() => clone.remove(), 3000);
+      }
+    }
+
+    function enableBiographyGlitch() {
+      const content = document.getElementById('content');
+      content.addEventListener('mousemove', (e) => {
+        if (window.location.hash !== '#biography') return;
+
+        const target = e.target;
+        if (target.classList.contains('glitch-char-wrapper')) {
+          glitchCharacter(target, e.clientX, e.clientY);
+        }
+      });
+    }
+
+    // BIO AND STATEMENT
+
+    async function loadBiography() {
+      try {
+        const res = await fetch('data/biography.json');
+        const data = await res.json();
+
+        const bioWrapper = document.createElement('div');
+        bioWrapper.id = 'bio-wrapper';
+        bioWrapper.style.position = 'relative';
+        bioWrapper.style.display = 'inline-block';
+        bioWrapper.style.width = '100%';
+
+        const bioClean = document.createElement('div');
+        bioClean.id = 'bio-clean';
+        bioClean.style.display = 'none';
+
+        const bioVisible = document.createElement('div');
+        bioVisible.id = 'bio-visible';
+
+        // BIOGRAPHY SECTION
+        const bioTitle = document.createElement('h3');
+        bioTitle.id = 'bio-title'; // <-- important
+        bioTitle.textContent = 'BIOGRAPHY';
+        bioVisible.appendChild(bioTitle);
+
+        data.bio.forEach(paragraph => {
+          const p = document.createElement('p');
+          p.textContent = paragraph;
+          bioVisible.appendChild(p);
+        });
+
+        // ARTIST STATEMENT SECTION
+        const statementTitle = document.createElement('h3');
+        statementTitle.id = 'statement-title'; // <-- important
+        statementTitle.textContent = 'ARTIST STATEMENT';
+        statementTitle.style.marginTop = '40px';
+        bioVisible.appendChild(statementTitle);
+
+        data.statement.forEach(paragraph => {
+          const p = document.createElement('p');
+          p.textContent = paragraph;
+          bioVisible.appendChild(p);
+        });
+
+
+        // hidden clean version for copy
+        data.bio.concat(data.statement).forEach(paragraph => {
+          const pClean = document.createElement('p');
+          pClean.textContent = paragraph;
+          bioClean.appendChild(pClean);
+        });
+
+        bioWrapper.appendChild(bioClean);
+        bioWrapper.appendChild(bioVisible);
+
+        const contentContainer = document.getElementById('content');
+        contentContainer.innerHTML = '';
+        contentContainer.appendChild(bioWrapper);
+
+        setupCopyByClick(data);
+        wrapBiographyChars();
+        enableBiographyGlitch();
+      } catch (err) {
+        console.error("Failed to load biography.json:", err);
+        contentContainer.innerHTML = '<p style="text-align:center;">Could not load biography. Please try refreshing.</p>';
+      }
+    }
+
+    function setupCopyByClick(data) {
+      const bioTitle = document.getElementById('bio-title');
+      const statementTitle = document.getElementById('statement-title');
+
+      bioTitle.addEventListener('click', () => {
+        copyTextArray(data.bio, 'BIOGRAPHY');
+      });
+
+      statementTitle.addEventListener('click', () => {
+        copyTextArray(data.statement, 'ARTIST STATEMENT');
+      });
+    }
+
+    function copyTextArray(array, label) {
+      const text = array.join('\n\n');
+      navigator.clipboard.writeText(text).then(() => {
+        showCopiedNotice(label);
+      });
+    }
+
+    function showCopiedNotice(label) {
+      const title = document.getElementById(label === 'BIOGRAPHY' ? 'bio-title' : 'statement-title');
+      const originalText = title.textContent;
+      title.textContent = 'copied.';
+      setTimeout(() => {
+        title.textContent = originalText;
+      }, 800);
+    }
+
+
+    // ACTIVITIES FORMAT
+    function formatDate(dateStr) {
+      const parts = dateStr.split('-');
+
+      if (parts.length === 3) {
+        // Handles full dates: YYYY-MM-DD
+        const [year, month, day] = parts;
+        const date = new Date(Number(year), Number(month) - 1, Number(day)); // JS months are 0-based
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
+        return date.toLocaleDateString('en-GB', options).toUpperCase().replace(/ /g, ' ');
+
+      } else if (parts.length === 2) {
+        // Handles partial dates: YYYY-MM (for residencies)
+        const [year, month] = parts;
+        const date = new Date(Number(year), Number(month) - 1, 1);
+        const options = { month: 'short', year: 'numeric' };
+        return date.toLocaleDateString('en-GB', options).toUpperCase().replace(/ /g, ' ');
+
+      } else {
+        return dateStr; // fallback for malformed inputs
+      }
+    }
+
+    function renderShow(show) {
+      const date = `<span class="date">${formatDate(show.date)}</span>`;
+      const collab = show.collaborators ? `<span class="collaborators">${show.collaborators}</span>` : '';
+      const location = `<span class="location">${show.venue} - ${show.city}</span>`;
+      return `<li>${date}${collab}${show.url ? ` <a href="${show.url}" target="_blank">${location}</a>` : location}</li>`;
+    }
+
+    // GETTING SHOW INFO
+    async function fetchShows() {
+      try {
+        const res = await fetch('data/shows.json');
+        const shows = await res.json();
+
+        const upcoming = shows.filter(s => s.type === 'upcoming');
+        const past = shows.filter(s => s.type === 'past');
+
+        document.getElementById("upcoming-shows").innerHTML = upcoming.map(renderShow).join('');
+        document.getElementById("past-shows").innerHTML = past.map(renderShow).join('');
+      } catch (err) {
+        console.error("Failed to load shows.json:", err);
+      }
+    }
+
+    // GETTING RESIDENCY INFO
+    async function fetchResidencies() {
+      try {
+        const res = await fetch('data/residencies.json');
+        const residencies = await res.json();
+
+        const list = document.getElementById("residencies");
+        list.innerHTML = residencies.map(item => {
+          const date = `<span class="date">${formatDate(item.date)}</span>`;
+          const location = `<span class="location">${item.venue} - ${item.city}</span>`;
+          return `<li>${date} ${location}</li>`;
+        }).join('');
+      } catch (err) {
+        console.error("Failed to load residencies.json:", err);
+      }
+    }
+
+    // ACTIVITY GLITCH
+
+    function startWordDriftAnimation() {
+      const clusterTarget = getClusterTarget();
+
+      // Wrap words in spans (non-destructive to layout)
+      const listItems = document.querySelectorAll('#past-shows li, #residencies li');
+      listItems.forEach(item => wrapWordsRecursively(item));
+
+      // Phase 1: Fade lines, then remove them cleanly
+      setTimeout(() => {
+        listItems.forEach(item => {
+          item.classList.add('drifting-line-fade'); // begin fading
+          setTimeout(() => {
+            item.classList.add('drifting'); // then remove line
+          }, 15000); // matches CSS transition time
+        });
+      }, 2000);
+
+
+      // Phase 2: Begin word drift at 8 seconds
+      setTimeout(() => {
+        const words = document.querySelectorAll('#past-shows .word-drift, #residencies .word-drift');
+
+        words.forEach(span => {
+          const rect = span.getBoundingClientRect();
+          const startX = rect.left + rect.width / 2;
+          const startY = rect.top + rect.height / 2;
+
+          const dx = clusterTarget.x - startX;
+          const dy = clusterTarget.y - startY;
+
+          const offsetX = dx + (Math.random() - 0.5) * 320;
+          const offsetY = dy + (Math.random() - 0.5) * 180;
+          const scale = 0.8 + Math.random() * 0.5;
+
+          span.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+          span.style.opacity = (0.55 + Math.random() * 0.15).toFixed(2);
+        });
+
+        // Fade out headings over 40s
+        const pastHeader = document.querySelector('h3:nth-of-type(2)');
+        const residenciesHeader = document.querySelector('h3:nth-of-type(3)');
+        [pastHeader, residenciesHeader].forEach(header => {
+          if (header) {
+            header.style.transition = 'opacity 40s ease-out';
+            header.style.opacity = '0';
+          }
+        });
+
+      }, 5000);
+    }
+
+
+    function getClusterTarget() {
+      const anchor = document.querySelector('#upcoming-shows');
+      const rect = anchor.getBoundingClientRect();
+      return {
+        x: rect.left + rect.width / 2,
+        y: rect.bottom + 112
+      };
+    }
+
+    function wrapWordsRecursively(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const words = node.textContent.trim().split(/\s+/);
+        const fragment = document.createDocumentFragment();
+
+        words.forEach((word, index) => {
+          const span = document.createElement('span');
+          span.className = 'word-drift';
+          span.textContent = word;
+          fragment.appendChild(span);
+          if (index < words.length - 1) fragment.appendChild(document.createTextNode(' '));
+        });
+
+        node.replaceWith(fragment);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        [...node.childNodes].forEach(wrapWordsRecursively);
+      }
+    }
+
+  </script>
+</body>
+
+<<<<<<< HEAD
+</html>
+=======
+</html>
+>>>>>>> 7f01b73 (Initial push after restructure)

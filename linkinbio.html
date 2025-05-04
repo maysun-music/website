@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link In Bio</title>
+<<<<<<< HEAD
+    <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon" />
+=======
+    <link rel="icon" href="images/m_favicon.ico" type="image/x-icon" />
+>>>>>>> 7f01b73 (Initial push after restructure)
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .mobile-menu.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 15px 0;
+            color: black;
+            text-decoration: none;
+            font-size: calc(100vh / 20);
+            font-weight: bolder;
+            text-transform: uppercase;
+            cursor: pointer;
+            line-height: 1;
+            transition: opacity 0.2s ease, transform 0.1s ease;
+        }
+
+        .mobile-menu a:active,
+        .mobile-menu a:hover,
+        #upcoming-links a:active,
+        #upcoming-links a:hover {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+
+        #upcoming-links {
+            margin-bottom: 2em;
+            border-bottom: 1px solid black;
+            padding-bottom: 1em;
+        }
+
+        #upcoming-links a {
+            display: block;
+            font-weight: bolder;
+            color: black;
+            margin: 0.75em auto;
+            width: 90vw;
+            font-size: clamp(1.1rem, 4vw, 1.75rem);
+            /* scales with screen size */
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 600px) {
+            .mobile-menu a {
+                font-size: calc(100vh / 20);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mobile-menu visible" id="mobileMenu">
+        <br />
+        <div id="upcoming-links">
+            <!-- Upcoming shows will appear here -->
+            <p style="font-size: 0.7rem; opacity: 0.5; margin-top: -1em; margin-bottom: 2em;">
+                Tap “•••” and “Open in browser” for best experience.
+            </p>
+        </div>
+        <a href="https://www.maysun.zip#home">WEBSITE</a>
+        <a href="https://maysunmusic.bandcamp.com/">BANDCAMP</a>
+        <a href="https://www.youtube.com/@MAYSUNmusic">YOUTUBE</a>
+        <a href="mailto:maysun.booking@gmail.com">CONTACT</a>
+        ↓
+        <a href="https://www.maysun.zip/forever.html">FOREVER IN SOUND</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const container = document.getElementById('upcoming-links');
+            mobileMenu.classList.add('visible');
+
+            fetch('shows.json')
+                .then(response => response.json())
+                .then(shows => {
+                    const upcoming = shows
+                        .filter(show => show.type === "upcoming")
+                        .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                    if (upcoming.length === 0) {
+                        const msg = document.createElement('div');
+                        msg.textContent = 'No upcoming shows.';
+                        container.appendChild(msg);
+                        return;
+                    }
+
+                    upcoming.forEach(show => {
+                        const [year, month, day] = show.date.split('-').map(Number);
+                        const dateObj = new Date(year, month - 1, day); // month is 0-based
+                        const dateFormatted = dateObj.toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric'
+                        }).toUpperCase();
+
+                        const link = document.createElement('a');
+                        link.href = show.url;
+<<<<<<< HEAD
+=======
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+>>>>>>> 7f01b73 (Initial push after restructure)
+                        link.textContent = `${dateFormatted} @ ${show.venue}`;
+                        container.appendChild(link);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching shows:', error);
+                    const msg = document.createElement('div');
+                    msg.textContent = 'Error loading shows.';
+                    container.appendChild(msg);
+                });
+        });
+    </script>
+</body>
+
+<<<<<<< HEAD
+</html>
+=======
+</html>
+>>>>>>> 7f01b73 (Initial push after restructure)
