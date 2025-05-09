@@ -5,11 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Link In Bio</title>
-<<<<<<< HEAD
     <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon" />
-=======
-    <link rel="icon" href="images/m_favicon.ico" type="image/x-icon" />
->>>>>>> 7f01b73 (Initial push after restructure)
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -117,7 +113,7 @@
             const container = document.getElementById('upcoming-links');
             mobileMenu.classList.add('visible');
 
-            fetch('shows.json')
+            fetch('data/shows.json')
                 .then(response => response.json())
                 .then(shows => {
                     const upcoming = shows
@@ -141,11 +137,8 @@
 
                         const link = document.createElement('a');
                         link.href = show.url;
-<<<<<<< HEAD
-=======
                         link.target = '_blank';
                         link.rel = 'noopener noreferrer';
->>>>>>> 7f01b73 (Initial push after restructure)
                         link.textContent = `${dateFormatted} @ ${show.venue}`;
                         container.appendChild(link);
                     });
@@ -159,9 +152,5 @@
         });
     </script>
 </body>
+</html>
 
-<<<<<<< HEAD
-</html>
-=======
-</html>
->>>>>>> 7f01b73 (Initial push after restructure)
