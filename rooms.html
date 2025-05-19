@@ -193,72 +193,83 @@
       margin: 0 0 10px 0;
     }
 
-    /* ---------- MOBILE STYLES ---------- */
-    @media (max-width: 600px) {
 
-      html,
-      body {
-        overflow: auto;
-        height: auto;
-        align-items: flex-start;
-      }
+   /* ---------- MOBILE STYLES ---------- */
+@media (max-width: 600px) {
+  html,
+  body {
+    overflow: auto;
+    height: auto;
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
-      .top-bar {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        top: 16px;
-        left: 0;
-        right: 0;
-        padding: 0 12px;
-      }
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    top: 16px;
+    left: 0;
+    right: 0;
+    padding: 0 12px;
+  }
 
-      .back-link {
-        display: none;
-      }
+  .back-link {
+    display: none;
+  }
 
-      .instruction {
-        font-size: 0.8rem;
-        text-align: center;
-      }
+  .instruction {
+    font-size: 0.8rem;
+    text-align: center;
+  }
 
-      .controls {
-        align-items: center;
-        text-align: center;
-        height: auto;
-      }
+  .controls {
+    align-items: center;
+    text-align: center;
+    height: auto;
+  }
 
-      .button-row {
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
+  .button-row {
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-      .volume-row {
-        display: none;
-      }
+  .volume-row {
+    display: none;
+  }
 
-      .container {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        aspect-ratio: auto;
-        margin: 20px 0;
-      }
+  .map-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 30vh;
+    padding: 10px 0;
+  }
 
-      .label-zone {
-        font-size: 2.4vw;
-      }
+  .container {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    margin: 0;
+  }
 
-      .description {
-        font-size: 0.7rem;
-        padding: 0 12px;
-        text-align: left;
-        width: 100%;
-        max-width: 100vw;
-        margin-bottom: 40px;
-      }
-    }
+  .label-zone {
+    font-size: 2.4vw;
+  }
+
+  .description {
+    font-size: 0.7rem;
+    padding: 0 12px;
+    text-align: left;
+    width: 100%;
+    max-width: 100vw;
+    margin-bottom: 40px;
+  }
+}
   </style>
 </head>
 
@@ -281,7 +292,9 @@
     </div>
   </div>
 
-  <div class="container" id="map-container"></div>
+  <div class="map-wrapper">
+    <div class="container" id="map-container"></div>
+  </div>
 
   <script>
     const activeRainIntervals = new Map();
