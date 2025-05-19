@@ -692,20 +692,22 @@
   <!-- Content Container -->
   <div class="content-container" id="content">
     <div class="image-container">
-      <img src="assets/images/misc/2024_MAYSUN_highland park_chienn tai_centered.png" alt="MAYSUN - photo by Chienn Tai">
+      <img src="assets/images/misc/2024_MAYSUN_highland park_chienn tai_centered.png"
+        alt="MAYSUN - photo by Chienn Tai">
       <div class="photo-credit">Photo: Chienn Tai (2024)</div>
     </div>
   </div>
 
   <!-- Bottom Menu for Desktop -->
   <div class="menu-container" id="menuContainer">
-    <img src="assets/images/logos/3MAYSUN_clear.png" alt="More" class="menu-logo" onclick="toggleMenu()" aria-haspopup="true"
-      aria-expanded="false">
+    <img src="assets/images/logos/3MAYSUN_clear.png" alt="More" class="menu-logo" onclick="toggleMenu()"
+      aria-haspopup="true" aria-expanded="false">
     <div class="menu-items" id="menuItems">
       <a href="#home" class="home-link" onclick="loadContent('home')">HOME</a>
       <a href="forever.html" onclick="event.stopPropagation();">FOREVER IN SOUND</a>
       <a href="#biography" onclick="loadContent('biography')">BIOGRAPHY</a>
       <a href="#activities" onclick="loadContent('activities')">ACTIVITIES</a>
+      <a href="rooms.html" onclick="event.stopPropagation();">ROOMS</a>
       <a href="#albums" onclick="loadContent('albums')">ALBUMS</a>
       <a href="#contact" onclick="loadContent('contact')">CONTACT</a>
     </div>
@@ -724,6 +726,7 @@
     <a href="#home" onclick="loadContent('home'); toggleBurgerMenu()">HOME</a>
     <a href="#biography" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
     <a href="#activities" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
+    <a href="rooms.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">ROOMS</a>
     <a href="#albums" onclick="loadContent('albums'); toggleBurgerMenu()">ALBUMS</a>
     <a href="forever.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">FOREVER IN SOUND</a>
     <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
