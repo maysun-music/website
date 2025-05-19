@@ -194,6 +194,38 @@
     .description p {
       margin: 0 0 10px 0;
     }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+      .volume-row {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .controls {
+        align-items: flex-start;
+        text-align: left;
+        height: auto;
+      }
+
+      .button-row {
+        gap: 16px;
+      }
+    }
+
+    .controls button {
+      min-width: 50px;
+      text-align: center;
+    }
+    
   </style>
 </head>
 
