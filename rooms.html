@@ -149,12 +149,17 @@
       white-space: nowrap;
       cursor: pointer;
       z-index: 1;
-      transition: opacity 2.0s ease;
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
     .label-zone:hover {
-      font-weight: 600;
       opacity: 0.4;
+    }
+
+    .label-zone.hover-flash {
+      transform: scale(1.04) rotate(-90deg);
+      /* include rotate so it doesn’t cancel it */
+      opacity: 0.5;
     }
 
     .rain-label {
@@ -480,6 +485,24 @@
 
       activeRainIntervals.set(anchorEl, interval);
     }
+
+    // Wave-style hover animation from instruction
+    const instructionText = document.querySelector('.instruction');
+
+    instructionText.addEventListener('mouseenter', () => {
+      const labels = [...document.querySelectorAll('.label-zone')];
+      labels.forEach((el, i) => {
+        setTimeout(() => {
+          const original = el.style.transform;
+          el.style.opacity = '0.4';
+
+          setTimeout(() => {
+            el.style.transform = original;
+            el.style.opacity = '';
+          }, 200);
+        }, i * 30); // subtle delay between each
+      });
+    });
 
     function stopRain(anchorEl) {
       const interval = activeRainIntervals.get(anchorEl);
