@@ -310,7 +310,7 @@
   <div class="top-bar">
     <div class="back-left">
       <a href="https://www.maysun.zip" class="back-link">← back</a>
-      <p class="instruction">Click a stem to activate sound.</p>
+      <p class="instruction">Click a stem for sound or silence.</p>
     </div>
     <div class="controls">
       <div class="volume-row">
@@ -318,9 +318,9 @@
         <input type="range" min="0" max="1" step="0.01" value="0.8" id="volumeSlider" />
       </div>
       <div class="button-row">
-        <button onclick="playAll()">play all</button>
-        <button onclick="stopAll()">stop</button>
-        <button onclick="randomPlay()">random</button>
+        <button onclick="playAll()">Play all</button>
+        <button onclick="stopAll()">Stop</button>
+        <button onclick="randomPlay()">Random</button>
       </div>
     </div>
   </div>
@@ -378,6 +378,7 @@
     const audioElements = [];
     const activeRainIntervals = new Map();
     let audioUnlocked = false;
+
 
     if (isMobile) {
       mobileUnlock.style.display = 'flex';
