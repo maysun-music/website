@@ -202,6 +202,28 @@
       margin: 0 0 10px 0;
     }
 
+    #mobileUnlock {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(3px);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.2rem;
+      font-family: Helvetica, Arial, sans-serif;
+      color: black;
+      cursor: pointer;
+    }
+
     /* ---------- MOBILE STYLES ---------- */
     @media (max-width: 600px) {
       .back-link {
@@ -284,24 +306,6 @@
       text-align: center;
       z-index: 9998;
     }
-
-    @media (max-width: 740px) {
-      .menu-container {
-        display: none;
-      }
-
-      .burger-menu {
-        display: block;
-      }
-
-      .mobile-menu a {
-        font-size: 18px;
-        display: block;
-        margin: 20px 0;
-        color: black;
-        text-decoration: none;
-      }
-    }
   </style>
 </head>
 
@@ -345,26 +349,8 @@
     <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
   </div>
 
-  <!-- Add inside <body>, just before your <script> tag -->
-  <div id="mobileUnlock" style="
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(3px);
-  z-index: 99999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 1.2rem;
-  font-family: Helvetica, Arial, sans-serif;
-  color: black;
-  cursor: pointer;
-">
+
+  <div id="mobileUnlock" role="button" aria-label="Tap to begin" tabindex="0">
     <div>
       <p>Tap to begin</p>
     </div>
@@ -381,7 +367,10 @@
 
 
     if (isMobile) {
-      mobileUnlock.style.display = 'flex';
+      requestAnimationFrame(() => {
+        mobileUnlock.style.visibility = 'visible';
+        mobileUnlock.style.opacity = '1';
+      });
     } else {
       audioUnlocked = true;
       mobileUnlock.remove(); // hide it entirely on desktop
@@ -500,7 +489,10 @@
     // Unlock interaction on mobile
     mobileUnlock.addEventListener('click', () => {
       audioUnlocked = true;
-      mobileUnlock.style.display = 'none';
+      mobileUnlock.style.opacity = '0';
+      setTimeout(() => {
+        mobileUnlock.style.visibility = 'hidden';
+      }, 400); // matches transition duration
 
       // Create and play an empty buffer to unlock WebAudio if needed
       try {
