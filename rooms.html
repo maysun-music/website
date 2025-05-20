@@ -477,13 +477,24 @@
     }
 
     function randomPlay() {
-      stopAll();
       const shuffled = [...audioElements].sort(() => 0.5 - Math.random());
       const count = 2;
-      shuffled.slice(0, count).forEach(({ audio, el }) => {
-        audio.volume = volumeSlider.value;
-        audio.play();
-        startRain(el.innerText, el, audio);
+      const selected = shuffled.slice(0, count);
+
+      // Stop all others first
+      audioElements.forEach(({ audio, el }) => {
+        if (!selected.some(item => item.audio === audio)) {
+          fadeOutAndStop(audio, el, 1000);
+        }
+      });
+
+      // Play selected ones
+      selected.forEach(({ audio, el }) => {
+        if (audio.paused) {
+          audio.volume = volumeSlider.value;
+          audio.play();
+          startRain(el.innerText, el, audio);
+        }
       });
     }
 
