@@ -323,12 +323,11 @@
       el.addEventListener('click', (e) => {
         e.stopPropagation();
         if (audio.paused) {
+          audio.volume = volumeSlider.value; // Ensure it's reset
           audio.play();
           startRain(label, el, audio);
         } else {
-          audio.pause();
-          audio.currentTime = 0;
-          stopRain(el);
+          fadeOutAndStop(audio, el, 1000); // Apply fade here too
         }
       });
     });
@@ -384,11 +383,32 @@
       });
     }
 
+    function fadeOutAndStop(audio, el, duration = 1000) {
+      const startVolume = audio.volume;
+      const startTime = performance.now();
+
+      function fade(time) {
+        const elapsed = time - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const newVolume = startVolume * (1 - progress);
+        audio.volume = newVolume;
+
+        if (progress < 1) {
+          requestAnimationFrame(fade);
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.volume = volumeSlider.value; // Reset to original slider volume
+          stopRain(el);
+        }
+      }
+
+      requestAnimationFrame(fade);
+    }
+
     function stopAll() {
       audioElements.forEach(({ audio, el }) => {
-        audio.pause();
-        audio.currentTime = 0;
-        stopRain(el);
+        fadeOutAndStop(audio, el, 1000); // fade out over 1 second
       });
     }
 
