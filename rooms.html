@@ -379,11 +379,11 @@
       el.innerText = label;
       container.appendChild(el);
 
-      let audio = new Audio();
-      const canPlayOgg = audio.canPlayType('audio/ogg; codecs="vorbis"');
-      audio.src = canPlayOgg && src.endsWith('.ogg')
-        ? src
-        : src.replace('/ogg/', '/mp3/').replace('.ogg', '.mp3');
+      const fallbackSrc = src.endsWith('.ogg') ? src.replace('/ogg/', '/mp3/').replace('.ogg', '.mp3') : src;
+      const testAudio = document.createElement('audio');
+      const canPlayOgg = testAudio.canPlayType('audio/ogg; codecs="vorbis"');
+
+      const audio = new Audio(canPlayOgg && src.endsWith('.ogg') ? src : fallbackSrc);
       audio.loop = loop;
       audio.volume = volumeSlider.value;
       audioElements.push({ audio, el });
