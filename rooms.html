@@ -380,26 +380,18 @@
       el.innerText = label;
       container.appendChild(el);
 
-      // Create audio element with preload and fallback sources
-      const audio = document.createElement('audio');
-      audio.preload = "none";
+      const canPlayOgg = new Audio().canPlayType('audio/ogg; codecs="vorbis"') !== '';
+      const isOgg = src.endsWith('.ogg');
+      const finalSrc = isOgg && !canPlayOgg
+        ? src.replace('/ogg/', '/mp3/').replace('.ogg', '.mp3')
+        : src;
+
+      const audio = new Audio(finalSrc);
+      audio.preload = 'none';
       audio.loop = loop;
       audio.volume = volumeSlider.value;
+      audio.load();
 
-      const sourceOgg = document.createElement('source');
-      sourceOgg.src = src;
-      sourceOgg.type = 'audio/ogg';
-      audio.appendChild(sourceOgg);
-
-      if (src.endsWith('.ogg')) {
-        const mp3Src = src.replace('/ogg/', '/mp3/').replace('.ogg', '.mp3');
-        const sourceMp3 = document.createElement('source');
-        sourceMp3.src = mp3Src;
-        sourceMp3.type = 'audio/mpeg';
-        audio.appendChild(sourceMp3);
-      }
-
-      audio.load(); // Ensures sources are registered
       audioElements.push({ audio, el });
 
       el.addEventListener('click', (e) => {
