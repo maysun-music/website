@@ -209,7 +209,7 @@
       .top-bar {
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 0px;
         top: 16px;
         left: 0;
         right: 0;
@@ -219,12 +219,14 @@
       .instruction {
         font-size: 0.8rem;
         text-align: center;
+        margin-bottom: 2px;
       }
 
       .controls {
         align-items: center;
         text-align: center;
         height: auto;
+        margin-top: -16px;
       }
 
       .button-row {
@@ -283,8 +285,8 @@
     const container = document.getElementById('map-container');
     const volumeSlider = document.getElementById('volumeSlider');
 
-    
-    const points = [ 
+
+    const points = [
       [22.0, 47, 'rooms/banff_2024/ogg/h9_loop_bin_glitch.ogg', true, 'sped up grand piano with warp glitches', 1.0, 0.6],
       [27.6, 71, 'rooms/banff_2024/mp3/h9_bin_room_01.mp3', false, 'percussion through delay into speaker and back into mic', 1.1, 0.8],
       [33.1, 85, 'rooms/banff_2024/mp3/h9_bin_room_03.mp3', false, 'room mic capturing a bass and effects through bass amp going through snare with chains', 1.2, 0.9],
