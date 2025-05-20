@@ -345,6 +345,55 @@
     <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
   </div>
 
+  <!-- Add inside <body>, just before your <script> tag -->
+  <div id="mobileUnlock" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(3px);
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: Helvetica, Arial, sans-serif;
+  color: black;
+  cursor: pointer;
+">
+    <div>
+      <p>Tap to begin</p>
+    </div>
+  </div>
+
+  <script>
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const mobileUnlock = document.getElementById('mobileUnlock');
+
+    if (isMobile) {
+      mobileUnlock.style.display = 'flex';
+    }
+
+    mobileUnlock?.addEventListener('click', () => {
+      // Unlock audio context if needed
+      try {
+        const context = new (window.AudioContext || window.webkitAudioContext)();
+        const buffer = context.createBuffer(1, 1, 22050);
+        const source = context.createBufferSource();
+        source.buffer = buffer;
+        source.connect(context.destination);
+        source.start(0);
+      } catch (e) { }
+
+      mobileUnlock.style.display = 'none';
+    });
+  </script>
+
+
   <script>
     const activeRainIntervals = new Map();
     const audioElements = [];
