@@ -10,6 +10,14 @@
       box-sizing: border-box;
     }
 
+    @media (min-width: 601px) {
+      .container {
+        transform: scale(0.80);
+        /* or try 0.85 */
+        transform-origin: center top;
+      }
+    }
+
     html,
     body {
       margin: 0;
@@ -277,16 +285,16 @@
     const volumeSlider = document.getElementById('volumeSlider');
 
     const points = [
-      [15, 47, 'rooms/banff_2024/ogg/h9_loop_bin_glitch.ogg', true, 'sped up grand piano with warp glitches'],
-      [20, 71, 'rooms/banff_2024/mp3/h9_bin_room_01.mp3', false, 'percussion through delay into speaker and back into mic'],
-      [27, 62, 'rooms/banff_2024/mp3/h9_bin_room_03.mp3', false, 'room mic capturing a bass and effects through bass amp going through snare with chains'],
-      [33, 88, 'rooms/banff_2024/ogg/h9_loop_mono_pulse.ogg', true, 'detuned bass into chorus and saturation'],
-      [41, 83, 'rooms/banff_2024/mp3/h9_stereo_room.mp3', false, 'spatialized bass with processed percussion'],
-      [37, 48, 'rooms/banff_2024/mp3/h9_mono_piano.mp3', false, 'grand piano pitched down, played back into the room and brought back to initial pitch'],
-      [44, 61, 'rooms/banff_2024/mp3/h9_mono_bass.mp3', false, 'saturated bass through snare with contact mic'],
-      [46, -8, 'rooms/banff_2024/mp3/h9_bin_room_02.mp3', false, 'processed space'],
-      [52, 65, 'rooms/banff_2024/ogg/h9_loop_bin_drum.ogg', true, 'drums through little bluetooth speaker into a tom with room sound leaking in'],
-      [58, 53, 'rooms/banff_2024/mp3/h9_bin_pianolow.mp3', false, 'slowed down piano with octaver']
+      [22.0, 47, 'rooms/banff_2024/ogg/h9_loop_bin_glitch.ogg', true, 'sped up grand piano with warp glitches'],
+      [27.6, 71, 'rooms/banff_2024/mp3/h9_bin_room_01.mp3', false, 'percussion through delay into speaker and back into mic'],
+      [33.1, 85, 'rooms/banff_2024/mp3/h9_bin_room_03.mp3', false, 'room mic capturing a bass and effects through bass amp going through snare with chains'],
+      [38.7, 88, 'rooms/banff_2024/ogg/h9_loop_mono_pulse.ogg', true, 'detuned bass into chorus and saturation'],
+      [44.2, 110, 'rooms/banff_2024/mp3/h9_stereo_room.mp3', false, 'spatialized bass with processed percussion'],
+      [49.8, 48, 'rooms/banff_2024/mp3/h9_mono_piano.mp3', false, 'grand piano pitched down, played back into the room and brought back to initial pitch'],
+      [55.3, 61, 'rooms/banff_2024/mp3/h9_mono_bass.mp3', false, 'saturated bass through snare with contact mic'],
+      [60.9, -8, 'rooms/banff_2024/mp3/h9_bin_room_02.mp3', false, 'processed space'],
+      [66.4, 70, 'rooms/banff_2024/ogg/h9_loop_bin_drum.ogg', true, 'drums through little bluetooth speaker into a tom with room sound leaking in'],
+      [72.0, 53, 'rooms/banff_2024/mp3/h9_bin_pianolow.mp3', false, 'slowed down piano with octaver']
     ];
 
     points.forEach(([xPercent, yPercent, src, loop, label]) => {
@@ -296,7 +304,7 @@
       const xCenter = 43;
       const spreadScale = 1.75;
       const xOffset = xCenter + (xPercent - xCenter) * spreadScale;
-      el.style.left = `${xOffset + 13}%`;
+      el.style.left = `${xOffset + 0}%`;
       el.style.top = `${yPercent + 20}%`;
 
       el.innerText = label;
