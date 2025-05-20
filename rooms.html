@@ -396,6 +396,7 @@
         el.setAttribute('role', 'button');
         el.setAttribute('aria-label', label);
         el.setAttribute('tabindex', '0');
+        el.dataset.rainDuration = (8 + Math.random() * 4).toFixed(2); // 8–12s per stem
 
         const xCenter = 43;
         const spreadScale = 1.75;
@@ -448,6 +449,8 @@
     function startRain(text, anchorEl, audio) {
       if (activeRainIntervals.has(anchorEl)) return;
 
+      const duration = anchorEl.dataset.rainDuration;
+
       const interval = setInterval(() => {
         if (audio.paused) {
           stopRain(anchorEl);
@@ -461,7 +464,7 @@
         const baseLeft = parseFloat(anchorEl.style.left);
         wrapper.style.left = `${baseLeft + spreadAmount}%`;
         wrapper.style.top = anchorEl.style.top;
-        wrapper.style.animation = `rainDown 10s linear forwards`;
+        wrapper.style.animation = `rainDown ${duration}s linear forwards`;
 
         const words = text.split(' ');
         words.forEach(word => {
@@ -472,7 +475,7 @@
         });
 
         container.appendChild(wrapper);
-        setTimeout(() => wrapper.remove(), 10000);
+        setTimeout(() => wrapper.remove(), duration * 1000);
       }, 400);
 
       activeRainIntervals.set(anchorEl, interval);
