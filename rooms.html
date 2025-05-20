@@ -381,21 +381,29 @@
       el.innerText = label;
       container.appendChild(el);
 
-      const audio = document.createElement('audio');
-      audio.src = src;
-      audio.loop = loop;
-      audio.volume = volumeSlider.value;
-      // Don't call audio.load() until after interaction
-      container.appendChild(audio);
-
-      audioElements.push({ audio, el });
-
       el.addEventListener('click', (e) => {
         e.stopPropagation();
+
+        // Check if this element already has audio assigned
+        let existingEntry = audioElements.find(entry => entry.el === el);
+        let audio = existingEntry ? existingEntry.audio : null;
+
+        // Create audio only on first click (required for mobile)
+        if (!audio) {
+          audio = new Audio(src);
+          audio.loop = loop;
+          audio.volume = volumeSlider.value;
+          audio.load();
+          audioElements.push({ audio, el });
+        }
+
         if (audio.paused) {
           audio.volume = volumeSlider.value;
-          audio.play();
-          startRain(label, el, audio);
+          audio.play().then(() => {
+            startRain(label, el, audio);
+          }).catch(err => {
+            console.warn('Audio play error:', err);
+          });
         } else {
           fadeOutAndStop(audio, el, 1000);
         }
