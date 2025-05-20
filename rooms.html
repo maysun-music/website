@@ -380,23 +380,36 @@
       el.innerText = label;
       container.appendChild(el);
 
-      const fallbackSrc = src.endsWith('.ogg') ? src.replace('/ogg/', '/mp3/').replace('.ogg', '.mp3') : src;
-      const testAudio = document.createElement('audio');
-      const canPlayOgg = testAudio.canPlayType('audio/ogg; codecs="vorbis"');
-
-      const audio = new Audio(canPlayOgg && src.endsWith('.ogg') ? src : fallbackSrc);
+      // Create audio element with preload and fallback sources
+      const audio = document.createElement('audio');
+      audio.preload = "none";
       audio.loop = loop;
       audio.volume = volumeSlider.value;
+
+      const sourceOgg = document.createElement('source');
+      sourceOgg.src = src;
+      sourceOgg.type = 'audio/ogg';
+      audio.appendChild(sourceOgg);
+
+      if (src.endsWith('.ogg')) {
+        const mp3Src = src.replace('/ogg/', '/mp3/').replace('.ogg', '.mp3');
+        const sourceMp3 = document.createElement('source');
+        sourceMp3.src = mp3Src;
+        sourceMp3.type = 'audio/mpeg';
+        audio.appendChild(sourceMp3);
+      }
+
+      audio.load(); // Ensures sources are registered
       audioElements.push({ audio, el });
 
       el.addEventListener('click', (e) => {
         e.stopPropagation();
         if (audio.paused) {
-          audio.volume = volumeSlider.value; // Ensure it's reset
+          audio.volume = volumeSlider.value;
           audio.play();
           startRain(label, el, audio);
         } else {
-          fadeOutAndStop(audio, el, 1000); // Apply fade here too
+          fadeOutAndStop(audio, el, 1000);
         }
       });
     });
