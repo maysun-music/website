@@ -377,10 +377,13 @@
     const volumeSlider = document.getElementById('volumeSlider');
     const audioElements = [];
     const activeRainIntervals = new Map();
-    let audioUnlocked = !isMobile; // desktop = already unlocked
+    let audioUnlocked = false;
 
     if (isMobile) {
       mobileUnlock.style.display = 'flex';
+    } else {
+      audioUnlocked = true;
+      mobileUnlock.remove(); // hide it entirely on desktop
     }
 
     const points = [
@@ -439,6 +442,47 @@
     // Always create points
     createPointElements();
 
+    function startRain(text, anchorEl, audio) {
+      if (activeRainIntervals.has(anchorEl)) return;
+
+      const interval = setInterval(() => {
+        if (audio.paused) {
+          stopRain(anchorEl);
+          return;
+        }
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'rain-label';
+
+        const spreadAmount = (Math.random() - 0.8) * 2;
+        const baseLeft = parseFloat(anchorEl.style.left);
+        wrapper.style.left = `${baseLeft + spreadAmount}%`;
+        wrapper.style.top = anchorEl.style.top;
+        wrapper.style.animation = `rainDown 10s linear forwards`;
+
+        const words = text.split(' ');
+        words.forEach(word => {
+          const wordEl = document.createElement('span');
+          wordEl.innerText = word + ' ';
+          wordEl.style.opacity = (0.15 + Math.random() * 0.45).toFixed(2);
+          wrapper.appendChild(wordEl);
+        });
+
+        container.appendChild(wrapper);
+        setTimeout(() => wrapper.remove(), 10000);
+      }, 400);
+
+      activeRainIntervals.set(anchorEl, interval);
+    }
+
+    function stopRain(anchorEl) {
+      const interval = activeRainIntervals.get(anchorEl);
+      if (interval) {
+        clearInterval(interval);
+        activeRainIntervals.delete(anchorEl);
+      }
+    }
+
     // Unlock interaction on mobile
     mobileUnlock.addEventListener('click', () => {
       audioUnlocked = true;
@@ -454,6 +498,75 @@
         src.start(0);
       } catch (e) { }
     });
+
+    function fadeOutAndStop(audio, el, duration = 1000) {
+      const startVolume = audio.volume;
+      const startTime = performance.now();
+
+      function fade(time) {
+        const elapsed = time - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const newVolume = startVolume * (1 - progress);
+        audio.volume = newVolume;
+
+        if (progress < 1) {
+          requestAnimationFrame(fade);
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.volume = volumeSlider.value;
+          stopRain(el);
+        }
+      }
+
+      requestAnimationFrame(fade);
+    }
+
+    function playAll() {
+      audioElements.forEach(({ audio, el }) => {
+        audio.volume = volumeSlider.value;
+        if (audio.paused) {
+          audio.play();
+          startRain(el.innerText, el, audio);
+        }
+      });
+    }
+
+    function stopAll() {
+      audioElements.forEach(({ audio, el }) => {
+        fadeOutAndStop(audio, el, 1000);
+      });
+    }
+
+    function randomPlay() {
+      const shuffled = [...audioElements].sort(() => 0.5 - Math.random());
+      const count = 2;
+      const selected = shuffled.slice(0, count);
+
+      // Stop all others
+      audioElements.forEach(({ audio, el }) => {
+        if (!selected.some(item => item.audio === audio)) {
+          fadeOutAndStop(audio, el, 1000);
+        }
+      });
+
+      // Play selected
+      selected.forEach(({ audio, el }) => {
+        if (audio.paused) {
+          audio.volume = volumeSlider.value;
+          audio.play();
+          startRain(el.innerText, el, audio);
+        }
+      });
+    }
+
+    // Ensure volume slider stays in sync
+    volumeSlider.addEventListener('input', () => {
+      audioElements.forEach(({ audio }) => {
+        audio.volume = volumeSlider.value;
+      });
+    });
+
   </script>
 
   <div class="description">
