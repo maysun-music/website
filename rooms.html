@@ -421,6 +421,10 @@
         audio.load();
         audioElements.push({ audio, el });
 
+        audio.addEventListener('error', () => {
+          console.error('Error loading audio:', src);
+        });
+
         el.addEventListener('click', (e) => {
           e.stopPropagation();
           if (!audioUnlocked) return;
