@@ -381,12 +381,12 @@
       el.innerText = label;
       container.appendChild(el);
 
-      const audio = new Audio(src);
-
-      audio.preload = 'none';
+      const audio = document.createElement('audio');
+      audio.src = src;
       audio.loop = loop;
       audio.volume = volumeSlider.value;
-      audio.load();
+      // Don't call audio.load() until after interaction
+      container.appendChild(audio);
 
       audioElements.push({ audio, el });
 
