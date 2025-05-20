@@ -393,6 +393,9 @@
       points.forEach(([xPercent, yPercent, src, loop, label, scale = 1.0, opacity = 1.0]) => {
         const el = document.createElement('div');
         el.className = 'label-zone';
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', label);
+        el.setAttribute('tabindex', '0');
 
         const xCenter = 43;
         const spreadScale = 1.75;
@@ -428,6 +431,12 @@
             });
           } else {
             fadeOutAndStop(audio, el, 1000);
+          }
+        });
+
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            el.click();
           }
         });
       });
@@ -481,8 +490,10 @@
       const menu = document.getElementById('mobileMenu');
       if (menu.style.display === 'block') {
         menu.style.display = 'none';
+        document.body.style.overflow = ''; // allow scrolling again
       } else {
         menu.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // prevent scrolling when menu is open
       }
     }
 
