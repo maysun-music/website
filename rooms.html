@@ -378,23 +378,52 @@
       mobileUnlock.style.display = 'flex';
     }
 
-    mobileUnlock?.addEventListener('click', () => {
-      // Unlock audio context if needed
-      try {
-        const context = new (window.AudioContext || window.webkitAudioContext)();
-        const buffer = context.createBuffer(1, 1, 22050);
-        const source = context.createBufferSource();
-        source.buffer = buffer;
-        source.connect(context.destination);
-        source.start(0);
-      } catch (e) { }
-
+    mobileUnlock.addEventListener('click', () => {
       mobileUnlock.style.display = 'none';
+      audioUnlocked = true;
+
+      // Pre-create all Audio elements during gesture
+      points.forEach(([xPercent, yPercent, src, loop, label, scale = 1.0, opacity = 1.0]) => {
+        const el = document.createElement('div');
+        el.className = 'label-zone';
+
+        const xCenter = 43;
+        const spreadScale = 1.75;
+        const xOffset = xCenter + (xPercent - xCenter) * spreadScale;
+        el.style.left = `${xOffset + 0}%`;
+        el.style.top = `${yPercent + 20}%`;
+        el.style.opacity = opacity;
+        el.style.transform = `rotate(-90deg) scale(${scale})`;
+        el.style.transformOrigin = 'left top';
+        el.innerText = label;
+        container.appendChild(el);
+
+        const audio = new Audio(src);
+        audio.loop = loop;
+        audio.volume = volumeSlider.value;
+        audio.load(); // preload
+        audioElements.push({ audio, el });
+
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (audio.paused) {
+            audio.volume = volumeSlider.value;
+            audio.play().then(() => {
+              startRain(label, el, audio);
+            }).catch(err => {
+              console.warn('Audio play error:', err);
+            });
+          } else {
+            fadeOutAndStop(audio, el, 1000);
+          }
+        });
+      });
     });
   </script>
 
 
   <script>
+    let audioUnlocked = false;
     const activeRainIntervals = new Map();
     const audioElements = [];
     const container = document.getElementById('map-container');
@@ -414,50 +443,6 @@
       [72.0, 53, 'rooms/banff_2024/audio/h9_bin_pianolow.mp3', false, 'slowed down piano with octaver', 1.0, 1.0]
     ];
 
-    points.forEach(([xPercent, yPercent, src, loop, label, scale = 1.0, opacity = 1.0]) => {
-      const el = document.createElement('div');
-      el.className = 'label-zone';
-
-      const xCenter = 43;
-      const spreadScale = 1.75;
-      const xOffset = xCenter + (xPercent - xCenter) * spreadScale;
-      el.style.left = `${xOffset + 0}%`;
-      el.style.top = `${yPercent + 20}%`;
-      el.style.opacity = opacity;
-      el.style.transform = `rotate(-90deg) scale(${scale})`;
-      el.style.transformOrigin = 'left top';
-
-      el.innerText = label;
-      container.appendChild(el);
-
-      el.addEventListener('click', (e) => {
-        e.stopPropagation();
-
-        // Check if this element already has audio assigned
-        let existingEntry = audioElements.find(entry => entry.el === el);
-        let audio = existingEntry ? existingEntry.audio : null;
-
-        // Create audio only on first click (required for mobile)
-        if (!audio) {
-          audio = new Audio(src);
-          audio.loop = loop;
-          audio.volume = volumeSlider.value;
-          audio.load();
-          audioElements.push({ audio, el });
-        }
-
-        if (audio.paused) {
-          audio.volume = volumeSlider.value;
-          audio.play().then(() => {
-            startRain(label, el, audio);
-          }).catch(err => {
-            console.warn('Audio play error:', err);
-          });
-        } else {
-          fadeOutAndStop(audio, el, 1000);
-        }
-      });
-    });
 
     function startRain(text, anchorEl, audio) {
       if (activeRainIntervals.has(anchorEl)) return;
