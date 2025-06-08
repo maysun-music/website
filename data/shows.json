@@ -1,10 +1,23 @@
 [
   {
+    "date": "2025-08-01",
+    "venue": "Electric Eclectics",
+    "city": "Meaford, ON, CAN",
+    "type": "upcoming",
+    "url": "https://electric-eclectics.com/"
+  },
+  {
+    "date": "2025-06-20",
+    "venue": "Kaleidoscope",
+    "city": "Brooklyn, NY, USA",
+    "type": "upcoming"
+  },
+  {
     "date": "2025-06-07",
     "collaborators": "w/ Ethan Cohn",
     "venue": "Improv Spaces Music Festival",
     "city": "Roundlake, NY, USA",
-    "type": "upcoming", 
+    "type": "past",
     "url": "https://improvspaces.wordpress.com/"
   },
   {
@@ -12,7 +25,7 @@
     "collaborators": "w/ Joy Guidry & SCRAAATCH",
     "venue": "Fridman Gallery",
     "city": "New York, NY, USA",
-    "type": "past", 
+    "type": "past",
     "url": "https://new-ear.org/2025/03/24/joy-guidry-scraaatch-maysun-in-quartet/"
   },
   {
@@ -22,7 +35,7 @@
     "city": "Brooklyn, NY, USA",
     "type": "past",
     "url": "https://cutelab.nyc/"
-  }, 
+  },
   {
     "date": "2025-04-15",
     "venue": "Cassette",
