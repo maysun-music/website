@@ -1,9 +1,12 @@
 [
   {
-    "title": "TIFT (2025)",
-    "description": "A site-responsive installation at Theatre in the Flesh. Spatial feedback between sound nodes and audience movement.",
+    "title": "TIFT - THE FESTIVAL OF DYONYSOS - UNDERWORLDS (2025)",
+    "type": "A site specific audio reactive sound installation.", 
+    "description": "The Listening Field\nSpeak, whisper, shout.\nThe space hears you, distorts you, and answers back.\n\nVoices drift and return changed.\nNo memory. Only echoes.\n\nPass through. Follow the sound. Take a seat.\nStay as long as you like. The room is listening.",
+    "technical": "Two Daisy Seed microcontrollers record audio through MAX9814 capsules posititioned on different walls. Room sound is captured, transformed, and sent through several audio paths that oscillate over a set period of time. A digital polyphonic synthesizer is programmed to generate chords every few seconds while shifting between specific melodic modes every few minutes. The installation occupied two vacant office rooms, one serving as a transitional space, and the other as the main interactive sound environment.",
     "thumb": "assets/images/thumbs/tift_2025_thumb.jpg",
-    "url": "tift_2025.html"
+    "url": "tift_2025.html",
+    "images": []
   },
   {
     "title": "BANFF CENTRE (2024)",
