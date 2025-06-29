@@ -486,6 +486,80 @@
       margin: 0;
     }
 
+    /* ------------------- INSTALLATIONS -----------------*/
+    .installations-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+
+    .installation-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      text-decoration: none;
+      color: black;
+      transition: transform 0.3s ease;
+      max-width: 800px;
+    }
+
+    .installation-item img {
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+      /* prevent image from shrinking */
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .installation-item:hover {
+      transform: scale(1.02);
+    }
+
+    .installation-label {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    #installations-wrapper {
+      max-width: 750px;
+      margin: 80px auto 100px;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    #installations-visible h3 {
+      text-align: left;
+      font-size: 2rem;
+      margin: 50px 0 20px 0;
+      letter-spacing: 0.05em;
+      font-weight: bold;
+    }
+
+    .installation-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .installation-label {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .installation-description {
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
     /* ------------------- SOCIAL LINKS ------------------- */
     .social-links {
       position: fixed;
@@ -707,7 +781,7 @@
       <a href="forever.html" onclick="event.stopPropagation();">FOREVER IN SOUND</a>
       <a href="#biography" onclick="loadContent('biography')">BIOGRAPHY</a>
       <a href="#activities" onclick="loadContent('activities')">ACTIVITIES</a>
-      <a href="rooms.html" onclick="event.stopPropagation();">LISTENING FIELD</a>
+      <a href="#installations" onclick="event.stopPropagation();">INSTALLATIONS</a>
       <a href="#albums" onclick="loadContent('albums')">ALBUMS</a>
       <a href="#contact" onclick="loadContent('contact')">CONTACT</a>
     </div>
@@ -726,7 +800,7 @@
     <a href="#home" onclick="loadContent('home'); toggleBurgerMenu()">HOME</a>
     <a href="#biography" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
     <a href="#activities" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
-    <a href="rooms.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">LISTENING FIELD</a>
+    <a href="#installations" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">INSTALLATIONS</a>
     <a href="#albums" onclick="loadContent('albums'); toggleBurgerMenu()">ALBUMS</a>
     <a href="forever.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">FOREVER IN SOUND</a>
     <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
@@ -966,6 +1040,64 @@
                                      </a>
                                  </div>`;
             break;
+
+          case 'installations':
+            fetch('data/installations.json')
+              .then(res => res.json())
+              .then(data => {
+                const wrapper = document.createElement('div');
+                wrapper.id = 'installations-wrapper';
+
+                const visible = document.createElement('div');
+                visible.id = 'installations-visible';
+
+                const title = document.createElement('h3');
+                title.textContent = 'INSTALLATIONS';
+                visible.appendChild(title);
+
+                const preview = document.createElement('div');
+                preview.className = 'installations-preview';
+
+                data.forEach(item => {
+                  const container = document.createElement('div');
+                  container.className = 'installation-item';
+
+                  const link = document.createElement('a');
+                  link.href = item.url;
+
+                  const img = document.createElement('img');
+                  img.src = item.thumb;
+                  img.alt = item.title;
+
+                  link.appendChild(img);
+
+                  const text = document.createElement('div');
+                  text.className = 'installation-text';
+
+                  const label = document.createElement('p');
+                  label.className = 'installation-label';
+                  label.textContent = item.title;
+
+                  const desc = document.createElement('p');
+                  desc.className = 'installation-description';
+                  desc.textContent = item.description;
+
+                  text.appendChild(label);
+                  text.appendChild(desc);
+
+                  container.appendChild(link);
+                  container.appendChild(text);
+                  preview.appendChild(container);
+                });
+
+                visible.appendChild(preview);
+                wrapper.appendChild(visible);
+
+                contentContainer.innerHTML = '';
+                contentContainer.appendChild(wrapper);
+              });
+            break;
+
           default:
             content = '<p>Coming Soon.</p>';
         }

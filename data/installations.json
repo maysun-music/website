@@ -1,0 +1,14 @@
+[
+  {
+    "title": "TIFT (2025)",
+    "description": "A site-responsive installation at Theatre in the Flesh. Spatial feedback between sound nodes and audience movement.",
+    "thumb": "assets/images/thumbs/tift_2025_thumb.jpg",
+    "url": "tift_2025.html"
+  },
+  {
+    "title": "BANFF CENTRE (2024)",
+    "description": "Virtual installation adapted from a generative system at The Banff Centre. Built from recordings made with binaural mics, cyclical processing and multi-channel playback.",
+    "thumb": "assets/images/thumbs/banff_3024_thumb.jpg",
+    "url": "banff_2024.html"
+  }
+]

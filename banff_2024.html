@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banff Center 2024</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 601px) {
+      .container {
+        transform: scale(0.80);
+        transform-origin: center top;
+      }
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      font-family: Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 100;
+      line-height: 1;
+    }
+
+    .back-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 40px;
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: black;
+    }
+
+    .instruction {
+      font-size: 0.75rem;
+      color: #444;
+      margin: 0;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 40px;
+      font-size: 0.75rem;
+      text-align: right;
+    }
+
+    .volume-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 6px 0;
+    }
+
+    .volume-row label {
+      font-size: 0.75rem;
+    }
+
+    .controls input[type="range"] {
+      width: 100px;
+      height: 2px;
+      background: black;
+      border-radius: 2px;
+      cursor: pointer;
+      appearance: none;
+    }
+
+    .controls input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      background: black;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .controls input[type="range"]::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      background: black;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .controls button {
+      background: none;
+      border: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-transform: lowercase;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .controls button:hover {
+      font-weight: 600;
+    }
+
+    .container {
+      width: 90vmin;
+      aspect-ratio: 3 / 2;
+      max-width: 1000px;
+      max-height: 90vmin;
+      background-color: white;
+      position: relative;
+      border: none;
+    }
+
+    .label-zone {
+      position: absolute;
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      font-size: 1.5vmin;
+      white-space: nowrap;
+      cursor: pointer;
+      z-index: 1;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .label-zone:hover {
+      opacity: 0.4;
+    }
+
+    .label-zone.hover-flash {
+      transform: scale(1.04) rotate(-90deg);
+      /* include rotate so it doesn’t cancel it */
+      opacity: 0.5;
+    }
+
+    .rain-label {
+      position: absolute;
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      font-size: 1.5vmin;
+      white-space: nowrap;
+      z-index: 0;
+    }
+
+    @keyframes rainDown {
+      0% {
+        transform: translateY(0) rotate(-90deg);
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translateY(100vmin) rotate(-90deg);
+        opacity: 0;
+      }
+    }
+
+    .rain-label span {
+      display: inline-block;
+      pointer-events: none;
+    }
+
+    .description {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 95vw;
+      width: 800px;
+      font-size: 0.65rem;
+      line-height: 1.25;
+      color: black;
+      opacity: 0.7;
+      z-index: 99;
+      text-align: left;
+    }
+
+    .description p {
+      margin: 0 0 10px 0;
+    }
+
+    #mobileUnlock {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(3px);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1.2rem;
+      font-family: Helvetica, Arial, sans-serif;
+      color: black;
+      cursor: pointer;
+    }
+
+    /* ---------- MOBILE STYLES ---------- */
+    @media (max-width: 600px) {
+      .back-link {
+        display: none;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+        top: 16px;
+        left: 0;
+        right: 0;
+        padding: 0 12px;
+      }
+
+      .instruction {
+        font-size: 0.8rem;
+        text-align: center;
+        margin-bottom: 2px;
+      }
+
+      .controls {
+        align-items: center;
+        text-align: center;
+        height: auto;
+        margin-top: -16px;
+      }
+
+      .button-row {
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .volume-row {
+        display: none;
+      }
+
+      .description {
+        font-size: 0.7rem;
+        padding: 0 12px;
+        text-align: left;
+        width: 100%;
+        max-width: 100vw;
+      }
+
+      .container {
+        max-height: 68vmin;
+        margin-top: -270px;
+      }
+    }
+
+    /* ------------------- BURGER & MOBILE MENU ------------------- */
+    .burger-menu {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    .burger-menu div {
+      width: 30px;
+      height: 4px;
+      background: black;
+      margin: 6px 0;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      padding: 20px 0;
+      text-align: center;
+      z-index: 9998;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <div class="back-left">
+      <a href="https://www.maysun.zip" class="back-link">← back</a>
+      <p class="instruction">Click a stem for sound or silence.</p>
+    </div>
+    <div class="controls">
+      <div class="volume-row">
+        <label for="volumeSlider">vol.</label>
+        <input type="range" min="0" max="1" step="0.01" value="0.8" id="volumeSlider" />
+      </div>
+      <div class="button-row">
+        <button onclick="playAll()">Play all</button>
+        <button onclick="stopAll()">Stop</button>
+        <button onclick="randomPlay()">Random</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-wrapper">
+    <div class="container" id="map-container"></div>
+  </div>
+
+  <div class="burger-menu" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="loadContent('home'); toggleBurgerMenu()">HOME</a>
+    <a href="#biography" onclick="loadContent('biography'); toggleBurgerMenu()">BIOGRAPHY</a>
+    <a href="#activities" onclick="loadContent('activities'); toggleBurgerMenu()">ACTIVITIES</a>
+    <a href="installations.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">INSTALLATIONS</a>
+    <a href="#albums" onclick="loadContent('albums'); toggleBurgerMenu()">ALBUMS</a>
+    <a href="forever.html" onclick="event.stopPropagation(); toggleBurgerMenu(); return true;">FOREVER IN SOUND</a>
+    <a href="#contact" onclick="loadContent('contact'); toggleBurgerMenu()">CONTACT</a>
+  </div>
+
+
+  <div id="mobileUnlock" role="button" aria-label="Tap to enter." tabindex="0">
+    <div>
+      <p>Tap to enter.</p>
+    </div>
+  </div>
+
+  <script>
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const mobileUnlock = document.getElementById('mobileUnlock');
+    const container = document.getElementById('map-container');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const audioElements = [];
+    const activeRainIntervals = new Map();
+    let audioUnlocked = false;
+
+
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        mobileUnlock.style.visibility = 'visible';
+        mobileUnlock.style.opacity = '1';
+      });
+    } else {
+      audioUnlocked = true;
+      mobileUnlock.remove(); // hide it entirely on desktop
+    }
+
+    const points = [ // H - V - file - Loop? - label - font size - opacity
+      [22.0, 47, 'installations/banff_2024/audio/h9_loop_glitch.mp3', true, 'sped-up grand piano, warped and glitched', 1.0, 0.6],
+      [27.6, 71, 'installations/banff_2024/audio/h9_loop_room01.mp3', true, 'percussion cyclically processed between mic, effect pedal, and speaker', 0.9, 0.8],
+      [33.1, 85, 'installations/banff_2024/audio/h9_loop_room03.mp3', true, 'room mic capturing bass and effects reamped through snare with chains', 1.0, 0.9],
+      [38.7, 20, 'installations/banff_2024/audio/h9_loop_pulse.mp3', true, 'detuned bass into chorus and saturation', 0.9, 1.0],
+      [44.2, 110, 'installations/banff_2024/audio/h9_loop_bassverb.mp3', true, 'bass spatialized across room, layered with processed percussion', 1.3, 1.0],
+      [49.8, 48, 'installations/banff_2024/audio/h9_loop_piano.mp3', true, 'pitched-down grand piano reintroduced to room, then re-pitched to initial state', 0.8, 0.7],
+      [55.3, 61, 'installations/banff_2024/audio/h9_loop_bass.mp3', true, 'saturated bass through snare with contact mic', 0.9, 1.0],
+      [60.9, 20, 'installations/banff_2024/audio/h9_loop_room02.mp3', true, 'empty room reacting to itself', 0.7, 1.0],
+      [66.4, 85, 'installations/banff_2024/audio/h9_loop_drum.mp3', true, 'drums routed through bluetooth speaker into tom, with room bleed', 1.0, 1.0],
+      [72.0, 53, 'installations/banff_2024/audio/h9_loop_pianolow.mp3', true, 'slowed down piano with octaver', 1.0, 1.0]
+    ];
+
+    function createPointElements() {
+      points.forEach(([xPercent, yPercent, src, loop, label, scale = 1.0, opacity = 1.0]) => {
+        const el = document.createElement('div');
+        el.className = 'label-zone';
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', label);
+        el.setAttribute('tabindex', '0');
+        el.dataset.rainDuration = (8 + Math.random() * 4).toFixed(2); // 8–12s per stem
+
+        const xCenter = 43;
+        const spreadScale = 1.75;
+        const xOffset = xCenter + (xPercent - xCenter) * spreadScale;
+        el.style.left = `${xOffset + 0}%`;
+        el.style.top = `${yPercent + 20}%`;
+        el.style.opacity = opacity;
+        el.style.transform = `rotate(-90deg) scale(${scale})`;
+        el.style.transformOrigin = 'left top';
+        el.innerText = label;
+        container.appendChild(el);
+
+        const audio = new Audio(src);
+        audio.loop = loop;
+        audio.volume = volumeSlider.value;
+        audio.load();
+        audioElements.push({ audio, el });
+
+        audio.addEventListener('error', () => {
+          console.error('Error loading audio:', src);
+        });
+
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!audioUnlocked) return;
+
+          if (audio.paused) {
+            audio.volume = volumeSlider.value;
+            audio.play().then(() => {
+              startRain(label, el, audio);
+            }).catch(err => {
+              console.warn('Audio play error:', err);
+            });
+          } else {
+            fadeOutAndStop(audio, el, 1000);
+          }
+        });
+
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            el.click();
+          }
+        });
+      });
+    }
+
+    // Always create points
+    createPointElements();
+
+    function startRain(text, anchorEl, audio) {
+      if (activeRainIntervals.has(anchorEl)) return;
+
+      const duration = anchorEl.dataset.rainDuration;
+
+      const interval = setInterval(() => {
+        if (audio.paused) {
+          stopRain(anchorEl);
+          return;
+        }
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'rain-label';
+
+        const spreadAmount = (Math.random() - 0.8) * 2;
+        const baseLeft = parseFloat(anchorEl.style.left);
+        wrapper.style.left = `${baseLeft + spreadAmount}%`;
+        wrapper.style.top = anchorEl.style.top;
+        wrapper.style.animation = `rainDown ${duration}s linear forwards`;
+
+        const words = text.split(' ');
+        words.forEach(word => {
+          const wordEl = document.createElement('span');
+          wordEl.innerText = word + ' ';
+          wordEl.style.opacity = (0.15 + Math.random() * 0.45).toFixed(2);
+          wrapper.appendChild(wordEl);
+        });
+
+        container.appendChild(wrapper);
+        setTimeout(() => wrapper.remove(), duration * 1000);
+      }, 400);
+
+      activeRainIntervals.set(anchorEl, interval);
+    }
+
+    // Wave-style hover animation from instruction
+    const instructionText = document.querySelector('.instruction');
+
+    instructionText.addEventListener('mouseenter', () => {
+      const labels = [...document.querySelectorAll('.label-zone')];
+      labels.forEach((el, i) => {
+        setTimeout(() => {
+          const original = el.style.transform;
+          el.style.opacity = '0.4';
+
+          setTimeout(() => {
+            el.style.transform = original;
+            el.style.opacity = '';
+          }, 200);
+        }, i * 30); // subtle delay between each
+      });
+    });
+
+    function stopRain(anchorEl) {
+      const interval = activeRainIntervals.get(anchorEl);
+      if (interval) {
+        clearInterval(interval);
+        activeRainIntervals.delete(anchorEl);
+      }
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+        document.body.style.overflow = ''; // allow scrolling again
+      } else {
+        menu.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // prevent scrolling when menu is open
+      }
+    }
+
+    // Unlock interaction on mobile
+    mobileUnlock.addEventListener('click', () => {
+      audioUnlocked = true;
+      mobileUnlock.style.opacity = '0';
+      setTimeout(() => {
+        mobileUnlock.style.visibility = 'hidden';
+      }, 400); // matches transition duration
+
+      // Create and play an empty buffer to unlock WebAudio if needed
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const buffer = ctx.createBuffer(1, 1, 22050);
+        const src = ctx.createBufferSource();
+        src.buffer = buffer;
+        src.connect(ctx.destination);
+        src.start(0);
+      } catch (e) { }
+    });
+
+    function fadeOutAndStop(audio, el, duration = 1000) {
+      const startVolume = audio.volume;
+      const startTime = performance.now();
+
+      function fade(time) {
+        const elapsed = time - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const newVolume = startVolume * (1 - progress);
+        audio.volume = newVolume;
+
+        if (progress < 1) {
+          requestAnimationFrame(fade);
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.volume = volumeSlider.value;
+          stopRain(el);
+        }
+      }
+
+      requestAnimationFrame(fade);
+    }
+
+    function playAll() {
+      audioElements.forEach(({ audio, el }) => {
+        audio.volume = volumeSlider.value;
+        if (audio.paused) {
+          audio.play();
+          startRain(el.innerText, el, audio);
+        }
+      });
+    }
+
+    function stopAll() {
+      audioElements.forEach(({ audio, el }) => {
+        fadeOutAndStop(audio, el, 1000);
+      });
+    }
+
+    function randomPlay() {
+      const shuffled = [...audioElements].sort(() => 0.5 - Math.random());
+      const count = 2;
+      const selected = shuffled.slice(0, count);
+
+      // Stop all others
+      audioElements.forEach(({ audio, el }) => {
+        if (!selected.some(item => item.audio === audio)) {
+          fadeOutAndStop(audio, el, 1000);
+        }
+      });
+
+      // Play selected
+      selected.forEach(({ audio, el }) => {
+        if (audio.paused) {
+          audio.volume = volumeSlider.value;
+          audio.play();
+          startRain(el.innerText, el, audio);
+        }
+      });
+    }
+
+    // Ensure volume slider stays in sync
+    volumeSlider.addEventListener('input', () => {
+      audioElements.forEach(({ audio }) => {
+        audio.volume = volumeSlider.value;
+      });
+    });
+
+  </script>
+
+  <div class="description">
+    <p>
+      During my 2024 residency at the Banff Centre, I turned a hut into a self-generative sound installation. Two
+      recording systems continuously processed live sound from the space, feeding back into the room and to each other.
+      I interacted with this cyclical processing using drums, grand piano, bass, and modular synthesis. I would create
+      sounds, listen as they were transformed, and respond when it felt right.
+    </p>
+    <p>
+      The sounds were captured with binaural microphones in my ears and room mics, sometimes shaped further by placing
+      objects near the speakers or on amps. Some recordings were spatialized in a quadraphonic setup within the space,
+      further imprinting the room's acoustics into the sound.
+    </p>
+    <p>
+      This page shares fragments of that process.
+      The full residency experience can be viewed <a href="https://youtu.be/yQGrodUm9tY" target="_blank"
+        rel="noopener noreferrer">here</a>.
+    </p>
+  </div>
+
+</body>
+
+</html>
