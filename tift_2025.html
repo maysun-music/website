@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,7 +67,7 @@
     }
 
     .menu-logo {
-      height: 24px;
+      height: 32px;
       cursor: pointer;
     }
 
@@ -74,7 +75,8 @@
       display: flex;
       gap: 15px;
       overflow-x: auto;
-      padding-left: 10px;
+      padding-left: 20px;
+      padding-right: 30px;
     }
 
     .menu-items a {
@@ -82,6 +84,16 @@
       color: black;
       font-size: 14px;
       white-space: nowrap;
+    }
+
+    .menu-items a:hover {
+      transform: scale(1.2);
+      transition: transform 0.2s ease;
+    }
+
+    .menu-logo:hover {
+      transform: scale(1.2);
+      transition: transform 0.2s ease;
     }
 
     /* Top-left burger menu - Mobile only */
@@ -106,7 +118,7 @@
       background: white;
       border: 1px solid #ccc;
       padding: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .mobile-menu a {
@@ -159,7 +171,9 @@
 
   <!-- DESKTOP BOTTOM MENU -->
   <div class="menu-container">
-    <img src="assets/images/logos/3MAYSUN_clear.png" alt="More" class="menu-logo">
+    <a href="#home" onclick="loadContent('home')">
+      <img src="assets/images/logos/3MAYSUN_clear.png" alt="More" class="menu-logo">
+    </a>
     <div class="menu-items">
       <a href="#home" onclick="loadContent('home')">HOME</a>
       <a href="forever.html">FOREVER IN SOUND</a>
@@ -201,4 +215,5 @@
     }
   </script>
 </body>
+
 </html>
