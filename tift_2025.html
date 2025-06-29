@@ -67,10 +67,6 @@
     </div>
   </div>
 
-  <div class="description" id="tift-description">
-    <!-- Content will be loaded from JSON -->
-  </div>
-
   <script>
     fetch('data/installations.json')
       .then(res => res.json())
@@ -80,18 +76,17 @@
 
         const descContainer = document.getElementById('tift-description');
 
-        // Split the description on first newline to bold the first line
         const [firstLine, ...rest] = tift.description.split('\n');
         const remainingText = rest.join('<br>');
 
         descContainer.innerHTML = `
-          <h1>${tift.title}</h1>
-          <p><em>${tift.type}</em></p>
-          <br>
-          <p><strong>${firstLine}</strong><br>${remainingText}</p>
-          <h2>Technical Information</h2>
-          <p>${tift.technical}</p>
-        `;
+      <h1>${tift.title}</h1>
+      <p><em>${tift.type}</em><br>${tift.location} — ${tift.dates}</p>
+      <br>
+      <p><strong>${firstLine}</strong><br>${remainingText}</p>
+      <h2>Technical Information</h2>
+      <p>${tift.technical}</p>
+    `;
       })
       .catch(err => {
         console.error('Failed to load installation description:', err);
