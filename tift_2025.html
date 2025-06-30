@@ -50,6 +50,18 @@
       margin: 10px 0;
     }
 
+    #audioToggleBtn {
+      background: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+      border: 1px solid black;
+      padding: 3px 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0;
+      /* <-- makes it square */
+    }
+
     /* Bottom menu - Desktop only */
     .menu-container {
       position: fixed;
@@ -201,8 +213,11 @@
     <div class="video-wrapper">
       <video autoplay loop muted playsinline width="100%" height="auto">
         <source src="installations/tift_2025/video/tift_2025_reel.mp4" type="video/mp4">
-        Your browser does not support the video tag.
+        Your browser does not support this video.
       </video>
+      <div style="margin-top: 10px;">
+        <button id="audioToggleBtn">SOUND ON</button>
+      </div>
     </div>
 
     <div class="description" id="tift-description"></div>
@@ -241,6 +256,52 @@
       menu.classList.toggle('visible');
     }
   </script>
+
+  <script>
+    const audio = new Audio('installations/tift_2025/audio/tift_2025_audioloop.mp3');
+    audio.loop = true;
+    audio.volume = 0;
+    let isPlaying = false;
+    let fadeInterval;
+
+    const toggleBtn = document.getElementById('audioToggleBtn');
+
+    function fadeAudio(targetVolume, direction) {
+      clearInterval(fadeInterval);
+      fadeInterval = setInterval(() => {
+        const step = 0.02;
+        if (direction === 'in') {
+          if (audio.volume < targetVolume) {
+            audio.volume = Math.min(audio.volume + step, targetVolume);
+          } else {
+            clearInterval(fadeInterval);
+          }
+        } else {
+          if (audio.volume > 0) {
+            audio.volume = Math.max(audio.volume - step, 0);
+          } else {
+            audio.pause();
+            clearInterval(fadeInterval);
+          }
+        }
+      }, 100);
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (!isPlaying) {
+        audio.currentTime = 0;
+        audio.play();
+        fadeAudio(0.8, 'in');
+        toggleBtn.textContent = 'SOUND OFF';
+        isPlaying = true;
+      } else {
+        fadeAudio(0, 'out');
+        toggleBtn.textContent = 'SOUND ON';
+        isPlaying = false;
+      }
+    });
+  </script>
+
 </body>
 
 </html>
