@@ -290,6 +290,7 @@
     toggleBtn.addEventListener('click', () => {
       if (!isPlaying) {
         audio.currentTime = 0;
+        audio.load(); 
         audio.play();
         fadeAudio(0.8, 'in');
         toggleBtn.textContent = 'SOUND OFF';
