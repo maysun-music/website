@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Activities</title>
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="styles/global.css">
+
+  <!-- Activities-specific styles -->
+  <style>
+    .content-container {
+      text-align: center;
+    }
+
+    .activities-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .activities-content li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 16px;
+      line-height: 0.2;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .activities-content li::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      margin: 0 60px;
+      height: 0.5px;
+      background: black;
+      z-index: 0;
+      opacity: 1;
+      transition: opacity 2s ease;
+    }
+
+    .activities-content strong,
+    .activities-content .date,
+    .activities-content .location {
+      background: white;
+      z-index: 1;
+      padding: 0 10px;
+    }
+
+    .activities-content .date {
+      font-weight: bold;
+      padding-right: 10px;
+    }
+
+    .activities-content .collaborators {
+      position: relative;
+      z-index: 2;
+      background: white;
+      text-transform: uppercase;
+      font-size: 8px;
+      padding: 0 5px;
+    }
+
+    .activities-content a {
+      color: black;
+      text-decoration: none;
+      position: relative;
+      z-index: 2;
+      border-bottom: 1px dotted black;
+      background: white;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .activities-content a:hover {
+      color: #edd500;
+      border-bottom-color: #edd500;
+    }
+
+    /* WORD DRIFT */
+    .word-drift {
+      display: inline-block;
+      position: relative;
+      transition: transform 120s ease-in-out, opacity 30s ease-in-out;
+      will-change: transform, opacity;
+      z-index: 3;
+    }
+
+    li.drifting-line-fade::before {
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      transition: opacity 15s ease, height 15s ease;
+    }
+
+    li.drifting {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    li.drifting .date,
+    li.drifting .location,
+    li.drifting strong,
+    li.drifting a {
+      background: transparent !important;
+      border: none !important;
+      z-index: 3 !important;
+    }
+
+    @keyframes cloudPulse {
+
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: translate(var(--tx), var(--ty)) scale(var(--scale));
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .word-drift.pulsing {
+      animation: cloudPulse 6s ease-in-out infinite;
+    }
+
+    /* MOBILE ADJUSTMENTS */
+    @media (max-width: 740px) {
+      .activities-content li {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 10px 0;
+      }
+
+      .activities-content li::before {
+        display: none;
+      }
+
+      .activities-content .date,
+      .activities-content strong,
+      .activities-content .location {
+        display: block;
+        line-height: 1.1;
+        margin-bottom: 3px;
+      }
+
+      .activities-content .collaborators {
+        position: relative;
+        z-index: 2;
+        background: white;
+        display: block;
+        font-size: 12px;
+        line-height: 1.2;
+        word-break: break-word;
+        white-space: normal;
+        margin-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- load global nav -->
+  <script>
+    fetch('components/nav.html')
+      .then(res => res.text())
+      .then(html => document.body.insertAdjacentHTML('afterbegin', html));
+  </script>
+
+  <div class="content-container">
+    <h3>UPCOMING SHOWS</h3>
+    <div class="activities-content">
+      <ul id="upcoming-shows"></ul>
+    </div>
+
+    <h3>PAST PERFORMANCES</h3>
+    <div class="activities-content">
+      <ul id="past-shows"></ul>
+    </div>
+
+    <h3>RESIDENCIES</h3>
+    <div class="activities-content">
+      <ul id="residencies"></ul>
+    </div>
+  </div>
+
+  <!-- Activities scripts -->
+  <script>
+    function formatDate(dateStr) {
+      const parts = dateStr.split('-');
+      if (parts.length === 3) {
+        const [y, m, d] = parts;
+        return new Date(y, m - 1, d)
+          .toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+          .toUpperCase().replace(/ /g, ' ');
+      } else if (parts.length === 2) {
+        const [y, m] = parts;
+        return new Date(y, m - 1, 1)
+          .toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })
+          .toUpperCase().replace(/ /g, ' ');
+      }
+      return dateStr;
+    }
+
+    function renderShow(show) {
+      const date = `<span class="date">${formatDate(show.date)}</span>`;
+      const collab = show.collaborators
+        ? `<span class="collaborators">${show.collaborators}</span>`
+        : '';
+      const loc = `<span class="location">${show.venue} – ${show.city}</span>`;
+      return `<li>${date}${collab}${show.url
+        ? ` <a href="${show.url}" target="_blank">${loc}</a>`
+        : loc}</li>`;
+    }
+
+    async function fetchShows() {
+      try {
+        const res = await fetch('data/shows.json');
+        const shows = await res.json();
+        document.getElementById('upcoming-shows').innerHTML =
+          shows.filter(s => s.type === 'upcoming').map(renderShow).join('');
+        document.getElementById('past-shows').innerHTML =
+          shows.filter(s => s.type === 'past').map(renderShow).join('');
+      } catch (err) {
+        console.error('Failed to load shows.json:', err);
+      }
+    }
+
+    async function fetchResidencies() {
+      try {
+        const res = await fetch('data/residencies.json');
+        const list = await res.json();
+        document.getElementById('residencies').innerHTML =
+          list.map(item => {
+            const date = `<span class="date">${formatDate(item.date)}</span>`;
+            const loc = `<span class="location">${item.venue} – ${item.city}</span>`;
+            return `<li>${date} ${loc}</li>`;
+          }).join('');
+      } catch (err) {
+        console.error('Failed to load residencies.json:', err);
+      }
+    }
+
+    function wrapWordsRecursively(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const words = node.textContent.trim().split(/\s+/);
+        const frag = document.createDocumentFragment();
+        words.forEach((w, i) => {
+          const span = document.createElement('span');
+          span.className = 'word-drift';
+          span.textContent = w;
+          frag.appendChild(span);
+          if (i < words.length - 1) frag.appendChild(document.createTextNode(' '));
+        });
+        node.replaceWith(frag);
+      } else {
+        node.childNodes.forEach(wrapWordsRecursively);
+      }
+    }
+
+    function getClusterTarget() {
+      const rect = document.querySelector('#upcoming-shows').getBoundingClientRect();
+      return { x: rect.left + rect.width / 2, y: rect.bottom + 112 };
+    }
+
+    function startWordDriftAnimation() {
+      const items = document.querySelectorAll('#past-shows li, #residencies li');
+      items.forEach(item => wrapWordsRecursively(item));
+
+      setTimeout(() => {
+        items.forEach(item => {
+          item.classList.add('drifting-line-fade');
+          setTimeout(() => item.classList.add('drifting'), 15000);
+        });
+      }, 2000);
+
+      setTimeout(() => {
+        document.querySelectorAll('.word-drift').forEach(span => {
+          const rect = span.getBoundingClientRect();
+          const dx = getClusterTarget().x - (rect.left + rect.width / 2);
+          const dy = getClusterTarget().y - (rect.top + rect.height / 2);
+          span.style.transform = `translate(${dx + (Math.random() - 0.5) * 320}px,${dy + (Math.random() - 0.5) * 180}px) scale(${0.8 + Math.random() * 0.5})`;
+          span.style.opacity = (0.55 + Math.random() * 0.15).toFixed(2);
+        });
+        document.querySelectorAll('h3').forEach(h => { h.style.transition = 'opacity 40s ease-out'; h.style.opacity = '0'; });
+      }, 5000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchShows()
+        .then(() => fetchResidencies())
+        .then(() => startWordDriftAnimation());
+    });
+  </script>
+</body>
+
+</html>

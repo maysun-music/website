@@ -6,6 +6,13 @@ body {
   color: black;
 }
 
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 160px 20px 100px;
+  box-sizing: border-box;
+}
+
 .menu-container {
   position: fixed;
   bottom: 0;
@@ -105,3 +112,44 @@ body {
     display: none;
   }
 }
+
+
+
+    /* ------------------- SOCIAL LINKS ------------------- */
+    .social-links {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .social-links a {
+      margin: 0 5px;
+      position: relative;
+    }
+
+    .social-links img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .social-links a span {
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%) rotate(90deg);
+      opacity: 0;
+      font-size: 10px;
+      color: black;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .social-links a:hover span {
+      opacity: 1;
+    }
+
+    .social-links a:hover img {
+      opacity: 0.5;
+    }

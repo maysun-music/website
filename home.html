@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAYSUN</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        /* Overlay text style (optional default) */
+        .overlay-text {
+            position: absolute;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            user-select: none;
+            transition: opacity 2.5s ease;
+            opacity: 0;
+            width: 300px;
+        }
+
+        /* make the content wrapper center its kids
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 80px auto 100px;
+            padding: 0 20px;
+            max-width: 800px;
+        } */
+
+        /* center and size down the home image */
+        .image-container {
+            text-align: center;
+            width: 100%;
+        }
+
+        .image-container img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ------------------- PHOTO CREDIT ------------------- */
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            /* aligns credit to the right */
+            margin: 0;
+        }
+
+        .photo-credit {
+            font-size: 8px;
+            color: black;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 2px 4px;
+            border-radius: 3px;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Global navigation -->
+    <script>
+        fetch('components/nav.html')
+            .then(res => res.text())
+            .then(html => document.body.insertAdjacentHTML('afterbegin', html));
+    </script>
+
+    <!-- Main content -->
+    <div class="content-container" id="content">
+        <div class="image-container">
+            <img id="home-image" src="assets/images/misc/2024_MAYSUN_highland park_chienn tai_centered.png"
+                alt="MAYSUN - Photo by Chienn Tai">
+            <div class="photo-credit">Photo: Chienn Tai (2024)</div>
+        </div>
+    </div>
+
+    <!-- Overlay effect -->
+    <script>
+        let overlayActive = false;
+        let overlayRequestId = null;
+
+        function addOverlayText() {
+            const clone = document.createElement('img');
+            clone.src = 'images/3MAYSUN_clear.png';
+            clone.classList.add('overlay-text');
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            clone.style.left = x + 'px';
+            clone.style.top = y + 'px';
+            document.body.appendChild(clone);
+            requestAnimationFrame(() => {
+                clone.style.opacity = '0';
+            });
+            setTimeout(() => clone.remove(), 3000);
+        }
+
+        function startOverlay() {
+            overlayActive = true;
+            const startTime = performance.now() + 2000;
+            let count = 0;
+
+            function animate() {
+                if (!overlayActive) return;
+                const now = performance.now();
+                if (now > startTime && count < 300) {
+                    addOverlayText();
+                    count++;
+                }
+                overlayRequestId = requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            startOverlay();
+        });
+
+        // Pause overlay when leaving home
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash !== '' && overlayActive) {
+                overlayActive = false;
+                cancelAnimationFrame(overlayRequestId);
+            }
+        });
+    </script>
+</body>
+
+</html>
