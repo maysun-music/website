@@ -185,7 +185,7 @@
       box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
       overflow-y: auto;
       padding: 20px;
-      transition: right 0.3s ease;
+      transition: right 1.0s ease;
       z-index: 900;
     }
 
@@ -219,15 +219,32 @@
       text-decoration: none;
     }
 
+    /* --- hover to open the side-nav --- */
+    .nav-toggle {
+      /* match your panel’s transition speed */
+      transition: right 1s ease;
+    }
+
+    .nav-toggle:hover {
+      /* push the button out of the way when open */
+      right: 288px;
+      /* = side-nav width (280px) + 8px margin */
+    }
+
+    .nav-toggle:hover~.side-nav,
+    .side-nav:hover {
+      right: 0;
+      /* slide the panel fully into view */
+    }
+
     html {
       overflow-y: scroll;
     }
 
-    html.no-scroll,
     body.no-scroll {
       overflow: hidden;
-      height: 100%;
     }
+
 
     @media (max-width: 768px) {
       .nav-toggle {
@@ -254,11 +271,13 @@
       });
   </script>
 
-  <div class="nav-toggle" onclick="toggleSideNav()"><span>CLICK FOR INDEX</span></div>
+<div class="nav-container">
+  <div class="nav-toggle"><span>SECTION MAP</span></div>
   <div class="side-nav" id="sideNav">
     <h2>Sections</h2>
-    <div id="sectionLinks"></div>
-  </div>
+   <div id="sectionLinks"></div>
+   </div>
+ </div>
 
   <div class="content-container">
     <h1 style="font-size: 80px;"><b>FOREVER IN SOUND</b></h1>
@@ -468,18 +487,19 @@
       }
     }
 
-    function toggleSideNav() {
-      const nav = document.getElementById('sideNav');
-      const isOpen = nav.classList.toggle('open');
+    // function toggleSideNav(e) {
+    //   if (e) {
+    //     e.stopPropagation();
+    //   }
+    //   const nav = document.getElementById('sideNav');
+    //   const isOpen = nav.classList.toggle('open');
 
-      if (isOpen) {
-        document.body.classList.add('no-scroll');
-        document.documentElement.classList.add('no-scroll'); // html element
-      } else {
-        document.body.classList.remove('no-scroll');
-        document.documentElement.classList.remove('no-scroll');
-      }
-    }
+    //   if (isOpen) {
+    //     document.body.classList.add('no-scroll');
+    //   } else {
+    //     document.body.classList.remove('no-scroll');
+    //   }
+    // }
 
     let navCloseTimer = null;
     const sideNav = document.getElementById('sideNav');
@@ -487,6 +507,9 @@
     sideNav.addEventListener('mouseleave', () => {
       navCloseTimer = setTimeout(() => {
         sideNav.classList.remove('open');
+        // **also** clear the no-scroll class
+        document.body.classList.remove('no-scroll');
+        document.documentElement.classList.remove('no-scroll');
       }, 3000);
     });
 
