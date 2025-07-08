@@ -8,6 +8,14 @@
   <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon">
   <!-- only your global styles here -->
   <link rel="stylesheet" href="styles/global.css">
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('visible');
+    }
+  </script>
+  
   <style>
     /* minimal on-page styles */
     .content-container {
@@ -34,14 +42,14 @@
 </head>
 
 <body>
-  <!-- inject your nav -->
+  <!-- NAV FETCH-->
   <script>
     fetch('components/nav.html')
       .then(r => r.text())
       .then(html => document.body.insertAdjacentHTML('afterbegin', html));
   </script>
 
-  <!-- main content area -->
+  <!-- CONTENT -->
   <div class="content-container" id="content"></div>
 
   <script>
