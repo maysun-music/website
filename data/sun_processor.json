@@ -1,0 +1,39 @@
+{
+    "id": "sun_processor",
+    "title": "SUN PROCESSOR",
+    "main_image": "assets/images/diy_devices/sun_processor/main_synth_1600w.JPG",
+    "short_description": "This performance instrument uses the surrounding space as source material, capturing sound through an embedded microphone and shaping it in real time. Each momentary switch triggers a deeply curated sonic world, using rhythm, looping, repeats, and granular processing to create soundscapes. It sculpts the room into evolving patterns and tones. An additional polyphonic synth voice adds harmonic layers, allowing you to recapture and blend them into the processing. Everything is focused on shaping space.",
+    "back_story": "I designed this synth after years of searching for the perfect setup. I moved from hardware synths to modular synthesis, from using samplers to working entirely in a DAW and many other combinations. My process has always been shaped by reamping sounds into a space, and it felt disconnected from that processs in live performances. More recently, I started using a simple microphone with guitar pedals and my DAW, trying to bring the space into the performance itself. Still, feeling the need for something more direct, portable, and with stronger musical intention, I created this device to give me full control in a compact, standalone setup. There is no need for a computer, interface, pedals, or microphones. Everything is built in.",
+    "future": "Planned improvements include designing a custom PCB for a slimmer profile, adding more input options, expanding the LED design, adding more output options for flexible routing, creating additional soundscape states as well as optimizing CPU usage and delegating some processing to analog circuitry.",
+    "components": [
+        "Daisy Seed microcontroller",
+        "MAX9814 microphone preamp",
+        "DotStar 8×8 LED matrix",
+        "16 momentary switches",
+        "6 potentiometers",
+        "1 toggle switch",
+        "power switch",
+        "1/8\" mono input jack",
+        "1/8\" stereo output jack"
+    ],
+    "gallery": [
+        "assets/images/diy_devices/sun_processor/bts01_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts02_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts03_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts04_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts05_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts06_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts07_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts08_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts09_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts10_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts11_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts12_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts13_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts14_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts15_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts16_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts17_synth_900h.JPG",
+        "assets/images/diy_devices/sun_processor/bts18_synth_900h.JPG"
+    ]
+}
