@@ -177,14 +177,14 @@
   </script>
 
   <div class="content-container">
-    <h3>UPCOMING SHOWS</h3>
+    <h3>UPCOMING PERFORMANCES</h3>
     <div class="activities-content">
-      <ul id="upcoming-shows"></ul>
+      <ul id="upcoming-performances"></ul>
     </div>
 
     <h3>PAST PERFORMANCES</h3>
     <div class="activities-content">
-      <ul id="past-shows"></ul>
+      <ul id="past-performances"></ul>
     </div>
 
     <h3>RESIDENCIES</h3>
@@ -226,9 +226,9 @@
       try {
         const res = await fetch('data/shows.json');
         const shows = await res.json();
-        document.getElementById('upcoming-shows').innerHTML =
+        document.getElementById('upcoming-performances').innerHTML =
           shows.filter(s => s.type === 'upcoming').map(renderShow).join('');
-        document.getElementById('past-shows').innerHTML =
+        document.getElementById('past-performances').innerHTML =
           shows.filter(s => s.type === 'past').map(renderShow).join('');
       } catch (err) {
         console.error('Failed to load shows.json:', err);
@@ -268,12 +268,12 @@
     }
 
     function getClusterTarget() {
-      const rect = document.querySelector('#upcoming-shows').getBoundingClientRect();
+      const rect = document.querySelector('#upcoming-performances').getBoundingClientRect();
       return { x: rect.left + rect.width / 2, y: rect.bottom + 112 };
     }
 
     function startWordDriftAnimation() {
-      const items = document.querySelectorAll('#past-shows li, #residencies li');
+      const items = document.querySelectorAll('#past-performances li, #residencies li');
       items.forEach(item => wrapWordsRecursively(item));
 
       setTimeout(() => {
