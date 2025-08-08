@@ -69,7 +69,7 @@
     "id": "cymbal_controller",
     "title": "CYMBAL CONTROLLER",
     "year": "2024",
-    "url": "cymbal-controller.html",
+    "url": "cymbal_controller.html",
     "main_image": "assets/images/diy_devices/gyro/main_gyro_1600w.jpg",
     "short_description": "This device uses a Teensy 4.1 and MPU9250 to turn cymbal motion into 4 continuous MIDI CC signals (Y+, Y–, X+, X–), allowing real-time control of spatialization, textures, and other effects. The unit recalibrates its center when still, includes switches to mute CC channels for easier mapping in Ableton, and features a sensitivity knob for scaling data. It appears as USB-Device to any DAW. Paired with a hand-hammered steel cymbal from a previous DIY project, the system enables tactile, gesture-based modulation while performing.",
     "back_story": "I wanted a more tactile way to control sound. Something portable, expressive, and performable. Using only a cymbal and a laptop, I could shape spatial textures and effects from an acoustic source in real time. This paired naturally with a steel cymbal I shaped and hand-hammered in 2021, turning it into both an acoustic and electronic instrument.",
