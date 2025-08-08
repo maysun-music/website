@@ -6,111 +6,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DIY Tools</title>
   <link rel="stylesheet" href="styles/global.css" />
-  <style>
-    body {
-      font-family: Helvetica, Arial, sans-serif;
-      background-color: white;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+  body{font-family:Helvetica,Arial,sans-serif;background:#fff;margin:0;padding:0}
+  #globalNav{width:100%}
+  h1.page-title{text-align:center;font-size:2rem;margin:50px auto 20px;font-weight:bold;letter-spacing:.05em;max-width:750px;padding:0 20px}
 
-    #globalNav {
-      width: 100%;
-    }
+  .instrument-list{display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:800px;margin:0 auto;padding:2rem 1rem 4rem}
+  .instrument-item{text-align:center;margin-bottom:4rem;position:relative}
+  .instrument-title{font-weight:bold;font-size:1.2rem;margin-bottom:.2rem}
+  .instrument-year{font-size:.9rem;color:#000000;margin-bottom:.5rem}
 
-    h1.page-title {
-      text-align: center;
-      font-size: 2rem;
-      margin: 50px auto 20px;
-      font-weight: bold;
-      letter-spacing: 0.05em;
-      max-width: 750px;
-      padding: 0 20px;
-    }
+  .instrument-image-container{position:relative;display:inline-block;cursor:pointer;overflow:visible;max-height:300px}
+  .instrument-image{
+    max-height:160px;
+    height:auto;
+    width:auto;
+    max-width:100%;
+    display:block;
+    transition:filter .35s ease,transform .35s ease,opacity .35s ease;
+  }
 
-    .instrument-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-    }
+  /* blur + lighten + fade — no white box, no shadow */
+  .instrument-image-container:hover .instrument-image,
+  .instrument-image-container:focus .instrument-image {
+    filter:blur(8px) brightness(1.1);
+    opacity:0.75; /* fade for white wash effect */
+    transform:scale(1.01);
+  }
 
-    .instrument-item {
-      text-align: center;
-      margin-bottom: 4rem;
-      position: relative;
-    }
+  /* text overlay with no background */
+  .instrument-overlay{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:min(1100px,92vw);
+    padding:0;
+    text-align:center;
+    z-index:10;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .35s ease;
+    background:transparent;
+  }
+  .instrument-image-container:hover .instrument-overlay,
+  .instrument-image-container:focus .instrument-overlay{opacity:1}
 
-    .instrument-title {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-bottom: 0.2rem;
-    }
+  .instrument-description{display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .instrument-description>div{font-size:clamp(14px,1.8vw,20px);line-height:1.35;letter-spacing:.01em;color:#000}
+  .instrument-description span{margin-top:.9rem;font-style:italic;font-size:clamp(12px,1.3vw,18px);color:#000000;opacity:.9}
 
-    .instrument-year {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 0.5rem;
-    }
-
-    .instrument-image-container {
-      position: relative;
-      max-height: 500px;
-      overflow: hidden;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .instrument-image {
-      max-height: 500px;
-      height: auto;
-      width: auto;
-      max-width: 100%;
-      display: block;
-      transition: opacity 0.3s ease-in-out;
-    }
-
-    .instrument-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(255, 255, 255, 0.96);
-      color: black;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      font-size: 0.95rem;
-      line-height: 1.4;
-      text-align: center;
-    }
-
-    .instrument-image-container:hover .instrument-overlay,
-    .instrument-image-container:focus .instrument-overlay {
-      opacity: 1;
-    }
-
-    .instrument-description {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .instrument-description span {
-      font-style: italic;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      opacity: 0.5;
-    }
-  </style>
+  @media (max-width:560px){
+    .instrument-image-container{max-height:260px}
+    .instrument-image{max-height:260px}
+  }
+</style>
 </head>
 
 <body>
