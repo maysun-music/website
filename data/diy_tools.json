@@ -1,0 +1,68 @@
+[
+  {
+    "id": "cycl",
+    "title": "CYCL",
+    "year": "2025",
+    "url": "cycl.html",
+    "main_image": "assets/images/diy_devices/cycl/main_synth_1600w.jpg",
+    "short_description": "This performance instrument uses surrounding space as source material, capturing sound through an embedded microphone and shaping it in real time. Each momentary switch triggers deeply curated processing, using looping, repeats, and granular synthesis to create full soundscapes. It sculpts the room into evolving patterns and tones that cycle back for further transformation. The instrument also features a polyphonic synth voice to add harmonic layers into the processing. Everything is aimed at shaping space.",
+    "back_story": "I designed this synth after years of trying out different setups. I moved from hardware synths to modular, to samplers, to working entirely in a DAW and many other combinations. My album work has always been shaped by reamping sounds into a space, and I’ve been trying to link that process to live performances for a while. Wanting something more intentional, portable, and easy to improvise with led me to create this device.",
+    "future": "Planned improvements include designing a custom PCB for a slimmer profile, adding more input and output options, expanding the LED design, creating new soundscape states, optimizing CPU usage, and delegating some processing to analog circuitry.",
+    "components": [
+      "Daisy Seed microcontroller",
+      "MAX9814 microphone preamp",
+      "DotStar 8×8 LED matrix",
+      "16 momentary switches",
+      "6 potentiometers",
+      "1 toggle switch",
+      "power switch",
+      "1/8\" mono input jack",
+      "1/8\" stereo output jack",
+      "found wood",
+      "recycled acrylic sheet"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/cycl/bts01_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts02_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts03_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts04_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts05_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts06_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts07_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts08_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts09_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts10_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts11_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts12_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts13_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts14_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts15_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts16_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts17_synth_900h.jpg",
+      "assets/images/diy_devices/cycl/bts18_synth_900h.jpg"
+    ]
+  },
+  {
+    "id": "node-1",
+    "title": "NODE-1",
+    "year": "2025",
+    "url": "node-1.html",
+    "main_image": "assets/images/diy_devices/node-1/main_node1_1600w.jpg",
+    "short_description": "Node-1 is a wall-mounted listening device. It captures ambient room sound such as voices, footsteps, and movement, and transforms it using granular textures and layered delays. It shifts through different internal states over a 30-minute cycle. A stabilizing synth voice plays slow chords that change qualities every few minutes, helping anchor the space when feedback becomes intense.",
+    "back_story": "Node-1 is the foundation for CYCL. I was looking for a way to shape room sound into soundscapes. Reactive, but also generative. With multiple nodes, any space becomes a spatial listening system.",
+    "future": "This is the first step of a bigger project. To be continued...",
+    "components": [
+      "Daisy Seed microcontroller",
+      "MAX9814 microphone preamp",
+      "LED indicator",
+      "1/8\" mono output jack",
+      "recycled acrylic sheet"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/node-1/bts01_node1_900h.jpg",
+      "assets/images/diy_devices/node-1/bts02_node1_900h.jpg",
+      "assets/images/diy_devices/node-1/bts03_node1_900h.jpg",
+      "assets/images/diy_devices/node-1/bts04_node1_900h.jpg"
+    ]
+  }
+]

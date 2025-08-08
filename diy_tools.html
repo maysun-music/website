@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIY Tools</title>
+  <link rel="stylesheet" href="styles/global.css" />
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    #globalNav {
+      width: 100%;
+    }
+
+    h1.page-title {
+      text-align: center;
+      font-size: 2rem;
+      margin: 50px auto 20px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      max-width: 750px;
+      padding: 0 20px;
+    }
+
+    .instrument-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .instrument-item {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .instrument-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .instrument-year {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .instrument-image-container {
+      position: relative;
+      max-height: 500px;
+      overflow: hidden;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .instrument-image {
+      max-height: 500px;
+      height: auto;
+      width: auto;
+      max-width: 100%;
+      display: block;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .instrument-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.96);
+      color: black;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .instrument-image-container:hover .instrument-overlay,
+    .instrument-image-container:focus .instrument-overlay {
+      opacity: 1;
+    }
+
+    .instrument-description {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .instrument-description span {
+      font-style: italic;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="globalNav"></div>
+  <h1 class="page-title">DIY/TOOLS</h1>
+
+  <div class="instrument-list" id="instrumentList"></div>
+
+  <script>
+    // Load global nav
+    fetch('components/nav.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('globalNav').innerHTML = html;
+        const navScript = document.createElement('script');
+        navScript.src = 'components/nav.js';
+        document.body.appendChild(navScript);
+      });
+
+    // Load diy_tools
+    fetch('data/diy_tools.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('instrumentList');
+        data.forEach(instrument => {
+          const item = document.createElement('div');
+          item.className = 'instrument-item';
+
+          const title = document.createElement('div');
+          title.className = 'instrument-title';
+          title.textContent = instrument.title;
+
+          const year = document.createElement('div');
+          year.className = 'instrument-year';
+          year.textContent = `(${instrument.year})`;
+
+          const imageContainer = document.createElement('div');
+          imageContainer.className = 'instrument-image-container';
+
+          const image = document.createElement('img');
+          image.className = 'instrument-image';
+          image.src = instrument.main_image;
+          image.alt = instrument.title;
+
+          const overlay = document.createElement('div');
+          overlay.className = 'instrument-overlay';
+
+          const descriptionWrap = document.createElement('div');
+          descriptionWrap.className = 'instrument-description';
+
+          const descriptionText = document.createElement('div');
+          descriptionText.textContent = `${instrument.short_description.slice(0, 180)}...`;
+
+          const clickHint = document.createElement('span');
+          clickHint.textContent = 'Click for more';
+
+          descriptionWrap.appendChild(descriptionText);
+          descriptionWrap.appendChild(clickHint);
+          overlay.appendChild(descriptionWrap);
+
+          imageContainer.appendChild(image);
+          imageContainer.appendChild(overlay);
+
+          imageContainer.addEventListener('click', () => {
+            window.location.href = instrument.url;
+          });
+
+          item.appendChild(title);
+          item.appendChild(year);
+          item.appendChild(imageContainer);
+
+          container.appendChild(item);
+        });
+      });
+  </script>
+</body>
+
+</html>
