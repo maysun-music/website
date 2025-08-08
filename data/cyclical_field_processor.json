@@ -1,0 +1,41 @@
+{
+    "id": "cyclical_field_processor",
+    "title": "CYCLICAL FIELD PROCESSOR",
+    "main_image": "assets/images/diy_devices/cyclical_field_processor/main_synth_1600w.JPG",
+    "short_description": "This performance instrument uses surrounding space as source material, capturing sound through an embedded microphone and shaping it in real time. Each momentary switch triggers deeply curated processing, using looping, repeats, and granular synthesis to create full soundscapes. It sculpts the room into evolving patterns and tones that cycle back for further transformation. The instrument also features a polyphonic synth voice to add harmonic layers into the processing. Everything is aimed at shaping space.",
+    "back_story": "I designed this synth after years of trying out different setups. I moved from hardware synths to modular, to samplers, to working entirely in a DAW and many other combinations. My album work has always been shaped by reamping sounds into a space, and I’ve been trying to link that process to live performances for a while. Wanting something more intentional, portable, and easy to improvise with led me to create this device.",
+    "future": "Planned improvements include designing a custom PCB for a slimmer profile, adding more input and output options, expanding the LED design, creating new soundscape states, optimizing CPU usage, and delegating some processing to analog circuitry.",
+    "components": [
+        "Daisy Seed microcontroller",
+        "MAX9814 microphone preamp",
+        "DotStar 8×8 LED matrix",
+        "16 momentary switches",
+        "6 potentiometers",
+        "1 toggle switch",
+        "power switch",
+        "1/8\" mono input jack",
+        "1/8\" stereo output jack",
+        "found wood",
+        "recycled acrylic sheet"
+    ],
+    "gallery": [
+        "assets/images/diy_devices/cyclical_field_processor/bts01_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts02_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts03_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts04_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts05_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts06_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts07_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts08_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts09_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts10_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts11_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts12_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts13_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts14_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts15_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts16_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts17_synth_900h.JPG",
+        "assets/images/diy_devices/cyclical_field_processor/bts18_synth_900h.JPG"
+    ]
+}
