@@ -64,5 +64,34 @@
       "assets/images/diy_devices/node-1/bts03_node1_900h.jpg",
       "assets/images/diy_devices/node-1/bts04_node1_900h.jpg"
     ]
+  },
+  {
+    "id": "cymbal_controller",
+    "title": "CYMBAL CONTROLLER",
+    "year": "2024",
+    "url": "cymbal-controller.html",
+    "main_image": "assets/images/diy_devices/gyro/main_gyro_1600w.jpg",
+    "short_description": "This device uses a Teensy 4.1 and MPU9250 to turn cymbal motion into 4 continuous MIDI CC signals (Y+, Y–, X+, X–), allowing real-time control of spatialization, textures, and other effects. The unit recalibrates its center when still, includes switches to mute CC channels for easier mapping in Ableton, and features a sensitivity knob for scaling data. It appears as USB-Device to any DAW. Paired with a hand-hammered steel cymbal from a previous DIY project, the system enables tactile, gesture-based modulation while performing.",
+    "back_story": "I wanted a more tactile way to control sound. Something portable, expressive, and performable. Using only a cymbal and a laptop, I could shape spatial textures and effects from an acoustic source in real time. This paired naturally with a steel cymbal I shaped and hand-hammered in 2021, turning it into both an acoustic and electronic instrument.",
+    "future": "Future versions will focus on improved stability, including more consistent calibration behavior and refined motion filtering for smoother control.",
+    "components": [
+      "Teensy 4.1 microcontroller",
+      "MPU9250 gyroscope/accelerometer",
+      "4 toggle switches",
+      "1 potentiometer",
+      "1 button",
+      "B-stock maple",
+      "recycled acrylic sheet",
+      "velcro mount"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/gyro/bts01_gyro_900h.jpg",
+      "assets/images/diy_devices/gyro/bts02_gyro_900h.jpg",
+      "assets/images/diy_devices/gyro/bts03_gyro_900h.jpg",
+      "assets/images/diy_devices/gyro/bts04_gyro_900h.jpg",
+      "assets/images/diy_devices/gyro/bts05_gyro_900h.jpg",
+      "assets/images/diy_devices/gyro/bts06_gyro_900h.jpg",
+      "assets/images/diy_devices/gyro/bts07_gyro_900h.jpg"
+    ]
   }
 ]
