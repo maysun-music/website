@@ -15,7 +15,8 @@
     .content-container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 160px 20px 100px;
+      box-sizing: border-box;
     }
 
     .main-image {
@@ -27,7 +28,7 @@
     }
 
     h1 {
-      font-size: 148px;
+      font-size: clamp(40px, 12vw, 100px);
       font-weight: bold;
       margin: 20px 0 10px 0;
       line-height: 1.1;
@@ -148,12 +149,15 @@
       });
   </script>
 
-  <div id="nav-placeholder"></div>
+  <div id="globalNav"></div>
   <script>
     fetch('components/nav.html')
       .then(res => res.text())
-      .then(data => {
-        document.getElementById('nav-placeholder').innerHTML = data;
+      .then(html => {
+        document.getElementById('globalNav').innerHTML = html;
+        const navScript = document.createElement('script');
+        navScript.src = 'components/nav.js';
+        document.body.appendChild(navScript);
       });
   </script>
 
