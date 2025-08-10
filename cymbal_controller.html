@@ -2,113 +2,90 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CYMBAL CONTROLLER</title>
-    <link rel="stylesheet" href="styles/global.css" />
-    <style>
-        body {
-            margin: 0;
-            font-family: Helvetica, Arial, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CYMBAL CONTROLLER</title>
+  <link rel="stylesheet" href="styles/global.css" />
+  <style>
+    body { margin: 0; font-family: Helvetica, Arial, sans-serif; }
 
-        .content-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 160px 20px 100px;
-            box-sizing: border-box;
-        }
+    .content-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 160px 20px 100px;
+      box-sizing: border-box;
+    }
 
-        .main-image {
-            width: 100%;
-            height: auto;
-            margin: 10px 0 20px 0;
-        }
+    .main-image {
+      width: 100%;
+      height: auto;
+      margin: 10px 0 20px 0;
+    }
 
-        h1 {
-            font-size: clamp(40px, 12vw, 100px);
-            font-weight: bold;
-            margin: 20px 0 10px 0;
-            line-height: 1.1;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
+    h1 {
+      font-size: clamp(40px, 12vw, 100px);
+      font-weight: bold;
+      margin: 20px 0 10px 0;
+      line-height: 1.1;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
 
-        p,
-        .section p {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
+    p, .section p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
 
-        .section h2 {
-            margin-bottom: 0;
-        }
+    .section h2 { margin-bottom: 0; }
 
-        .carousel {
-            display: flex;
-            overflow-x: hidden;
-            gap: 5px;
-            padding: 10px 0;
-            position: relative;
-        }
+    .carousel {
+      display: flex;
+      overflow-x: hidden;
+      gap: 5px;
+      padding: 10px 0;
+      position: relative;
+    }
 
-        .carousel-track {
-            display: flex;
-            gap: 5px;
-            min-width: 200%;
-            animation: scroll 30s linear infinite;
-        }
+    .carousel-track {
+      display: flex;
+      gap: 5px;
+      min-width: 200%;
+      animation: scroll 15s linear infinite;
+    }
 
-        .carousel img {
-            height: 400px;
-            flex-shrink: 0;
-            scroll-snap-align: start;
-        }
+    .carousel img {
+      height: 400px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
 
-        @keyframes scroll {
-            0% {
-                transform: translateX(0%);
-            }
+    @keyframes scroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
 
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .section {
-            margin: 40px 0;
-        }
-
-        .section ul {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-
-        .section li {
-            margin-bottom: 6px;
-        }
-
-        .section:last-of-type {
-            padding-bottom: 100px;
-        }
-    </style>
+    .section { margin: 40px 0; }
+    .section ul { padding-left: 20px; margin-top: 10px; }
+    .section li { margin-bottom: 6px; }
+    .section:last-of-type { padding-bottom: 100px; }
+  </style>
 </head>
 
 <body>
 
-    <div class="content-container" id="deviceContent"></div>
+  <div class="content-container" id="deviceContent"></div>
 
-    <script>
-        fetch('data/diy_tools.json')
-            .then(res => res.json())
-            .then(devices => {
-                const device = devices.find(d => d.id === 'cymbal_controller');
-                const container = document.getElementById('deviceContent');
-                const duplicatedGallery = device.gallery.concat(device.gallery);
+  <script>
+    fetch('data/diy_tools.json')
+      .then(res => res.json())
+      .then(devices => {
+        const device = devices.find(d => d.id === 'cymbal_controller');
+        const container = document.getElementById('deviceContent');
+        const duplicatedGallery = device.gallery.concat(device.gallery);
 
-                container.innerHTML = `
+        container.innerHTML = `
           <h1>${device.title}</h1>
           <img src="${device.main_image}" alt="Main Image" class="main-image" />
 
@@ -144,21 +121,36 @@
             </div>
           </div>
         `;
-            });
-    </script>
 
-    <div id="globalNav"></div>
-    <script>
-        fetch('components/nav.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('globalNav').innerHTML = html;
-                const navScript = document.createElement('script');
-                navScript.src = 'components/nav.js';
-                document.body.appendChild(navScript);
-            });
-    </script>
+        // Compute NEXT based on array order (wrap around)
+        const currentIndex = devices.findIndex(d => d.id === 'cymbal_controller');
+        const next = devices[(currentIndex + 1) % devices.length];
+
+        // Plain text NEXT link (right aligned, no box)
+        const nav = document.createElement('div');
+        nav.style.textAlign = 'right';
+        nav.style.marginTop = '20px';
+        nav.innerHTML = `<a href="${next.url}" aria-label="Next instrument" style="text-decoration:none;color:inherit;">NEXT →</a>`;
+        container.appendChild(nav);
+
+        // Keyboard: Right arrow goes next
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') location.href = next.url;
+        });
+      });
+  </script>
+
+  <div id="globalNav"></div>
+  <script>
+    fetch('components/nav.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('globalNav').innerHTML = html;
+        const navScript = document.createElement('script');
+        navScript.src = 'components/nav.js';
+        document.body.appendChild(navScript);
+      });
+  </script>
 
 </body>
-
 </html>

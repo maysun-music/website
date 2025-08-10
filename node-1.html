@@ -7,10 +7,7 @@
   <title>NODE-1</title>
   <link rel="stylesheet" href="styles/global.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: Helvetica, Arial, sans-serif;
-    }
+    body { margin: 0; font-family: Helvetica, Arial, sans-serif; }
 
     .content-container {
       max-width: 800px;
@@ -36,17 +33,14 @@
       letter-spacing: 0.5px;
     }
 
-    p,
-    .section p {
+    p, .section p {
       font-size: 18px;
       line-height: 1.6;
       margin-top: 0;
       margin-bottom: 0;
     }
 
-    .section h2 {
-      margin-bottom: 0;
-    }
+    .section h2 { margin-bottom: 0; }
 
     .carousel {
       display: flex;
@@ -60,7 +54,7 @@
       display: flex;
       gap: 5px;
       min-width: 200%;
-      animation: scroll 30s linear infinite;
+      animation: scroll 15s linear infinite;
     }
 
     .carousel img {
@@ -70,31 +64,21 @@
     }
 
     @keyframes scroll {
-      0% {
-        transform: translateX(0%);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
     }
 
-    .section {
-      margin: 40px 0;
-    }
+    .section { margin: 40px 0; }
+    .section ul { padding-left: 20px; margin-top: 10px; }
+    .section li { margin-bottom: 6px; }
 
-    .section ul {
-      padding-left: 20px;
-      margin-top: 10px;
-    }
+    .section:last-of-type { padding-bottom: 100px; }
 
-    .section li {
-      margin-bottom: 6px;
-    }
-
-    .section:last-of-type {
-      padding-bottom: 100px;
-    }
+    /* (Optional) remove these old box styles entirely
+    .next-nav { ... }
+    .next-nav a { ... }
+    .next-nav a:hover { ... }
+    */
   </style>
 </head>
 
@@ -146,6 +130,22 @@
             </div>
           </div>
         `;
+
+        // ▶️ figure out NEXT based on array order (wrap to first)
+        const currentIndex = devices.findIndex(d => d.id === 'node-1');
+        const next = devices[(currentIndex + 1) % devices.length];
+
+        // ▶️ plain text NEXT link (no box)
+        const nav = document.createElement('div');
+        nav.style.textAlign = 'right';
+        nav.style.marginTop = '20px';
+        nav.innerHTML = `<a href="${next.url}" aria-label="Next instrument" style="text-decoration:none;color:inherit;">NEXT →</a>`;
+        container.appendChild(nav);
+
+        // ▶️ keyboard: Right arrow goes next
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') location.href = next.url;
+        });
       });
   </script>
 
@@ -162,5 +162,4 @@
   </script>
 
 </body>
-
 </html>
