@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MAYSUN — CYCL / NODE‑1 One‑Pager</title>
+    <meta name="description"
+        content="CYCL and NODE-1 by MAYSUN: portable, adaptable spatial audio systems and instrument design." />
+    <style>
+        :root {
+            --fg: #111;
+            --muted: #666;
+            --bg: #fff;
+            --maxw: 860px;
+            --pad: clamp(16px, 3vw, 32px);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+        }
+
+        .wrap {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: calc(var(--pad) * 2) var(--pad) calc(var(--pad) * 3);
+        }
+
+        header h1 {
+            font-size: clamp(28px, 6vw, 44px);
+            letter-spacing: 0.5px;
+            margin: 0 0 6px 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        header .tagline {
+            font-size: clamp(14px, 2.4vw, 18px);
+            color: var(--muted);
+            margin: 4px 0 0 0;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e6e6e6;
+            margin: 28px 0;
+        }
+
+        h2 {
+            font-size: clamp(18px, 3.2vw, 24px);
+            margin: 0 0 10px 0;
+            letter-spacing: 0.2px;
+        }
+
+        p {
+            margin: 0 0 14px 0;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 1.1em;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        /* Optional media slots you can populate from JSON later */
+        .media {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr;
+            margin-top: 8px;
+        }
+
+        .media figure {
+            margin: 0;
+        }
+
+        .media img,
+        .media video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        footer {
+            margin-top: 32px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrap" role="main">
+        <header>
+            <h1>ETIENNE MASON / MAYSUN</h1>
+            <p class="tagline">Sound Artist &amp; Composer | Portable Spatial Audio Systems &amp; Instrument Design</p>
+        </header>
+
+        <hr class="divider" />
+
+        <section aria-labelledby="about">
+            <h2 id="about">About Me</h2>
+            <p>I am a composer, musician, and sound artist creating immersive sonic environments through modular
+                systems, custom instruments, and cyclical processing. I develop adaptable, site-responsive installations
+                and performances where sound, space, and listener are inseparable.</p>
+        </section>
+
+
+        <section aria-labelledby="cycl-node" style="margin-top: 120px; text-align: center;">
+            <h2 id="cycl-node"
+                style="font-size: clamp(28px, 6vw, 44px); letter-spacing: 0.5px; margin: 0 0 6px 0; line-height: 1.1; text-transform: uppercase;">
+                CYCL &amp; NODE-1
+            </h2>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                <figure style="margin: 0 auto;">
+                    <img src="assets/images/diy_devices/cycl/main_synth_1600w.jpg" alt="CYCL synthesizer"
+                        style="width: 40%; height: auto; display: block; object-fit: cover; margin: 0 auto;">
+                </figure>
+                <figure style="margin: 0 auto;">
+                    <img src="assets/images/diy_devices/node-1/main_node1_1600w_side.jpg" alt="NODE-1 device"
+                        style="width: 40%; height: auto; display: block; object-fit: cover; margin: 0 auto;">
+                </figure>
+            </div>
+        </section>
+
+        <section aria-labelledby="overview">
+            <h2 id="overview">Project Overview</h2>
+            <p>CYCL is a custom-built performance synthesizer designed to capture and process sound in real time. NODE-1
+                is a network of portable listening devices that autonomously alter and cycle audio through a space,
+                creating evolving, site-specific sound environments.</p>
+
+            <p>Together, they form a scalable and adaptable system capable of spatializing audio in non-traditional
+                spaces. They can capture and process anything in the room, from my own performance to other musicians or
+                the sounds of the audience, making each presentation a collaborative listening experience shaped by
+                those present.</p>
+
+            <p>This is an ongoing body of work that I am continuing to expand. Upcoming development focuses on learning
+                to design PCBs, refining hardware and firmware for greater control and more varied sonic states, and
+                exploring new modes of interaction between CYCL and NODE-1 in both large-scale systems and intimate,
+                improvised setups. Future plans include wireless state control to keep the sound network coherent.</p>
+
+            <p>Housings are built from recycled and street-found materials. The first CYCL enclosure was constructed
+                from found wood and reclaimed acrylic, giving the instrument a distinct physical presence while reducing
+                waste.
+            </p>
+        </section>
+        <p style="text-align: center; font-size: 0.95em; color: #666; margin-top: 80px;">
+            Spatial Nodes: Listening to audience and shaping the space.
+        </p>
+        <figure style="margin: 20px auto; text-align: center;">
+            <img src="assets/images/diy_devices/node-1/node1mockup.jpg" alt="NODE-1 installation mockup"
+                style="width: 80%; height: auto; display: block; margin: 0 auto;">
+        </figure>
+
+        <hr class="divider" />
+
+        <section aria-labelledby="goals">
+            <h2 id="goals">Goals</h2>
+            <ul>
+                <li>Develop additional sound states and optimize the code for stability and flexibility.</li>
+                <li>Improve musical playability, interaction, and overall sound quality.</li>
+                <li>Design and build a PCB so the system is more compact and can fit more easily into found objects.
+                </li>
+                <li>Integrate a wireless network for scalable deployment of NODE-1 units.</li>
+                <li>Experiment with different musicians and instruments within the system.</li>
+                <li>Refine the physical design for durability, portability, and usability.</li>
+                <li>Test the system with live audiences to evaluate engagement and response.</li>
+            </ul>
+
+            <hr class="divider" />
+
+            <section aria-labelledby="why">
+                <h2 id="why">Why It Matters</h2>
+                <p>I wish for immersive, interactive sound to be possible in any space, not only in specialized rooms.
+                    This project builds tools that are portable, scalable, and easy to set up so more people can
+                    experience spatial sound.</p>
+
+                <p>The system can include non‑musicians and non‑technical participants, inviting audiences to shape what
+                    they hear. It supports collaboration with other arts, adapts to galleries and found spaces alike,
+                    and keeps the focus on curiosity, play, and shared listening.</p>
+            </section>
+
+            <footer>
+                <p>
+                    <strong>Website:</strong> <a href="https://maysun.zip" target="_blank">maysun.zip</a> |
+                    <strong>Phone:</strong> <a href="tel:+19296637640">929&nbsp;663&nbsp;7640</a> |
+                    <strong>Email:</strong> <a href="mailto:maysun.booking@gmail.com">maysun.booking@gmail.com</a>
+                </p>
+            </footer>
+    </main>
+</body>
+
+</html>
