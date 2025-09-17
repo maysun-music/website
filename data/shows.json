@@ -1,11 +1,18 @@
 [
   {
+    "date": "2025-11-06",
+    "venue": "Dada Bar",
+    "city": "Brooklyn, NY, USA",
+    "type": "upcoming",
+    "url": "https://dadabar.nyc/event/6251682/735086334/generational-dis-connect-with-declan-sheehy-moss-and-maysun" 
+  },
+  {
     "date": "2025-09-04",
     "collaborators": "w/ Kengchakaj",
     "venue": "Nublu",
     "city": "New York, NY, USA",
     "type": "past",
-    "url": "https://nublu.net/"
+    "url": "https://nublu.net/" 
   },
   {
     "date": "2025-08-21",
