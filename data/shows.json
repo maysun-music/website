@@ -1,10 +1,23 @@
 [
+    {
+    "date": "2025-11-26",
+    "venue": "Silence Please",
+    "city": "Brooklyn, NY, USA",
+    "type": "upcoming"
+  },
   {
     "date": "2025-11-06",
     "venue": "Dada Bar",
     "city": "Brooklyn, NY, USA",
     "type": "upcoming",
     "url": "https://www.eventbrite.com/e/generational-disconnect-with-declan-sheehy-moss-and-maysun-tickets-1711249626699?aff=oddtdtcreator" 
+  },
+  {
+    "date": "2025-10-09",
+    "collaborators": "w/ hillary",
+    "venue": "Silence Please",
+    "city": "New York, NY, USA",
+    "type": "upcoming"
   },
   {
     "date": "2025-09-04",
