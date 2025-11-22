@@ -1,12 +1,19 @@
 [
-    {
+  {
+    "date": "2025-12-12",
+    "venue": "UAAD",
+    "city": "Brooklyn, NY, USA",
+    "type": "upcoming",
+    "url": "https://www.uaad.art/"
+  },
+  {
     "date": "2025-11-26",
     "venue": "Silence Please",
     "city": "Brooklyn, NY, USA",
     "type": "upcoming",
     "url": "https://link.dice.fm/S231ae8c4ff5?dice_id=S231ae8c4ff5"
   },
-    {
+  {
     "date": "2025-11-15",
     "venue": "Transmitter Brewing",
     "city": "Brooklyn, NY, USA",
@@ -18,7 +25,7 @@
     "venue": "Dada Bar",
     "city": "Brooklyn, NY, USA",
     "type": "past",
-    "url": "https://www.eventbrite.com/e/generational-disconnect-with-declan-sheehy-moss-and-maysun-tickets-1711249626699?aff=oddtdtcreator" 
+    "url": "https://www.eventbrite.com/e/generational-disconnect-with-declan-sheehy-moss-and-maysun-tickets-1711249626699?aff=oddtdtcreator"
   },
   {
     "date": "2025-10-09",
@@ -33,7 +40,7 @@
     "venue": "Nublu",
     "city": "New York, NY, USA",
     "type": "past",
-    "url": "https://nublu.net/" 
+    "url": "https://nublu.net/"
   },
   {
     "date": "2025-08-21",
