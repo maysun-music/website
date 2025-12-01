@@ -1,8 +1,15 @@
 [
+    {
+    "date": "2026-01-10",
+    "venue": "Reforesters Laboratory",
+    "city": "Brooklyn, NY, USA",
+    "type": "upcoming",
+    "url": "https://reforesters.io/events.html"
+  },
   {
     "date": "2025-12-12",
     "venue": "UAAD",
-    "city": "Brooklyn, NY, USA",
+    "city": "New York, NY, USA",
     "type": "upcoming",
     "url": "https://www.uaad.art/"
   },
