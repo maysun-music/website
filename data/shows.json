@@ -1,23 +1,38 @@
 [
-    {
-    "date": "2026-01-10",
+  {
+    "date": "2026-02-03",
+    "collaborators": "w/ Ethan Cohn",
+    "venue": "Brothers & Wash",
+    "city": "Brooklyn, NY, USA",
+    "type": "upcoming",
+    "url": "https://reforesters.io/events.html"
+  },
+  {
+    "date": "2026-01-30",
     "venue": "Reforesters Laboratory",
     "city": "Brooklyn, NY, USA",
     "type": "upcoming",
     "url": "https://reforesters.io/events.html"
   },
-    {
+  {
     "date": "2026-01-26",
     "venue": "TBD",
     "city": "Brooklyn, NY, USA",
     "type": "upcoming",
-    "url": "http://www.maysun.zip"
+    "url": "http://www.maysun.zip/activities"
+  },
+  {
+    "date": "2025-12-21",
+    "venue": "Yesternow Records",
+    "city": "Brooklyn, NY, USA",
+    "type": "past",
+    "url": "http://www.maysun.zip/activities"
   },
   {
     "date": "2025-12-12",
     "venue": "UAAD",
     "city": "New York, NY, USA",
-    "type": "upcoming",
+    "type": "past",
     "url": "https://www.uaad.art/"
   },
   {
