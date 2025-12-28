@@ -30,9 +30,10 @@
     /* Main content area */
     .content-container {
       width: calc(100% - 150px);
-      margin: 0;
+      margin: 0 auto;
       padding: 40px 40px 40px 40px;
       box-sizing: border-box;
+      max-width: 900px;
     }
 
     h1 {
@@ -64,7 +65,7 @@
       width: 150px;
       height: calc(100vh - 60px);
       background: white;
-      padding: 20px;
+      padding: 20px 30px 20px 10px;
       overflow-y: auto;
       z-index: 500;
     }
@@ -184,8 +185,9 @@
     .custom-audio-wrapper {
       border: 1px solid black;
       padding: 0;
-      display: inline-block;
+      display: block;
       max-width: 320px;
+      width: 100%;
     }
 
     .custom-audio-wrapper audio {
@@ -206,7 +208,7 @@
 
       .content-container {
         width: 100%;
-        padding: 20px;
+        padding: 80px 20px 20px 20px;
       }
 
       h1 {
