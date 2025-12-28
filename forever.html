@@ -1,98 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forever In Sound</title>
-
+  
   <!-- GLOBAL NAV STYLES -->
-  <link rel="stylesheet" href="styles/global.css">
-
-        <script src="components/nav.js"></script>
-
+  <link rel="stylesheet" href="../styles/global.css">
+  <script src="../components/nav.js"></script>
+  
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: Helvetica, Arial, sans-serif;
-      background: white;
-      color: black;
-      text-align: left;
-      overflow-x: hidden;
-    }
-
-    html,
-    body {
-      scroll-behavior: smooth;
-      max-width: 100vw;
-    }
-
-    .content-container {
-      width: 100%;
-      margin: 0 auto;
-      padding: 20px 40px 20px 20px;
       box-sizing: border-box;
     }
 
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      background: white;
+      color: black;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Main content area */
+    .content-container {
+      width: calc(100% - 150px);
+      margin: 0;
+      padding: 40px 40px 40px 40px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 80px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
     .section {
-      padding: 30px 0 0;
+      padding: 60px 0;
+      min-height: 50vh;
     }
 
     .section-title {
       font-size: 2rem;
-      line-height: 1.2;
-      margin: 0 0 0.5rem 0;
+      margin-bottom: 1rem;
     }
 
-    .photo {
-      display: block;
-      margin: 2em 0;
-      max-width: 600px;
+    .section p {
+      margin-bottom: 1em;
+      line-height: 1.6;
     }
 
-    /* Audio */
-    .audio-track {
-      font-size: 0.9rem;
-      margin: 1.2rem 0;
-    }
-
-    .track-top-line {
-      font-style: italic;
-    }
-
-    .track-instruments {
-      font-size: 0.65rem;
-      font-style: italic;
-      color: #444;
-      margin-top: 0.2rem;
-    }
-
-    .custom-audio-wrapper {
+    /* Grid Navigation - Desktop only */
+    .grid-nav {
+      position: fixed;
+      right: 0;
+      top: 60px;
+      width: 150px;
+      height: calc(100vh - 60px);
       background: white;
-      border: 1px solid black;
-      padding: 0;
-      display: inline-block;
-      width: 100%;
-      max-width: 320px;
-      margin-top: 0.5rem;
-      overflow: hidden;
-      box-sizing: border-box;
+      padding: 20px;
+      overflow-y: auto;
+      z-index: 500;
     }
 
-    .custom-audio-wrapper audio {
-      width: 100%;
-      height: 36px;
-      border: none;
-      outline: none;
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(5, 25px);
+      gap: 2px;
+      margin-top: 20px;
+    }
+
+    .grid-square {
+      width: 25px;
+      height: 25px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .grid-square.filled {
+      background: black;
+      border-color: black;
+    }
+
+    .grid-square.active {
+      transform: scale(1.3);
+      z-index: 10;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    }
+
+    .grid-square:hover {
+      transform: scale(1.2);
+      z-index: 9;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: fixed;
+      background: black;
+      color: white;
+      padding: 8px 12px;
+      font-size: 11px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      max-width: 200px;
+    }
+
+    .tooltip.visible {
+      opacity: 1;
+    }
+
+    /* Media - Images, Videos, Audio */
+    .photo {
+      max-width: 600px;
+      margin: 2em 0;
       display: block;
     }
 
-    /* Video */
     .video-row-2up {
       display: flex;
-      gap: 5px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin: 2em 0;
       flex-wrap: wrap;
     }
 
@@ -100,14 +139,16 @@
       position: relative;
       flex: 1;
       min-width: 300px;
+      max-width: 400px;
       background: black;
       cursor: pointer;
       overflow: hidden;
+      aspect-ratio: 16/9;
     }
 
-    .youtube-thumb {
+    .youtube-placeholder img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       object-fit: cover;
     }
@@ -118,144 +159,70 @@
       left: 50%;
       width: 68px;
       height: 48px;
-      background: url('https://img.icons8.com/ios-filled/100/ffffff/play-button-circled.png') no-repeat center center;
+      background: url('https://img.icons8.com/ios-filled/100/ffffff/play-button-circled.png') no-repeat center;
       background-size: contain;
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
 
+    .audio-track {
+      margin: 2em 0;
+    }
 
-    @media (max-width: 860px) {
+    .track-top-line {
+      font-style: italic;
+      margin-bottom: 0.5em;
+    }
+
+    .track-instruments {
+      font-size: 0.65rem;
+      font-style: italic;
+      color: #444;
+      margin-bottom: 0.5em;
+    }
+
+    .custom-audio-wrapper {
+      border: 1px solid black;
+      padding: 0;
+      display: inline-block;
+      max-width: 320px;
+    }
+
+    .custom-audio-wrapper audio {
+      width: 100%;
+      height: 36px;
+      display: block;
+    }
+
+    iframe {
+      margin: 2em 0;
+    }
+
+    /* Mobile: hide grid, full width content */
+    @media (max-width: 768px) {
+      .grid-nav {
+        display: none;
+      }
+
+      .content-container {
+        width: 100%;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
       .video-row-2up {
         flex-direction: column;
       }
 
       .youtube-placeholder {
-        min-width: 100% !important;
-      }
-    }
-
-    @media (max-width: 768px) {
-
-      .content-container {
-        margin: 0 auto !important;
-        padding: 100px 20px 20px 20px;
-        width: 100%;
-        max-width: 100vw;
-        box-sizing: border-box;
-      }
-    }
-
-    /* ---- SIDE NAV ---- */
-    .nav-toggle {
-      position: fixed;
-      top: 50%;
-      right: 8px;
-      /* keeps it out of scrollbar zone */
-      transform: translateY(-50%);
-      background: black;
-      color: white;
-      padding: 2px 4px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 9999;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      letter-spacing: 12px;
-      line-height: 0.8;
-      user-select: none;
-    }
-
-    /* Remove trailing spacing after last letter */
-    .nav-toggle span::after {
-      content: '';
-      display: block;
-      height: 0;
-      margin-top: -12px;
-      /* counteracts last letter-spacing */
-    }
-
-    .side-nav {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      height: 100%;
-      width: 280px;
-      background: white;
-      border-left: 1px solid black;
-      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
-      overflow-y: auto;
-      padding: 20px;
-      transition: right 1.0s ease;
-      z-index: 900;
-    }
-
-    .side-nav.open {
-      right: 0;
-    }
-
-    .side-nav h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      border-bottom: 1px solid black;
-      padding-bottom: px;
-      margin-bottom: 1rem;
-    }
-
-    .side-nav a {
-      display: block;
-      padding: 6px 0;
-      font-size: 0.65rem;
-      color: black;
-      text-decoration: none;
-      border-bottom: 1px solid #eee;
-    }
-
-    .side-nav a:hover {
-      background: #f0f0f0;
-    }
-
-    .side-nav a.active {
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    /* --- hover to open the side-nav --- */
-    .nav-toggle {
-      /* match your panel’s transition speed */
-      transition: right 1s ease;
-    }
-
-    .nav-toggle:hover {
-      /* push the button out of the way when open */
-      right: 288px;
-      /* = side-nav width (280px) + 8px margin */
-    }
-
-    .nav-toggle:hover~.side-nav,
-    .side-nav:hover {
-      right: 0;
-      /* slide the panel fully into view */
-    }
-
-    html {
-      overflow-y: scroll;
-    }
-
-    body.no-scroll {
-      overflow: hidden;
-    }
-
-
-    @media (max-width: 768px) {
-      .nav-toggle {
-        display: none;
+        min-width: 100%;
       }
     }
   </style>
 </head>
-
 <body>
 
   <script>
@@ -266,152 +233,181 @@
       }
     };
 
-    fetch('components/nav.html')
+    fetch('../components/nav.html')
       .then(res => res.text())
       .then(html => {
         document.body.insertAdjacentHTML('afterbegin', html);
       });
   </script>
 
-<div class="nav-container">
-  <div class="nav-toggle"><span>SECTION MAP</span></div>
-  <div class="side-nav" id="sideNav">
-    <h2>Sections</h2>
-    <div id="sectionLinks"></div>
+  <!-- Grid Navigation -->
+  <div class="grid-nav">
+    <div class="grid-container" id="gridContainer"></div>
   </div>
-</div>
 
+  <!-- Tooltip -->
+  <div class="tooltip" id="tooltip"></div>
+
+  <!-- Main Content -->
   <div class="content-container">
-    <h1 style="font-size: 80px;"><b>FOREVER IN SOUND</b></h1>
-
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        fetch('data/forever.json')
-          .then(res => res.json())
-          .then(sections => {
-            const container = document.querySelector('.content-container');
-            const placeholdersToLoad = [];
-
-            sections.forEach(section => {
-              const sectionDiv = document.createElement('div');
-              sectionDiv.className = 'section';
-              sectionDiv.id = section.id;
-
-              const text = section.text.split('\n').map(p => `<p>${p}</p>`).join('');
-              let html = `<h2 class="section-title">${section.title}</h2>${text}`;
-
-              // Add YouTube
-              if (section.media?.youtube) {
-                const vids = section.media.youtube.map(id => `
-              <div class="youtube-placeholder" data-id="${id}">
-                <img class="youtube-thumb" src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="YouTube thumbnail">
-                <div class="play-button"></div>
-              </div>`).join('');
-                html += `<div class="video-row-2up">${vids}</div>`;
-              }
-
-              // Add Bandcamp (uses prebuilt embed src)
-              if (section.media?.bandcamp_embed) {
-                html += section.media.bandcamp_embed;
-              }
-
-              // Add Audio
-              if (section.media?.audio) {
-                html += `
-    <div class="audio-track">
-      <div class="track-top-line">
-        <span><i>${section.media.audioTitle || 'Audio'}</i></span>
-      </div>
-      ${section.media.instruments ? `<div class="track-instruments">${section.media.instruments}</div>` : ''}
-      <div class="custom-audio-wrapper">
-        <audio controls preload="none" controlsList="nodownload">
-          <source src="${section.media.audio}" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    </div>`;
-              }
-
-              // Add Image
-              if (section.media?.image) {
-                html += `<img class="photo" src="${section.media.image}" alt="Image for ${section.title}">`;
-              }
-
-              // Set content and append
-              sectionDiv.innerHTML = html;
-              container.appendChild(sectionDiv);
-
-              // Register YouTube observers
-              sectionDiv.querySelectorAll('.youtube-placeholder').forEach(div => {
-                placeholdersToLoad.push(div);
-              });
-            });
-
-            // YouTube Lazy Loader + Click-to-Play
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  loadIframe(entry.target);
-                }
-              });
-            }, { rootMargin: "200px" });
-
-            function loadIframe(div) {
-              const id = div.getAttribute("data-id");
-              const iframe = document.createElement("iframe");
-              iframe.src = `https://www.youtube.com/embed/${id}?enablejsapi=1`;
-              iframe.frameBorder = "0";
-              iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-              iframe.allowFullscreen = true;
-              iframe.loading = "lazy";
-              iframe.width = "100%";
-              iframe.height = "100%";
-              div.innerHTML = "";
-              div.appendChild(iframe);
-              observer.unobserve(div);
-              setTimeout(() => {
-                const player = new YT.Player(iframe, {
-                  events: { 'onStateChange': onPlayerStateChange }
-                });
-                players.push(player);
-              }, 100);
-            }
-
-            // Attach both lazy and click logic
-            placeholdersToLoad.forEach(div => {
-              observer.observe(div);
-              div.addEventListener('click', () => loadIframe(div));
-            });
-          }); // <--- MISSING
-      });   // <--- MISSING
-    </script>
-
-
-  </div> <!-- group div-->
+    <h1>FOREVER IN SOUND</h1>
+    <div id="sectionsContainer"></div>
+  </div>
 
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
+    let sections = [];
     let players = [];
 
-    function onYouTubeIframeAPIReady() {
-      const checkInterval = setInterval(() => {
-        const iframes = document.querySelectorAll('iframe[src*="youtube.com/embed/"]');
-        if (iframes.length > 0) {
-          clearInterval(checkInterval);
-          iframes.forEach((iframe, index) => {
-            // Add small delay here to ensure DOM and API are fully ready
-            setTimeout(() => {
-              const player = new YT.Player(iframe, {
-                events: {
-                  'onStateChange': onPlayerStateChange
-                }
-              });
-              players.push(player);
-            }, 100);
-          });
+    // Load content from JSON
+    fetch('../data/forever.json')
+      .then(res => res.json())
+      .then(data => {
+        sections = data;
+        renderSections();
+        renderGrid();
+        setupScrollObserver();
+      });
+
+    function renderSections() {
+      const container = document.getElementById('sectionsContainer');
+      
+      sections.forEach(section => {
+        const div = document.createElement('div');
+        div.className = 'section';
+        div.id = section.id;
+        
+        let html = `<h2 class="section-title">${section.title}</h2>`;
+        html += section.text.split('\n').map(p => `<p>${p}</p>`).join('');
+        
+        // YouTube videos
+        if (section.media?.youtube) {
+          const vids = section.media.youtube.map(id => `
+            <div class="youtube-placeholder" data-id="${id}">
+              <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="YouTube thumbnail">
+              <div class="play-button"></div>
+            </div>
+          `).join('');
+          html += `<div class="video-row-2up">${vids}</div>`;
         }
-      }, 500);
+        
+        // Bandcamp embed
+        if (section.media?.bandcamp_embed) {
+          html += section.media.bandcamp_embed;
+        }
+        
+        // Audio
+        if (section.media?.audio) {
+          html += `
+            <div class="audio-track">
+              <div class="track-top-line"><i>${section.media.audioTitle || 'Audio'}</i></div>
+              ${section.media.instruments ? `<div class="track-instruments">${section.media.instruments}</div>` : ''}
+              <div class="custom-audio-wrapper">
+                <audio controls preload="none" controlsList="nodownload">
+                  <source src="${section.media.audio}" type="audio/mpeg">
+                </audio>
+              </div>
+            </div>
+          `;
+        }
+        
+        // Image
+        if (section.media?.image) {
+          html += `<img class="photo" src="${section.media.image}" alt="${section.title}">`;
+        }
+        
+        div.innerHTML = html;
+        container.appendChild(div);
+        
+        // Setup YouTube lazy loading
+        div.querySelectorAll('.youtube-placeholder').forEach(placeholder => {
+          placeholder.addEventListener('click', () => loadYouTube(placeholder));
+        });
+      });
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('gridContainer');
+      const totalSquares = Math.ceil((window.innerHeight - 60) / 27) * 5; // Calculate squares to fill height
+      
+      for (let i = 0; i < totalSquares; i++) {
+        const square = document.createElement('div');
+        square.className = 'grid-square';
+        
+        if (i < sections.length) {
+          square.classList.add('filled');
+          square.dataset.index = i;
+          square.dataset.id = sections[i].id;
+          square.dataset.title = sections[i].title;
+          
+          // Click to navigate
+          square.addEventListener('click', () => {
+            document.getElementById(sections[i].id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          
+          // Hover tooltip
+          square.addEventListener('mouseenter', (e) => showTooltip(e, sections[i].title));
+          square.addEventListener('mouseleave', hideTooltip);
+        }
+        
+        grid.appendChild(square);
+      }
+    }
+
+    function showTooltip(e, title) {
+      const tooltip = document.getElementById('tooltip');
+      const rect = e.target.getBoundingClientRect();
+      tooltip.textContent = title;
+      tooltip.style.right = (window.innerWidth - rect.left + 10) + 'px';
+      tooltip.style.top = rect.top + 'px';
+      tooltip.classList.add('visible');
+    }
+
+    function hideTooltip() {
+      document.getElementById('tooltip').classList.remove('visible');
+    }
+
+    function setupScrollObserver() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Remove active from all squares
+            document.querySelectorAll('.grid-square.active').forEach(s => s.classList.remove('active'));
+            
+            // Add active to current square
+            const square = document.querySelector(`.grid-square[data-id="${entry.target.id}"]`);
+            if (square) square.classList.add('active');
+          }
+        });
+      }, {
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0.1
+      });
+      
+      sections.forEach(section => {
+        const el = document.getElementById(section.id);
+        if (el) observer.observe(el);
+      });
+    }
+
+    function loadYouTube(placeholder) {
+      const id = placeholder.dataset.id;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${id}?enablejsapi=1`;
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.width = '100%';
+      iframe.style.height = '100%';
+      placeholder.innerHTML = '';
+      placeholder.appendChild(iframe);
+      
+      setTimeout(() => {
+        const player = new YT.Player(iframe, {
+          events: { 'onStateChange': onPlayerStateChange }
+        });
+        players.push(player);
+      }, 100);
     }
 
     function onPlayerStateChange(event) {
@@ -424,156 +420,10 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const sectionGroups = document.querySelectorAll('.section-group[data-section]');
-      const maxSectionGroup = 6;
-      let currentSectionGroup = 1;
-
-      // Make sure group 1 is visible initially
-      document.querySelectorAll('.section-group[data-section="1"]').forEach(group => {
-        group.setAttribute("data-loaded", "true");
-      });
-
-      // Reveal function
-      const revealGroup = (groupNum) => {
-        for (let i = 1; i <= groupNum; i++) {
-          document.querySelectorAll(`.section-group[data-section="${i}"]`).forEach(group => {
-            group.setAttribute("data-loaded", "true");
-          });
-        }
-        currentSectionGroup = Math.max(currentSectionGroup, groupNum);
-      };
-
-      // Scroll-based loader
-      function checkScrollPosition() {
-        const loadedGroups = [...document.querySelectorAll('.section-group[data-section]')]
-          .filter(g => g.getAttribute('data-loaded') === 'true');
-        const last = loadedGroups[loadedGroups.length - 1];
-        if (!last) return;
-
-        const rect = last.getBoundingClientRect();
-        const threshold = window.innerHeight + 200;
-
-        if (rect.bottom < threshold && currentSectionGroup < maxSectionGroup) {
-          currentSectionGroup++;
-          revealGroup(currentSectionGroup);
-          setTimeout(checkScrollPosition, 100);
-        }
-      }
-
-      window.addEventListener("scroll", checkScrollPosition);
-      window.addEventListener("resize", checkScrollPosition);
-      window.addEventListener("load", checkScrollPosition);
-      checkScrollPosition();
-    });
-
-    function degradePage(layersToAdd) {
-      const elements = document.querySelectorAll("p");
-      if (elements.length > 0) {
-        const shuffled = [...elements].sort(() => 0.5 - Math.random());
-        for (let i = 0; i < layersToAdd; i++) {
-          const original = shuffled[i % shuffled.length];
-          const clone = original.cloneNode(true);
-          clone.style.position = "absolute";
-          clone.style.left = `${Math.random() * window.innerWidth}px`;
-          clone.style.top = `${window.scrollY + Math.random() * window.innerHeight}px`;
-          clone.style.pointerEvents = "none";
-          clone.style.opacity = 0.3 + Math.random() * 0.4;
-          clone.style.transform = `scale(1)`;
-          clone.style.zIndex = 9999;
-          clone.style.color = "black";
-          clone.style.width = `${original.offsetWidth}px`;
-          clone.style.height = `${original.offsetHeight}px`;
-          document.body.appendChild(clone);
-        }
-      }
+    function onYouTubeIframeAPIReady() {
+      // API ready callback
     }
-
-    // function toggleSideNav(e) {
-    //   if (e) {
-    //     e.stopPropagation();
-    //   }
-    //   const nav = document.getElementById('sideNav');
-    //   const isOpen = nav.classList.toggle('open');
-
-    //   if (isOpen) {
-    //     document.body.classList.add('no-scroll');
-    //   } else {
-    //     document.body.classList.remove('no-scroll');
-    //   }
-    // }
-
-    let navCloseTimer = null;
-    const sideNav = document.getElementById('sideNav');
-
-    sideNav.addEventListener('mouseleave', () => {
-      navCloseTimer = setTimeout(() => {
-        sideNav.classList.remove('open');
-        // **also** clear the no-scroll class
-        document.body.classList.remove('no-scroll');
-        document.documentElement.classList.remove('no-scroll');
-      }, 3000);
-    });
-
-    sideNav.addEventListener('mouseenter', () => {
-      if (navCloseTimer) {
-        clearTimeout(navCloseTimer);
-        navCloseTimer = null;
-      }
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch('data/forever.json')
-        .then(res => res.json())
-        .then(sections => {
-          const linksContainer = document.getElementById('sectionLinks');
-
-          sections.forEach(section => {
-            const link = document.createElement('a');
-            link.href = `#${section.id}`;
-            link.textContent = section.title;
-            link.addEventListener('click', () => {
-              document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              document.getElementById('sideNav').classList.remove('open');
-              document.body.classList.remove('no-scroll');
-              document.documentElement.classList.remove('no-scroll');
-            });
-            linksContainer.appendChild(link);
-          });
-
-          // Highlight current section
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                document.querySelectorAll('#sectionLinks a').forEach(a => a.classList.remove('active'));
-                const active = document.querySelector(`#sectionLinks a[href="#${entry.target.id}"]`);
-                if (active) active.classList.add('active');
-              }
-            });
-          }, { rootMargin: '-50% 0px -45% 0px', threshold: 0.1 });
-
-          sections.forEach(s => {
-            const el = document.getElementById(s.id);
-            if (el) observer.observe(el);
-          });
-        });
-    });
-
-    document.addEventListener('click', (event) => {
-      const sideNav = document.getElementById('sideNav');
-      const navToggle = document.querySelector('.nav-toggle');
-
-      const isNavOpen = sideNav.classList.contains('open');
-      const clickedInsideNav = sideNav.contains(event.target);
-      const clickedToggle = navToggle.contains(event.target);
-
-      if (isNavOpen && !clickedInsideNav && !clickedToggle) {
-        sideNav.classList.remove('open');
-        document.body.classList.remove('no-scroll');
-        document.documentElement.classList.remove('no-scroll');
-      }
-    });
   </script>
-</body>
 
+</body>
 </html>
