@@ -1,137 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Albums</title>
-
-  <!-- Global styles -->
+  
+  <!-- GLOBAL NAV STYLES -->
   <link rel="stylesheet" href="styles/global.css">
-
   <script src="components/nav.js"></script>
-
-  <!-- Album-specific styles -->
+  
   <style>
-    /* ------------------- ALBUM GRID ------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      background: white;
+      color: black;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Main content area */
     .content-container {
-      text-align: center;
+      width: calc(100% - 150px);
+      margin: 0 auto;
+      padding: 40px 40px 40px 40px;
+      box-sizing: border-box;
+      max-width: 900px;
     }
 
-    .album-grid {
-      transform: scale(0.8);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, auto) auto;
-      gap: 10px;
-      justify-items: center;
-      align-items: start;
-      margin-top: 20px;
+    h1 {
+      font-size: 80px;
+      font-weight: bold;
+      margin-bottom: 40px;
     }
 
-    .album-item {
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease;
+    /* Album sections */
+    .album-section {
+      padding: 0px 0; /* SPACING: Adjust this value to control space between albums */
     }
 
-    .album-item img {
+    .album-section:last-child {
+      padding-bottom: 100vh; /* SPACING: Extra padding so last album can scroll into view */
+    }
+
+    /* Visual grouping */
+    .album-section.group-end {
+      padding-bottom: 40px; /* SPACING: Extra space before separator line */
+      margin-bottom: 20px; /* SPACING: Space after separator line */
+      border-bottom: 2px solid #ccc;
+    }
+
+    .album-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .album-cover {
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+    }
+
+    .album-cover img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.3s ease;
     }
 
-    .album-item::before {
-      content: attr(data-title);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
+    .album-info {
+      flex: 1;
+    }
+
+    .album-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    .album-year {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.8rem;
+    }
+
+    .album-process {
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .album-link {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid black;
+      text-decoration: none;
+      color: black;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+
+    .album-link:hover {
+      background: black;
       color: white;
-      font-size: 14px;
-      padding: 5px;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
     }
 
-    .album-item:hover {
-      transform: scale(1.25);
+    /* Timeline Navigation - Desktop only */
+    .timeline-nav {
+      position: fixed;
+      right: 0;
+      top: 60px;
+      width: 150px;
+      height: calc(100vh - 60px);
+      background: white;
+      padding: 20px 30px 20px 10px;
+      overflow-y: auto;
+      z-index: 500;
+    }
+
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 20px;
+    }
+
+    .timeline-square {
+      width: 25px;
+      height: 25px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #666;
+    }
+
+    .timeline-square.filled {
+      background: black;
+      border-color: black;
+      color: #999;
+    }
+
+    .timeline-square.active {
+      transform: scale(1.3);
       z-index: 10;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
     }
 
-    .album-item:hover::before {
+    .timeline-square:hover {
+      transform: scale(1.2);
+      z-index: 9;
+    }
+
+    /* Tooltip for timeline */
+    .timeline-tooltip {
+      position: fixed;
+      background: black;
+      color: white;
+      padding: 8px 12px;
+      font-size: 11px;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .timeline-tooltip.visible {
       opacity: 1;
     }
 
-    .bandcamp-link-item {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      grid-column: 2;
-      grid-row: 4;
-      text-align: center;
-      padding-top: 15px;
+    /* Mobile: hide timeline, full width content */
+    @media (max-width: 768px) {
+      .timeline-nav {
+        display: none;
+      }
+
+      .content-container {
+        width: 100%;
+        padding: 80px 20px 20px 20px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .album-header {
+        flex-direction: column;
+      }
+
+      .album-cover {
+        width: 100%;
+        max-width: 250px;
+      }
     }
 
-    .bandcamp-link-item::before {
-      content: none;
-    }
-
-    .bandcamp-link-item p,
-    .bandcamp-link-item a {
-      margin: 0;
+    /* Tablet: adjust content width */
+    @media (min-width: 769px) and (max-width: 1200px) {
+      .content-container {
+        width: calc(100% - 200px);
+        max-width: 600px;
+      }
     }
   </style>
 </head>
-
 <body>
-  <!-- Load global nav -->
+
   <script>
+    window.toggleMobileMenu = function () {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) {
+        menu.classList.toggle('visible');
+      }
+    };
+
     fetch('components/nav.html')
       .then(res => res.text())
-      .then(html => document.body.insertAdjacentHTML('afterbegin', html));
+      .then(html => {
+        document.body.insertAdjacentHTML('afterbegin', html);
+      });
   </script>
 
-  <div class="content-container">
-    <h3>ALBUMS</h3>
-    <div class="album-grid">
-      <a href="https://maysunmusic.bandcamp.com/album/timelines" target="_blank" class="album-item"
-        data-title="Timelines (2023)">
-        <img src="assets/images/album_covers/08_album_cover.png" alt="Timelines">
-      </a>
-      <a href="https://maysunmusic.bandcamp.com/album/wanderlust-ii" target="_blank" class="album-item"
-        data-title="Wanderlust II (2021)">
-        <img src="assets/images/album_covers/06_album_cover.png" alt="Wanderlust II">
-      </a>
-      <a href="https://maysunmusic.bandcamp.com/album/waiting-spaces" target="_blank" class="album-item"
-        data-title="Waiting Spaces (2020)">
-        <img src="assets/images/album_covers/05_album_cover.png" alt="Waiting Spaces">
-      </a>
-      <a href="https://maysunmusic.bandcamp.com/album/the-after-mountain" target="_blank" class="album-item"
-        data-title="The After Mountain (2020)">
-        <img src="assets/images/album_covers/04_album_cover.png" alt="The After Mountain">
-      </a>
-      <a href="https://maysunmusic.bandcamp.com/album/sun-ice" target="_blank" class="album-item"
-        data-title="Sun & Ice (2017)">
-        <img src="assets/images/album_covers/03_album_cover.png" alt="Sun & Ice">
-      </a>
-      <a href="https://maysunmusic.bandcamp.com/album/the-field-of-living" target="_blank" class="album-item"
-        data-title="The Field of Living (2016)">
-        <img src="assets/images/album_covers/02_album_cover.png" alt="The Field of Living">
-      </a>
-      <a href="https://maysunmusic.bandcamp.com/album/all-these-are-the-days" target="_blank" class="album-item"
-        data-title="All These Are The Days (2016)">
-        <img src="assets/images/album_covers/01_album_cover.png" alt="All These Are The Days">
-      </a>
-    </div>
+  <!-- Timeline Navigation -->
+  <div class="timeline-nav">
+    <div class="timeline-container" id="timelineContainer"></div>
   </div>
-  </div>
-</body>
 
+  <!-- Timeline Tooltip -->
+  <div class="timeline-tooltip" id="timelineTooltip"></div>
+
+  <!-- Main Content -->
+  <div class="content-container">
+    <h1>ALBUMS</h1>
+    <div id="albumsContainer"></div>
+  </div>
+
+  <script>
+    let albums = [];
+    
+    // Define grouping (which albums mark the end of a conceptual group)
+    const groupEnds = ['sun-and-ice', 'waiting-spaces', 'wanderlust-ii'];
+    
+    // Load albums from JSON
+    fetch('data/albums.json')
+      .then(res => res.json())
+      .then(data => {
+        albums = data.albums;
+        renderAlbums();
+        renderTimeline();
+        setupScrollObserver();
+      });
+
+    function renderAlbums() {
+      const container = document.getElementById('albumsContainer');
+      
+      albums.forEach(album => {
+        const section = document.createElement('div');
+        section.className = 'album-section';
+        section.id = album.id;
+        
+        // Add visual grouping
+        if (groupEnds.includes(album.id)) {
+          section.classList.add('group-end');
+        }
+        
+        section.innerHTML = `
+          <div class="album-header">
+            <div class="album-cover">
+              <img src="${album.cover}" alt="${album.title}">
+            </div>
+            <div class="album-info">
+              <div class="album-title">${album.title}</div>
+              <div class="album-year">${album.year}</div>
+              ${album.process ? `<p class="album-process">${album.process}</p>` : ''}
+              <a href="${album.bandcamp}" target="_blank" class="album-link">Listen</a>
+            </div>
+          </div>
+        `;
+        
+        container.appendChild(section);
+      });
+    }
+
+    function renderTimeline() {
+      const timeline = document.getElementById('timelineContainer');
+      const years = [...new Set(albums.map(a => a.year))].sort();
+      
+      years.forEach(year => {
+        const square = document.createElement('div');
+        square.className = 'timeline-square filled';
+        square.textContent = `'${String(year).slice(2)}`;
+        square.dataset.year = year;
+        
+        square.addEventListener('click', () => {
+          const firstAlbumOfYear = albums.find(a => a.year === year);
+          if (firstAlbumOfYear) {
+            document.getElementById(firstAlbumOfYear.id)?.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start' 
+            });
+          }
+        });
+        
+        // Hover tooltip
+        square.addEventListener('mouseenter', (e) => showTooltip(e, year));
+        square.addEventListener('mouseleave', hideTooltip);
+        
+        timeline.appendChild(square);
+      });
+    }
+
+    function showTooltip(e, year) {
+      const tooltip = document.getElementById('timelineTooltip');
+      const rect = e.target.getBoundingClientRect();
+      tooltip.textContent = year;
+      tooltip.style.right = (window.innerWidth - rect.left + 10) + 'px';
+      tooltip.style.top = rect.top + 'px';
+      tooltip.classList.add('visible');
+    }
+
+    function hideTooltip() {
+      document.getElementById('timelineTooltip').classList.remove('visible');
+    }
+
+    function setupScrollObserver() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const album = albums.find(a => a.id === entry.target.id);
+            if (album) {
+              document.querySelectorAll('.timeline-square.active').forEach(s => s.classList.remove('active'));
+              const yearSquare = document.querySelector(`.timeline-square[data-year="${album.year}"]`);
+              if (yearSquare) yearSquare.classList.add('active');
+            }
+          }
+        });
+      }, {
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0.1
+      });
+      
+      albums.forEach(album => {
+        const el = document.getElementById(album.id);
+        if (el) observer.observe(el);
+      });
+    }
+  </script>
+
+</body>
 </html>

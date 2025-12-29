@@ -1,0 +1,60 @@
+{
+  "albums": [
+    {
+      "id": "all-these-are-the-days",
+      "year": 2016,
+      "title": "All These Are The Days",
+      "cover": "assets/images/album_covers/01_album_cover.png",
+      "process": "",
+      "bandcamp": "https://maysunmusic.bandcamp.com/album/all-these-are-the-days"
+    },
+    {
+      "id": "the-field-of-living",
+      "year": 2016,
+      "title": "The Field of Living",
+      "cover": "assets/images/album_covers/02_album_cover.png",
+      "process": "",
+      "bandcamp": "https://maysunmusic.bandcamp.com/album/the-field-of-living"
+    },
+    {
+      "id": "sun-and-ice",
+      "year": 2017,
+      "title": "Sun & Ice",
+      "cover": "assets/images/album_covers/03_album_cover.png",
+      "process": "",
+      "bandcamp": "https://maysunmusic.bandcamp.com/album/sun-ice"
+    },
+    {
+      "id": "the-after-mountain",
+      "year": 2020,
+      "title": "The After Mountain",
+      "cover": "assets/images/album_covers/04_album_cover.png",
+      "process": "",
+      "bandcamp": "https://maysunmusic.bandcamp.com/album/the-after-mountain"
+    },
+    {
+      "id": "waiting-spaces",
+      "year": 2020,
+      "title": "Waiting Spaces",
+      "cover": "assets/images/album_covers/05_album_cover.png",
+      "process": "",
+      "bandcamp": "https://maysunmusic.bandcamp.com/album/waiting-spaces"
+    },
+    {
+      "id": "wanderlust-ii",
+      "year": 2021,
+      "title": "Wanderlust II",
+      "cover": "assets/images/album_covers/06_album_cover.png",
+      "process": "",
+      "bandcamp": "https://maysunmusic.bandcamp.com/album/wanderlust-ii"
+    },
+    {
+      "id": "timelines",
+      "year": 2023,
+      "title": "Timelines",
+      "cover": "assets/images/album_covers/08_album_cover.png",
+      "process": "",
+      "bandcamp": "https://maysunmusic.bandcamp.com/album/timelines"
+    }
+  ]
+}
