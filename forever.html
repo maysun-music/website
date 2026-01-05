@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forever In Sound</title>
-  
+
   <!-- GLOBAL NAV STYLES -->
   <link rel="stylesheet" href="../styles/global.css">
   <script src="../components/nav.js"></script>
-  
+
   <style>
     * {
       margin: 0;
@@ -102,7 +103,7 @@
     .grid-square.active {
       transform: scale(1.3);
       z-index: 10;
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     }
 
     .grid-square:hover {
@@ -216,7 +217,7 @@
       .content-container {
         width: 100%;
         padding: 80px 20px 20px 20px;
-        max-width: 100%; 
+        max-width: 100%;
       }
 
       h1 {
@@ -241,6 +242,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <script>
@@ -259,7 +261,7 @@
   </script>
 
   <!-- Grid Navigation -->
-  <div class="grid-nav">
+  <div class="grid-nav" id="gridNav">
     <div class="grid-container" id="gridContainer"></div>
   </div>
 
@@ -283,21 +285,28 @@
       .then(data => {
         sections = data;
         renderSections();
-        renderGrid();
-        setupScrollObserver();
+
+        // Only render grid on desktop
+        if (window.innerWidth > 768) {
+          renderGrid();
+          setupScrollObserver();
+        } else {
+          // Remove grid nav from DOM on mobile
+          document.getElementById('gridNav')?.remove();
+        }
       });
 
     function renderSections() {
       const container = document.getElementById('sectionsContainer');
-      
+
       sections.forEach(section => {
         const div = document.createElement('div');
         div.className = 'section';
         div.id = section.id;
-        
+
         let html = `<h2 class="section-title">${section.title}</h2>`;
         html += section.text.split('\n').map(p => `<p>${p}</p>`).join('');
-        
+
         // YouTube videos
         if (section.media?.youtube) {
           const vids = section.media.youtube.map(id => `
@@ -308,12 +317,12 @@
           `).join('');
           html += `<div class="video-row-2up">${vids}</div>`;
         }
-        
+
         // Bandcamp embed
         if (section.media?.bandcamp_embed) {
           html += section.media.bandcamp_embed;
         }
-        
+
         // Audio
         if (section.media?.audio) {
           html += `
@@ -328,15 +337,15 @@
             </div>
           `;
         }
-        
+
         // Image
         if (section.media?.image) {
           html += `<img class="photo" src="${section.media.image}" alt="${section.title}">`;
         }
-        
+
         div.innerHTML = html;
         container.appendChild(div);
-        
+
         // Setup YouTube lazy loading
         div.querySelectorAll('.youtube-placeholder').forEach(placeholder => {
           placeholder.addEventListener('click', () => loadYouTube(placeholder));
@@ -347,28 +356,28 @@
     function renderGrid() {
       const grid = document.getElementById('gridContainer');
       const totalSquares = Math.ceil((window.innerHeight - 60) / 27) * 5; // Calculate squares to fill height
-      
+
       for (let i = 0; i < totalSquares; i++) {
         const square = document.createElement('div');
         square.className = 'grid-square';
-        
+
         if (i < sections.length) {
           square.classList.add('filled');
           square.dataset.index = i;
           square.dataset.id = sections[i].id;
           square.dataset.title = sections[i].title;
           square.textContent = i + 1;
-          
+
           // Click to navigate
           square.addEventListener('click', () => {
             document.getElementById(sections[i].id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
           });
-          
+
           // Hover tooltip
           square.addEventListener('mouseenter', (e) => showTooltip(e, sections[i].title));
           square.addEventListener('mouseleave', hideTooltip);
         }
-        
+
         grid.appendChild(square);
       }
     }
@@ -392,7 +401,7 @@
           if (entry.isIntersecting) {
             // Remove active from all squares
             document.querySelectorAll('.grid-square.active').forEach(s => s.classList.remove('active'));
-            
+
             // Add active to current square
             const square = document.querySelector(`.grid-square[data-id="${entry.target.id}"]`);
             if (square) square.classList.add('active');
@@ -402,7 +411,7 @@
         rootMargin: '-40% 0px -40% 0px',
         threshold: 0.1
       });
-      
+
       sections.forEach(section => {
         const el = document.getElementById(section.id);
         if (el) observer.observe(el);
@@ -420,7 +429,7 @@
       iframe.style.height = '100%';
       placeholder.innerHTML = '';
       placeholder.appendChild(iframe);
-      
+
       setTimeout(() => {
         const player = new YT.Player(iframe, {
           events: { 'onStateChange': onPlayerStateChange }
@@ -445,4 +454,5 @@
   </script>
 
 </body>
+
 </html>
