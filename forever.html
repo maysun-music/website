@@ -31,11 +31,19 @@
 
     /* Main content area */
     .content-container {
-      width: calc(100% - 150px);
+      width: 100%;
       margin: 0 auto;
-      padding: 40px 40px 40px 40px;
+      padding: 80px 20px 20px 20px;
       box-sizing: border-box;
-      max-width: 900px;
+    }
+
+    /* Desktop: add grid offset and max width */
+    @media (min-width: 769px) {
+      .content-container {
+        width: calc(100% - 150px);
+        padding: 40px 40px 40px 40px;
+        max-width: 900px;
+      }
     }
 
     h1 {
@@ -135,8 +143,7 @@
       max-width: 600px;
       margin: 2em 0;
       display: block;
-      max-width: 100%;
-    }
+        }
 
     .video-row-2up {
       display: flex;
@@ -154,7 +161,6 @@
       cursor: pointer;
       overflow: hidden;
       aspect-ratio: 16/9;
-      max-width: 100%;
     }
 
     .youtube-placeholder img {
