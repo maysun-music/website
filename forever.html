@@ -451,6 +451,17 @@
     function onYouTubeIframeAPIReady() {
       // API ready callback
     }
+
+    // Diagnostic: Find elements wider than viewport
+    setTimeout(() => {
+      const elements = document.querySelectorAll('*');
+      elements.forEach(el => {
+        if (el.scrollWidth > document.documentElement.clientWidth) {
+          console.log('Wide element:', el.tagName, el.className, el.scrollWidth);
+        }
+      });
+    }, 2000);
+
   </script>
 
 </body>
