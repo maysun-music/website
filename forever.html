@@ -67,6 +67,35 @@
       line-height: 1.6;
     }
 
+    html,
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #sectionsContainer,
+    .content-container,
+    .section {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Force Bandcamp (and any other) iframes that have inline width:400px to fit mobile */
+    iframe {
+      width: 100% !important;
+      max-width: 100% !important;
+      display: block;
+      margin: 2em 0;
+    }
+
+    /* Keep images from overflowing */
+    .photo {
+      width: 100%;
+      height: auto;
+      max-width: 600px;
+    }
+
+
     /* Grid Navigation - Desktop only */
     .grid-nav {
       position: fixed;
@@ -143,7 +172,7 @@
       max-width: 600px;
       margin: 2em 0;
       display: block;
-        }
+    }
 
     .video-row-2up {
       display: flex;
