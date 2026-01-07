@@ -40,12 +40,12 @@
     /* Desktop: add grid offset and max width */
     @media (min-width: 769px) {
       .content-container {
-        width: min(900px, calc(100% - 150px));
+        width: 900px;
+        max-width: calc(100% - 150px);
         padding: 40px;
-        margin-right: 150px;
-        /* reserve space for the fixed grid */
-        margin-left: auto;
-        /* keeps it centered-ish */
+        margin: 0 auto;
+        padding-right: calc(40px + 150px);
+        /* leaves room for the fixed grid */
       }
     }
 
@@ -267,13 +267,13 @@
       }
     }
 
-    /* Tablet: adjust content width to avoid grid overlap */
+    /* Tablet: adjust content width to avoid grid overlap
     @media (min-width: 769px) and (max-width: 1200px) {
       .content-container {
         width: calc(100% - 200px);
         max-width: 600px;
       }
-    }
+    } */
   </style>
 </head>
 
