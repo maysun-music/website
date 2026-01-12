@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DIY Tools</title>
+  <title>DIY MAKES</title>
   <link rel="stylesheet" href="styles/global.css" />
 <style>
   body{font-family:Helvetica,Arial,sans-serif;background:#fff;margin:0;padding:0}
@@ -65,7 +65,7 @@
 
 <body>
   <div id="globalNav"></div>
-  <h1 class="page-title">DIY/TOOLS</h1>
+  <h1 class="page-title">DIY/MAKES</h1>
 
   <div class="instrument-list" id="instrumentList"></div>
 
@@ -80,8 +80,8 @@
         document.body.appendChild(navScript);
       });
 
-    // Load diy_tools
-    fetch('data/diy_tools.json')
+    // Load diy_makes
+    fetch('data/diy_makes.json')
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById('instrumentList');

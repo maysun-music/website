@@ -87,7 +87,7 @@
   <div class="content-container" id="deviceContent"></div>
 
   <script>
-    fetch('data/diy_tools.json')
+    fetch('data/diy_makes.json')
       .then(res => res.json())
       .then(devices => {
         const device = devices.find(d => d.id === 'node-1');
