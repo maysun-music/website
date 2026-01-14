@@ -324,6 +324,7 @@
         if (window.innerWidth > 768) {
           renderGrid();
           setupScrollObserver();
+          setupKeyboardNavigation();
         } else {
           // Remove grid nav from DOM on mobile
           document.getElementById('gridNav')?.remove();
@@ -450,6 +451,65 @@
         const el = document.getElementById(section.id);
         if (el) observer.observe(el);
       });
+    }
+
+    function setupKeyboardNavigation() {
+      // Only enable on desktop
+      if (window.innerWidth <= 768) return;
+
+      let currentIndex = 0;
+
+      // Update current index based on scroll position
+      function updateCurrentIndex() {
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const el = document.getElementById(sections[i].id);
+          if (el && el.offsetTop <= scrollPosition) {
+            currentIndex = i;
+            break;
+          }
+        }
+      }
+
+      // Navigate to next/previous chapter
+      function navigateChapter(direction) {
+        updateCurrentIndex();
+
+        let newIndex = currentIndex + direction;
+
+        // Clamp to valid range
+        if (newIndex < 0) newIndex = 0;
+        if (newIndex >= sections.length) newIndex = sections.length - 1;
+
+        // Scroll to new chapter
+        const targetSection = document.getElementById(sections[newIndex].id);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      // Listen for arrow keys
+      document.addEventListener('keydown', (e) => {
+        // Ignore if user is typing in an input/textarea
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        switch (e.key) {
+          case 'ArrowUp':
+          case 'ArrowLeft':
+            e.preventDefault();
+            navigateChapter(-1); // Previous chapter
+            break;
+          case 'ArrowDown':
+          case 'ArrowRight':
+            e.preventDefault();
+            navigateChapter(1); // Next chapter
+            break;
+        }
+      });
+
+      // Update current index as user scrolls
+      window.addEventListener('scroll', updateCurrentIndex);
     }
 
     function loadYouTube(placeholder) {
