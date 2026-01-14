@@ -462,16 +462,14 @@
       // Update current index based on scroll position
       function updateCurrentIndex() {
         const scrollPosition = window.scrollY + window.innerHeight / 2;
-        let foundIndex = 0;
 
-        for (let i = 0; i < sections.length; i++) {
+        for (let i = sections.length - 1; i >= 0; i--) {
           const el = document.getElementById(sections[i].id);
           if (el && el.offsetTop <= scrollPosition) {
-            foundIndex = i;
+            currentIndex = i;
+            break;
           }
         }
-        
-        currentIndex = foundIndex;
       }
 
       // Navigate to next/previous chapter
