@@ -22,89 +22,99 @@
             will-change: opacity;
             transition: opacity 6s ease-out;
         }
+    </style>
 
-        #bio-visible-container {
-            position: relative;
-        }
+    #bio-visible-container {
+    position: relative;
+    }
 
-        #copy-bio-container {
-            position: absolute;
-            font-size: 12px;
-            z-index: 10;
-        }
+    #copy-bio-container {
+    position: absolute;
+    font-size: 12px;
+    z-index: 10;
+    }
 
-        #bio-wrapper {
-            max-width: 750px;
-            margin: 0 auto 100px;
-            /* Remove the 80px top margin */
-            padding: 40px 20px 0 20px;
-            /* Add padding instead for breathing room */
-            text-align: left;
-        }
+    #bio-wrapper {
+    max-width: 750px;
+    margin: 0 auto 100px;
+    /* Remove the 80px top margin */
+    padding: 40px 20px 0 20px;
+    /* Add padding instead for breathing room */
+    text-align: left;
+    }
 
-        #bio-visible {
-            font-size: 1rem;
-            line-height: 1.2;
-            color: black;
-        }
+    #bio-visible {
+    font-size: 1rem;
+    line-height: 1.2;
+    color: black;
+    }
 
-        #bio-visible h3 {
-            text-align: left;
-            font-size: 2rem;
-            margin: 50px 0 20px 0;
-            letter-spacing: 0.05em;
-            font-weight: bold;
-        }
+    #bio-visible h3 {
+    text-align: left;
+    font-size: 2rem;
+    margin: 50px 0 20px 0;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    }
 
-        #bio-visible p {
-            margin-bottom: 1.6em;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards;
-        }
+    #bio-visible p {
+    margin-bottom: 1.6em;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+    }
 
-        /* Slight stagger for a soft load-in */
-        #bio-visible p:nth-of-type(1) {
-            animation-delay: 0.2s;
-        }
+    /* Slight stagger for a soft load-in */
+    #bio-visible p:nth-of-type(1) {
+    animation-delay: 0.2s;
+    }
 
-        #bio-visible p:nth-of-type(2) {
-            animation-delay: 0.4s;
-        }
+    #bio-visible p:nth-of-type(2) {
+    animation-delay: 0.4s;
+    }
 
-        #bio-visible p:nth-of-type(3) {
-            animation-delay: 0.6s;
-        }
+    #bio-visible p:nth-of-type(3) {
+    animation-delay: 0.6s;
+    }
 
-        #bio-visible p:nth-of-type(4) {
-            animation-delay: 0.8s;
-        }
+    #bio-visible p:nth-of-type(4) {
+    animation-delay: 0.8s;
+    }
 
-        #bio-visible p:nth-of-type(5) {
-            animation-delay: 1s;
-        }
+    #bio-visible p:nth-of-type(5) {
+    animation-delay: 1s;
+    }
 
-        #bio-visible p:nth-of-type(6) {
-            animation-delay: 1.2s;
-        }
+    #bio-visible p:nth-of-type(6) {
+    animation-delay: 1.2s;
+    }
 
-        #bio-title,
-        #statement-title {
-            cursor: pointer;
-        }
+    #bio-title,
+    #statement-title {
+    cursor: pointer;
+    }
 
-        /* you can extend if you have more */
+    /* you can extend if you have more */
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
+    @keyframes fadeInUp {
+    from {
+    opacity: 0;
+    transform: translateY(10px);
+    }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    }
+
+    .statement-axiom {
+    font-size: 1.2rem;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-top: 0.2em;
+    margin-bottom: 1.6em;
+    }
+
     </style>
 </head>
 
@@ -160,9 +170,10 @@
                 statementTitle.style.marginTop = '40px';
                 bioVisible.appendChild(statementTitle);
 
-                data.statement.forEach(paragraph => {
+                data.statement.forEach((paragraph, i) => {
                     const p = document.createElement('p');
                     p.textContent = paragraph;
+                    if (i === 0) p.classList.add('statement-axiom');
                     bioVisible.appendChild(p);
                 });
 
