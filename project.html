@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MAYSUN — Distributed Listener System</title>
     <meta name="description"
-        content="Distributed Listener System by MAYSUN: custom instruments and portable Listeners that compose immersive, site-responsive sound." />
+        content="Distributed Listener System by MAYSUN: instruments that listen. Site-responsive spatial audio using whatever equipment is available." />
     <style>
         :root {
             --fg: #111;
@@ -98,6 +98,13 @@
             font-size: 14px;
             color: var(--muted);
         }
+
+        .callout {
+            font-size: clamp(16px, 2.8vw, 20px);
+            line-height: 1.4;
+            color: var(--fg);
+            margin: 24px 0;
+        }
     </style>
 </head>
 
@@ -105,31 +112,41 @@
     <main class="wrap" role="main">
         <header>
             <h1>ETIENNE MASON / MAYSUN</h1>
-            <p class="tagline">Sound Artist &amp; Composer | Portable Spatial Audio Systems &amp; Instrument Design</p>
+            <p class="tagline">Sound Artist &amp; Composer | Instruments That Listen</p>
         </header>
 
         <hr class="divider" />
 
         <section aria-labelledby="about">
-            <h2 id="about">About Me</h2>
-            <p>I create immersive environments with custom instruments, modular systems, and cyclical processing. My
-                work is site-responsive, treating sound, space, and listener as one composition. With over fifteen years
-                of experience in performance and touring, my current focus involves developing portable systems that
-                make spatial sound accessible across diverse environments.</p>
+            <h2 id="about">About</h2>
+            <p>I build instruments that listen.</p>
+            
+            <p>Working with custom electronics and distributed processing, I create spatial audio systems that treat the room as a sound source. Microphones capture ambient sound, movement, conversation, silence. That audio is processed through granular effects, time manipulation, and feedback circuits, then redistributed through the space. The room hears itself and responds.</p>
+
+            <p>My systems are portable and site-specific. Instead of bringing all equipment, I use available amplification. Each amp or speaker contributes its own character to the sonic ecology. No two installations sound the same because no two spaces are the same.</p>
+
+            <p>This approach emerged from years of touring, recording spaces, and processing audio through physical environments. The most interesting sounds come from letting the space participate. My role is to build the conditions for that participation.</p>
         </section>
 
         <section aria-labelledby="distributed-listener-system" style="margin-top:80px;">
             <h2 id="distributed-listener-system"
                 style="font-size:clamp(28px,6vw,44px);letter-spacing:.5px;line-height:1.1;text-transform:uppercase;">
                 Distributed Listener System</h2>
-            <p>Distributed Listener System is a portable system in development for composing with space. Custom instruments and
-                networked devices listen to the audience and the room, then reshape and redistribute sound in real time
-                to create evolving, site-specific works.</p>
+            
+            <p class="callout">What if the room was the instrument?</p>
+
+            <p>Most spatial audio systems move sound around a space. Distributed Listener System makes the space listen to itself.</p>
+
+            <p>Each Listener captures a different perspective of the room, processes what it hears, and feeds that back into the space. The result is an ecology of sound that responds to the room's acoustics, the audience's presence, and what enters the space.</p>
+
+            <p>The system adapts to available equipment. A whisper of sound in a corner. A louder presence in front. The imperfections are what make the sound real.</p>
+
+            <p>This is spatial audio that works in any space. DIY venues. Galleries. Warehouses. Outdoor sites. Wherever there's sound and amplification.</p>
         </section>
 
         <section aria-labelledby="cycl-node" style="margin-top:40px;text-align:center;">
             <h2 id="cycl-node" style="margin:0 0 16px;letter-spacing:.5px;line-height:1.1;text-transform:uppercase;">
-                CYCL &amp; NODE-1</h2>
+                Previous Work: CYCL &amp; NODE-1</h2>
             <div
                 style="display:flex;flex-direction:row;justify-content:center;align-items:flex-start;gap:24px;flex-wrap:wrap;">
                 <figure style="margin:0;">
@@ -138,39 +155,25 @@
                 </figure>
                 <figure style="margin:0;">
                     <img src="assets/images/diy_devices/node-1/main_node1_1600w_side.jpg"
-                        alt="NODE-1 portable audio device"
+                        alt="NODE-1 wall-mounted listening device"
                         style="width:300px;max-width:100%;height:auto;display:block;object-fit:cover;">
                 </figure>
             </div>
         </section>
 
-        <section aria-labelledby="overview">
-            <h2 id="overview">Project Overview</h2>
-            <p>CYCL is a self-designed performance synthesizer that captures and transforms sound in real time. NODE-1
-                is a network of wireless audio processing units, each with its own microphone, DSP, and speaker output.
-                Together, they form a Distributed Listener System where sound moves through physical space.</p>
+        <section aria-labelledby="how-it-works">
+            <h2 id="how-it-works">How It Works</h2>
+            
+            <p>Distributed Listener System combines concepts from two previous builds. CYCL is a performance synthesizer that captures and transforms sound in real time. NODE-1 was a wall-mounted listening device for sound installations. The new system takes the processing architecture from both and distributes it wirelessly across multiple units.</p>
 
-            <p>The controller transmits effect states and spatial movement patterns wirelessly to the Listeners. In direct
-                mode, all Listeners mirror the same processing in real time. In sequencer mode, effects rotate through the
-                Listeners at adjustable tempos, with envelope-based crossfading creating smooth spatial transitions. Sound
-                appears to travel through the room, turning space itself into a performable element.</p>
+            <p>Each Listener is an independent audio processor with its own microphone, custom DSP, and amplifier output. A controller transmits processing states and spatial patterns wirelessly to the Listeners. In direct mode, all Listeners mirror the same processing. In sequencer mode, processing is distributed across Listeners in different patterns at adjustable tempos, with smooth crossfading between states.</p>
 
-            <p>Each Listeners processes audio independently using custom granular algorithms (pitch shifting, time
-                stretching, grain manipulation). The system uses a decentralized architecture where no central mixer
-                exists, distributing CPU load across Listeners and maintaining true spatial separation.</p>
+            <p>Each Listener runs custom granular algorithms for pitch shifting, time stretching, and grain manipulation. There is no central mixer. Processing is distributed across units.</p>
 
-            <p>Enclosures are hand-built from reclaimed and street-found materials. The controller uses an aluminum case
-                with RF-optimized openings for reliable wireless performance.</p>
-
-            <p>The system is currently in prototype testing phase, with working hardware and operational sequencing.
-                Next developments focus on expanding spatial movement patterns, refining interaction modes, and
-                preparing for multi-Listener field testing.</p>
-
-            <p>To me, technology must always be in service to the music.</p>
+            <p>The controller uses an aluminum enclosure with RF-optimized openings for wireless communication. It requires fixed power. Listener enclosures are hand-built from reclaimed and street-found materials.</p>
         </section>
 
-        <p style="text-align:center;font-size:.95em;color:#666;margin-top:80px">Concept mockup: Distributed Listener System listen to
-            the audience and shape the room.</p>
+        <p style="text-align:center;font-size:.95em;color:#666;margin-top:60px">Concept mockup: Listeners placed throughout a space, each connected to different amplification.</p>
         <figure style="margin:20px auto;text-align:center;">
             <img src="assets/images/diy_devices/node-1/node1mockup.jpg" alt="Distributed Listener System installation mockup"
                 style="width:80%;height:auto;display:block;margin:0 auto;">
@@ -178,41 +181,18 @@
 
         <hr class="divider" />
 
-        <section aria-labelledby="goals">
-            <h2 id="goals">Goals</h2>
-            <ul>
-                <li>Develop distinct sound scenes and interactive processing algorithms.</li>
-                <li>Build and test systems that facilitate musical collaboration.</li>
-                <li>Create experiences where the space and audience become integral to the composition.</li>
-            </ul>
-            <hr class="divider" />
+        <section aria-labelledby="current-status">
+            <h2 id="current-status">Current Status</h2>
+            <p>The system is in active field testing. Hardware is operational, sequencing works, wireless communication is stable. Recent tests with different amplification types confirmed that using available equipment creates richer spatial character than identical speakers.</p>
+
+            <p>Next developments focus on refining spatial movement patterns, building additional Listeners for multi-unit testing, and documenting placement strategies for different space types.</p>
+
+            <p>All development will be released as open source hardware and software.</p>
         </section>
-
-        <section aria-labelledby="why">
-            <h2 id="why">Why It Matters</h2>
-            <p>Spatial audio is often confined to specialized venues and research centers. This project breaks down
-                those barriers by creating portable systems that work in any space, from galleries to DIY venues to
-                outdoor sites.</p>
-            <p>By making immersive audio accessible and releasing all development as open source, I am building tools
-                that artists anywhere can adapt, modify, and expand, giving more people access to experimental spatial
-                composition.</p>
-        </section>
-
-        <footer>
-            <p><strong>Website:</strong> <a href="https://maysun.zip" target="_blank">maysun.zip</a> |
-                <strong>Phone:</strong> <a href="tel:+19296637640">929&nbsp;663&nbsp;7640</a> |
-                <strong>Email:</strong> <a href="mailto:maysun.booking@gmail.com">maysun.booking@gmail.com</a>
-            </p>
-        </footer>
-        </section>
-
-
-        <hr class="divider" />
 
         <section aria-labelledby="current-build" style="margin-top:40px;">
-            <h2 id="current-build">Current Build Status</h2>
-            <p style="text-align:center;font-size:.95em;color:#666;margin-bottom:20px;">Controller prototype in aluminum
-                enclosure and listener protoboard assembly.</p>
+            <h2 id="current-build">Prototypes</h2>
+            <p style="text-align:center;font-size:.95em;color:#666;margin-bottom:20px;">Controller in aluminum enclosure and Listener protoboard assembly.</p>
             <div
                 style="display:flex;flex-direction:row;justify-content:center;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-top:20px;">
                 <figure style="margin:0;">
@@ -226,6 +206,35 @@
                 </figure>
             </div>
         </section>
+
+        <hr class="divider" />
+
+        <section aria-labelledby="why">
+            <h2 id="why">Why It Matters</h2>
+            <p>Spatial audio is often confined to specialized venues with controlled environments and expensive infrastructure. This keeps immersive sound experiences inaccessible to most artists and audiences.</p>
+            
+            <p>Distributed Listener System breaks down those barriers by working with whatever equipment exists in a space. The system is truly portable because you only carry the Listeners and controller. Everything else is sourced locally.</p>
+
+            <p>By releasing all development as open source, I'm building tools that artists anywhere can adapt, modify, and expand. The goal is to make experimental spatial composition accessible beyond research centers and equipped venues.</p>
+
+            <p>Technology must always be in service to the music.</p>
+        </section>
+
+        <hr class="divider" />
+
+        <section aria-labelledby="opportunities">
+            <h2 id="opportunities">Collaboration & Opportunities</h2>
+            <p>I'm interested in site-specific commissions, residencies in non-traditional spaces, collaborative projects with dancers, visual artists, and architects, and workshops teaching others to build Listener systems.</p>
+            
+            <p>If you have a space that wants to listen to itself, let's talk.</p>
+        </section>
+
+        <footer>
+            <p><strong>Website:</strong> <a href="https://maysun.zip" target="_blank">maysun.zip</a> |
+                <strong>Phone:</strong> <a href="tel:+19296637640">929&nbsp;663&nbsp;7640</a> |
+                <strong>Email:</strong> <a href="mailto:maysun.booking@gmail.com">maysun.booking@gmail.com</a>
+            </p>
+        </footer>
     </main>
 </body>
 
