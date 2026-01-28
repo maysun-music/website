@@ -49,6 +49,11 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 50px;
+
+      max-width: 900px;
+      /* adjust to taste */
+      margin: 0 auto;
+      /* centers the grid */
     }
 
     .grid-item {
@@ -58,13 +63,15 @@
     .grid-item-title {
       font-weight: bold;
       font-size: 1rem;
-      margin-bottom: 8px;
+      margin-bottom: 2px;
+      /* was 8px */
     }
 
     .grid-item-type {
       font-size: 0.85rem;
       color: #666;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      /* was 12px */
       text-transform: lowercase;
     }
 
