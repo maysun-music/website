@@ -2,6 +2,7 @@
   {
     "id": "cycl",
     "title": "CYCL",
+    "type": "instrument",
     "year": "2025",
     "url": "cycl.html",
     "main_image": "assets/images/diy_devices/cycl/main_synth_1600w.jpg",
@@ -47,6 +48,7 @@
   {
     "id": "node-1",
     "title": "NODE-1",
+    "type": "instrument",
     "year": "2025",
     "url": "node-1.html",
     "main_image": "assets/images/diy_devices/node-1/main_node1_1600w.jpg",
@@ -70,6 +72,7 @@
   {
     "id": "cymbal_controller",
     "title": "CYMBAL CONTROLLER",
+    "type": "instrument",
     "year": "2024",
     "url": "cymbal_controller.html",
     "main_image": "assets/images/diy_devices/gyro/main_gyro_1600w.jpg",
