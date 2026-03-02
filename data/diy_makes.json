@@ -1,4 +1,43 @@
-[
+[  
+  {
+    "id": "dls",
+    "title": "Distributed Listener System",
+    "type": "instrument",
+    "year": "2026",
+    "url": "dls.html",
+    "main_image": "assets/images/diy_devices/dls/main_dls_1600w.jpg",
+    "short_description": "Distributed Listener System is a portable and scalable spatial-audio instrument built from a controller and multiple wireless listening nodes. It lets me deploy microphones and small speakers across a room (or across multiple rooms) to capture what is already happening in the space, transmit it, and re-amplify it as a coherent, responsive soundscape. The system is designed for quick setups and improvisation: audience chatter, footsteps, room tone, and nearby performances become the material. By placing listeners at different locations, the space itself becomes a playable network, where distance, placement, and feedback shape the piece in real time.",
+    "back_story": "I kept running into the same limitation while working with spatial sound: access. Most immersive systems are fixed installs, hard to tour, and hard to adapt to new rooms. I started building a lightweight kit that could travel in a backpack and scale depending on the venue. The result is a two-part architecture: a controller that manages routing and behavior, and listener nodes that can be placed anywhere to capture and return sound. It is a portable approach to spatial audio that can grow from a simple one-room setup to a distributed multi-room system.",
+    "components": [
+      "Controller (TX): ESP32 WROOM-32E",
+      "Controller (TX): 0.96\" OLED screen",
+      "Controller (TX): 6 switches",
+      "Controller (TX): 2 potentiometers",
+      "Controller (TX): 2 momentary switches",
+      "Controller (TX): 1 on/off switch",
+      "Controller (TX): 5V buck converter",
+      "Controller (TX): Barrel connector",
+      "Controller (TX): Recycled aluminum enclosure with wood panel",
+      "Listener (RX): XIAO SEEED ESP32-S3",
+      "Listener (RX): Daisy Seed",
+      "Listener (RX): MAX9814 microphone",
+      "Listener (RX): OPA1652 op-amp",
+      "Listener (RX): 2 potentiometers",
+      "Listener (RX): 3-position switch",
+      "Listener (RX): XLR/1/4\" dual jack input",
+      "Listener (RX): Stereo 1/4\" output",
+      "Listener (RX): Barrel connector",
+      "Listener (RX): Buck converter",
+      "Listener (RX): Oak and acrylic enclosure (hand-built from reclaimed materials)"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/dls/bts01_dls_900h.jpg",
+      "assets/images/diy_devices/dls/bts02_dls_900h.jpg",
+      "assets/images/diy_devices/dls/bts03_dls_900h.jpg",
+      "assets/images/diy_devices/dls/bts04_dls_900h.jpg",
+      "assets/images/diy_devices/dls/bts05_dls_900h.jpg"
+    ]
+  },
   {
     "id": "cycl",
     "title": "CYCL",

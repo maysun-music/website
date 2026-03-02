@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DLS</title>
+  <link rel="stylesheet" href="styles/global.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .content-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 160px 20px 100px;
+      box-sizing: border-box;
+    }
+
+    .main-image {
+      width: 100%;
+      height: auto;
+      margin: 10px 0 20px 0;
+    }
+
+    h1 {
+      font-size: clamp(40px, 12vw, 100px);
+      font-weight: bold;
+      margin: 20px 0 10px 0;
+      line-height: 1.1;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    p,
+    .section p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .section h2 {
+      margin-bottom: 0;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: hidden;
+      gap: 5px;
+      padding: 10px 0;
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 5px;
+      min-width: 200%;
+      animation: scroll 15s linear infinite;
+    }
+
+    .carousel img {
+      height: 400px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .section {
+      margin: 40px 0;
+    }
+
+    .section ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .section li {
+      margin-bottom: 6px;
+    }
+
+    .section:last-of-type {
+      padding-bottom: 100px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="content-container" id="deviceContent"></div>
+
+  <script>
+    fetch('data/diy_makes.json')
+      .then(res => res.json())
+      .then(devices => {
+        const id = 'dls';                                   // current page
+        const idx = devices.findIndex(d => d.id === id);     // ▶️ find position
+        const device = devices[idx];
+
+        // Safe fallback if not found
+        if (!device) {
+          document.getElementById('deviceContent').innerHTML = `<h1>Not found</h1><p>Device id "${id}" not found in diy_makes.json.</p>`;
+          return;
+        }
+
+        const next = devices[(idx + 1) % devices.length];    // ▶️ wrap-around next
+
+        const container = document.getElementById('deviceContent');
+
+        const fallbackMain = 'assets/images/placeholders/device_placeholder_1600w.jpg';
+        const fallbackGallery = 'assets/images/placeholders/device_placeholder_900h.jpg';
+
+        const gallery = Array.isArray(device.gallery) ? device.gallery : [];
+        const duplicatedGallery = gallery.concat(gallery);
+
+        // Only show "Next Steps" if it exists
+        const nextStepsBlock = device.future ? `
+          <div class="section">
+            <h2>Next Steps</h2>
+            <p>${device.future}</p>
+          </div>
+        ` : '';
+
+        container.innerHTML = `
+          <h1>${device.title}</h1>
+          <img
+            src="${device.main_image || fallbackMain}"
+            onerror="this.onerror=null; this.src='${fallbackMain}';"
+            alt="Main Image"
+            class="main-image"
+          />
+
+          <div class="section">
+            <h2>Overview</h2>
+            <p>${device.short_description || ''}</p>
+          </div>
+
+          <div class="section">
+            <h2>Reason for Making</h2>
+            <p>${device.back_story || ''}</p>
+          </div>
+
+          <div class="section">
+            <h2>Components</h2>
+            <ul>
+              ${(device.components || []).map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+
+          ${nextStepsBlock}
+
+          <hr>
+
+          <div class="section">
+            <div class="carousel">
+              <div class="carousel-track">
+                ${
+                  duplicatedGallery.length
+                    ? duplicatedGallery.map(img => `
+                        <img
+                          src="${img || fallbackGallery}"
+                          onerror="this.onerror=null; this.src='${fallbackGallery}';"
+                          alt="Gallery image"
+                        >
+                      `).join('')
+                    : `
+                        <img
+                          src="${fallbackGallery}"
+                          alt="Gallery placeholder"
+                        >
+                        <img
+                          src="${fallbackGallery}"
+                          alt="Gallery placeholder"
+                        >
+                      `
+                }
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Add Next link at the bottom
+        const nav = document.createElement('div');
+        nav.style.textAlign = 'right';
+        nav.style.marginTop = '20px';
+        nav.innerHTML = `<a href="${next.url}" style="text-decoration:none;color:inherit;">NEXT →</a>`;
+        container.appendChild(nav);
+
+        // Optional: keyboard right arrow navigation
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') location.href = next.url;
+        });
+
+        // Update document title to match device
+        document.title = device.title || 'DLS';
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('deviceContent').innerHTML = `<h1>Error</h1><p>Failed to load diy_makes.json.</p>`;
+      });
+  </script>
+
+
+  <div id="globalNav"></div>
+  <script>
+    fetch('components/nav.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('globalNav').innerHTML = html;
+        const navScript = document.createElement('script');
+        navScript.src = 'components/nav.js';
+        document.body.appendChild(navScript);
+      });
+  </script>
+
+</body>
+
+</html>
