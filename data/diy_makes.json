@@ -1,4 +1,4 @@
-[  
+[
   {
     "id": "dls",
     "title": "Distributed Listener System",
@@ -6,8 +6,8 @@
     "year": "2026",
     "url": "dls.html",
     "main_image": "assets/images/diy_devices/dls/main_dls_1600w.jpg",
-    "short_description": "Distributed Listener System is a portable and scalable spatial-audio instrument built from a controller and multiple wireless listening nodes. It lets me deploy microphones and small speakers across a room (or across multiple rooms) to capture what is already happening in the space, transmit it, and re-amplify it as a coherent, responsive soundscape. The system is designed for quick setups and improvisation: audience chatter, footsteps, room tone, and nearby performances become the material. By placing listeners at different locations, the space itself becomes a playable network, where distance, placement, and feedback shape the piece in real time.",
-    "back_story": "I kept running into the same limitation while working with spatial sound: access. Most immersive systems are fixed installs, hard to tour, and hard to adapt to new rooms. I started building a lightweight kit that could travel in a backpack and scale depending on the venue. The result is a two-part architecture: a controller that manages routing and behavior, and listener nodes that can be placed anywhere to capture and return sound. It is a portable approach to spatial audio that can grow from a simple one-room setup to a distributed multi-room system.",
+    "short_description": "Distributed Listener System is a portable spatial performance instrument composed of a wireless controller and multiple listening nodes. Each Listener captures and processes sound locally while receiving coordinated control signals. The nodes do not share a sound source. Each hears the room from its own position. What is distributed is not the sound itself, but the processing. By placing Listeners across a room or between connected spaces, architecture becomes part of the signal path. The system allows sound to move through space without relying on a fixed multichannel array.",
+    "back_story": "The system extends from my studio practice of routing sound through physical environments, recording the result, and feeding it back into the same space. I built CYCL to replicate that cyclical process live using a microphone as the primary sound source. Distributed Listener expands that logic across multiple spaces. Instead of a single instrument hearing the room, several independent nodes capture different points of view within the same architectural container. The room feeds back into itself, and the processing moves wirelessly through space.",
     "components": [
       "Controller (TX): ESP32 WROOM-32E",
       "Controller (TX): 0.96\" OLED screen",
