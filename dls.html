@@ -68,8 +68,13 @@
     }
 
     @keyframes scroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .section {
@@ -146,12 +151,17 @@
             <p>${device.back_story || ''}</p>
           </div>
 
-          <div class="section">
-            <h2>Components</h2>
-            <ul>
-              ${(device.components || []).map(item => `<li>${item}</li>`).join('')}
-            </ul>
-          </div>
+<div class="section">
+  <h2>Components</h2>
+  <p><strong>Controller (TX)</strong></p>
+  <ul>
+    ${(device.components_tx || []).map(item => `<li>${item}</li>`).join('')}
+  </ul>
+  <p style="margin-top:16px;"><strong>Listener (RX)</strong></p>
+  <ul>
+    ${(device.components_rx || []).map(item => `<li>${item}</li>`).join('')}
+  </ul>
+</div>
 
           ${nextStepsBlock}
 
@@ -160,16 +170,15 @@
           <div class="section">
             <div class="carousel">
               <div class="carousel-track">
-                ${
-                  duplicatedGallery.length
-                    ? duplicatedGallery.map(img => `
+                ${duplicatedGallery.length
+            ? duplicatedGallery.map(img => `
                         <img
                           src="${img || fallbackGallery}"
                           onerror="this.onerror=null; this.src='${fallbackGallery}';"
                           alt="Gallery image"
                         >
                       `).join('')
-                    : `
+            : `
                         <img
                           src="${fallbackGallery}"
                           alt="Gallery placeholder"
@@ -179,7 +188,7 @@
                           alt="Gallery placeholder"
                         >
                       `
-                }
+          }
               </div>
             </div>
           </div>
