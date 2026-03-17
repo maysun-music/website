@@ -540,5 +540,17 @@
       "zCKe_0nKU6w"
     ]
   }
+},
+{
+  "id": "wireless",
+  "title": "58. WIRELESS",
+  "year": 2026,
+  "month": 3,
+  "text": "Adapting to life in NYC placed me in several AV tech roles. Setting up systems for interpretation at conferences, front of house sound and audio assistant in venues, and stage crew for different productions.\n\nEach situation had a similar component: wireless microphones.\n\nInterpreters broadcast to receivers worn by audience members. Concert halls use wireless handhelds for presenters and conferences. Stage crews rely on wireless headsets to communicate throughout a show.\n\nThis exposure made these systems feel more reliable than I had anticipated, and I started considering how to integrate them into my own process.\n\nMy CYCL synth used an embedded microphone, but I had also added a secondary input. I began wondering how it could extend if I used a wireless mic placed further away in the space, or in another room entirely. The architecture of a building itself could become part of the signal path in a more deliberate way.\n\nIf the microphone could be separated from the instrument, could the instrument be separated from me?\n\nI started developing a second DIY instrument built around the same core as CYCL, with wireless control using ESP32 microcontrollers and ESP-NOW for communication. I called it the Listener System. With wireless control, multiple units can be coordinated from a single controller. With decentralized processing, and each unit mounted directly to a speaker, you can start shaping a space.\n\nThis arrangement makes a form of portable and scalable spatial audio possible without the cabling infrastructure it usually requires. Rather than moving sounds through a space, I move processing.\n\nBecause the listeners share the same space and process sound from around them, it still gives a sense of unified movement.\n\nIt also makes processing possible across spaces. A Listener in an adjacent room can capture its surroundings, generate its own sound field, and send it into the main space, where it is reprocessed and can bleed back into the halls and into that initial room. The feedback path spans architecture rather than the interior of a single space.\n\nThe Listener System is currently in progress.",
+  "media": {
+    "image": "assets/images/misc/listener_plot.jpg"
+  }
 }
+
+
   ]
