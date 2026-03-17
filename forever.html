@@ -55,6 +55,23 @@
       margin-bottom: 40px;
     }
 
+    #jumpLatest {
+      display: inline-block;
+      margin-bottom: 40px;
+      padding: 8px 12px;
+      border: 1px solid black;
+      background: white;
+      color: black;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    #jumpLatest:hover {
+      background: black;
+      color: white;
+    }
+
     .section {
       padding: 60px 0;
       min-height: 50vh;
@@ -305,6 +322,7 @@
   <!-- Main Content -->
   <div class="content-container">
     <h1>FOREVER IN SOUND</h1>
+    <button id="jumpLatest">Jump to latest entry</button>
     <div id="sectionsContainer"></div>
   </div>
 
@@ -319,6 +337,7 @@
       .then(data => {
         sections = data;
         renderSections();
+        setupJumpLatest();
 
         // Only render grid on desktop
         if (window.innerWidth > 768) {
@@ -385,6 +404,25 @@
         div.querySelectorAll('.youtube-placeholder').forEach(placeholder => {
           placeholder.addEventListener('click', () => loadYouTube(placeholder));
         });
+      });
+    }
+
+    function setupJumpLatest() {
+      const button = document.getElementById('jumpLatest');
+      if (!button || sections.length === 0) return;
+
+      const latest = sections[sections.length - 1];
+
+      if (latest.year && latest.month) {
+        const monthNames = [
+          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+        button.textContent = `Jump to latest entry (${monthNames[latest.month - 1]} ${latest.year})`;
+      }
+
+      button.addEventListener('click', () => {
+        document.getElementById(latest.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
 
