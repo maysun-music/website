@@ -1,5 +1,22 @@
 [
   {
+    "id": "forever_book",
+    "title": "Forever in Sound Book",
+    "type": "book",
+    "year": "2025",
+    "url": "foreverbook.html",
+    "main_image": "assets/images/diy_devices/book/main_book_360w.jpg",
+    "short_description": "A physical edition of Forever in Sound, chapters 1 through 55. 102 pages, 4 copies made.",
+    "back_story": "My grandmother expressed she wished she could read the Forever in Sound section of my website as a book instead of on her phone. I adapted the webpage diary into this printed version for her, and made 2 other copies for my family, and 1 for myself.",
+    "gallery": [
+      "assets/images/diy_devices/book/bts01_book_900h.JPG",
+      "assets/images/diy_devices/book/bts02_book_900h.JPG",
+      "assets/images/diy_devices/book/bts03_book_900h.JPG",
+      "assets/images/diy_devices/book/bts04_book_900h.JPG",
+      "assets/images/diy_devices/book/bts05_book_900h.JPG"
+    ]
+  },
+  {
     "id": "dls",
     "title": "Listener System",
     "type": "instrument",
