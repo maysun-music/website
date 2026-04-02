@@ -1,22 +1,5 @@
 [
   {
-    "id": "forever_book",
-    "title": "FOREVER IN SOUND (Book Edition)",
-    "type": "book",
-    "year": "2025",
-    "url": "foreverbook.html",
-    "main_image": "assets/images/diy_devices/book/main_book_360w.jpg",
-    "short_description": "A physical edition of FOREVER IN SOUND, chapters 1–55. 102 pages. Edition of 4.",
-    "back_story": "My grandmother wanted to read Forever in Sound as a book instead of on her phone. I adapted the website into a physical edition and gave it to her for her 90th birthday. I made three additional copies for my family and myself.",
-    "gallery": [
-      "assets/images/diy_devices/book/bts01_book_900h.JPG",
-      "assets/images/diy_devices/book/bts02_book_900h.JPG",
-      "assets/images/diy_devices/book/bts03_book_900h.JPG",
-      "assets/images/diy_devices/book/bts04_book_900h.JPG",
-      "assets/images/diy_devices/book/bts05_book_900h.JPG"
-    ]
-  },
-  {
     "id": "dls",
     "title": "Listener System",
     "type": "instrument",
@@ -124,6 +107,23 @@
       "assets/images/diy_devices/node-1/bts02_node1_900h.jpg",
       "assets/images/diy_devices/node-1/bts03_node1_900h.jpg",
       "assets/images/diy_devices/node-1/bts04_node1_900h.jpg"
+    ]
+  },
+    {
+    "id": "forever_book",
+    "title": "FOREVER IN SOUND (Book Edition)",
+    "type": "book",
+    "year": "2025",
+    "url": "foreverbook.html",
+    "main_image": "assets/images/diy_devices/book/main_book_360w.jpg",
+    "short_description": "A physical edition of FOREVER IN SOUND, chapters 1–55. 102 pages. Edition of 4.",
+    "back_story": "My grandmother wanted to read Forever in Sound as a book instead of on her phone. I adapted the website into a physical edition and gave it to her for her 90th birthday. I made three additional copies for my family and myself.",
+    "gallery": [
+      "assets/images/diy_devices/book/bts01_book_900h.JPG",
+      "assets/images/diy_devices/book/bts02_book_900h.JPG",
+      "assets/images/diy_devices/book/bts03_book_900h.JPG",
+      "assets/images/diy_devices/book/bts04_book_900h.JPG",
+      "assets/images/diy_devices/book/bts05_book_900h.JPG"
     ]
   },
   {
