@@ -40,6 +40,31 @@
     ]
   },
   {
+    "id": "pizzarat",
+    "title": "PizzaRAT",
+    "type": "virtual instrument",
+    "year": "2026",
+    "url": "pizzarat.html",
+    "main_image": "assets/images/diy_devices/pizzarat/main_pizzarat_1500h.jpg",
+    "short_description": "A saturation plugin modeled after the sound of NYC subway announcements. Choose a train line, adjust pizza toastiness, grab the bar, poke the rat.\n\nBuilt from recordings of distorted MTA speakers, brake screeches, and tunnel resonance. Designed to bring that texture into drums, bass, and vocals.\n\nFree to download.",
+    "back_story": "I was walking in the subway, once again hearing announcement speakers screaming, impossible to understand. I posted “someone should make an MTA distortion plugin” with a video of it.\n\nJack Tipper replied right away: let’s do it.\n\nLuke Nash joined and we made it happen.",
+    "links": [
+      {
+        "label": "Download PizzaRat",
+        "url": "https://aotu.gumroad.com/l/pizzarat"
+      },
+      {
+        "label": "Jack Tipper",
+        "url": "https://www.aotustudios.com/"
+      }
+    ],
+    "gallery": [
+      "assets/images/diy_devices/pizzarat/bts01_pizzarat_700h.jpg",
+      "assets/images/diy_devices/pizzarat/bts02_pizzarat_700h.jpg",
+      "assets/images/diy_devices/pizzarat/bts03_pizzarat_700h.jpg"
+    ]
+  },
+  {
     "id": "cycl",
     "title": "CYCL",
     "type": "instrument",
@@ -109,7 +134,7 @@
       "assets/images/diy_devices/node-1/bts04_node1_900h.jpg"
     ]
   },
-    {
+  {
     "id": "forever_book",
     "title": "FOREVER IN SOUND (Book Edition)",
     "type": "book",
