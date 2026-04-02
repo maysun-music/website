@@ -7,7 +7,10 @@
   <title>NODE-1</title>
   <link rel="stylesheet" href="styles/global.css" />
   <style>
-    body { margin: 0; font-family: Helvetica, Arial, sans-serif; }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+    }
 
     .content-container {
       max-width: 800px;
@@ -33,14 +36,17 @@
       letter-spacing: 0.5px;
     }
 
-    p, .section p {
+    p,
+    .section p {
       font-size: 18px;
       line-height: 1.6;
       margin-top: 0;
       margin-bottom: 0;
     }
 
-    .section h2 { margin-bottom: 0; }
+    .section h2 {
+      margin-bottom: 0;
+    }
 
     .carousel {
       display: flex;
@@ -48,31 +54,36 @@
       gap: 5px;
       padding: 10px 0;
       position: relative;
+      cursor: grab;
     }
 
     .carousel-track {
       display: flex;
       gap: 5px;
       min-width: 200%;
-      animation: scroll 15s linear infinite;
     }
 
     .carousel img {
       height: 400px;
       flex-shrink: 0;
-      scroll-snap-align: start;
     }
 
-    @keyframes scroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+    .section {
+      margin: 40px 0;
     }
 
-    .section { margin: 40px 0; }
-    .section ul { padding-left: 20px; margin-top: 10px; }
-    .section li { margin-bottom: 6px; }
+    .section ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
 
-    .section:last-of-type { padding-bottom: 100px; }
+    .section li {
+      margin-bottom: 6px;
+    }
+
+    .section:last-of-type {
+      padding-bottom: 100px;
+    }
 
     /* (Optional) remove these old box styles entirely
     .next-nav { ... }
@@ -131,6 +142,28 @@
           </div>
         `;
 
+        const track = container.querySelector('.carousel-track');
+        const carousel = container.querySelector('.carousel');
+
+        let offset = 0;
+        let paused = false;
+        const speed = 0.4;
+
+        function tick() {
+          if (!paused) {
+            offset += speed;
+            const halfWidth = track.scrollWidth / 2;
+            if (offset >= halfWidth) offset -= halfWidth;
+            track.style.transform = `translateX(-${offset}px)`;
+          }
+          requestAnimationFrame(tick);
+        }
+
+        carousel.addEventListener('mouseenter', () => paused = true);
+        carousel.addEventListener('mouseleave', () => paused = false);
+
+        requestAnimationFrame(tick);
+
         // ▶️ figure out NEXT based on array order (wrap to first)
         const currentIndex = devices.findIndex(d => d.id === 'node-1');
         const next = devices[(currentIndex + 1) % devices.length];
@@ -162,4 +195,5 @@
   </script>
 
 </body>
+
 </html>

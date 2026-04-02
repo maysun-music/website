@@ -52,29 +52,19 @@
       gap: 5px;
       padding: 10px 0;
       position: relative;
+      cursor: grab;
     }
 
     .carousel-track {
       display: flex;
       gap: 5px;
       min-width: 200%;
-      animation: scroll 15s linear infinite;
     }
+
 
     .carousel img {
       height: 400px;
       flex-shrink: 0;
-      scroll-snap-align: start;
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0%);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
     }
 
     .section {
@@ -208,6 +198,28 @@
 
         // Update document title to match device
         document.title = device.title || 'DLS';
+
+        const track = container.querySelector('.carousel-track');
+        const carousel = container.querySelector('.carousel');
+
+        let offset = 0;
+        let paused = false;
+        const speed = 0.4;
+
+        function tick() {
+          if (!paused) {
+            offset += speed;
+            const halfWidth = track.scrollWidth / 2;
+            if (offset >= halfWidth) offset -= halfWidth;
+            track.style.transform = `translateX(-${offset}px)`;
+          }
+          requestAnimationFrame(tick);
+        }
+
+        carousel.addEventListener('mouseenter', () => paused = true);
+        carousel.addEventListener('mouseleave', () => paused = false);
+
+        requestAnimationFrame(tick);
       })
       .catch(err => {
         console.error(err);

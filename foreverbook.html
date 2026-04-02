@@ -54,19 +54,23 @@
       gap: 5px;
       padding: 10px 0;
       position: relative;
+      cursor: grab;
     }
 
     .carousel-track {
       display: flex;
       gap: 5px;
       min-width: 200%;
-      animation: scroll 15s linear infinite;
+    }
+
+
+    .carousel:hover .carousel-track {
+      animation-play-state: paused;
     }
 
     .carousel img {
       height: 400px;
       flex-shrink: 0;
-      scroll-snap-align: start;
     }
 
     @keyframes scroll {
@@ -86,7 +90,6 @@
     .section:last-of-type {
       padding-bottom: 100px;
     }
-
   </style>
 </head>
 
