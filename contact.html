@@ -154,7 +154,7 @@
       text-transform: uppercase;
       background: none;
       border: 1px solid #ccc;
-      padding: 6px 50px;
+      padding: 6px 70px;
       cursor: pointer;
     }
 
@@ -251,8 +251,6 @@
   <!-- RESOURCES -->
   <div class="resources-container">
     <h2>RESOURCES</h2>
-    <p class="resources-subtitle">Spatial audio templates and samples.</p>
-
     <div class="resources-section-title">Multichannel Speaker Layouts (.txt)</div>
     <div class="venues-grid" id="venues-grid">
       <!-- populated by JS -->
@@ -308,7 +306,7 @@
             <div class="venue-meta">${v.location}</div>
             <div class="speaker-count">${v.speakers} structure</div>
 ${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopener">${v.url}</a></div>` : ''}            <textarea readonly id="txt-${v.id}">${v.txt}</textarea>
-            <button class="copy-btn" onclick="copyTxt('txt-${v.id}', this)">Copy</button>
+            <button class="copy-btn" onclick="downloadTxt('${v.id}', '${v.name}')">Download</button>
           </div>
         </div>
       `).join('');
@@ -333,16 +331,17 @@ ${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopen
       `).join('');
     }
 
-    function copyTxt(id, btn) {
-      const ta = document.getElementById(id);
-      navigator.clipboard.writeText(ta.value).then(() => {
-        btn.textContent = 'Copied';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = 'Copy';
-          btn.classList.remove('copied');
-        }, 2000);
-      });
+    function downloadTxt(id, name) {
+      const ta = document.getElementById(`txt-${id}`);
+      const blob = new Blob([ta.value], { type: 'text/plain' });
+
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${name.toLowerCase().replace(/\s+/g, '_')}.txt`;
+
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
   </script>
 </body>
