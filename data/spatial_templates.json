@@ -20,7 +20,7 @@
       "id": "iris_cantor",
       "name": "Iris Cantor Theater",
       "location": "36 E 8th St, New York, NY 10003",
-      "speakers": "50.6",
+      "speakers": "50.2",
       "url": "https://tisch.nyu.edu/drama/production-resources/production-theatres/iris-cantor-theatre.html",
       "pictures": [
         "assets/images/spat_templates/iris_cantor/iriscantor01.jpg",
@@ -29,7 +29,7 @@
         "assets/images/spat_templates/iris_cantor/iriscantor04.jpg",
         "assets/images/spat_templates/iris_cantor/iriscantor05.jpg"
       ],
-      "txt": "Coming soon."
+      "txt": "# ======================================\n# File \"iriscantor_spat.txt\"\n# Made with XP4L - www.xp4l.com/\n# Approximate locations based on tech sheet\n# formatted by Etienne Mason - MAYSUN - www.maysun.zip\n#\n# Sub channels (not in AED layout)\n# ch 27-28 = subs\n# routing: move ch 27-28 \u2192 51-52, shift ch 29-52 \u2192 27-50\n# for AED channels remain consecutive (1-50)\n# ======================================\n/speaker/number 50\n/speakers/correction/delay \"auto\"\n/speakers/correction/gain \"auto\"\n/speakers/aed -60.9317 20.161 1.37031 -71.5554 21.7251 1.27593 -83.6563 22.6599 1.2259 -96.3437 22.6599 1.2259 -109.865 21.5568 1.28542 -120.27 19.9399 1.38488 -132.526 17.201 1.59707 -141.788 19.7907 1.3949 -154.162 22.4007 1.23934 -168.058 24.1355 1.15504 167.99 24.1301 1.15528 154.106 22.391 1.23985 141.744 19.7798 1.39563 132.494 17.1911 1.59796 120.242 19.9245 1.3859 109.845 21.5373 1.28652 96.3367 22.6373 1.22706 83.6633 22.6373 1.22706 71.5746 21.7052 1.27704 60.959 20.1451 1.37135 -141.755 45.771 1.88019 -154.135 49.6481 1.76788 -168.044 51.9938 1.70986 167.977 51.9869 1.71002 154.078 49.6345 1.76823 141.711 45.7539 1.88074 -60.1837 79.4306 1.3705 60.3262 79.3856 1.3707 -119.816 79.4306 1.3705 119.674 79.3856 1.3707 -71.2587 48.7224 1.79278 -83.6319 50.0884 1.75646 -96.3681 50.0884 1.75646 -109.937 48.5141 1.79851 -120.368 46.0653 1.8709 -127.999 43.4693 1.95838 71.488 48.7607 1.79172 83.6319 50.0884 1.75646 96.3681 50.0884 1.75646 109.937 48.5141 1.79852 120.368 46.0653 1.8709 127.999 43.4693 1.95838 -47.1984 45.3756 1.5714 0.200169 56.1539 1.34654 47.3825 45.2758 1.57411 -44.9696 0.0 0.840676 -27.7107 0.240984 0.670188 0.0606636 0.0 0.59613 27.8062 0.240773 0.670776 45.0304 0.0 0.841568\n/speaker/1/name \"1\"\n/speaker/2/name \"2\"\n/speaker/3/name \"3\"\n/speaker/4/name \"4\"\n/speaker/5/name \"5\"\n/speaker/6/name \"6\"\n/speaker/7/name \"7\"\n/speaker/8/name \"8\"\n/speaker/9/name \"9\"\n/speaker/10/name \"10\"\n/speaker/11/name \"11\"\n/speaker/12/name \"12\"\n/speaker/13/name \"13\"\n/speaker/14/name \"14\"\n/speaker/15/name \"15\"\n/speaker/16/name \"16\"\n/speaker/17/name \"17\"\n/speaker/18/name \"18\"\n/speaker/19/name \"19\"\n/speaker/20/name \"20\"\n/speaker/21/name \"21\"\n/speaker/22/name \"22\"\n/speaker/23/name \"23\"\n/speaker/24/name \"24\"\n/speaker/25/name \"25\"\n/speaker/26/name \"26\"\n/speaker/27/name \"27\"\n/speaker/28/name \"28\"\n/speaker/29/name \"29\"\n/speaker/30/name \"30\"\n/speaker/31/name \"31\"\n/speaker/32/name \"32\"\n/speaker/33/name \"33\"\n/speaker/34/name \"34\"\n/speaker/35/name \"35\"\n/speaker/36/name \"36\"\n/speaker/37/name \"37\"\n/speaker/38/name \"38\"\n/speaker/39/name \"39\"\n/speaker/40/name \"40\"\n/speaker/41/name \"41\"\n/speaker/42/name \"42\"\n/speaker/43/name \"43\"\n/speaker/44/name \"44\"\n/speaker/45/name \"45\"\n/speaker/46/name \"46\"\n/speaker/47/name \"47\"\n/speaker/48/name \"48\"\n/speaker/49/name \"49\"\n/speaker/50/name \"50\""
     }
 
   ],
