@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MAYSUN</title>
     <link rel="stylesheet" href="styles/global.css">
-
-      <script src="components/nav.js"></script>
+    <script src="components/nav.js"></script>
 
     <style>
-        /* Overlay text style (optional default) */
         .overlay-text {
             position: absolute;
             pointer-events: none;
@@ -21,68 +19,61 @@
             width: 300px;
         }
 
-        /* make the content wrapper center its kids
-        .content-container {
+        .image-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin: 80px auto 100px;
-            padding: 0 20px;
-            max-width: 800px;
-        } */
-
-        /* center and size down the home image */
-        .image-container {
+            align-items: flex-end;
+            margin: 0;
             text-align: center;
             width: 100%;
+            cursor: default;
         }
 
-        .image-container img {
+        .image-container img#home-image {
             display: block;
             margin: 0 auto;
             max-width: 100%;
             height: auto;
         }
 
-        /* ------------------- PHOTO CREDIT ------------------- */
-        .image-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            /* aligns credit to the right */
-            margin: 0;
+        /* reveal text */
+        .reveal-text {
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            color: #555;
+            margin-top: 16px;
+            opacity: 0;
+            transition: opacity 4.5s ease;
+            pointer-events: none;
+            user-select: none;
         }
 
-        .photo-credit {
-            font-size: 8px;
-            color: black;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 2px 4px;
-            border-radius: 3px;
-            margin-top: 3px;
+        .reveal-text.visible {
+            opacity: 1;
         }
     </style>
 </head>
 
 <body>
-    <!-- Global navigation -->
     <script>
         fetch('components/nav.html')
             .then(res => res.text())
             .then(html => document.body.insertAdjacentHTML('afterbegin', html));
     </script>
 
-    <!-- Main content -->
     <div class="content-container" id="content">
-        <div class="image-container">
-            <img id="home-image" src="assets/images/misc/cup_headshot.png"
-                alt="MAYSUN - Photo by Chienn Tai">
-            <!-- <div class="photo-credit">Photo: Chienn Tai (2024)</div> -->
+        <div class="image-container" id="image-wrapper">
+            <img id="home-image" src="assets/images/misc/cup_headshot.png" alt="MAYSUN - Photo by Chienn Tai">
         </div>
+        <p class="reveal-text" id="reveal-text">
+            A living archive of sound, process, and experimentation. Compositions, instruments, spatial systems, tools and more. Documented as they happen.
+        </p>
     </div>
 
-    <!-- Overlay effect -->
     <script>
+        // ── overlay effect (unchanged) ──────────────────────────────
         let overlayActive = false;
         let overlayRequestId = null;
 
@@ -90,14 +81,10 @@
             const clone = document.createElement('img');
             clone.src = 'images/3MAYSUN_clear.png';
             clone.classList.add('overlay-text');
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight;
-            clone.style.left = x + 'px';
-            clone.style.top = y + 'px';
+            clone.style.left = Math.random() * window.innerWidth + 'px';
+            clone.style.top = Math.random() * window.innerHeight + 'px';
             document.body.appendChild(clone);
-            requestAnimationFrame(() => {
-                clone.style.opacity = '0';
-            });
+            requestAnimationFrame(() => { clone.style.opacity = '0'; });
             setTimeout(() => clone.remove(), 3000);
         }
 
@@ -105,11 +92,9 @@
             overlayActive = true;
             const startTime = performance.now() + 2000;
             let count = 0;
-
             function animate() {
                 if (!overlayActive) return;
-                const now = performance.now();
-                if (now > startTime && count < 300) {
+                if (performance.now() > startTime && count < 300) {
                     addOverlayText();
                     count++;
                 }
@@ -118,11 +103,36 @@
             animate();
         }
 
+        // ── reveal logic ────────────────────────────────────────────
+        const wrapper = document.getElementById('image-wrapper');
+        const text = document.getElementById('reveal-text');
+        let hovered = false;
+        let scrolled = false;
+
+        function updateVisibility() {
+            if (hovered || scrolled) {
+                text.classList.add('visible');
+            } else {
+                text.classList.remove('visible');
+            }
+        }
+
+        // hover (desktop)
+        wrapper.addEventListener('mouseenter', () => { hovered = true; updateVisibility(); });
+        wrapper.addEventListener('mouseleave', () => { hovered = false; updateVisibility(); });
+
+        // scroll (mobile + desktop)
+        window.addEventListener('scroll', () => {
+            const threshold = window.innerHeight * 0.3;
+            scrolled = window.scrollY > threshold;
+            updateVisibility();
+        });
+
+        // ── init ────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', () => {
             startOverlay();
         });
 
-        // Pause overlay when leaving home
         window.addEventListener('hashchange', () => {
             if (window.location.hash !== '' && overlayActive) {
                 overlayActive = false;
