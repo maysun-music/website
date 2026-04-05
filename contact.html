@@ -306,8 +306,7 @@
             <div class="venue-meta">${v.location}</div>
             <div class="speaker-count">${v.speakers} structure</div>
 ${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopener">${v.url}</a></div>` : ''}            <textarea readonly id="txt-${v.id}">${v.txt}</textarea>
-            <button class="copy-btn" onclick="downloadTxt('${v.id}', '${v.name}')">Download</button>
-          </div>
+<button class="copy-btn" onclick="downloadTxt('${v.id}', '${v.filename}')">Download</button>          </div>
         </div>
       `).join('');
     }
@@ -331,13 +330,13 @@ ${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopen
       `).join('');
     }
 
-    function downloadTxt(id, name) {
+    function downloadTxt(id, filename) {
       const ta = document.getElementById(`txt-${id}`);
       const blob = new Blob([ta.value], { type: 'text/plain' });
 
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `${name.toLowerCase().replace(/\s+/g, '_')}.txt`;
+      a.download = filename;
 
       document.body.appendChild(a);
       a.click();
