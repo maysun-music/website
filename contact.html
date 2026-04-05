@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact</title>
 
-  <!-- global nav styles + any site-wide CSS -->
   <link rel="stylesheet" href="styles/global.css" />
-
   <script src="components/nav.js"></script>
 
   <style>
@@ -16,7 +14,7 @@
       text-align: center;
       max-width: 600px;
       margin: 0 auto;
-      padding: 100px 20px;
+      padding: 100px 20px 32px;
     }
 
     .content-container h1 {
@@ -40,26 +38,318 @@
       background: black;
       color: white;
     }
+
+    .section-divider {
+      display: none;
+    }
+
+    .resources-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+    }
+
+    .resources-container h2 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .resources-container .resources-subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-bottom: 56px;
+      color: #666;
+    }
+
+    .resources-section-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 0;
+      border-bottom: none;
+      color: #666;
+    }
+
+    .venues-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      margin-bottom: 96px;
+    }
+
+    .venue-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .venue-card-text h3 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .venue-card-text .venue-meta {
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .venue-card-text .speaker-count {
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .venue-card-text textarea {
+      width: 100%;
+      height: 180px;
+      font-family: monospace;
+      font-size: 0.7rem;
+      resize: vertical;
+      border: 1px solid #ddd;
+      padding: 10px;
+      box-sizing: border-box;
+      background: #fafafa;
+      margin-bottom: 10px;
+    }
+
+    .venue-image-cycle {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .venue-image-cycle img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .venue-image-cycle img.active {
+      opacity: 1;
+    }
+
+    .venue-url {
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .venue-url a {
+      color: black;
+      text-decoration: none;
+      border-bottom: 1px solid black;
+    }
+
+    .venue-url a:hover {
+      background: black;
+      color: white;
+    }
+
+    .copy-btn {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid #ccc;
+      padding: 6px 16px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover,
+    .copy-btn.copied {
+      background: black;
+      color: white;
+      border-color: black;
+    }
+
+    .samples-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .sample-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .sample-card-text {
+      padding-top: 4px;
+    }
+
+    .sample-card-text h3 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+    }
+
+    .sample-card-text p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .sample-card-text a {
+      font-size: 0.8rem;
+      color: black;
+      text-decoration: none;
+      border-bottom: 1px solid black;
+    }
+
+    .sample-card-text a:hover {
+      background: black;
+      color: white;
+    }
+
+    .sample-card-image a {
+      display: block;
+    }
+
+    .sample-card-image img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sample-card-image a:hover img {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+
+      .venue-card,
+      .sample-card {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- load your nav the same way -->
   <script>
     fetch('components/nav.html')
       .then(res => res.text())
       .then(html => document.body.insertAdjacentHTML('afterbegin', html));
   </script>
 
+  <!-- CONTACT -->
   <div class="content-container">
     <h1>CONTACT</h1>
-    <p>
-      Collaborations, commissions, technical questions.
-    </p>
+    <p>Collaborations, commissions, technical questions.</p>
     <p>
       <a href="mailto:maysun.booking@gmail.com">maysun.booking@gmail.com</a>
     </p>
   </div>
+
+  <hr class="section-divider" />
+
+  <!-- RESOURCES -->
+  <div class="resources-container">
+    <h2>RESOURCES</h2>
+    <p class="resources-subtitle">Spatial audio templates and samples.</p>
+
+    <div class="resources-section-title">Multichannel Speaker Layouts (.txt)</div>
+    <div class="venues-grid" id="venues-grid">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="resources-section-title">Free Samples</div>
+    <div class="samples-grid" id="samples-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <script>
+    fetch('data/spatial_templates.json')
+      .then(res => res.json())
+      .then(data => {
+        renderVenues(data.venues);
+        renderSamples(data.samples);
+        startVenueImageCycles();
+      });
+
+    function startVenueImageCycles() {
+      const cycles = document.querySelectorAll('.venue-image-cycle');
+
+      cycles.forEach(cycle => {
+        const images = cycle.querySelectorAll('img');
+        if (images.length <= 1) return;
+
+        let index = 0;
+
+        setInterval(() => {
+          images[index].classList.remove('active');
+          index = (index + 1) % images.length;
+          images[index].classList.add('active');
+        }, 3000);
+      });
+    }
+
+    function renderVenues(venues) {
+      const grid = document.getElementById('venues-grid');
+      grid.innerHTML = venues.map(v => `
+        <div class="venue-card">
+          <div class="venue-card-image">
+            ${v.pictures && v.pictures.length ? `
+  <div class="venue-image-cycle" data-venue="${v.id}">
+    ${v.pictures.map((img, i) => `
+      <img src="${img}" alt="${v.name}" class="${i === 0 ? 'active' : ''}" />
+    `).join('')}
+  </div>
+` : ''}
+          </div>
+          <div class="venue-card-text">
+            <h3>${v.name}</h3>
+            <div class="venue-meta">${v.location}</div>
+            <div class="speaker-count">${v.speakers} structure</div>
+${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopener">${v.url}</a></div>` : ''}            <textarea readonly id="txt-${v.id}">${v.txt}</textarea>
+            <button class="copy-btn" onclick="copyTxt('txt-${v.id}', this)">Copy</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderSamples(samples) {
+      const grid = document.getElementById('samples-grid');
+      grid.innerHTML = samples.map(s => `
+        <div class="sample-card">
+          <div class="sample-card-text">
+            <h3>${s.title}</h3>
+            ${s.description ? `<p>${s.description}</p>` : ''}
+            <a href="${s.bandcamp}" target="_blank" rel="noopener">Listen / Download</a>
+          </div>
+
+          <div class="sample-card-image">
+            <a href="${s.bandcamp}" target="_blank" rel="noopener">
+              ${s.picture ? `<img src="${s.picture}" alt="${s.title}" />` : ''}
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copyTxt(id, btn) {
+      const ta = document.getElementById(id);
+      navigator.clipboard.writeText(ta.value).then(() => {
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 
 </html>

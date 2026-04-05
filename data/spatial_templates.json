@@ -1,0 +1,28 @@
+{
+  "venues": [
+    {
+      "id": "reforesters",
+      "name": "Reforesters",
+      "location": "147 Metropolitan Ave, Brooklyn, NY 11249",
+      "speakers": "24.2",
+      "url": "https://reforesters.io/",
+      "pictures": [
+        "assets/images/spat_templates/reforesters/reforesters01.jpg",
+        "assets/images/spat_templates/reforesters/reforesters02.jpg",
+        "assets/images/spat_templates/reforesters/reforesters03.jpg",
+        "assets/images/spat_templates/reforesters/reforesters04.jpg",
+        "assets/images/spat_templates/reforesters/reforesters05.jpg",
+        "assets/images/spat_templates/reforesters/reforesters06.jpg"
+      ],
+      "txt": "# ==========================================================\n# File \"reforesters_spat.txt\"\n# Made with XP4L - www.xp4l.com/\n# Scaled 0.3x\n# formatted by Etienne Mason - MAYSUN - www.maysun.zip\n#\n# Sub channels (not in AED layout)\n# ch 25 = floor sub\n# ch 26 = ceiling sub\n# ==========================================================\n/speaker/number 24\n/speakers/correction/delay \"auto\"\n/speakers/correction/gain \"auto\"\n/speakers/aed -46 63.6 0.9 43 63.6 0.9 135.4 63.6 0.9 -132.4 63.6 0.9 -26.0818 34.131 1.26915 25.1235 34.1334 1.269069 64.3198 34.006 1.273251 118.577 34.2931 1.263879 153.185 34.4334 1.259358 -155.749 35.024 1.24077 -116.948 35.0177 1.240965 -62.0449 35.5458 1.224906 -35.9856 2.6 1.153905 0.105327 14.4476 0.988248 36.1935 2.6 1.154019 54.8738 2.63285 1.13949 86.3828 2.37374 0.947841 126.927 2.63949 1.136625 142.255 2.60347 1.152342 -180 2.40549 0.93534 -140.383 2.6 1.153509 -130.249 2.54479 1.178892 -89.6984 3.51854 0.895263 -49.7505 2.54479 1.178892\n/speaker/1/name \"1\"\n/speaker/2/name \"2\"\n/speaker/3/name \"3\"\n/speaker/4/name \"4\"\n/speaker/5/name \"5\"\n/speaker/6/name \"6\"\n/speaker/7/name \"7\"\n/speaker/8/name \"8\"\n/speaker/9/name \"9\"\n/speaker/10/name \"10\"\n/speaker/11/name \"11\"\n/speaker/12/name \"12\"\n/speaker/13/name \"13\"\n/speaker/14/name \"14\"\n/speaker/15/name \"15\"\n/speaker/16/name \"16\"\n/speaker/17/name \"17\"\n/speaker/18/name \"18\"\n/speaker/19/name \"19\"\n/speaker/20/name \"20\"\n/speaker/21/name \"21\"\n/speaker/22/name \"22\"\n/speaker/23/name \"23\"\n/speaker/24/name \"24\""
+    }
+  ],
+  "samples": [
+    {
+      "id": "samples",
+      "title": "samples",
+      "picture": "assets/samples/bandcamp_samples.jpg",
+      "bandcamp": "https://maysunsamples.bandcamp.com/"
+    }
+  ]
+}
