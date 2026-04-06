@@ -130,18 +130,18 @@
         wrapper.addEventListener('mouseenter', () => { hovered = true; updateVisibility(); });
         wrapper.addEventListener('mouseleave', () => { hovered = false; updateVisibility(); });
 
-        // scroll (mobile + desktop)
-        window.addEventListener('scroll', () => {
-            const threshold = window.innerHeight * 0.3;
-            scrolled = window.scrollY > threshold;
-            updateVisibility();
-        });
 
         // ── init ────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', () => {
             startOverlay();
             if (window.innerWidth <= 768) {
-                setTimeout(() => text.classList.add('visible'), 100);
+                wrapper.addEventListener('click', () => {
+                    if (text.classList.contains('visible')) {
+                        text.classList.remove('visible');
+                    } else {
+                        text.classList.add('visible');
+                    }
+                });
             }
         });
 
