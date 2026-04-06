@@ -52,24 +52,19 @@
     h1 {
       font-size: 80px;
       font-weight: bold;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     #jumpLatest {
       display: inline-block;
-      margin-bottom: 40px;
-      padding: 8px 12px;
-      border: 1px solid black;
+      margin-bottom: 10px;
+      padding: 2px 4px;
+      border: 0.5px solid black;
       background: white;
       color: black;
       font-family: Helvetica, Arial, sans-serif;
-      font-size: 12px;
+      font-size: 8px;
       cursor: pointer;
-    }
-
-    #jumpLatest:hover {
-      background: black;
-      color: white;
     }
 
     .section {
@@ -322,7 +317,7 @@
   <!-- Main Content -->
   <div class="content-container">
     <h1>FOREVER IN SOUND</h1>
-    <button id="jumpLatest">Jump to latest entry</button>
+    <button id="jumpLatest">latest entry</button>
     <div id="sectionsContainer"></div>
   </div>
 
@@ -415,10 +410,10 @@
 
       if (latest.year && latest.month) {
         const monthNames = [
-          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
         ];
-        button.textContent = `Jump to latest entry (${monthNames[latest.month - 1]} ${latest.year})`;
+        button.textContent = `(Latest entry ${monthNames[latest.month - 1]})`;
       }
 
       button.addEventListener('click', () => {
