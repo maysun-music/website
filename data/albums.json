@@ -56,5 +56,14 @@
       "process": "TIMELINES was recorded between January 16th and 24th 2023, at the Banff Center for Arts and Creativity, in room E148. Recorded over 8 days, this music was created from different iterations of a same sound. Grand piano manipulated through electronic processing was recorded and reintroduced into the space at varying speeds and pitches. I intertwined additional piano lines into these new textures, repeating the process cyclically. Minimalist drumming and imperfections from my movement in the room were layered along the way. The ambient sounds of fellow artists creating in the adjacent rooms bled through the walls, subtly infiltrating the recordings, adding another layer of artifacts. This album is about a personal shift in perception, a subtle but profound alteration of timelines.",
       "bandcamp": "https://maysunmusic.bandcamp.com/album/timelines"
     }
+  ],
+  "samples": [
+    {
+      "id": "samples",
+      "title": "MAYSUN Samples",
+      "picture": "assets/images/album_covers/bandcamp_samples.jpg",
+      "bandcamp": "https://maysunsamples.bandcamp.com/",
+      "description": "Sounds recorded from glass, metal, steel, glass marimba, broken synths, and more. Made for personal use across SPDsx, SP404, Sensory Percussion, and sound design. Feel free to use these in your music, and if you do, I'd be happy to hear the result. Made to be used creatively."
+    }
   ]
 }
