@@ -16,7 +16,7 @@
         "assets/images/spat_templates/reforesters/reforesters05.jpg",
         "assets/images/spat_templates/reforesters/reforesters06.jpg"
       ],
-      "txt": "AED provided by Reforesters Laboratory. Scale by 0.3 for XP4L."
+      "txt": "# ======================================\n# AED provided by Reforesters Laboratory.\n# ======================================\n# Scale by 0.3 for XP4L."
     },
     {
       "id": "iris_cantor",
