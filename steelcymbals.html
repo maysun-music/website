@@ -26,12 +26,15 @@
     }
 
     h1 {
-      font-size: clamp(40px, 12vw, 100px);
+      font-size: clamp(40px, 10vw, 100px);
       font-weight: bold;
       margin: 20px 0 10px 0;
       line-height: 1.1;
       text-align: center;
       letter-spacing: 0.5px;
+
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
     }
 
     p,
@@ -153,15 +156,15 @@
             <div class="carousel">
               <div class="carousel-track">
                 ${duplicatedGallery.length
-                  ? duplicatedGallery.map(img => `
+            ? duplicatedGallery.map(img => `
                     <img src="${img || fallbackGallery}"
                     onerror="this.onerror=null; this.src='${fallbackGallery}';">
                   `).join('')
-                  : `
+            : `
                     <img src="${fallbackGallery}">
                     <img src="${fallbackGallery}">
                   `
-                }
+          }
               </div>
             </div>
           </div>
