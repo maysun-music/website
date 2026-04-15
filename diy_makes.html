@@ -7,6 +7,56 @@
   <title>OBJECTS & DIY</title>
   <link rel="stylesheet" href="styles/global.css" />
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .year-nav {
+      position: fixed;
+      right: 0;
+      top: 60px;
+      width: 150px;
+      height: calc(100vh - 60px);
+      background: white;
+      padding: 20px 5px 20px 10px;
+      overflow-y: auto;
+      z-index: 500;
+    }
+
+    .year-nav-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 20px;
+    }
+
+    .year-square {
+      width: 25px;
+      height: 25px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #666;
+      text-decoration: none;
+    }
+
+    .year-square.filled {
+      background: black;
+      border-color: black;
+      color: #999;
+    }
+
+    .year-square:hover {
+      transform: scale(1.2);
+      z-index: 9;
+    }
+
     body {
       font-family: Helvetica, Arial, sans-serif;
       background: #fff;
@@ -29,9 +79,10 @@
     }
 
     #itemsContainer {
+      width: calc(100% - 150px);
       max-width: 1000px;
       margin: 0 auto;
-      padding: 0 60px 80px
+      padding: 0 60px 80px;
     }
 
     .year-section {
@@ -142,8 +193,13 @@
     }
 
     @media (max-width:768px) {
+      .year-nav {
+        display: none;
+      }
+
       #itemsContainer {
-        padding: 0 30px 80px
+        width: 100%;
+        padding: 0 30px 80px;
       }
 
       .items-grid {
@@ -160,6 +216,10 @@
 
 <body>
   <div id="globalNav"></div>
+  <div class="year-nav">
+    <div class="year-nav-container" id="yearNavContainer"></div>
+  </div>
+
   <h1 class="page-title">OBJECTS & DIY</h1>
 
   <div id="itemsContainer"></div>
@@ -191,9 +251,21 @@
         // Sort years descending
         const years = Object.keys(byYear).sort((a, b) => b - a);
 
+        const yearNavContainer = document.getElementById('yearNavContainer');
+
+        years.forEach(year => {
+          const square = document.createElement('a');
+          square.className = 'year-square filled';
+          square.href = `#year-${year}`;
+          square.textContent = `'${String(year).slice(2)}`;
+          yearNavContainer.appendChild(square);
+        });
+
         years.forEach(year => {
           const section = document.createElement('div');
           section.className = 'year-section';
+
+          section.id = `year-${year}`;
 
           const header = document.createElement('div');
           header.className = 'year-header';
