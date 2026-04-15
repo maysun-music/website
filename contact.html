@@ -10,7 +10,64 @@
   <script src="components/nav.js"></script>
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .top-section-nav {
+      position: fixed;
+      right: 0;
+      top: 60px;
+      width: 150px;
+      height: calc(100vh - 60px);
+      background: white;
+      padding: 20px 5px 20px 10px;
+      overflow-y: auto;
+      z-index: 500;
+    }
+
+    .top-section-nav-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 20px;
+    }
+
+    .top-section-square {
+      width: 25px;
+      height: 25px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #666;
+      text-decoration: none;
+    }
+
+    .top-section-square.filled {
+      background: black;
+      border-color: black;
+      color: #999;
+    }
+
+    .top-section-square:hover {
+      transform: scale(1.2);
+      z-index: 9;
+    }
+
+    @media (max-width: 768px) {
+      .top-section-nav {
+        display: none;
+      }
+    }
+
     .content-container {
+      width: calc(100% - 150px);
       text-align: center;
       max-width: 600px;
       margin: 0 auto;
@@ -44,6 +101,7 @@
     }
 
     .resources-container {
+      width: calc(100% - 150px);
       max-width: 900px;
       margin: 0 auto;
       padding: 40px 20px 100px;
@@ -225,6 +283,17 @@
       opacity: 0.8;
     }
 
+    @media (max-width: 768px) {
+      .top-section-nav {
+        display: none;
+      }
+
+      .content-container,
+      .resources-container {
+        width: 100%;
+      }
+    }
+
     @media (max-width: 600px) {
 
       .venue-card,
@@ -236,14 +305,23 @@
 </head>
 
 <body>
+
   <script>
     fetch('components/nav.html')
       .then(res => res.text())
       .then(html => document.body.insertAdjacentHTML('afterbegin', html));
   </script>
 
+  <div class="top-section-nav">
+    <div class="top-section-nav-container">
+      <a href="#contact" class="top-section-square filled" title="Contact">C</a>
+      <a href="#spatial" class="top-section-square filled" title="Spatial">Sp</a>
+      <a href="#samples" class="top-section-square filled" title="Samples">Sa</a>
+    </div>
+  </div>
+
   <!-- CONTACT -->
-  <div class="content-container">
+  <div class="content-container" id="contact">
     <h1>CONTACT</h1>
     <p>Collaborations, commissions, questions.</p>
     <p>
@@ -256,12 +334,12 @@
   <!-- RESOURCES -->
   <div class="resources-container">
     <h2>RESOURCES</h2>
-    <div class="resources-section-title">Multichannel Speaker Layouts (.txt)</div>
+    <div class="resources-section-title" id="spatial">Multichannel Speaker Layouts (.txt)</div>
     <div class="venues-grid" id="venues-grid">
       <!-- populated by JS -->
     </div>
 
-    <div class="resources-section-title">Free Samples</div>
+    <div class="resources-section-title" id="samples">Free Samples</div>
     <div class="samples-grid" id="samples-grid">
       <!-- populated by JS -->
     </div>
@@ -327,7 +405,6 @@ ${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopen
       grid.innerHTML = samples.map(s => `
         <div class="sample-card">
           <div class="sample-card-text">
-            <h3>${s.title}</h3>
             ${s.description ? `<p>${s.description}</p>` : ''}
             <a href="${s.bandcamp}" target="_blank" rel="noopener">Listen / Download</a>
           </div>
