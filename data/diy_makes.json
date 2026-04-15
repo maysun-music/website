@@ -192,16 +192,17 @@
     "year": "2019",
     "url": "steelcymbals.html",
     "main_image": "assets/images/diy_devices/steelcymbals/main_cymbal_1600w.jpg",
-    "short_description": "A series of hand-made steel cymbals built from 22-gauge mild steel sheets, ranging from 14” to 48”. Each piece is cut, formed, and hammered by hand, resulting in a dark, controlled tone distinct from traditional bronze cymbals.\n\nThese instruments integrate naturally with ambient textures, synthesizers, and low, dampened drum setups.\n\nThe largest piece, a 48” cymbal, was later cut into an oval shape to facilitate transport.",
-    "back_story": "I had been modifying cymbals since my teens, reshaping, cutting, and sanding them to get specific sounds. This project came from the idea of starting a MAYSUN Instruments line (which never happened due to life/pandemic). I ordered sheets of mild steel, cut them into blanks, and started experimenting with hammering. Early versions were shaped on an anvil, but I moved to wood blocks to let the metal expand instead of compress.\n\nSteel blended better with my ambient synth work. It had a darker tone and shorter sustain. After making a few cymbals in sizes 14”, 18”, 24”, and 32”, I was left with a 48×48 sheet. As a joke, I drilled a hole in the center and started shaping it. Over a few weeks, it became a 48” cymbal with a defined stick sound and a low, gong-like breathing underneath.\n\nI plan to return to this project one day.",
+    "short_description": "A series of hand-made steel cymbals built from 22-gauge mild steel sheets, ranging from 8” to 48”. Each piece is cut, formed, and hammered by hand, resulting in a dark tone distinct from traditional b20 bronze cymbals.\n\nThe largest piece, a 48” cymbal, was later cut into an oval shape to facilitate transport.",
+    "back_story": "I have been modifying cymbals since my teens, reshaping, cutting, and sanding them to get specific sounds. This project came from the idea of starting a MAYSUN Instruments line (which never happened due to life/pandemic) that would blend in well with electonics. I ordered sheets of mild steel, cut them into blanks, and started experimenting with hammering. Early versions were shaped on an anvil, but I moved to wood to let the metal expand instead of compress.\n\nSteel blended well with my ambient synth work. It had a darker tone and shorter sustain. After making a few cymbals in sizes 14”, 18”, 24”, and 32”, I was left with a 48×48 sheet. From curiosity, I drilled a hole in the center and started shaping it. Over a few weeks, it became a 48” cymbal with a defined stick sound and a low, gong-like breathing tone underneath.\n\nI plan to continue to this project one day.",
     "components": [
       "2 sheets of 4×8 ft, 22-gauge mild steel"
     ],
     "tools": [
       "Angle grinder",
       "Ball peen hammer",
-      "Wood block (forming surface)",
-      "DIY circle jig"
+      "Anvil",
+      "Wood (forming surface)",
+      "DIY circle drawing jig"
     ],
     "gallery": [
       "assets/images/diy_devices/steelcymbals/bts01_cymbal_900h.jpg",
