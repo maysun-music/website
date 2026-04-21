@@ -50,7 +50,8 @@
     }
 
     .album-section:last-child {
-      padding-bottom: 0;
+      padding-bottom: 100vh;
+      /* SPACING: Extra padding so last album can scroll into view */
     }
 
     /* Visual grouping */
@@ -221,60 +222,6 @@
         max-width: 600px;
       }
     }
-
-    /*----- INSTALLATIONS ------ */
-    /* Installations section */
-    .installations-section {
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 2px solid #ccc;
-    }
-
-    .installations-section h2 {
-      font-size: 80px;
-      font-weight: bold;
-      margin-bottom: 40px;
-    }
-
-    .installations-preview {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    .installation-item {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      transition: transform 0.3s ease;
-    }
-
-    .installation-item:hover {
-      transform: scale(1.02);
-    }
-
-    .installation-item img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .installation-label {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 0.3rem;
-    }
-
-    .installation-description {
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .installations-section {
-      padding-bottom: 80px;
-      /* clears the bottom nav bar */
-    }
   </style>
 </head>
 
@@ -307,12 +254,6 @@
   <div class="content-container">
     <h1>ALBUMS</h1>
     <div id="albumsContainer"></div>
-
-    <div class="installations-section">
-      <h2>INSTALLATIONS</h2>
-      <div class="installations-preview" id="installationsContainer"></div>
-    </div>
-
   </div>
 
   <script>
@@ -331,26 +272,6 @@
         renderTimeline();
         setupScrollObserver();
         setupKeyboardNavigation();
-      });
-
-    fetch('data/installations.json')
-      .then(res => res.json())
-      .then(list => {
-        const container = document.getElementById('installationsContainer');
-        list.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'installation-item';
-          div.innerHTML = `
-        <a href="${item.url}" target="_blank">
-          <img src="${item.thumb}" alt="${item.title}" />
-        </a>
-        <div>
-          <p class="installation-label">${item.title}</p>
-          <p class="installation-description">${item.description}</p>
-        </div>
-      `;
-          container.appendChild(div);
-        });
       });
 
     function renderAlbums() {
@@ -409,23 +330,6 @@
 
         timeline.appendChild(square);
       });
-
-      // Divider
-      const divider = document.createElement('div');
-      divider.style.cssText = 'width: 25px; height: 1px; background: #ccc; margin: 6px 0;';
-      timeline.appendChild(divider);
-
-      // Installations square
-      const instSquare = document.createElement('div');
-      instSquare.className = 'timeline-square filled';
-      instSquare.textContent = '▣';
-      instSquare.title = 'Installations';
-      instSquare.addEventListener('click', () => {
-        document.querySelector('.installations-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-      instSquare.addEventListener('mouseenter', (e) => showTooltip(e, 'Installations'));
-      instSquare.addEventListener('mouseleave', hideTooltip);
-      timeline.appendChild(instSquare);
     }
 
     function showTooltip(e, year) {
