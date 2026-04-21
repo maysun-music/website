@@ -78,7 +78,7 @@
         <p class="reveal-text" id="reveal-text">
             This space is a living archive of sound, process, and experimentation.<br>
             Compositions, instruments, spatial systems, tools and more.<br>
-            Updated 4/14/26. </p>
+            Updated <span id="updated-date">...</span> </p>
     </div>
 
     <script>
@@ -152,6 +152,20 @@
             }
         });
     </script>
+
+    <script>
+        fetch('https://api.github.com/repos/maysun-music/website/commits?per_page=1')
+            .then(res => res.json())
+            .then(data => {
+                const date = new Date(data[0].commit.committer.date);
+                const formatted = date.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' });
+                document.getElementById('updated-date').textContent = formatted;
+            })
+            .catch(() => {
+                document.getElementById('updated-date').textContent = '—';
+            });
+    </script>
+    
 </body>
 
 </html>
