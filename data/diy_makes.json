@@ -41,27 +41,6 @@
       "assets/images/diy_devices/dls/bts06_dls_900h.jpg"
     ]
   },
-  {
-    "id": "euroblock_snake",
-    "title": "TRS to Euroblock Snake",
-    "type": "utility",
-    "year": "2026",
-    "url": "euroblock_snake.html",
-    "main_image": "assets/images/diy_devices/euroblock_snake/main_dante_snake_1600w.jpg",
-    "short_description": "A 16-channel passive snake box converting 1/4\" TRS to 3.5mm euroblock.\n\nBuilt to interface AV equipment with musician-friendly connectors. Each channel is direct-wired with no active circuitry.\n\nThe format allows flexible routing. It can be used as 8 inputs / 8 outputs, or any combination depending on the system.\n\nDesigned for use with a home Dante setup",
-    "back_story": "Many AV devices with Dante capability are built around euroblock connectors, which can be impractical for frequent patching. At the same time, these units are often undervalued on the second-hand market despite their Dante capabilities.\n\nAfter findong a few multi-channel analog-to-Dante units at low cost, I built this snake box to make it more usable in a home studio context.\n\nThe box is currently used with a Xilica Solaro FR1 and QR1 as part of a modular home Dante system.",
-    "components": [
-      "Aluminum enclosure",
-      "16x 1/4\" TRS connectors",
-      "16x 3.5mm euroblock connectors"
-    ],
-    "gallery": [
-      "assets/images/diy_devices/dante_snake/bts01_dante_snake_900h.jpg",
-      "assets/images/diy_devices/dante_snake/bts02_dante_snake_900h.jpg",
-      "assets/images/diy_devices/dante_snake/bts03_dante_snake_900h.jpg"
-    ]
-  },
-
 
   {
     "id": "pizzarat",
@@ -92,6 +71,28 @@
       "assets/images/diy_devices/pizzarat/bts03_pizzarat_700h.jpg"
     ]
   },
+
+    {
+    "id": "euroblock_snake",
+    "title": "TRS to Euroblock Snake",
+    "type": "utility",
+    "year": "2026",
+    "url": "euroblock_snake.html",
+    "main_image": "assets/images/diy_devices/euroblock_snake/main_euroblock_snake_1600w.jpg",
+    "short_description": "A 16-channel passive snake box converting 1/4\" TRS to 3.5mm euroblock.\n\nBuilt to interface AV equipment with musician-friendly connectors. Each channel is direct-wired with no active circuitry.\n\nThe format allows flexible routing. It can be used as 8 inputs / 8 outputs, or any combination depending on the system.\n\nDesigned for use with a home Dante setup",
+    "back_story": "Many AV devices with Dante capability are built around euroblock connectors, which can be impractical for frequent patching. At the same time, these units are often undervalued on the second-hand market despite their Dante capabilities.\n\nAfter findong a few multi-channel analog-to-Dante units at low cost, I built this snake box to make it more usable in a home studio context.\n\nThe box is currently used with a Xilica Solaro FR1 and QR1 as part of a modular home Dante system.",
+    "components": [
+      "Aluminum enclosure",
+      "16x 1/4\" TRS connectors",
+      "16x 3.5mm euroblock connectors"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/euroblock_snake/bts01_dante_snake_900h.jpg",
+      "assets/images/diy_devices/euroblock_snake/bts02_dante_snake_900h.jpg",
+      "assets/images/diy_devices/euroblock_snake/bts03_dante_snake_900h.jpg"
+    ]
+  },
+
   {
     "id": "cycl",
     "title": "CYCL",
