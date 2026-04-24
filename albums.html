@@ -368,13 +368,15 @@
         section.innerHTML = `
       <div class="album-header">
         <div class="album-cover">
-          <img src="${album.cover}" alt="${album.title}">
+          <a href="${album.bandcamp}" target="_blank">
+           <img src="${album.cover}" alt="${album.title}">
+          </a>
         </div>
         <div class="album-info">
           <div class="album-title">${album.title}</div>
           <div class="album-year">${album.year}</div>
           ${album.process ? `<p class="album-process">${album.process}</p>` : ''}
-          <a href="${album.bandcamp}" target="_blank" class="album-link">Listen</a>
+          <a href="${album.bandcamp}" target="_blank" class="album-link">Listen on Bandcamp</a>
         </div>
       </div>
     `;
