@@ -120,9 +120,46 @@
       background: yellow;
     }
 
+    /* ------ RIGHT SIDE PANEL ---- */
+
+    #info-panel {
+      position: fixed;
+      top: 140px;
+      right: 40px;
+      width: 320px;
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
+
+      color: #00eeff;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+
+      z-index: 999;
+      background: rgb(26, 1, 79);
+      padding: 0 12px;
+    }
+
+    #info-panel h2 {
+      color: #ee00ff;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    #info-panel .info-meta {
+      color: #bbb;
+      font-size: 11px;
+      margin-bottom: 14px;
+    }
+
+    #info-panel p {
+      margin-bottom: 1em;
+    }
+
     /* ── ITEMS ────────────────────────────────────────────── */
     #items-wrap {
-      max-width: 1000px;
+      max-width: calc(100vw - 420px);
+      margin-right: 360px;
       margin: 0;
       padding: 36px 40px 60px;
     }
@@ -283,6 +320,16 @@
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 20px;
       }
+
+      #mini-map,
+      #info-panel {
+        display: none;
+      }
+
+      #items-wrap {
+        max-width: 100%;
+      }
+
     }
   </style>
 </head>
@@ -312,6 +359,7 @@
   </div>
 
   <div id="mini-map"></div>
+  <aside id="info-panel"></aside>
 
   <!-- FOOTER -->
   <footer id="site-footer">
@@ -323,15 +371,20 @@
   <script>
     let miniMap = new Map();
     let allItems = [];
+    let biographyData = null;
 
     Promise.all([
       fetch('data/diy_makes.json').then(r => r.json()),
       fetch('data/albums.json').then(r => r.json()),
       fetch('data/spatial_templates.json').then(r => r.json()),
       fetch('data/forever.json').then(r => r.json()),
-      fetch('data/installations.json').then(r => r.json())
-    ]).then(([diy, albums, spatial, forever, installations]) => {
+      fetch('data/installations.json').then(r => r.json()),
+      fetch('data/biography.json').then(r => r.json())
+    ]).then(([diy, albums, spatial, forever, installations, biography]) => {
+      biographyData = biography;
       allItems = [...diy, ...albums, ...spatial, ...forever, ...installations];
+
+      renderDefaultInfo();
       renderItems(allItems, '');
     });
 
@@ -386,6 +439,49 @@
         : text;
     }
 
+    function escapeHTML(str) {
+      return String(str || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function renderDefaultInfo() {
+      const panel = document.getElementById('info-panel');
+      if (!panel || !biographyData) return;
+
+      const bio = (biographyData.bio || [])
+        .map(p => `<p>${escapeHTML(p)}</p>`)
+        .join('');
+
+      const statement = (biographyData.statement || [])
+        .map(p => `<p>${escapeHTML(p)}</p>`)
+        .join('');
+
+      panel.innerHTML = `
+  <h2>BIOGRAPHY</h2>
+  ${bio}
+  <h2>ARTIST STATEMENT</h2>
+  ${statement}
+`;
+    }
+
+    function renderItemInfo(item) {
+      const panel = document.getElementById('info-panel');
+      if (!panel) return;
+
+      const text = item.short_description || item.description || item.back_story || '';
+      const cleanText = escapeHTML(text).replace(/\n/g, '<br>');
+
+      panel.innerHTML = `
+  <h2>${escapeHTML(item.title || '')}</h2>
+  <div class="info-meta">${escapeHTML(item.type || '')}${item.year ? ' · ' + escapeHTML(item.year) : ''}</div>
+  <p>${cleanText}</p>
+`;
+    }
+
     function renderItems(items, q) {
       const meta = document.getElementById('search-meta');
       const grid = document.getElementById('items-grid');
@@ -418,16 +514,16 @@
 
         el.innerHTML = `
   <div class="grid-item-image-container">
-${item.main_image
+    ${item.main_image
             ? `<img class="grid-item-image" src="${item.main_image}" alt="${item.title}" loading="lazy">`
             : `<div class="grid-item-placeholder">${item.type === "forever in sound"
               ? getForeverPreview(item)
               : getPreviewText(item)
             }</div>`
           }
-                      <div class="grid-item-overlay">
-              <span class="grid-item-overlay-text">${(item.tags || []).slice(0, 5).join(' · ')}</span>
-            </div>
+      <div class="grid-item-overlay">
+        <span class="grid-item-overlay-text">${(item.tags || []).slice(0, 5).join(' · ')}</span>
+      </div>
           </div>
           <div class="grid-item-title">${item.title}</div>
           <div class="grid-item-type">${item.type} · ${item.year}</div>
@@ -449,15 +545,14 @@ ${item.main_image
 
         el.addEventListener('mouseenter', () => {
 
-          // reset
+          renderItemInfo(item);
+
           miniMap.forEach(sq => {
             sq.classList.remove('active', 'related');
           });
 
-          // self
           miniMap.get(item.id)?.classList.add('active');
 
-          // relations
           (item.relations || []).forEach(id => {
             miniMap.get(id)?.classList.add('related');
           });
@@ -465,6 +560,8 @@ ${item.main_image
         });
 
         el.addEventListener('mouseleave', () => {
+          renderDefaultInfo();
+
           miniMap.forEach(sq => {
             sq.classList.remove('active', 'related');
           });
