@@ -204,6 +204,11 @@
       overflow: hidden;
     }
 
+    .grid-item-image-container.related {
+      outline: 4px solid rgb(255, 221, 0);
+      outline-offset: -2px;
+    }
+
     .no-results {
       font-size: 13px;
       color: #bbb;
@@ -421,21 +426,38 @@ ${item.main_image
 
         el.addEventListener('mouseenter', () => {
 
-          // dim everything
-          elementMap.forEach(el => el.classList.add('dimmed'));
+          // reset everything first
+          elementMap.forEach(el => {
+            el.classList.add('dimmed');
+            el.querySelector('.grid-item-image-container')?.classList.remove('related');
+          });
 
-          // undim self
-          elementMap.get(item.id)?.classList.remove('dimmed');
+          // self
+          const selfEl = elementMap.get(item.id);
+          if (selfEl) {
+            selfEl.classList.remove('dimmed');
 
-          // undim relations
+            const selfImg = selfEl.querySelector('.grid-item-image-container');
+            if (selfImg) selfImg.classList.add('related');
+          }
+
+          // relations → highlight + undim
           (item.relations || []).forEach(relId => {
-            elementMap.get(relId)?.classList.remove('dimmed');
+            const relEl = elementMap.get(relId);
+            if (relEl) {
+              relEl.classList.remove('dimmed');
+              const relImg = relEl.querySelector('.grid-item-image-container');
+              if (relImg) relImg.classList.add('related');
+            }
           });
 
         });
 
         el.addEventListener('mouseleave', () => {
-          elementMap.forEach(el => el.classList.remove('dimmed'));
+          elementMap.forEach(el => {
+            el.classList.remove('dimmed');
+            el.querySelector('.grid-item-image-container')?.classList.remove('related');
+          });
         });
 
         elementMap.set(item.id, el);
