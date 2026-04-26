@@ -354,7 +354,7 @@
         div.id = section.id;
 
         let html = `<h2 class="section-title">${section.title}</h2>`;
-        html += section.text.split('\n').map(p => `<p>${p}</p>`).join('');
+        html += (section.description || '').split('\n').map(p => `<p>${p}</p>`).join('');
 
         // YouTube videos
         if (section.media?.youtube) {
@@ -388,8 +388,9 @@
         }
 
         // Image
-        if (section.media?.image) {
-          html += `<img class="photo" src="${section.media.image}" alt="${section.title}">`;
+        // Image (only if no YouTube)
+        if (!section.media?.youtube && section.main_image) {
+          html += `<img class="photo" src="${section.main_image}" alt="${section.title}">`;
         }
 
         div.innerHTML = html;
