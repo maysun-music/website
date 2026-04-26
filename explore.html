@@ -15,9 +15,9 @@
     }
 
     body {
-      font-family: Helvetica, Arial, sans-serif;
       background: rgb(26, 1, 79);
-      color: rgb(255, 255, 255);
+      position: relative;
+      z-index: 0;
     }
 
     /* ── HEADER ───────────────────────────────────────────── */
@@ -263,7 +263,7 @@
 
   <!-- SEARCH -->
   <div id="search-section">
-    <input type="text" id="search-input" placeholder="filter by anything..." autocomplete="off" spellcheck="false" />
+    <input type="text" id="search-input" placeholder="filter:" autocomplete="off" spellcheck="false" />
     <div id="search-meta"></div>
   </div>
 
