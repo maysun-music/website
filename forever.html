@@ -403,6 +403,18 @@
       });
     }
 
+    // handle anchor scroll AFTER content exists
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50);
+    }
+
     function setupJumpLatest() {
       const button = document.getElementById('jumpLatest');
       if (!button || sections.length === 0) return;

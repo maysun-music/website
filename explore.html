@@ -411,7 +411,12 @@ ${item.main_image
           <div class="grid-item-type">${item.type} · ${item.year}</div>
         `;
 
-        const goTo = () => { if (item.url) window.location.href = item.url; };
+        const goTo = () => {
+          if (!item.url) return;
+
+          window.location.href = item.url;
+        };
+
         el.addEventListener('click', goTo);
 
         el.addEventListener('mouseenter', () => {
