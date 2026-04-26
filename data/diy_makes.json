@@ -5,6 +5,8 @@
     "type": "instrument",
     "year": "2026",
     "url": "dls.html",
+    "tags": ["spatial-audio", "wireless", "electronics", "fabrication", "diy", "performance", "installation", "daisy seed"],
+    "relations": ["cycl", "node-1"],
     "main_image": "assets/images/diy_devices/dls/main_dls_1600w.jpg",
     "short_description": "Listener System is a portable spatial performance instrument composed of a wireless controller and multiple Listeners. The controller sends states, processing instructions, or sequences wirelessly to each Listener. It transmits no audio.\n\nEach Listener runs two processors. One receives the control signal, the other captures and processes audio locally. The Listeners do not share a sound source. Each one hears the room from its own perspective.\n\nBecause each Listener captures sound from a different point of view, none of them receive the exact same signal. At the same time, because they occupy the same architectural space, they respond to the same sonic environment. What is distributed is not the sound itself, but the processing. This creates the perception of sound moving through space.\n\nBy placing Listeners across a room or between connected spaces, architecture becomes part of the signal path.\n\nOne Listener or many. The system is scalable and portable.",
     "back_story": "The system extends from my studio practice of routing sound through physical environments, recording the result, and feeding it back into the same space. I built CYCL to replicate that cyclical process live using a microphone as its primary sound source. Listener System expands this logic across multiple spaces. Instead of a single instrument hearing the room, several independent nodes capture different points of view within the same architectural container. The room feeds back into itself, and the processing moves wirelessly through space.",
@@ -48,9 +50,11 @@
     "type": "virtual instrument",
     "year": "2026",
     "url": "pizzarat.html",
+    "tags": ["coding", "collaboration", "sound-design", "plugin"],
+    "relations": [],
     "main_image": "assets/images/diy_devices/pizzarat/main_pizzarat_1500h.jpg",
-    "short_description": "If you're anything like us, every time you hear the magical crunch of train announcements in the NYC subway system, you think to yourself, “dang, I wish I could get that sweet sweet tone on my drums, bass, and vocals.” After multiple hours of meticulous research and modeling, we believe we have finally captured the true sonic essence of the MTA in an audio plugin. Don’t believe us? Well, it’s free, so... uhh... ok!\n\nPick your train line, adjust pizza toastiness, grab the bar, poke the rat.\n\nMade by Luke Nash, Jack Tipper and Etienne Mason.",
-    "back_story": "I was in the subway listening to announcement speakers distort beyond intelligibility. I posted “someone should make an MTA distortion plugin” with a video.\n\nJack Tipper replied right away: “let's make this for april fools lmao.”\n\nLuke Nash joined and we made it happen.",
+    "short_description": "If you're anything like us, every time you hear the magical crunch of train announcements in the NYC subway system, you think to yourself, \u201cdang, I wish I could get that sweet sweet tone on my drums, bass, and vocals.\u201d After multiple hours of meticulous research and modeling, we believe we have finally captured the true sonic essence of the MTA in an audio plugin. Don't believe us? Well, it's free, so... uhh... ok!\n\nPick your train line, adjust pizza toastiness, grab the bar, poke the rat.\n\nMade by Luke Nash, Jack Tipper and Etienne Mason.",
+    "back_story": "I was in the subway listening to announcement speakers distort beyond intelligibility. I posted \u201csomeone should make an MTA distortion plugin\u201d with a video.\n\nJack Tipper replied right away: \u201clet\u2019s make this for april fools lmao.\u201d\n\nLuke Nash joined and we made it happen.",
     "links": [
       {
         "label": "Download PizzaRat here",
@@ -72,12 +76,14 @@
     ]
   },
 
-    {
+  {
     "id": "euroblock_snake",
     "title": "TRS to Euroblock Snake",
     "type": "utility",
     "year": "2026",
     "url": "euroblock_snake.html",
+    "tags": ["spatial-audio", "fabrication", "utilities", "dante", "diy"],
+    "relations": ["dls"],
     "main_image": "assets/images/diy_devices/euroblock_snake/main_euroblock_snake_1600w.jpg",
     "short_description": "A 16-channel passive snake box converting 1/4\" TRS to 3.5mm euroblock.\n\nBuilt to interface AV equipment with musician-friendly connectors.\n\nThe format allows flexible routing. It can be used as 8 inputs / 8 outputs, or any combination depending on the system.\n\nDesigned for use with a home Dante setup",
     "back_story": "Many AV devices have Dante capability but built around euroblock connectors, which can be impractical for frequent patching. These units seem to be undervalued at the moment on the second-hand market despite the fact that they have Dante cards.\n\nAfter finding a few units with analog-to-Dante channel at very low cost, I built this snake box to make it more useful to my personal use.\n\nThe box is currently used with a Xilica Solaro FR1 and QR1 as part of a modular home Dante system.",
@@ -99,24 +105,26 @@
     "type": "instrument",
     "year": "2025",
     "url": "cycl.html",
+    "tags": ["electronics", "fabrication", "performance", "daisy seed", "coding", "diy"],
+    "relations": ["node-1", "dls"],
     "main_image": "assets/images/diy_devices/cycl/main_synth_1600w.jpg",
-    "short_description": "This instrument creates soundscapes from surrounding sounds. It listens to and processes nearby musicians, audience chatter, movement, room acoustics, and other audible activity. Because it hears the space and returns sound back into the room, it produces successive iterations of that space over time. Each pass feeds into the next, forming cycles in which the room itself functions as the source. The signal path starts from the built-in microphone and is routed into either a dry path, a beat-repeat processor, or a looper.<br><br>These paths are then recombined and sent into a combination of four effects:<ul><li><strong>SunCrystals:</strong> chaotic granular processing with pitch-shift and feedback</li><li><strong>High Shifter:</strong> granular processing based on +1 and +2 octave logic</li><li><strong>Low Shifter:</strong> granular processing based on −1 and −2 octave logic</li><li><strong>SunGrain:</strong> a chopping effect that imposes rhythmic structure on incoming sound</li></ul>After this stage, the signal can continue to the output, or a snapshot can be captured and looped at half speed, creating a new source that can be routed back through the effects chain. This process can be repeated indefinitely, producing sounds that range from dark ambient textures to glitch-driven electronic material and tape-degradation–style soundscapes.<br><br>An 8×8 LED matrix display provides real-time visual feedback, indicating the active effect, CPU load, loop lengths, beat-repeat speeds, SunGrain tempo, per-effect gain, and input and output meters.",
+    "short_description": "This instrument creates soundscapes from surrounding sounds. It listens to and processes nearby musicians, audience chatter, movement, room acoustics, and other audible activity. Because it hears the space and returns sound back into the room, it produces successive iterations of that space over time. Each pass feeds into the next, forming cycles in which the room itself functions as the source. The signal path starts from the built-in microphone and is routed into either a dry path, a beat-repeat processor, or a looper.<br><br>These paths are then recombined and sent into a combination of four effects:<ul><li><strong>SunCrystals:</strong> chaotic granular processing with pitch-shift and feedback</li><li><strong>High Shifter:</strong> granular processing based on +1 and +2 octave logic</li><li><strong>Low Shifter:</strong> granular processing based on \u22121 and \u22122 octave logic</li><li><strong>SunGrain:</strong> a chopping effect that imposes rhythmic structure on incoming sound</li></ul>After this stage, the signal can continue to the output, or a snapshot can be captured and looped at half speed, creating a new source that can be routed back through the effects chain. This process can be repeated indefinitely, producing sounds that range from dark ambient textures to glitch-driven electronic material and tape-degradation\u2013style soundscapes.<br><br>An 8\u00d78 LED matrix display provides real-time visual feedback, indicating the active effect, CPU load, loop lengths, beat-repeat speeds, SunGrain tempo, per-effect gain, and input and output meters.",
     "back_story": "After years of using physical space as part of my recording process, I began looking for a way to reconnect with space in a live context, and to reamp sound through a room in real time. I had moved through many setups, including hardware synths, modular systems, samplers, and working entirely in a DAW, but none of them allowed this process to happen simply or directly in performance. I designed this instrument to be a portable, self-contained way to work with space live, without relying on external gear. It replaces the typical chain of microphone, interface, computer, DAW, and cabling, making it easier to improvise and collaborate.",
     "future": "For V2, the focus is on consolidating the design. This includes creating a custom PCB and adding a secondary output for additional routing possibilities.",
     "components": [
       "Daisy Seed Microcontroller",
       "MAX9814 Microphone",
-      "DotStar 8×8 LED matrix",
+      "DotStar 8\u00d78 LED matrix",
       "10 Momentary Switches",
       "2 Encoders",
       "6 Potentiometers",
       "1 Toggle Switch",
       "1 Power Switch",
       "5v Regulator",
-      "1/8\" mono input jack",
-      "1/8\" stereo output jack",
-      "Found Wood",
-      "Recycled Acrylic Sheet"
+      "Stereo 1/4\" output",
+      "Barrel connector",
+      "Aluminum enclosure (hand-cut)",
+      "Oak panel (hand-cut)"
     ],
     "gallery": [
       "assets/images/diy_devices/cycl/bts01_synth_900h.jpg",
@@ -139,12 +147,15 @@
       "assets/images/diy_devices/cycl/bts18_synth_900h.jpg"
     ]
   },
+
   {
     "id": "node-1",
     "title": "NODE-1",
     "type": "instrument",
     "year": "2025",
     "url": "node-1.html",
+    "tags": ["electronics", "fabrication", "spatial-audio", "daisy seed", "installation", "diy"],
+    "relations": ["cycl", "dls"],
     "main_image": "assets/images/diy_devices/node-1/main_node1_1600w.jpg",
     "short_description": "Node-1 is a wall-mounted listening device. It captures ambient room sound such as voices, footsteps, and movement, and transforms it using granular textures and layered delays. It shifts through different internal states over a 30-minute cycle. A stabilizing synth voice plays slow chords that change qualities every few minutes, helping anchor the space when feedback becomes intense.",
     "back_story": "Node-1 is the foundation for CYCL. I was looking for a way to shape room sound into soundscapes. Reactive, but also generative. With multiple nodes, any space becomes a spatial listening system.",
@@ -163,14 +174,17 @@
       "assets/images/diy_devices/node-1/bts04_node1_900h.jpg"
     ]
   },
+
   {
     "id": "forever_book",
     "title": "FOREVER IN SOUND",
     "type": "book",
     "year": "2025",
     "url": "foreverbook.html",
+    "tags": ["writing", "story", "life", "process"],
+    "relations": [],
     "main_image": "assets/images/diy_devices/book/main_book_360w.jpg",
-    "short_description": "A physical edition of FOREVER IN SOUND, chapters 1–55. 102 pages. Edition of 4.",
+    "short_description": "A physical edition of FOREVER IN SOUND, chapters 1\u201355. 102 pages. Edition of 4.",
     "back_story": "My grandmother wanted to read Forever in Sound as a book instead of on her phone. I adapted the website into a physical edition and gave it to her for her 90th birthday. I made three additional copies for my family and myself.",
     "gallery": [
       "assets/images/diy_devices/book/bts01_book_900h.JPG",
@@ -180,14 +194,17 @@
       "assets/images/diy_devices/book/bts05_book_900h.JPG"
     ]
   },
+
   {
     "id": "cymbal_controller",
     "title": "CYMBAL CONTROLLER",
     "type": "instrument",
     "year": "2024",
     "url": "cymbal_controller.html",
+    "tags": ["electronics", "fabrication", "cymbals", "performance", "spatial-audio", "diy"],
+    "relations": ["steel_cymbals"],
     "main_image": "assets/images/diy_devices/gyro/main_gyro_1600w.jpg",
-    "short_description": "This device uses a Teensy 4.1 and MPU9250 to turn cymbal motion into 4 continuous MIDI CC signals (Y+, Y–, X+, X–), allowing real-time control of spatialization, textures, and other effects. The unit recalibrates its center when still, includes switches to mute CC channels for easier mapping in Ableton, and features a sensitivity knob for scaling data. It appears as USB-Device to any DAW. Paired with a hand-hammered steel cymbal from a previous DIY project, the system enables tactile, gesture-based modulation while performing.",
+    "short_description": "This device uses a Teensy 4.1 and MPU9250 to turn cymbal motion into 4 continuous MIDI CC signals (Y+, Y\u2013, X+, X\u2013), allowing real-time control of spatialization, textures, and other effects. The unit recalibrates its center when still, includes switches to mute CC channels for easier mapping in Ableton, and features a sensitivity knob for scaling data. It appears as USB-Device to any DAW. Paired with a hand-hammered steel cymbal from a previous DIY project, the system enables tactile, gesture-based modulation while performing.",
     "back_story": "I wanted a more tactile way to control sound. Something portable, expressive, and performable. Using only a cymbal and a laptop, I could shape spatial textures and effects from an acoustic source in real time. This paired naturally with a steel cymbal I shaped and hand-hammered in 2021, turning it into both an acoustic and electronic instrument.",
     "future": "Future versions will focus on improved stability, including more consistent calibration behavior and refined motion filtering for smoother control.",
     "components": [
@@ -210,17 +227,20 @@
       "assets/images/diy_devices/gyro/bts07_gyro_900h.jpg"
     ]
   },
+
   {
     "id": "steel_cymbals",
     "title": "STEEL CYMBALS",
     "type": "instrument",
     "year": "2019",
     "url": "steelcymbals.html",
+    "tags": ["drums", "fabrication", "steel", "cymbal"],
+    "relations": ["cymbal_controller"],
     "main_image": "assets/images/diy_devices/steelcymbals/main_cymbal_1600w.jpg",
-    "short_description": "A series of hand-made steel cymbals built from 22-gauge mild steel sheets, ranging from 8” to 48”. Each piece is cut, formed, and hammered by hand, resulting in a dark tone distinct from traditional b20 bronze cymbals.\n\nThe largest piece, a 48” cymbal, was later cut into an oval shape to facilitate transport.",
-    "back_story": "I have been modifying cymbals since my teens, reshaping, cutting, and sanding them to get specific sounds. This project came from the idea of starting a MAYSUN Instruments line (which never happened due to life/pandemic) that would blend in well with electonics. I ordered sheets of mild steel, cut them into blanks, and started experimenting with hammering. Early versions were shaped on an anvil, but I moved to wood to let the metal expand instead of compress.\n\nSteel blended well with my ambient synth work. It had a darker tone and shorter sustain. After making a few cymbals in sizes 14”, 18”, 24”, and 32”, I was left with a 48×48 sheet. From curiosity, I drilled a hole in the center and started shaping it. Over a few weeks, it became a 48” cymbal with a defined stick sound and a low, gong-like breathing tone underneath.\n\nI plan to continue to this project one day.",
+    "short_description": "A series of hand-made steel cymbals built from 22-gauge mild steel sheets, ranging from 8\u201d to 48\u201d. Each piece is cut, formed, and hammered by hand, resulting in a dark tone distinct from traditional b20 bronze cymbals.\n\nThe largest piece, a 48\u201d cymbal, was later cut into an oval shape to facilitate transport.",
+    "back_story": "I have been modifying cymbals since my teens, reshaping, cutting, and sanding them to get specific sounds. This project came from the idea of starting a MAYSUN Instruments line (which never happened due to life/pandemic) that would blend in well with electronics. I ordered sheets of mild steel, cut them into blanks, and started experimenting with hammering. Early versions were shaped on an anvil, but I moved to wood to let the metal expand instead of compress.\n\nSteel blended well with my ambient synth work. It had a darker tone and shorter sustain. After making a few cymbals in sizes 14\u201d, 18\u201d, 24\u201d, and 32\u201d, I was left with a 48\u00d748 sheet. From curiosity, I drilled a hole in the center and started shaping it. Over a few weeks, it became a 48\u201d cymbal with a defined stick sound and a low, gong-like breathing tone underneath.\n\nI plan to continue this project one day.",
     "components": [
-      "2 sheets of 4×8 ft, 22-gauge mild steel"
+      "2 sheets of 4\u00d78 ft, 22-gauge mild steel"
     ],
     "tools": [
       "Angle grinder",
