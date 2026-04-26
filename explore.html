@@ -138,6 +138,12 @@
       z-index: 999;
       background: rgb(26, 1, 79);
       padding: 0 12px;
+
+    }
+
+    #info-content {
+      opacity: 1;
+      transition: opacity 8s ease;
     }
 
     #info-panel h2 {
@@ -359,7 +365,9 @@
   </div>
 
   <div id="mini-map"></div>
-  <aside id="info-panel"></aside>
+  <aside id="info-panel">
+    <div id="info-content"></div>
+  </aside>
 
   <!-- FOOTER -->
   <footer id="site-footer">
@@ -372,6 +380,7 @@
     let miniMap = new Map();
     let allItems = [];
     let biographyData = null;
+    let bioTimeout = null;
 
     Promise.all([
       fetch('data/diy_makes.json').then(r => r.json()),
@@ -449,7 +458,7 @@
     }
 
     function renderDefaultInfo() {
-      const panel = document.getElementById('info-panel');
+      const panel = document.getElementById('info-content');
       if (!panel || !biographyData) return;
 
       const bio = (biographyData.bio || [])
@@ -469,7 +478,7 @@
     }
 
     function renderItemInfo(item) {
-      const panel = document.getElementById('info-panel');
+      const panel = document.getElementById('info-content');
       if (!panel) return;
 
       const text = item.short_description || item.description || item.back_story || '';
@@ -544,6 +553,16 @@
         mini.appendChild(sq);
 
         el.addEventListener('mouseenter', () => {
+          const panel = document.getElementById('info-content');
+
+          // CANCEL pending bio fade
+          if (bioTimeout) {
+            clearTimeout(bioTimeout);
+            bioTimeout = null;
+          }
+
+          panel.style.transition = 'none';
+          panel.style.opacity = 1;
 
           renderItemInfo(item);
 
@@ -556,15 +575,22 @@
           (item.relations || []).forEach(id => {
             miniMap.get(id)?.classList.add('related');
           });
-
         });
 
         el.addEventListener('mouseleave', () => {
-          renderDefaultInfo();
+          const panel = document.getElementById('info-content');
 
-          miniMap.forEach(sq => {
-            sq.classList.remove('active', 'related');
-          });
+          panel.style.transition = 'opacity 0.15s ease';
+          panel.style.opacity = 0;
+
+          bioTimeout = setTimeout(() => {
+            renderDefaultInfo();
+
+            panel.style.transition = 'opacity 8s ease';
+            panel.style.opacity = 1;
+
+            bioTimeout = null;
+          }, 150);
         });
 
       });
