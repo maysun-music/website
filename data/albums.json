@@ -1,69 +1,90 @@
-{
-  "albums": [
-    {
-      "id": "all-these-are-the-days",
-      "year": 2016,
-      "title": "All These Are The Days",
-      "cover": "assets/images/album_covers/01_album_cover.png",
-      "process": "All These Are The Days was recorded at 4449, with drums tracked at Planet Studios in Montreal. Conceived as the first part of a three-panel work, the album was made during a period of withdrawal from collaborative projects and constant performance. The EP was recorded primarily with a Zoom H6, using cassette tape degradation as a central process. Tapes were physically damaged and reused, introducing saturation, instability, residual artifacts, and shifting stereo fields. Drums were recorded separately in a studio and later reintegrated into the textures. Conceptually, the drums function as my human presence, while the surrounding layers behave as unstable external forces.",
-      "bandcamp": "https://maysunmusic.bandcamp.com/album/all-these-are-the-days"
-    },
-    {
-      "id": "the-field-of-living",
-      "year": 2016,
-      "title": "The Field of Living",
-      "cover": "assets/images/album_covers/02_album_cover.png",
-      "process": "The Field of Living was recorded at 4449 and 4322, with drums tracked at Ohm Studios in Montreal. Conceived as the second part of a three-panel work, the EP marked an expansion from internal processing toward the surrounding environment, introducing field recordings into the compositional process. Sounds from everyday spaces were used as foundational material. A street-cleaning truck heard from an apartment window formed the basis of Dark Room. A metallic light fixture, water from a drain outside my parents’ house, and nearby streetcars were embedded into other tracks. These recordings functioned as anchors to specific places and moments, folding space and time into the music. The EP also introduced early experiments with physical re-amping. Sounds were played back through improvised systems and re-recorded to alter tone and perspective. External preamps were pushed beyond their intended use, favoring instability over fidelity. Drums were recorded separately and reintroduced into the layered textures. This release marks the first appearance of the name MAY SUN, announced in the fifth track.",
-      "bandcamp": "https://maysunmusic.bandcamp.com/album/the-field-of-living"
-    },
-    {
-      "id": "sun-and-ice",
-      "year": 2017,
-      "title": "Sun & Ice",
-      "cover": "assets/images/album_covers/03_album_cover.png",
-      "process": "Sun & Ice was recorded at 4322 and 1610 between January and April 2017. Conceived as the final part of a three-panel work, this EP was built around continuity, with each piece flowing directly into the next. Mixing was treated as an extension of composition, shaping the overall form as much as the musical material itself. This was the first release where everything was recorded independently, including drums. Each track was constructed around a distinct drum sound, often prepared with objects and heavy damping. On White Peafowl, a steel chain was dropped onto the snare before striking it, introducing physical gesture and chance into the recording process. The album incorporates a greater presence of synthesizers and more contextual field recordings. Throughout its creation, the recurring image was walking across a frozen lake while blinded by the sun, moving forward without certainty. The closing piece, Wanderlust, marks a decision to move on, closing the triptych.",
-      "bandcamp": "https://maysunmusic.bandcamp.com/album/sun-ice"
-    },
-    {
-      "id": "the-after-mountain",
-      "year": 2020,
-      "title": "The After Mountain",
-      "cover": "assets/images/album_covers/04_album_cover.png",
-      "process": "The After Mountain was recorded at 5430a between October 2019 and February 2020. It is in continuation with the musical triptych published in 2016-2017. This album was made with immersive spatialization in mind. Sound textures were moved across a room using 6 speakers placed in a circle and captured with a binaural microphone at the center. A person who listens with headphones will feel as if they are surrounded by moving sounds creating enveloping soundscapes. Each piece is minimalist, repetitive, immersive and slowly evolving in the micro details. The work is meant to be listened in its entirety as each piece merges into the other.",
-      "bandcamp": "https://maysunmusic.bandcamp.com/album/the-after-mountain"
-    },
-    {
-      "id": "waiting-spaces",
-      "year": 2020,
-      "title": "Waiting Spaces",
-      "cover": "assets/images/album_covers/05_album_cover.png",
-      "process": "Waiting Spaces was recorded at 6751 and 1960 between May & August 2020. It is in continuation with The After Mountain. Textures were created from upright and grand piano through modular synthesis, digital processing and physical movement. On this EP, drums are nonexistent or so very far in the background, more like a subconscious pulse. Binaural microphones were used to create a 3D audio space around the listener. Headphones are recommended for spatiality.",
-      "bandcamp": "https://maysunmusic.bandcamp.com/album/waiting-spaces"
-    },
-    {
-      "id": "wanderlust-ii",
-      "year": 2021,
-      "title": "Wanderlust II",
-      "cover": "assets/images/album_covers/06_album_cover.png",
-      "process": "Wanderlust II was recorded between January & December 2021 at 6751 & 7203. It is in continuation with all previous works. In this album, I imagined myself revisiting different rooms, which represent different time frames from the past. I pictured spaces that do not physically make sense, spaces where the areas overlap each other, fade into another and collapse on themselves. Each layer of sound was viewed as a universe of its own, a room in a room constantly shifting between which one contains the other. I reference many pieces from my previous releases. The intent was to merge previous works the same way memories condense themselves after time. The closing piece was recreated from the EP Sun & Ice to emphasize this recurring desire: Wanderlust.",
-      "bandcamp": "https://maysunmusic.bandcamp.com/album/wanderlust-ii"
-    },
-    {
-      "id": "timelines",
-      "year": 2023,
-      "title": "Timelines",
-      "cover": "assets/images/album_covers/08_album_cover.png",
-      "process": "TIMELINES was recorded between January 16th and 24th 2023, at the Banff Center for Arts and Creativity, in room E148. Recorded over 8 days, this music was created from different iterations of a same sound. Grand piano manipulated through electronic processing was recorded and reintroduced into the space at varying speeds and pitches. I intertwined additional piano lines into these new textures, repeating the process cyclically. Minimalist drumming and imperfections from my movement in the room were layered along the way. The ambient sounds of fellow artists creating in the adjacent rooms bled through the walls, subtly infiltrating the recordings, adding another layer of artifacts. This album is about a personal shift in perception, a subtle but profound alteration of timelines.",
-      "bandcamp": "https://maysunmusic.bandcamp.com/album/timelines"
-    }
-  ],
-  "samples": [
-    {
-      "id": "samples",
-      "title": "MAYSUN Samples",
-      "picture": "assets/images/album_covers/bandcamp_samples.jpg",
-      "bandcamp": "https://maysunsamples.bandcamp.com/",
-      "description": "Sounds recorded from glass, metal, steel, glass marimba, broken synths, and more. Made for personal use across SPDsx, SP404, Sensory Percussion, and sound design. Feel free to use these in your music, and if you do, I'd be happy to hear the result. Made to be used creatively."
-    }
-  ]
-}
+[
+  {
+    "id": "all-these-are-the-days",
+    "title": "All These Are The Days",
+    "type": "album",
+    "year": "2016",
+    "tags": ["album", "drums", "cassette", "field-recording", "montreal"],
+    "relations": ["the-field-of-living", "sun-and-ice"],
+    "url": "https://maysunmusic.bandcamp.com/album/all-these-are-the-days",
+    "main_image": "assets/images/album_covers/01_album_cover.png",
+    "description": "All These Are The Days was recorded at 4449, with drums tracked at Planet Studios in Montreal. Conceived as the first part of a three-panel work, the album was made during a period of withdrawal from collaborative projects and constant performance. The EP was recorded primarily with a Zoom H6, using cassette tape degradation as a central process. Tapes were physically damaged and reused, introducing saturation, instability, residual artifacts, and shifting stereo fields. Drums were recorded separately in a studio and later reintegrated into the textures. Conceptually, the drums function as my human presence, while the surrounding layers behave as unstable external forces."
+  },
+  {
+    "id": "the-field-of-living",
+    "title": "The Field of Living",
+    "type": "album",
+    "year": "2016",
+    "tags": ["album", "drums", "field-recording", "feedback", "montreal"],
+    "relations": ["all-these-are-the-days", "sun-and-ice"],
+    "url": "https://maysunmusic.bandcamp.com/album/the-field-of-living",
+    "main_image": "assets/images/album_covers/02_album_cover.png",
+    "description": "The Field of Living was recorded at 4449 and 4322, with drums tracked at Ohm Studios in Montreal. Conceived as the second part of a three-panel work, the EP marked an expansion from internal processing toward the surrounding environment, introducing field recordings into the compositional process. Sounds from everyday spaces were used as foundational material. A street-cleaning truck heard from an apartment window formed the basis of Dark Room. A metallic light fixture, water from a drain outside my parents' house, and nearby streetcars were embedded into other tracks. These recordings functioned as anchors to specific places and moments, folding space and time into the music. The EP also introduced early experiments with physical re-amping. Sounds were played back through improvised systems and re-recorded to alter tone and perspective. External preamps were pushed beyond their intended use, favoring instability over fidelity. Drums were recorded separately and reintroduced into the layered textures. This release marks the first appearance of the name MAY SUN, announced in the fifth track."
+  },
+  {
+    "id": "sun-and-ice",
+    "title": "Sun & Ice",
+    "type": "album",
+    "year": "2017",
+    "tags": ["album", "drums", "field-recording", "synthesis", "montreal"],
+    "relations": ["all-these-are-the-days", "the-field-of-living", "wanderlust-ii"],
+    "url": "https://maysunmusic.bandcamp.com/album/sun-ice",
+    "main_image": "assets/images/album_covers/03_album_cover.png",
+    "description": "Sun & Ice was recorded at 4322 and 1610 between January and April 2017. Conceived as the final part of a three-panel work, this EP was built around continuity, with each piece flowing directly into the next. Mixing was treated as an extension of composition, shaping the overall form as much as the musical material itself. This was the first release where everything was recorded independently, including drums. Each track was constructed around a distinct drum sound, often prepared with objects and heavy damping. On White Peafowl, a steel chain was dropped onto the snare before striking it, introducing physical gesture and chance into the recording process. The album incorporates a greater presence of synthesizers and more contextual field recordings. Throughout its creation, the recurring image was walking across a frozen lake while blinded by the sun, moving forward without certainty. The closing piece, Wanderlust, marks a decision to move on, closing the triptych."
+  },
+  {
+    "id": "the-after-mountain",
+    "title": "The After Mountain",
+    "type": "album",
+    "year": "2020",
+    "tags": ["album", "spatial-audio", "binaural", "room", "immersive"],
+    "relations": ["waiting-spaces", "wanderlust-ii"],
+    "url": "https://maysunmusic.bandcamp.com/album/the-after-mountain",
+    "main_image": "assets/images/album_covers/04_album_cover.png",
+    "description": "The After Mountain was recorded at 5430a between October 2019 and February 2020. It is in continuation with the musical triptych published in 2016-2017. This album was made with immersive spatialization in mind. Sound textures were moved across a room using 6 speakers placed in a circle and captured with a binaural microphone at the center. A person who listens with headphones will feel as if they are surrounded by moving sounds creating enveloping soundscapes. Each piece is minimalist, repetitive, immersive and slowly evolving in the micro details. The work is meant to be listened in its entirety as each piece merges into the other."
+  },
+  {
+    "id": "waiting-spaces",
+    "title": "Waiting Spaces",
+    "type": "album",
+    "year": "2020",
+    "tags": ["album", "spatial-audio", "binaural", "piano", "synthesis", "immersive"],
+    "relations": ["the-after-mountain", "wanderlust-ii"],
+    "url": "https://maysunmusic.bandcamp.com/album/waiting-spaces",
+    "main_image": "assets/images/album_covers/05_album_cover.png",
+    "description": "Waiting Spaces was recorded at 6751 and 1960 between May & August 2020. It is in continuation with The After Mountain. Textures were created from upright and grand piano through modular synthesis, digital processing and physical movement. On this EP, drums are nonexistent or so very far in the background, more like a subconscious pulse. Binaural microphones were used to create a 3D audio space around the listener. Headphones are recommended for spatiality."
+  },
+  {
+    "id": "wanderlust-ii",
+    "title": "Wanderlust II",
+    "type": "album",
+    "year": "2021",
+    "tags": ["album", "room", "spatial-audio", "memory", "immersive"],
+    "relations": ["sun-and-ice", "the-after-mountain", "waiting-spaces", "timelines"],
+    "url": "https://maysunmusic.bandcamp.com/album/wanderlust-ii",
+    "main_image": "assets/images/album_covers/06_album_cover.png",
+    "description": "Wanderlust II was recorded between January & December 2021 at 6751 & 7203. It is in continuation with all previous works. In this album, I imagined myself revisiting different rooms, which represent different time frames from the past. I pictured spaces that do not physically make sense, spaces where the areas overlap each other, fade into another and collapse on themselves. Each layer of sound was viewed as a universe of its own, a room in a room constantly shifting between which one contains the other. I reference many pieces from my previous releases. The intent was to merge previous works the same way memories condense themselves after time. The closing piece was recreated from the EP Sun & Ice to emphasize this recurring desire: Wanderlust."
+  },
+  {
+    "id": "timelines",
+    "title": "Timelines",
+    "type": "album",
+    "year": "2023",
+    "tags": ["album", "piano", "feedback", "room", "granular", "banff", "drums"],
+    "relations": ["wanderlust-ii"],
+    "url": "https://maysunmusic.bandcamp.com/album/timelines",
+    "main_image": "assets/images/album_covers/08_album_cover.png",
+    "description": "TIMELINES was recorded between January 16th and 24th 2023, at the Banff Center for Arts and Creativity, in room E148. Recorded over 8 days, this music was created from different iterations of a same sound. Grand piano manipulated through electronic processing was recorded and reintroduced into the space at varying speeds and pitches. I intertwined additional piano lines into these new textures, repeating the process cyclically. Minimalist drumming and imperfections from my movement in the room were layered along the way. The ambient sounds of fellow artists creating in the adjacent rooms bled through the walls, subtly infiltrating the recordings, adding another layer of artifacts. This album is about a personal shift in perception, a subtle but profound alteration of timelines."
+  },
+  {
+    "id": "samples",
+    "title": "MAYSUN Samples",
+    "type": "samples",
+    "year": "2024",
+    "tags": ["samples", "sound-design", "drums", "fabrication", "steel"],
+    "relations": ["steel_cymbals"],
+    "url": "https://maysunsamples.bandcamp.com/",
+    "main_image": "assets/images/album_covers/bandcamp_samples.jpg",
+    "description": "Sounds recorded from glass, metal, steel, glass marimba, broken synths, and more. Made for personal use across SPDsx, SP404, Sensory Percussion, and sound design. Feel free to use these in your music, and if you do, I'd be happy to hear the result. Made to be used creatively."
+  }
+]
