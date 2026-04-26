@@ -355,7 +355,7 @@
       fetch('data/albums.json').then(res => res.json())
     ]).then(([spatData, albumData]) => {
       renderVenues(spatData);
-      renderSamples(albumData.samples);
+      renderSamples(albumData);
       startVenueImageCycles();
     });
 
@@ -400,22 +400,25 @@ ${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopen
       `).join('');
     }
 
-    function renderSamples(samples) {
+    function renderSamples(data) {
       const grid = document.getElementById('samples-grid');
-      grid.innerHTML = samples.map(s => `
-        <div class="sample-card">
-          <div class="sample-card-text">
-            ${s.description ? `<p>${s.description}</p>` : ''}
-            <a href="${s.bandcamp}" target="_blank" rel="noopener">Listen / Download</a>
-          </div>
 
-          <div class="sample-card-image">
-            <a href="${s.bandcamp}" target="_blank" rel="noopener">
-              ${s.picture ? `<img src="${s.picture}" alt="${s.title}" />` : ''}
-            </a>
-          </div>
-        </div>
-      `).join('');
+      const samples = data.filter(item => item.type === 'samples');
+
+      grid.innerHTML = samples.map(s => `
+    <div class="sample-card">
+      <div class="sample-card-text">
+        ${s.description ? `<p>${s.description}</p>` : ''}
+        <a href="${s.url}" target="_blank" rel="noopener">Listen / Download</a>
+      </div>
+
+      <div class="sample-card-image">
+        <a href="${s.url}" target="_blank" rel="noopener">
+          ${s.main_image ? `<img src="${s.main_image}" alt="${s.title}" />` : ''}
+        </a>
+      </div>
+    </div>
+  `).join('');
     }
 
     function downloadTxt(id, filename) {
