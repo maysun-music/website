@@ -1,56 +1,69 @@
-{
-  "venues": [
-    {
-      "id": "reforesters",
-      "name": "Reforesters Laboratory",
-      "date": "2025-05-10",
-      "filename": "reforesters_spat.txt",
-      "location": "147 Metropolitan Ave, Brooklyn, NY 11249",
-      "speakers": "24.2",
-      "url": "https://reforesters.io/",
-      "pictures": [
-        "assets/images/spat_templates/reforesters/reforesters01.jpg",
-        "assets/images/spat_templates/reforesters/reforesters02.jpg",
-        "assets/images/spat_templates/reforesters/reforesters03.jpg",
-        "assets/images/spat_templates/reforesters/reforesters04.jpg",
-        "assets/images/spat_templates/reforesters/reforesters05.jpg",
-        "assets/images/spat_templates/reforesters/reforesters06.jpg"
-      ],
-      "txt": "# ======================================\n# AED provided by Reforesters Laboratory upon booking.\n# ======================================\n# Scale distance by 0.3 for XP4L."
-    },
-    {
-      "id": "iris_cantor",
-      "name": "Iris Cantor Theater",
-      "date": "2024-10-16",
-      "filename": "iriscantor_spat.txt",
-      "location": "36 E 8th St, New York, NY 10003",
-      "speakers": "50.2",
-      "url": "https://tisch.nyu.edu/drama/production-resources/production-theatres/iris-cantor-theatre.html",
-      "pictures": [
-        "assets/images/spat_templates/iris_cantor/iriscantor01.jpg",
-        "assets/images/spat_templates/iris_cantor/iriscantor02.jpg",
-        "assets/images/spat_templates/iris_cantor/iriscantor03.jpg",
-        "assets/images/spat_templates/iris_cantor/iriscantor04.jpg",
-        "assets/images/spat_templates/iris_cantor/iriscantor05.jpg"
-      ],
-      "txt": "# ======================================\n# File \"iriscantor_spat.txt\"\n# Made with XP4L - www.xp4l.com/\n# Approximate locations based on tech sheet\n# formatted by Etienne Mason - MAYSUN - www.maysun.zip\n# AED data compatible with Spat5 (Max/MSP) \n# and other OSC-based spatial audio software\n# Sub channels (not in AED layout)\n# ch 27-28 = subs\n# routing: move ch 27-28 \u2192 51-52, shift ch 29-52 \u2192 27-50\n# for AED channels remain consecutive (1-50)\n# ======================================\n/speaker/number 50\n/speakers/correction/delay \"auto\"\n/speakers/correction/gain \"auto\"\n/speakers/aed -60.9317 20.161 1.37031 -71.5554 21.7251 1.27593 -83.6563 22.6599 1.2259 -96.3437 22.6599 1.2259 -109.865 21.5568 1.28542 -120.27 19.9399 1.38488 -132.526 17.201 1.59707 -141.788 19.7907 1.3949 -154.162 22.4007 1.23934 -168.058 24.1355 1.15504 167.99 24.1301 1.15528 154.106 22.391 1.23985 141.744 19.7798 1.39563 132.494 17.1911 1.59796 120.242 19.9245 1.3859 109.845 21.5373 1.28652 96.3367 22.6373 1.22706 83.6633 22.6373 1.22706 71.5746 21.7052 1.27704 60.959 20.1451 1.37135 -141.755 45.771 1.88019 -154.135 49.6481 1.76788 -168.044 51.9938 1.70986 167.977 51.9869 1.71002 154.078 49.6345 1.76823 141.711 45.7539 1.88074 -60.1837 79.4306 1.3705 60.3262 79.3856 1.3707 -119.816 79.4306 1.3705 119.674 79.3856 1.3707 -71.2587 48.7224 1.79278 -83.6319 50.0884 1.75646 -96.3681 50.0884 1.75646 -109.937 48.5141 1.79851 -120.368 46.0653 1.8709 -127.999 43.4693 1.95838 71.488 48.7607 1.79172 83.6319 50.0884 1.75646 96.3681 50.0884 1.75646 109.937 48.5141 1.79852 120.368 46.0653 1.8709 127.999 43.4693 1.95838 -47.1984 45.3756 1.5714 0.200169 56.1539 1.34654 47.3825 45.2758 1.57411 -44.9696 0.0 0.840676 -27.7107 0.240984 0.670188 0.0606636 0.0 0.59613 27.8062 0.240773 0.670776 45.0304 0.0 0.841568\n/speaker/1/name \"1\"\n/speaker/2/name \"2\"\n/speaker/3/name \"3\"\n/speaker/4/name \"4\"\n/speaker/5/name \"5\"\n/speaker/6/name \"6\"\n/speaker/7/name \"7\"\n/speaker/8/name \"8\"\n/speaker/9/name \"9\"\n/speaker/10/name \"10\"\n/speaker/11/name \"11\"\n/speaker/12/name \"12\"\n/speaker/13/name \"13\"\n/speaker/14/name \"14\"\n/speaker/15/name \"15\"\n/speaker/16/name \"16\"\n/speaker/17/name \"17\"\n/speaker/18/name \"18\"\n/speaker/19/name \"19\"\n/speaker/20/name \"20\"\n/speaker/21/name \"21\"\n/speaker/22/name \"22\"\n/speaker/23/name \"23\"\n/speaker/24/name \"24\"\n/speaker/25/name \"25\"\n/speaker/26/name \"26\"\n/speaker/27/name \"27\"\n/speaker/28/name \"28\"\n/speaker/29/name \"29\"\n/speaker/30/name \"30\"\n/speaker/31/name \"31\"\n/speaker/32/name \"32\"\n/speaker/33/name \"33\"\n/speaker/34/name \"34\"\n/speaker/35/name \"35\"\n/speaker/36/name \"36\"\n/speaker/37/name \"37\"\n/speaker/38/name \"38\"\n/speaker/39/name \"39\"\n/speaker/40/name \"40\"\n/speaker/41/name \"41\"\n/speaker/42/name \"42\"\n/speaker/43/name \"43\"\n/speaker/44/name \"44\"\n/speaker/45/name \"45\"\n/speaker/46/name \"46\"\n/speaker/47/name \"47\"\n/speaker/48/name \"48\"\n/speaker/49/name \"49\"\n/speaker/50/name \"50\""
-    },
-    {
-      "id": "nyu_audiolab",
-      "name": "NYU Audiolab Media Commons",
-      "date": "2024-10-20",
-      "filename": "nyuaudiolab_spat.txt",
-      "location": "370 Jay St, Brooklyn, NY 11201",
-      "speakers": "46.4",
-      "url": "https://www.nyu.edu/life/campus-resources/370-jay-street/shared-spaces.html",
-      "pictures": [
-        "assets/images/spat_templates/nyu_audiolab/nyuaudiolab01.jpg",
-        "assets/images/spat_templates/nyu_audiolab/nyuaudiolab02.jpg",
-        "assets/images/spat_templates/nyu_audiolab/nyuaudiolab03.jpg",
-        "assets/images/spat_templates/nyu_audiolab/nyuaudiolab04.jpg",
-        "assets/images/spat_templates/nyu_audiolab/nyuaudiolab05.jpg"
-      ],
-      "txt": "# ======================================\n# File \"nyuaudiolab_spat.txt\"\n# Made with XP4L - www.xp4l.com\n# Room is not symmetrical or perfectly rectangular — AED positions measured by hand\n# Scaled distance 0.53x\n# formatted by Etienne Mason - MAYSUN - www.maysun.zip\n# AED data compatible with Spat5 (Max/MSP) \n# and other OSC-based spatial audio software\n# Sub channels (not in AED layout)\n# ch 4 = LFE (left and right sub)\n# ch 25-26-27-28 = individual subs\n# ======================================\n# ROUTING: XP4L ch \u2192 Audiolab output\n# --------------------------------------\n# 1  \u2192 1   LEFT\n# 2  \u2192 2   RIGHT\n# 3  \u2192 3   CENTER\n# 4  \u2192 5   LSS\n# 5  \u2192 6   RSS\n# 6  \u2192 7   LRS\n# 7  \u2192 8   RRS\n# 8  \u2192 9   LTF\n# 9  \u2192 10  RTF\n# 10 \u2192 11  LTR\n# 11 \u2192 12  RTR\n# 12 \u2192 17  LTM\n# 13 \u2192 18  RTM\n# 14 \u2192 23  CR\n# 15 \u2192 29  PIP 1-1\n# 16 \u2192 30  PIP 1-2\n# 17 \u2192 31  PIP 1-3\n# 18 \u2192 32  PIP 1-4\n# 19 \u2192 33  PIP 2-1\n# 20 \u2192 34  PIP 2-2\n# 21 \u2192 35  PIP 2-3\n# 22 \u2192 36  PIP 2-4\n# 23 \u2192 37  PIP 3-1\n# 24 \u2192 38  PIP 3-2\n# 25 \u2192 39  PIP 3-3\n# 26 \u2192 40  PIP 3-4\n# 27 \u2192 41  PIP 4-1\n# 28 \u2192 42  PIP 4-2\n# 29 \u2192 43  PIP 4-3\n# 30 \u2192 44  PIP 4-4\n# 31 \u2192 45  PIP 5-1\n# 32 \u2192 46  PIP 5-2\n# 33 \u2192 47  PIP 5-3\n# 34 \u2192 48  PIP 5-4\n# 35 \u2192 49  PIP 6-1\n# 36 \u2192 50  PIP 6-2\n# 37 \u2192 51  PIP 6-3\n# 38 \u2192 52  PIP 6-4\n# 39 \u2192 53  PIP 7-1\n# 40 \u2192 54  PIP 7-2\n# 41 \u2192 55  PIP 7-3\n# 42 \u2192 56  PIP 7-4\n# 43 \u2192 57  PIP 8-1\n# 44 \u2192 58  PIP 8-2\n# 45 \u2192 59  PIP 8-3\n# 46 \u2192 60  PIP 8-4\n# -----------------------------------------\n# Audiolab outputs 4, 13-16, 19-22, 25-28 must be skipped for continuous channels for AED\n# ======================================\n/speaker/number 46\n/speakers/correction/delay \"auto\"\n/speakers/correction/gain \"auto\"\n/speakers/aed -32.0 16.0 1.379 34.9875 15.6593 1.396 0.0 18.2456 1.179 -90.2272 24.561 0.887 82.1967 30.9994 0.726 -142.0 16.0 1.366 148.0 16.0 1.379 -25.4213 50.4726 0.706 34.2323 49.7498 0.713 -135.988 53.5699 0.677 143.852 58.6701 0.638 -81.0047 65.1693 0.600 76.0975 65.4588 0.598 -180.0 22.3589 0.971 -19.9914 23.5933 1.291 -19.9914 17.8022 1.243 -20.0 11.0831 1.205 -19.9914 4.20598 1.186 22.8382 23.1896 1.312 22.8387 17.4796 1.265 22.8382 10.8762 1.228 22.8382 4.34399 1.210 55.0 30.7435 1.012 54.9972 23.6283 0.948 54.9972 14.9451 0.898 54.9972 5.72147 0.873 130.213 28.9971 1.066 130.203 22.1724 1.006 130.203 13.9635 0.961 130.203 5.33215 0.936 160.301 24.7068 1.236 160.301 18.689 1.186 160.301 11.6616 1.147 160.306 4.43058 1.126 -158.0 25.6394 1.194 -158.008 19.437 1.142 -158.008 12.1507 1.101 -158.008 4.62044 1.080 -129.619 24.5477 1.244 -129.616 18.5645 1.193 -129.616 11.5804 1.154 -129.616 4.3983 1.135 -50.0027 27.5393 1.118 -50.0027 20.9754 1.061 -50.0027 13.1622 1.017 -50.0 5.0 0.995\n/speaker/1/name \"Left\"\n/speaker/2/name \"Right\"\n/speaker/3/name \"Center\"\n/speaker/4/name \"LSS\"\n/speaker/5/name \"RSS\"\n/speaker/6/name \"LRS\"\n/speaker/7/name \"RRS\"\n/speaker/8/name \"LTF\"\n/speaker/9/name \"RTF\"\n/speaker/10/name \"LTR\"\n/speaker/11/name \"RTR\"\n/speaker/12/name \"LTM\"\n/speaker/13/name \"RTM\"\n/speaker/14/name \"CR\"\n/speaker/15/name \"PIPE 1-1\"\n/speaker/16/name \"PIPE 1-2\"\n/speaker/17/name \"PIPE 1-3\"\n/speaker/18/name \"PIPE 1-4\"\n/speaker/19/name \"PIPE 2-1\"\n/speaker/20/name \"PIPE 2-2\"\n/speaker/21/name \"PIPE 2-3\"\n/speaker/22/name \"PIPE 2-4\"\n/speaker/23/name \"PIPE 3-1\"\n/speaker/24/name \"PIPE 3-2\"\n/speaker/25/name \"PIPE 3-3\"\n/speaker/26/name \"PIPE 3-4\"\n/speaker/27/name \"PIPE 4-1\"\n/speaker/28/name \"PIPE 4-2\"\n/speaker/29/name \"PIPE 4-3\"\n/speaker/30/name \"PIPE 4-4\"\n/speaker/31/name \"PIPE 5-1\"\n/speaker/32/name \"PIPE 5-2\"\n/speaker/33/name \"PIPE 5-3\"\n/speaker/34/name \"PIPE 5-4\"\n/speaker/35/name \"PIPE 6-1\"\n/speaker/36/name \"PIPE 6-2\"\n/speaker/37/name \"PIPE 6-3\"\n/speaker/38/name \"PIPE 6-4\"\n/speaker/39/name \"PIPE 7-1\"\n/speaker/40/name \"PIPE 7-2\"\n/speaker/41/name \"PIPE 7-3\"\n/speaker/42/name \"PIPE 7-4\"\n/speaker/43/name \"PIPE 8-1\"\n/speaker/44/name \"PIPE 8-2\"\n/speaker/45/name \"PIPE 8-3\"\n/speaker/46/name \"PIPE 8-4\""
-    }
-  ]
-}
+[
+  {
+    "id": "spat-reforesters",
+    "title": "Reforesters Laboratory",
+    "type": "spatial template",
+    "date": "2025",
+    "tags": ["spatial-audio", "resources", "new york", "template", "max", "msp", "xp4l", "performance"],
+    "relations": ["spat-iris-cantor", "cycl", "spat-nyu-audiolab"],
+    "url": "https://reforesters.io/",
+    "main_image": "assets/images/spat_templates/reforesters/reforesters01.jpg",
+    "description": "Speaker layout template for Reforesters Laboratory, Brooklyn. 24.2 system. AED data compatible with Spat5 (Max/MSP) and other OSC-based spatial audio software.",
+    "location": "147 Metropolitan Ave, Brooklyn, NY 11249",
+    "speakers": "24.2",
+    "filename": "reforesters_spat.txt",
+    "gallery": [
+      "assets/images/spat_templates/reforesters/reforesters01.jpg",
+      "assets/images/spat_templates/reforesters/reforesters02.jpg",
+      "assets/images/spat_templates/reforesters/reforesters03.jpg",
+      "assets/images/spat_templates/reforesters/reforesters04.jpg",
+      "assets/images/spat_templates/reforesters/reforesters05.jpg",
+      "assets/images/spat_templates/reforesters/reforesters06.jpg"
+    ],
+    "txt": "# ======================================\n# AED provided by Reforesters Laboratory upon booking.\n# ======================================\n# Scale distance by 0.3 for XP4L."
+  },
+  {
+    "id": "spat-iris-cantor",
+    "title": "Iris Cantor Theater",
+    "type": "spatial template",
+    "date": "2024",
+    "tags": ["spatial-audio", "resources", "new york", "template", "max", "msp", "xp4l"],
+    "relations": ["spat-reforesters", "cymbal_controller", "spat-nyu-audiolab", "performance"],
+    "url": "https://tisch.nyu.edu/drama/production-resources/production-theatres/iris-cantor-theatre.html",
+    "main_image": "assets/images/spat_templates/iris_cantor/iriscantor01.jpg",
+    "description": "Speaker layout template for Iris Cantor Theater, NYU Tisch. 50.2 system. Approximate locations based on tech sheet. AED data compatible with Spat5 (Max/MSP) and other OSC-based spatial audio software.",
+    "location": "36 E 8th St, New York, NY 10003",
+    "speakers": "50.2",
+    "filename": "iriscantor_spat.txt",
+    "gallery": [
+      "assets/images/spat_templates/iris_cantor/iriscantor01.jpg",
+      "assets/images/spat_templates/iris_cantor/iriscantor02.jpg",
+      "assets/images/spat_templates/iris_cantor/iriscantor03.jpg",
+      "assets/images/spat_templates/iris_cantor/iriscantor04.jpg",
+      "assets/images/spat_templates/iris_cantor/iriscantor05.jpg"
+    ],
+    "txt": "# ======================================\n# File \"iriscantor_spat.txt\"\n# Made with XP4L - www.xp4l.com/\n# Approximate locations based on tech sheet\n# formatted by Etienne Mason - MAYSUN - www.maysun.zip\n# AED data compatible with Spat5 (Max/MSP) \n# and other OSC-based spatial audio software\n# Sub channels (not in AED layout)\n# ch 27-28 = subs\n# routing: move ch 27-28 \u2192 51-52, shift ch 29-52 \u2192 27-50\n# for AED channels remain consecutive (1-50)\n# ======================================\n/speaker/number 50\n/speakers/correction/delay \"auto\"\n/speakers/correction/gain \"auto\"\n/speakers/aed -60.9317 20.161 1.37031 -71.5554 21.7251 1.27593 -83.6563 22.6599 1.2259 -96.3437 22.6599 1.2259 -109.865 21.5568 1.28542 -120.27 19.9399 1.38488 -132.526 17.201 1.59707 -141.788 19.7907 1.3949 -154.162 22.4007 1.23934 -168.058 24.1355 1.15504 167.99 24.1301 1.15528 154.106 22.391 1.23985 141.744 19.7798 1.39563 132.494 17.1911 1.59796 120.242 19.9245 1.3859 109.845 21.5373 1.28652 96.3367 22.6373 1.22706 83.6633 22.6373 1.22706 71.5746 21.7052 1.27704 60.959 20.1451 1.37135 -141.755 45.771 1.88019 -154.135 49.6481 1.76788 -168.044 51.9938 1.70986 167.977 51.9869 1.71002 154.078 49.6345 1.76823 141.711 45.7539 1.88074 -60.1837 79.4306 1.3705 60.3262 79.3856 1.3707 -119.816 79.4306 1.3705 119.674 79.3856 1.3707 -71.2587 48.7224 1.79278 -83.6319 50.0884 1.75646 -96.3681 50.0884 1.75646 -109.937 48.5141 1.79851 -120.368 46.0653 1.8709 -127.999 43.4693 1.95838 71.488 48.7607 1.79172 83.6319 50.0884 1.75646 96.3681 50.0884 1.75646 109.937 48.5141 1.79852 120.368 46.0653 1.8709 127.999 43.4693 1.95838 -47.1984 45.3756 1.5714 0.200169 56.1539 1.34654 47.3825 45.2758 1.57411 -44.9696 0.0 0.840676 -27.7107 0.240984 0.670188 0.0606636 0.0 0.59613 27.8062 0.240773 0.670776 45.0304 0.0 0.841568\n/speaker/1/name \"1\"\n/speaker/2/name \"2\"\n/speaker/3/name \"3\"\n/speaker/4/name \"4\"\n/speaker/5/name \"5\"\n/speaker/6/name \"6\"\n/speaker/7/name \"7\"\n/speaker/8/name \"8\"\n/speaker/9/name \"9\"\n/speaker/10/name \"10\"\n/speaker/11/name \"11\"\n/speaker/12/name \"12\"\n/speaker/13/name \"13\"\n/speaker/14/name \"14\"\n/speaker/15/name \"15\"\n/speaker/16/name \"16\"\n/speaker/17/name \"17\"\n/speaker/18/name \"18\"\n/speaker/19/name \"19\"\n/speaker/20/name \"20\"\n/speaker/21/name \"21\"\n/speaker/22/name \"22\"\n/speaker/23/name \"23\"\n/speaker/24/name \"24\"\n/speaker/25/name \"25\"\n/speaker/26/name \"26\"\n/speaker/27/name \"27\"\n/speaker/28/name \"28\"\n/speaker/29/name \"29\"\n/speaker/30/name \"30\"\n/speaker/31/name \"31\"\n/speaker/32/name \"32\"\n/speaker/33/name \"33\"\n/speaker/34/name \"34\"\n/speaker/35/name \"35\"\n/speaker/36/name \"36\"\n/speaker/37/name \"37\"\n/speaker/38/name \"38\"\n/speaker/39/name \"39\"\n/speaker/40/name \"40\"\n/speaker/41/name \"41\"\n/speaker/42/name \"42\"\n/speaker/43/name \"43\"\n/speaker/44/name \"44\"\n/speaker/45/name \"45\"\n/speaker/46/name \"46\"\n/speaker/47/name \"47\"\n/speaker/48/name \"48\"\n/speaker/49/name \"49\"\n/speaker/50/name \"50\""
+  },
+  {
+    "id": "spat-nyu-audiolab",
+    "title": "NYU Audiolab Media Commons",
+    "type": "spatial template",
+    "date": "2024",
+    "tags": ["spatial-audio", "resources", "new york", "template", "max", "msp", "xp4l"],
+    "relations": ["spat-reforesters", "cycl", "cymbal_controller", "spat-iris-cantor", "performance"],
+    "url": "https://www.nyu.edu/life/campus-resources/370-jay-street/shared-spaces.html",
+    "main_image": "assets/images/spat_templates/nyu_audiolab/nyuaudiolab01.jpg",
+    "description": "Speaker layout template for NYU Audiolab Media Commons, 370 Jay St Brooklyn. 46.4 system. Room is not symmetrical or perfectly rectangular, AED positions measured by hand. AED data compatible with Spat5 (Max/MSP) and other OSC-based spatial audio software.",
+    "location": "370 Jay St, Brooklyn, NY 11201",
+    "speakers": "46.4",
+    "filename": "nyuaudiolab_spat.txt",
+    "gallery": [
+      "assets/images/spat_templates/nyu_audiolab/nyuaudiolab01.jpg",
+      "assets/images/spat_templates/nyu_audiolab/nyuaudiolab02.jpg",
+      "assets/images/spat_templates/nyu_audiolab/nyuaudiolab03.jpg",
+      "assets/images/spat_templates/nyu_audiolab/nyuaudiolab04.jpg",
+      "assets/images/spat_templates/nyu_audiolab/nyuaudiolab05.jpg"
+    ],
+    "txt": "# ======================================\n# File \"nyuaudiolab_spat.txt\"\n# Made with XP4L - www.xp4l.com\n# Room is not symmetrical or perfectly rectangular — AED positions measured by hand\n# Scaled distance 0.53x\n# formatted by Etienne Mason - MAYSUN - www.maysun.zip\n# AED data compatible with Spat5 (Max/MSP) \n# and other OSC-based spatial audio software\n# Sub channels (not in AED layout)\n# ch 4 = LFE (left and right sub)\n# ch 25-26-27-28 = individual subs\n# ======================================\n# ROUTING: XP4L ch \u2192 Audiolab output\n# --------------------------------------\n# 1  \u2192 1   LEFT\n# 2  \u2192 2   RIGHT\n# 3  \u2192 3   CENTER\n# 4  \u2192 5   LSS\n# 5  \u2192 6   RSS\n# 6  \u2192 7   LRS\n# 7  \u2192 8   RRS\n# 8  \u2192 9   LTF\n# 9  \u2192 10  RTF\n# 10 \u2192 11  LTR\n# 11 \u2192 12  RTR\n# 12 \u2192 17  LTM\n# 13 \u2192 18  RTM\n# 14 \u2192 23  CR\n# 15 \u2192 29  PIP 1-1\n# 16 \u2192 30  PIP 1-2\n# 17 \u2192 31  PIP 1-3\n# 18 \u2192 32  PIP 1-4\n# 19 \u2192 33  PIP 2-1\n# 20 \u2192 34  PIP 2-2\n# 21 \u2192 35  PIP 2-3\n# 22 \u2192 36  PIP 2-4\n# 23 \u2192 37  PIP 3-1\n# 24 \u2192 38  PIP 3-2\n# 25 \u2192 39  PIP 3-3\n# 26 \u2192 40  PIP 3-4\n# 27 \u2192 41  PIP 4-1\n# 28 \u2192 42  PIP 4-2\n# 29 \u2192 43  PIP 4-3\n# 30 \u2192 44  PIP 4-4\n# 31 \u2192 45  PIP 5-1\n# 32 \u2192 46  PIP 5-2\n# 33 \u2192 47  PIP 5-3\n# 34 \u2192 48  PIP 5-4\n# 35 \u2192 49  PIP 6-1\n# 36 \u2192 50  PIP 6-2\n# 37 \u2192 51  PIP 6-3\n# 38 \u2192 52  PIP 6-4\n# 39 \u2192 53  PIP 7-1\n# 40 \u2192 54  PIP 7-2\n# 41 \u2192 55  PIP 7-3\n# 42 \u2192 56  PIP 7-4\n# 43 \u2192 57  PIP 8-1\n# 44 \u2192 58  PIP 8-2\n# 45 \u2192 59  PIP 8-3\n# 46 \u2192 60  PIP 8-4\n# -----------------------------------------\n# Audiolab outputs 4, 13-16, 19-22, 25-28 must be skipped for continuous channels for AED\n# ======================================\n/speaker/number 46\n/speakers/correction/delay \"auto\"\n/speakers/correction/gain \"auto\"\n/speakers/aed -32.0 16.0 1.379 34.9875 15.6593 1.396 0.0 18.2456 1.179 -90.2272 24.561 0.887 82.1967 30.9994 0.726 -142.0 16.0 1.366 148.0 16.0 1.379 -25.4213 50.4726 0.706 34.2323 49.7498 0.713 -135.988 53.5699 0.677 143.852 58.6701 0.638 -81.0047 65.1693 0.600 76.0975 65.4588 0.598 -180.0 22.3589 0.971 -19.9914 23.5933 1.291 -19.9914 17.8022 1.243 -20.0 11.0831 1.205 -19.9914 4.20598 1.186 22.8382 23.1896 1.312 22.8387 17.4796 1.265 22.8382 10.8762 1.228 22.8382 4.34399 1.210 55.0 30.7435 1.012 54.9972 23.6283 0.948 54.9972 14.9451 0.898 54.9972 5.72147 0.873 130.213 28.9971 1.066 130.203 22.1724 1.006 130.203 13.9635 0.961 130.203 5.33215 0.936 160.301 24.7068 1.236 160.301 18.689 1.186 160.301 11.6616 1.147 160.306 4.43058 1.126 -158.0 25.6394 1.194 -158.008 19.437 1.142 -158.008 12.1507 1.101 -158.008 4.62044 1.080 -129.619 24.5477 1.244 -129.616 18.5645 1.193 -129.616 11.5804 1.154 -129.616 4.3983 1.135 -50.0027 27.5393 1.118 -50.0027 20.9754 1.061 -50.0027 13.1622 1.017 -50.0 5.0 0.995\n/speaker/1/name \"Left\"\n/speaker/2/name \"Right\"\n/speaker/3/name \"Center\"\n/speaker/4/name \"LSS\"\n/speaker/5/name \"RSS\"\n/speaker/6/name \"LRS\"\n/speaker/7/name \"RRS\"\n/speaker/8/name \"LTF\"\n/speaker/9/name \"RTF\"\n/speaker/10/name \"LTR\"\n/speaker/11/name \"RTR\"\n/speaker/12/name \"LTM\"\n/speaker/13/name \"RTM\"\n/speaker/14/name \"CR\"\n/speaker/15/name \"PIPE 1-1\"\n/speaker/16/name \"PIPE 1-2\"\n/speaker/17/name \"PIPE 1-3\"\n/speaker/18/name \"PIPE 1-4\"\n/speaker/19/name \"PIPE 2-1\"\n/speaker/20/name \"PIPE 2-2\"\n/speaker/21/name \"PIPE 2-3\"\n/speaker/22/name \"PIPE 2-4\"\n/speaker/23/name \"PIPE 3-1\"\n/speaker/24/name \"PIPE 3-2\"\n/speaker/25/name \"PIPE 3-3\"\n/speaker/26/name \"PIPE 3-4\"\n/speaker/27/name \"PIPE 4-1\"\n/speaker/28/name \"PIPE 4-2\"\n/speaker/29/name \"PIPE 4-3\"\n/speaker/30/name \"PIPE 4-4\"\n/speaker/31/name \"PIPE 5-1\"\n/speaker/32/name \"PIPE 5-2\"\n/speaker/33/name \"PIPE 5-3\"\n/speaker/34/name \"PIPE 5-4\"\n/speaker/35/name \"PIPE 6-1\"\n/speaker/36/name \"PIPE 6-2\"\n/speaker/37/name \"PIPE 6-3\"\n/speaker/38/name \"PIPE 6-4\"\n/speaker/39/name \"PIPE 7-1\"\n/speaker/40/name \"PIPE 7-2\"\n/speaker/41/name \"PIPE 7-3\"\n/speaker/42/name \"PIPE 7-4\"\n/speaker/43/name \"PIPE 8-1\"\n/speaker/44/name \"PIPE 8-2\"\n/speaker/45/name \"PIPE 8-3\"\n/speaker/46/name \"PIPE 8-4\""
+  }
+]

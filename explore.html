@@ -287,9 +287,10 @@
 
     Promise.all([
       fetch('data/diy_makes.json').then(r => r.json()),
-      fetch('data/albums.json').then(r => r.json())
-    ]).then(([diy, albums]) => {
-      allItems = [...diy, ...albums]; // merge arrays
+      fetch('data/albums.json').then(r => r.json()),
+      fetch('data/spatial_templates.json').then(r => r.json())
+    ]).then(([diy, albums, spatial]) => {
+      allItems = [...diy, ...albums, ...spatial];
       renderItems(allItems, '');
     });
 
