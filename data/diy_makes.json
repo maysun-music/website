@@ -208,7 +208,7 @@
     "back_story": "I wanted a more tactile way to control sound. Something portable, expressive, and performable. Using only a cymbal and a laptop, I could shape spatial textures and effects from an acoustic source in real time. This paired naturally with a steel cymbal I shaped and hand-hammered in 2021, turning it into both an acoustic and electronic instrument.",
     "future": "Future versions will focus on improved stability, including more consistent calibration behavior and refined motion filtering for smoother control.",
     "components": [
-      "Teensy 4.1 microcontroller",
+      "Arduino Teensy 4.1 microcontroller",
       "MPU9250 gyroscope/accelerometer",
       "4 toggle switches",
       "1 potentiometer",
