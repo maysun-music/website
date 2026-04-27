@@ -392,8 +392,8 @@
       fetch('data/biography.json').then(r => r.json())
     ]).then(([diy, albums, spatial, forever, installations, biography]) => {
       biographyData = biography;
-      allItems = [...diy, ...albums, ...spatial, ...forever, ...installations];
-
+      allItems = [...diy, ...albums, ...spatial, ...forever, ...installations]
+        .sort((a, b) => Number(b.year) - Number(a.year));
       renderDefaultInfo();
       renderItems(allItems, '');
     });
@@ -408,7 +408,7 @@
       const haystack = [
         item.title || '',
         item.type || '',
-        item.date || '',
+        item.year || '',
         item.description || '',
         item.short_description || '',
         item.back_story || '',
