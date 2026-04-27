@@ -394,7 +394,8 @@
             <div class="venue-meta">${v.location}</div>
 <div class="speaker-count">${v.speakers} structure</div>
 ${v.date ? `<div class="venue-date">Mapped ${v.date}</div>` : ''}
-${v.url ? `<div class="venue-url"><a href="${v.url}" target="_blank" rel="noopener">${v.url}</a></div>` : ''}            <textarea readonly id="txt-${v.id}">${v.txt}</textarea>
+${v.venue_url ? `<div class="venue-url"><a href="${v.venue_url}" target="_blank" rel="noopener">${v.venue_url}</a></div>` : ''}
+            <textarea readonly id="txt-${v.id}">${v.txt}</textarea>
 <button class="copy-btn" onclick="downloadTxt('${v.id}', '${v.filename}')">Download</button>          </div>
         </div>
       `).join('');
