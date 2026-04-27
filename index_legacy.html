@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MAYSUN</title>
+  <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon">
+  <!-- only your global styles here -->
+  <link rel="stylesheet" href="styles/global.css">
+
+  <script src="components/nav.js"></script>
+
+  <style>
+    /* minimal on-page styles */
+    .content-container {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .image-container img {
+      display: block;
+      margin: 0 auto;
+      max-width: 80%;
+      height: auto;
+    }
+
+    .photo-credit {
+      font-size: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 2px 4px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV FETCH-->
+  <script>
+    fetch('components/nav.html')
+      .then(r => r.text())
+      .then(html => document.body.insertAdjacentHTML('afterbegin', html));
+  </script>
+
+  <!-- CONTENT -->
+  <div class="content-container" id="content"></div>
+
+  <script>
+    function loadContent(section) {
+      switch (section) {
+        case 'home':
+          window.location.href = 'home.html';
+          return;
+
+        case 'biography':
+          window.location.href = 'biography.html';
+          return;
+
+        case 'activities':
+          window.location.href = 'activities.html';
+          return;
+
+        case 'albums':
+          window.location.href = 'albums.html';
+          return;
+
+        case 'installations':
+          window.location.href = 'installations.html';
+          return;
+
+        case 'contact':
+          window.location.href = 'contact.html';
+          return;
+
+        case 'tools':
+          window.location.href = 'tools.html';
+          return;
+
+        default:
+          document.getElementById('content').innerHTML = '<p>Coming Soon.</p>';
+      }
+      window.location.hash = section;
+    }
+
+    // wire up your nav links
+    document.addEventListener('DOMContentLoaded', () => {
+      // load initial section (hash or home)
+      const section = location.hash.slice(1) || 'home';
+      loadContent(section);
+
+      // delegate clicks on any <a href="#section">
+      document.body.addEventListener('click', e => {
+        const a = e.target.closest('a');
+        if (!a) return;
+        const href = a.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          loadContent(href.slice(1));
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
