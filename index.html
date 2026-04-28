@@ -42,15 +42,39 @@
       flex-wrap: wrap;
     }
 
-    #site-nav a {
+    .nav-item {
       font-size: 13px;
       color: #00eeff;
-      text-decoration: none;
       letter-spacing: 0.04em;
+    }
+
+    /* FILTER behavior */
+    .nav-item.filter {
+      cursor: pointer;
+    }
+
+    .nav-item.filter {
+      padding: 2px 6px;
+      /* always present */
+    }
+
+    .nav-item.filter:hover {
+      background: #ee00ff;
+      color: rgb(26, 1, 79);
+    }
+
+    .nav-item.filter.active {
+      background: #ee00ff;
+      color: rgb(26, 1, 79);
+    }
+
+    /* LINK behavior */
+    .nav-item.link {
+      text-decoration: none;
       transition: color 0.15s;
     }
 
-    #site-nav a:hover {
+    .nav-item.link:hover {
       color: #ee00ff;
     }
 
@@ -82,29 +106,6 @@
 
     #search-input::placeholder {
       color: #ee00ff;
-    }
-
-    #search-meta {
-      font-size: 11px;
-      color: #ee00ff;
-      margin-top: 8px;
-      letter-spacing: 0.04em;
-      min-height: 0;
-    }
-
-    .filter-chip {
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      cursor: pointer;
-      user-select: none;
-      padding: 2px 4px;
-      display: inline-block;
-      color: #ee00ff;
-      opacity: 0.5;
-    }
-
-    .filter-chip:hover {
-      opacity: 1;
     }
 
     /* ------- MAP --------- */
@@ -361,231 +362,226 @@
   <header id="site-header">
     <div id="site-name">MAYSUN</div>
     <nav id="site-nav">
-      <a href="forever.html">forever in sound</a>
-      <a href="https://maysunmusic.bandcamp.com/" target="_blank">music</a>
-      <a href="activities.html">shows</a>
-      <a href="contact.html">contact</a>
+      <span class="nav-item filter" data-section="story">forever in sound</span>
+      <span class="nav-item filter" data-section="albums">music</span>
+      <span class="nav-item filter" data-section="fabrication">fabrication</span>
+
+      <a class="nav-item link" href="activities.html">shows</a>
+      <a class="nav-item link" href="contact.html">contact</a>
     </nav>
   </header>
 
   <!-- SEARCH -->
   <div id="search-section">
     <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
-    <div id="search-meta"></div>
-    <div id="suggested-filters">
-      <span class="filter-chip" data-section="story">story</span>
-      <span class="filter-chip" data-section="albums">albums</span>
-      <span class="filter-chip" data-section="fabrication">fabrication</span>
-      <span class="filter-chip" data-section="resources">resources</span>
+
+    <!-- ITEMS -->
+    <div id="items-wrap">
+      <div id="items-grid"></div>
     </div>
-  </div>
 
-  <!-- ITEMS -->
-  <div id="items-wrap">
-    <div id="items-grid"></div>
-  </div>
+    <div id="mini-map"></div>
+    <aside id="info-panel">
+      <div id="info-content"></div>
+    </aside>
 
-  <div id="mini-map"></div>
-  <aside id="info-panel">
-    <div id="info-content"></div>
-  </aside>
+    <!-- FOOTER -->
+    <footer id="site-footer">
+      <a href="https://www.instagram.com/maysun.music/" target="_blank">instagram</a>
+      <a href="https://maysunmusic.bandcamp.com/" target="_blank">bandcamp</a>
+      <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">youtube</a>
+      <a href="contact.html">contact</a>
+    </footer>
 
-  <!-- FOOTER -->
-  <footer id="site-footer">
-    <a href="https://www.instagram.com/maysun.music/" target="_blank">instagram</a>
-    <a href="https://maysunmusic.bandcamp.com/" target="_blank">bandcamp</a>
-    <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">youtube</a>
-    <a href="contact.html">contact</a>
-  </footer>
+    <script>
+      let miniMap = new Map();
+      let allItems = [];
+      let biographyData = null;
+      let bioTimeout = null;
+      let activeSection = null;
 
-  <script>
-    let miniMap = new Map();
-    let allItems = [];
-    let biographyData = null;
-    let bioTimeout = null;
-    let activeSection = null;
-
-    Promise.all([
-      fetch('data/diy_makes.json').then(r => r.json()),
-      fetch('data/albums.json').then(r => r.json()),
-      fetch('data/spatial_templates.json').then(r => r.json()),
-      fetch('data/forever.json').then(r => r.json()),
-      fetch('data/installations.json').then(r => r.json()),
-      fetch('data/biography.json').then(r => r.json())
-    ]).then(([diy, albums, spatial, forever, installations, biography]) => {
-      biographyData = biography;
-      allItems = [...diy, ...albums, ...spatial, ...forever, ...installations]
-        .sort((a, b) => Number(b.year) - Number(a.year));
-      renderDefaultInfo();
-      renderItems(allItems, '');
-    });
-
-    document.getElementById('search-input').addEventListener('input', function () {
-      const q = this.value.trim().toLowerCase();
-      if (q) {
-        activeSection = null;
-        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      }
-      const filtered = q ? allItems.filter(item => matches(item, q)) : allItems;
-      renderItems(filtered, q);
-    });
-
-    function resetChips() {
-      document.querySelectorAll('.filter-chip').forEach(c => {
-        c.classList.remove('active');
-        c.style.cssText = 'background:transparent; color:#ee00ff; opacity:0.5;';
+      Promise.all([
+        fetch('data/diy_makes.json').then(r => r.json()),
+        fetch('data/albums.json').then(r => r.json()),
+        fetch('data/spatial_templates.json').then(r => r.json()),
+        fetch('data/forever.json').then(r => r.json()),
+        fetch('data/installations.json').then(r => r.json()),
+        fetch('data/biography.json').then(r => r.json())
+      ]).then(([diy, albums, spatial, forever, installations, biography]) => {
+        biographyData = biography;
+        allItems = [...diy, ...albums, ...spatial, ...forever, ...installations]
+          .sort((a, b) => Number(b.year) - Number(a.year));
+        renderDefaultInfo();
+        renderItems(allItems, '');
       });
-    }
 
-    document.querySelectorAll('.filter-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const section = chip.dataset.section;
-        if (activeSection === section) {
+      document.getElementById('search-input').addEventListener('input', function () {
+        const q = this.value.trim().toLowerCase();
+        if (q) {
           activeSection = null;
-          resetChips();
-          document.getElementById('search-input').value = '';
-          renderItems(allItems, '');
-        } else {
-          activeSection = section;
-          resetChips();
-          chip.style.cssText = 'background:#ee00ff; color:rgb(26,1,79); opacity:1;';
-          document.getElementById('search-input').value = '';
-          let filtered = allItems.filter(item => item.section === section);
-          if (section === 'story') {
-            filtered = filtered.sort((a, b) => a.title.localeCompare(b.title));
-          }
-          renderItems(filtered, '');
+          document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
         }
+        const filtered = q ? allItems.filter(item => matches(item, q)) : allItems;
+        renderItems(filtered, q);
       });
-    });
 
-    function matches(item, q) {
-      const haystack = [
-        item.title || '',
-        item.type || '',
-        item.year || '',
-        item.description || '',
-        item.short_description || '',
-        item.back_story || '',
-        item.future || '',
-        (item.tags || []).join(' '),
-        (item.components || []).join(' '),
-        (item.components_tx || []).join(' '),
-        (item.components_rx || []).join(' ')
-      ].join(' ').toLowerCase();
+      document.querySelectorAll('.nav-item.filter').forEach(el => {
+        el.addEventListener('click', () => {
+          if (!allItems.length) return;
+          const section = el.dataset.section;
 
-      return haystack.includes(q);
-    }
+          if (activeSection === section) {
+            activeSection = null;
+            document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
+            renderItems(allItems, '');
+          } else {
+            activeSection = section;
 
-    function isRelated(a, b) {
-      if (a.id === b.id) return true;
+            document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
 
-      return (a.relations || []).includes(b.id) ||
-        (b.relations || []).includes(a.id);
-    }
+            let filtered = allItems.filter(item => item.section === section);
 
-    function getPreviewText(item) {
-      const text = (item.description || item.short_description || '').trim();
+            if (section === 'story') {
+              filtered = filtered.sort((a, b) => a.title.localeCompare(b.title));
+            }
 
-      // first line only
-      const firstLine = text.split('\n')[0];
+            renderItems(filtered, '');
+          }
 
-      // limit length
-      return firstLine.length > 80
-        ? firstLine.slice(0, 80) + '...'
-        : firstLine;
-    }
+          document.getElementById('search-input').value = '';
+        });
+      });
 
-    function getForeverPreview(item) {
-      const text = (item.description || '').trim();
+      function matches(item, q) {
+        const haystack = [
+          item.title || '',
+          item.type || '',
+          item.year || '',
+          item.description || '',
+          item.short_description || '',
+          item.back_story || '',
+          item.future || '',
+          (item.tags || []).join(' '),
+          (item.components || []).join(' '),
+          (item.components_tx || []).join(' '),
+          (item.components_rx || []).join(' ')
+        ].join(' ').toLowerCase();
 
-      return text.length > 200
-        ? text.slice(0, 200) + '...'
-        : text;
-    }
+        return haystack.includes(q);
+      }
 
-    function escapeHTML(str) {
-      return String(str || '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
+      function isRelated(a, b) {
+        if (a.id === b.id) return true;
 
-    function renderDefaultInfo() {
-      const panel = document.getElementById('info-content');
-      if (!panel || !biographyData) return;
+        return (a.relations || []).includes(b.id) ||
+          (b.relations || []).includes(a.id);
+      }
 
-      const bio = (biographyData.bio || [])
-        .map(p => `<p>${escapeHTML(p)}</p>`)
-        .join('');
+      function getPreviewText(item) {
+        const text = (item.description || item.short_description || '').trim();
 
-      const statement = (biographyData.statement || [])
-        .map(p => `<p>${escapeHTML(p)}</p>`)
-        .join('');
+        // first line only
+        const firstLine = text.split('\n')[0];
 
-      panel.innerHTML = `
+        // limit length
+        return firstLine.length > 80
+          ? firstLine.slice(0, 80) + '...'
+          : firstLine;
+      }
+
+      function getForeverPreview(item) {
+        const text = (item.description || '').trim();
+
+        return text.length > 200
+          ? text.slice(0, 200) + '...'
+          : text;
+      }
+
+      function escapeHTML(str) {
+        return String(str || '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#039;');
+      }
+
+      function renderDefaultInfo() {
+        const panel = document.getElementById('info-content');
+        if (!panel || !biographyData) return;
+
+        const bio = (biographyData.bio || [])
+          .map(p => `<p>${escapeHTML(p)}</p>`)
+          .join('');
+
+        const statement = (biographyData.statement || [])
+          .map(p => `<p>${escapeHTML(p)}</p>`)
+          .join('');
+
+        panel.innerHTML = `
   <h2>BIOGRAPHY</h2>
   ${bio}
   <h2>ARTIST STATEMENT</h2>
   ${statement}
 `;
-    }
+      }
 
-    function renderItemInfo(item) {
-      const panel = document.getElementById('info-content');
-      if (!panel) return;
+      function renderItemInfo(item) {
+        const panel = document.getElementById('info-content');
+        if (!panel) return;
 
-      const text = item.short_description || item.description || item.back_story || '';
-      const cleanText = escapeHTML(text).replace(/\n/g, '<br>');
+        const text = item.short_description || item.description || item.back_story || '';
+        const cleanText = escapeHTML(text).replace(/\n/g, '<br>');
 
-      panel.innerHTML = `
+        panel.innerHTML = `
   <h2>${escapeHTML(item.title || '')}</h2>
   <div class="info-meta">${escapeHTML(item.type || '')}${item.year ? ' · ' + escapeHTML(item.year) : ''}</div>
   <p>${cleanText}</p>
 `;
-    }
-
-    function renderItems(items, q) {
-      const meta = document.getElementById('search-meta');
-      const grid = document.getElementById('items-grid');
-      grid.innerHTML = '';
-
-      meta.textContent = q
-        ? (items.length ? items.length + ' result' + (items.length !== 1 ? 's' : '') : '')
-        : '';
-
-      const mini = document.getElementById('mini-map');
-      mini.innerHTML = '';
-      miniMap.clear();
-
-      if (items.length === 0) {
-        grid.innerHTML = '<div class="no-results">nothing found for "' + q + '"</div>';
-        return;
       }
 
-      items.forEach((item, idx) => {
+      function renderItems(items, q) {
+        const meta = document.getElementById('search-meta');
+        const grid = document.getElementById('items-grid');
+        grid.innerHTML = '';
 
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = item.short_description || '';
-        const text = (tempDiv.textContent || '').trim();
-        const preview = text.length > 80 ? text.slice(0, 80) + '...' : text;
+        if (meta) {
+          meta.textContent = q
+            ? (items.length ? items.length + ' result' + (items.length !== 1 ? 's' : '') : '')
+            : '';
+        }
 
-        const el = document.createElement('div');
-        el.className = 'grid-item';
-        el.dataset.id = item.id;
-        el.style.animationDelay = (idx * 30) + 'ms';
+        const mini = document.getElementById('mini-map');
+        mini.innerHTML = '';
+        miniMap.clear();
 
-        el.innerHTML = `
+        if (items.length === 0) {
+          grid.innerHTML = '<div class="no-results">nothing found for "' + q + '"</div>';
+          return;
+        }
+
+        items.forEach((item, idx) => {
+
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = item.short_description || '';
+          const text = (tempDiv.textContent || '').trim();
+          const preview = text.length > 80 ? text.slice(0, 80) + '...' : text;
+
+          const el = document.createElement('div');
+          el.className = 'grid-item';
+          el.dataset.id = item.id;
+          el.style.animationDelay = (idx * 30) + 'ms';
+
+          el.innerHTML = `
   <div class="grid-item-image-container">
     ${item.main_image
-            ? `<img class="grid-item-image" src="${item.main_image}" alt="${item.title}" loading="lazy">`
-            : `<div class="grid-item-placeholder">${item.type === "forever in sound"
-              ? getForeverPreview(item)
-              : getPreviewText(item)
-            }</div>`
-          }
+              ? `<img class="grid-item-image" src="${item.main_image}" alt="${item.title}" loading="lazy">`
+              : `<div class="grid-item-placeholder">${item.type === "forever in sound"
+                ? getForeverPreview(item)
+                : getPreviewText(item)
+              }</div>`
+            }
       <div class="grid-item-overlay">
         <span class="grid-item-overlay-text">${(item.tags || []).slice(0, 5).join(' · ')}</span>
       </div>
@@ -594,80 +590,80 @@
           <div class="grid-item-type">${item.type} · ${item.year}</div>
         `;
 
-        const goTo = () => {
-          if (!item.url) return;
+          const goTo = () => {
+            if (!item.url) return;
 
-          window.location.href = item.url;
-        };
+            window.location.href = item.url;
+          };
 
-        el.addEventListener('click', goTo);
-        grid.appendChild(el);
+          el.addEventListener('click', goTo);
+          grid.appendChild(el);
 
-        const sq = document.createElement('div');
-        sq.className = 'mini-square';
-        miniMap.set(item.id, sq);
-        mini.appendChild(sq);
+          const sq = document.createElement('div');
+          sq.className = 'mini-square';
+          miniMap.set(item.id, sq);
+          mini.appendChild(sq);
 
-        el.addEventListener('mouseenter', () => {
-          const panel = document.getElementById('info-content');
+          el.addEventListener('mouseenter', () => {
+            const panel = document.getElementById('info-content');
 
-          // CANCEL pending bio fade
-          if (bioTimeout) {
-            clearTimeout(bioTimeout);
-            bioTimeout = null;
-          }
+            // CANCEL pending bio fade
+            if (bioTimeout) {
+              clearTimeout(bioTimeout);
+              bioTimeout = null;
+            }
 
-          panel.style.transition = 'none';
-          panel.style.opacity = 1;
-
-          renderItemInfo(item);
-
-          miniMap.forEach(sq => {
-            sq.classList.remove('active', 'related');
-          });
-
-          miniMap.get(item.id)?.classList.add('active');
-
-          (item.relations || []).forEach(id => {
-            miniMap.get(id)?.classList.add('related');
-          });
-        });
-
-        el.addEventListener('mouseleave', () => {
-          const panel = document.getElementById('info-content');
-
-          panel.style.transition = 'opacity 0.15s ease';
-          panel.style.opacity = 0;
-
-          bioTimeout = setTimeout(() => {
-            renderDefaultInfo();
-
-            panel.style.transition = 'opacity 8s ease';
+            panel.style.transition = 'none';
             panel.style.opacity = 1;
 
-            bioTimeout = null;
-          }, 150);
-        });
+            renderItemInfo(item);
 
-      });
-    }
-    function getRelated(item) {
-      const scores = {};
-      allItems.forEach(other => {
-        if (other.id === item.id) return;
-        let score = 0;
-        if ((item.relations || []).includes(other.id)) score += 10;
-        if ((other.relations || []).includes(item.id)) score += 10;
-        const shared = (item.tags || []).filter(t => (other.tags || []).includes(t));
-        score += shared.length;
-        if (score > 0) scores[other.id] = { item: other, score };
-      });
-      return Object.values(scores)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 3)
-        .map(s => s.item);
-    }
-  </script>
+            miniMap.forEach(sq => {
+              sq.classList.remove('active', 'related');
+            });
+
+            miniMap.get(item.id)?.classList.add('active');
+
+            (item.relations || []).forEach(id => {
+              miniMap.get(id)?.classList.add('related');
+            });
+          });
+
+          el.addEventListener('mouseleave', () => {
+            const panel = document.getElementById('info-content');
+
+            panel.style.transition = 'opacity 0.15s ease';
+            panel.style.opacity = 0;
+
+            bioTimeout = setTimeout(() => {
+              renderDefaultInfo();
+
+              panel.style.transition = 'opacity 8s ease';
+              panel.style.opacity = 1;
+
+              bioTimeout = null;
+            }, 150);
+          });
+
+        });
+      }
+      function getRelated(item) {
+        const scores = {};
+        allItems.forEach(other => {
+          if (other.id === item.id) return;
+          let score = 0;
+          if ((item.relations || []).includes(other.id)) score += 10;
+          if ((other.relations || []).includes(item.id)) score += 10;
+          const shared = (item.tags || []).filter(t => (other.tags || []).includes(t));
+          score += shared.length;
+          if (score > 0) scores[other.id] = { item: other, score };
+        });
+        return Object.values(scores)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 3)
+          .map(s => s.item);
+      }
+    </script>
 
 </body>
 
