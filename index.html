@@ -833,8 +833,8 @@
             function renderList(list) {
               return list.map(s => {
                 const date = `<span style="color:#bbb; font-size:13px; min-width:130px; display:inline-block;">${formatDate(s.date)}</span>`;
-                const collab = s.collaborators ? `<span style="color:#bbb; font-size:13px;"> ${s.collaborators}</span>` : '';
-                const venue = `<strong style="font-size:13px;">${s.venue}</strong>${collab}`;
+                const collab = s.collaborators ? `<span style="color:#bbb; font-size:12px;"> ${s.collaborators}</span>` : '';
+                const venue = `<span style="font-size:12px;">${s.venue}</span>${collab}`;
                 const city = `<span style="color:#bbb; font-size:13px;"> — ${s.city}</span>`;
                 const inner = `${venue}${city}`;
                 const line = s.url
