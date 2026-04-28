@@ -5,6 +5,7 @@
     "type": "instrument",
     "year": "2026",
     "url": "dls.html",
+    "section": "fabrication",
     "tags": [
       "spatial-audio",
       "wireless",
@@ -62,6 +63,7 @@
     "type": "virtual instrument",
     "year": "2026",
     "url": "pizzarat.html",
+    "section": "fabrication",
     "tags": [
       "coding",
       "collaboration",
@@ -98,6 +100,7 @@
     "type": "utility",
     "year": "2026",
     "url": "amp_board.html",
+    "section": "fabrication",
     "tags": [
       "spatial-audio",
       "fabrication",
@@ -130,6 +133,7 @@
     "type": "utility",
     "year": "2026",
     "url": "euroblock_snake.html",
+    "section": "fabrication",
     "tags": [
       "spatial-audio",
       "fabrication",
@@ -160,6 +164,7 @@
     "type": "instrument",
     "year": "2025",
     "url": "cycl.html",
+    "section": "fabrication",
     "tags": [
       "electronics",
       "fabrication",
@@ -219,6 +224,7 @@
     "type": "instrument",
     "year": "2025",
     "url": "node-1.html",
+    "section": "fabrication",
     "tags": [
       "electronics",
       "fabrication",
@@ -255,6 +261,7 @@
     "type": "book",
     "year": "2025",
     "url": "foreverbook.html",
+    "section": "fabrication",
     "tags": [
       "writing",
       "story",
@@ -279,6 +286,7 @@
     "type": "instrument",
     "year": "2024",
     "url": "cymbal_controller.html",
+    "section": "fabrication",
     "tags": [
       "electronics",
       "fabrication",
@@ -319,6 +327,7 @@
     "type": "instrument",
     "year": "2019",
     "url": "steelcymbals.html",
+    "section": "fabrication",
     "tags": [
       "drums",
       "fabrication",
