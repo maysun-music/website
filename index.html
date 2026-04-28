@@ -324,6 +324,14 @@
       animation: fadeUp 0.2s ease forwards;
     }
 
+    #last-update {
+      font-size: 12px;
+      color: #555;
+      /* dark gray */
+      margin-left: auto;
+      opacity: 0.5;
+    }
+
     /* ── MOBILE ───────────────────────────────────────────── */
     @media (max-width: 640px) {
 
@@ -392,6 +400,7 @@
       <a href="https://maysunmusic.bandcamp.com/" target="_blank">bandcamp</a>
       <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">youtube</a>
       <a href="contact.html">contact</a>
+      <span id="last-update"></span>
     </footer>
 
     <script>
@@ -664,6 +673,25 @@
           .slice(0, 3)
           .map(s => s.item);
       }
+
+      fetch('https://api.github.com/repos/maysun-music/website/commits?per_page=1')
+        .then(res => res.json())
+        .then(data => {
+          const date = new Date(data[0].commit.author.date);
+
+          const mm = String(date.getMonth() + 1).padStart(2, '0');
+          const dd = String(date.getDate()).padStart(2, '0');
+          const yy = String(date.getFullYear()).slice(-2);
+
+          const hh = String(date.getHours()).padStart(2, '0');
+          const min = String(date.getMinutes()).padStart(2, '0');
+
+          document.getElementById('last-update').textContent =
+            `last update: ${mm}/${dd}/${yy} - ${hh}:${min}`;
+        })
+        .catch(() => {
+          document.getElementById('last-update').textContent = '';
+        });
     </script>
 
 </body>
