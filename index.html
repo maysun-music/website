@@ -362,6 +362,94 @@
       }
 
     }
+
+    /* ── OVERLAY ─────────────────────────────────────────── */
+    #overlay-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 0, 40, 0.85);
+      z-index: 2000;
+      cursor: pointer;
+    }
+
+    #overlay-backdrop.visible {
+      display: block;
+    }
+
+    #overlay-panel {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      max-width: 94vw;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: rgb(26, 1, 79);
+      border: 0.5px solid #00eeff;
+      padding: 48px;
+      z-index: 2001;
+      cursor: default;
+    }
+
+    #overlay-panel h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00eeff;
+      margin-bottom: 16px;
+    }
+
+    #overlay-panel p {
+      font-size: 13px;
+      color: #00eeff;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    #overlay-panel a {
+      color: #ee00ff;
+      text-decoration: none;
+    }
+
+    #overlay-panel a:hover {
+      text-decoration: underline;
+    }
+
+    .overlay-icons {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .overlay-icons a img {
+      width: 22px;
+      height: 22px;
+      opacity: 0.6;
+      transition: opacity 0.15s;
+      filter: invert(1);
+    }
+
+    .overlay-icons a:hover img {
+      opacity: 1;
+    }
+
+    #overlay-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 11px;
+      color: #00eeff;
+      opacity: 0.4;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+    }
+
+    #overlay-close:hover {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -375,8 +463,8 @@
       <span class="nav-item filter" data-section="albums">music</span>
       <span class="nav-item filter" data-section="fabrication">fabrication</span>
 
-      <a class="nav-item link" href="activities.html">shows</a>
-      <a class="nav-item link" href="contact.html">contact</a>
+      <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">shows</span>
+      <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">contact</span>
     </nav>
   </header>
 
@@ -692,7 +780,106 @@
         .catch(() => {
           document.getElementById('last-update').textContent = '';
         });
+
+      const overlayContents = {
+        contact: `
+    <h2>CONTACT</h2>
+    <p>Collaborations, commissions, questions.</p>
+    <p><a href="mailto:maysun.booking@gmail.com">maysun.booking@gmail.com</a></p>
+    <div class="overlay-icons">
+      <a href="https://www.instagram.com/maysun.music/" target="_blank">
+        <img src="assets/images/logos/ig_logo.png" alt="Instagram">
+      </a>
+      <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+        <img src="assets/images/logos/bc_logo.png" alt="Bandcamp">
+      </a>
+      <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+        <img src="assets/images/logos/yt_logo.png" alt="YouTube">
+      </a>
+    </div>
+  `
+      };
+
+      function openOverlay(key) {
+        document.getElementById('overlay-backdrop').classList.add('visible');
+        document.getElementById('overlay-panel').style.display = 'block';
+        history.pushState({ overlay: key }, '', '#' + key);
+
+        if (key === 'shows') {
+          renderShowsOverlay();
+        } else {
+          document.getElementById('overlay-content').innerHTML = overlayContents[key] || '';
+        }
+      }
+
+      function renderShowsOverlay() {
+        const content = document.getElementById('overlay-content');
+        content.innerHTML = '<h2>SHOWS</h2><p style="opacity:0.4; font-size:11px;">loading...</p>';
+
+        fetch('data/shows.json')
+          .then(r => r.json())
+          .then(shows => {
+            const upcoming = shows.filter(s => s.type === 'upcoming');
+            const past = shows.filter(s => s.type === 'past');
+
+            function formatDate(str) {
+              if (!str.match(/^\d{4}-\d{2}-\d{2}$/)) return str;
+              const [y, m, d] = str.split('-');
+              return new Date(y, m - 1, d)
+                .toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+                .toUpperCase();
+            }
+
+            function renderList(list) {
+              return list.map(s => {
+                const date = `<span style="color:#bbb; font-size:13px; min-width:130px; display:inline-block;">${formatDate(s.date)}</span>`;
+                const collab = s.collaborators ? `<span style="color:#bbb; font-size:13px;"> ${s.collaborators}</span>` : '';
+                const venue = `<strong style="font-size:13px;">${s.venue}</strong>${collab}`;
+                const city = `<span style="color:#bbb; font-size:13px;"> — ${s.city}</span>`;
+                const inner = `${venue}${city}`;
+                const line = s.url
+                  ? `<a href="${s.url}" target="_blank" style="text-decoration:none; color:#00eeff;">${inner}</a>`
+                  : `<span style="color:#00eeff;">${inner}</span>`;
+                return `<div style="display:flex; gap:12px; padding:6px 0; border-bottom:0.5px solid rgba(255,255,255,0.05); flex-wrap:wrap;">${date}${line}</div>`;
+              }).join('');
+            }
+
+            content.innerHTML = `
+        <h2>SHOWS</h2>
+        ${upcoming.length ? `
+          <p style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">UPCOMING</p>
+          ${renderList(upcoming)}
+          <div style="margin-bottom:24px;"></div>
+        ` : ''}
+        <p style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">PAST</p>
+        ${renderList(past)}
+      `;
+          });
+      }
+
+      function closeOverlay() {
+        document.getElementById('overlay-backdrop').classList.remove('visible');
+        document.getElementById('overlay-panel').style.display = 'none';
+        history.pushState({}, '', window.location.pathname);
+      }
+
+      document.addEventListener('click', e => {
+        if (e.target.id === 'overlay-backdrop') closeOverlay();
+      });
+
+      // open on load if hash matches
+      if (window.location.hash === '#contact') openOverlay('contact');
+      window.addEventListener('popstate', e => {
+        if (e.state?.overlay) openOverlay(e.state.overlay);
+        else closeOverlay();
+      });
     </script>
+
+    <div id="overlay-backdrop"></div>
+    <div id="overlay-panel">
+      <span id="overlay-close" onclick="closeOverlay()">close ✕</span>
+      <div id="overlay-content"></div>
+    </div>
 
 </body>
 
