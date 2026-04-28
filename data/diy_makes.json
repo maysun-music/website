@@ -75,6 +75,30 @@
       "assets/images/diy_devices/pizzarat/bts03_pizzarat_700h.jpg"
     ]
   },
+    {
+    "id": "amp_board",
+    "title": "6 Channel Amp Board",
+    "type": "utility",
+    "year": "2026",
+    "url": "amp_board.html",
+    "tags": ["spatial-audio", "fabrication", "utilities", "dante", "diy"],
+    "relations": ["euroblock_snake"],
+    "main_image": "assets/images/diy_devices/amp_board/main_amp_1600w.jpg",
+    "short_description": "6-channel amp board built for a home spatial audio setup. Powers six Realistic Minimus 7 speakers from a shared 24V PSU, converting balanced 1/4\" inputs to unbalanced. Open layout on a wooden base with elevated acrylic panel for airflow and mounting.",    
+    "back_story": "6-channel amps are expensive, so I combined three stereo TPA3116D2 boards into a single unit. Made with found materials (wood, acrylic, screws) and designed as a practical, mountable solution",
+    "components": [
+      "3x TPA3116D2 stereo amp modules",
+      "6x 1/4\" Switchcraft style TRS connectors",
+      "plywood",
+      "acrylic",
+      "barrel connector",
+      "24V 6A PSU"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/amp_board/bts01_amp_900h.jpg",
+      "assets/images/diy_devices/amp_board/bts02_amp_900h.jpg"
+    ]
+  },
 
   {
     "id": "euroblock_snake",
