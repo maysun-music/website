@@ -83,8 +83,8 @@
     #search-section {
       max-width: 1000px;
       margin: 0;
-      padding: 0 40px 32px;
-      border-bottom: 0.5px solid #00f7ff;
+      padding: 0 40px 6px;
+      /* border-bottom: 0.5px solid #00f7ff; */
     }
 
     #search-input {
@@ -332,6 +332,14 @@
       opacity: 0.5;
     }
 
+    /* ── STICKY TOP ──────────────────────────────────────── */
+    #sticky-top {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: rgb(26, 1, 79);
+    }
+
     /* ── MOBILE ───────────────────────────────────────────── */
     @media (max-width: 640px) {
 
@@ -341,10 +349,6 @@
 
       #site-header {
         padding: 20px 20px 16px;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: rgb(26, 1, 79);
       }
 
       #site-name {
@@ -503,14 +507,17 @@
     }
 
     #overlay-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      font-size: 11px;
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      font-size: 28px;
+      font-weight: bold;
       color: #00eeff;
-      opacity: 0.4;
+      opacity: 0.6;
       cursor: pointer;
-      letter-spacing: 0.08em;
+      z-index: 2002;
+      display: none;
+      line-height: 1;
     }
 
     #overlay-close:hover {
@@ -521,231 +528,233 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header id="site-header">
-    <div id="site-name">MAYSUN</div>
-    <nav id="site-nav">
-      <span class="nav-item filter" data-section="story">forever in sound</span>
-      <span class="nav-item filter" data-section="albums">music</span>
-      <span class="nav-item filter" data-section="fabrication">fabrication</span>
+  <div id="sticky-top">
+    <!-- HEADER -->
+    <header id="site-header">
+      <div id="site-name">MAYSUN</div>
+      <nav id="site-nav">
+        <span class="nav-item filter" data-section="story">forever in sound</span>
+        <span class="nav-item filter" data-section="albums">music</span>
+        <span class="nav-item filter" data-section="fabrication">fabrication</span>
 
-      <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">shows</span>
-      <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">contact</span>
-    </nav>
-  </header>
+        <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">shows</span>
+        <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">contact</span>
+      </nav>
+    </header>
 
-  <!-- SEARCH -->
-  <div id="search-section">
-    <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
-
-    <!-- ITEMS -->
-    <div id="items-wrap">
-      <div id="items-grid"></div>
+    <!-- SEARCH -->
+    <div id="search-section">
+      <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
     </div>
+  </div>
+  <!-- ITEMS -->
+  <div id="items-wrap">
+    <div id="items-grid"></div>
+  </div>
 
-    <div id="mini-map"></div>
-    <aside id="info-panel">
-      <div id="info-content"></div>
-    </aside>
+  <div id="mini-map"></div>
+  <aside id="info-panel">
+    <div id="info-content"></div>
+  </aside>
 
-    <!-- FOOTER -->
-    <footer id="site-footer">
-      <a href="https://www.instagram.com/maysun.music/" target="_blank">instagram</a>
-      <a href="https://maysunmusic.bandcamp.com/" target="_blank">bandcamp</a>
-      <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">youtube</a>
-      <a href="contact.html">contact</a>
-      <span id="last-update"></span>
-    </footer>
+  <!-- FOOTER -->
+  <footer id="site-footer">
+    <a href="https://www.instagram.com/maysun.music/" target="_blank">instagram</a>
+    <a href="https://maysunmusic.bandcamp.com/" target="_blank">bandcamp</a>
+    <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">youtube</a>
+    <a href="contact.html">contact</a>
+    <span id="last-update"></span>
+  </footer>
 
-    <script>
-      let miniMap = new Map();
-      let allItems = [];
-      let biographyData = null;
-      let bioTimeout = null;
-      let activeSection = null;
+  <script>
+    let miniMap = new Map();
+    let allItems = [];
+    let biographyData = null;
+    let bioTimeout = null;
+    let activeSection = null;
 
-      Promise.all([
-        fetch('data/diy_makes.json').then(r => r.json()),
-        fetch('data/albums.json').then(r => r.json()),
-        fetch('data/spatial_templates.json').then(r => r.json()),
-        fetch('data/forever.json').then(r => r.json()),
-        fetch('data/installations.json').then(r => r.json()),
-        fetch('data/biography.json').then(r => r.json())
-      ]).then(([diy, albums, spatial, forever, installations, biography]) => {
-        biographyData = biography;
-        allItems = [...diy, ...albums, ...spatial, ...forever, ...installations]
-          .sort((a, b) => Number(b.year) - Number(a.year));
-        renderDefaultInfo();
-        renderItems(allItems, '');
-      });
+    Promise.all([
+      fetch('data/diy_makes.json').then(r => r.json()),
+      fetch('data/albums.json').then(r => r.json()),
+      fetch('data/spatial_templates.json').then(r => r.json()),
+      fetch('data/forever.json').then(r => r.json()),
+      fetch('data/installations.json').then(r => r.json()),
+      fetch('data/biography.json').then(r => r.json())
+    ]).then(([diy, albums, spatial, forever, installations, biography]) => {
+      biographyData = biography;
+      allItems = [...diy, ...albums, ...spatial, ...forever, ...installations]
+        .sort((a, b) => Number(b.year) - Number(a.year));
+      renderDefaultInfo();
+      renderItems(allItems, '');
+    });
 
-      document.getElementById('search-input').addEventListener('input', function () {
-        const q = this.value.trim().toLowerCase();
-        if (q) {
+    document.getElementById('search-input').addEventListener('input', function () {
+      const q = this.value.trim().toLowerCase();
+      if (q) {
+        activeSection = null;
+        document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
+      }
+      const filtered = q ? allItems.filter(item => matches(item, q)) : allItems;
+      renderItems(filtered, q);
+    });
+
+    document.querySelectorAll('.nav-item.filter').forEach(el => {
+      el.addEventListener('click', () => {
+        if (!allItems.length) return;
+        const section = el.dataset.section;
+
+        if (activeSection === section) {
           activeSection = null;
           document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
-        }
-        const filtered = q ? allItems.filter(item => matches(item, q)) : allItems;
-        renderItems(filtered, q);
-      });
+          renderItems(allItems, '');
+        } else {
+          activeSection = section;
 
-      document.querySelectorAll('.nav-item.filter').forEach(el => {
-        el.addEventListener('click', () => {
-          if (!allItems.length) return;
-          const section = el.dataset.section;
+          document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
+          el.classList.add('active');
 
-          if (activeSection === section) {
-            activeSection = null;
-            document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
-            renderItems(allItems, '');
-          } else {
-            activeSection = section;
+          let filtered = allItems.filter(item => item.section === section);
 
-            document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-
-            let filtered = allItems.filter(item => item.section === section);
-
-            if (section === 'story') {
-              filtered = filtered.sort((a, b) => a.title.localeCompare(b.title));
-            }
-
-            renderItems(filtered, '');
+          if (section === 'story') {
+            filtered = filtered.sort((a, b) => a.title.localeCompare(b.title));
           }
 
-          document.getElementById('search-input').value = '';
-        });
+          renderItems(filtered, '');
+        }
+
+        document.getElementById('search-input').value = '';
       });
+    });
 
-      function matches(item, q) {
-        const haystack = [
-          item.title || '',
-          item.type || '',
-          item.year || '',
-          item.description || '',
-          item.short_description || '',
-          item.back_story || '',
-          item.future || '',
-          (item.tags || []).join(' '),
-          (item.components || []).join(' '),
-          (item.components_tx || []).join(' '),
-          (item.components_rx || []).join(' ')
-        ].join(' ').toLowerCase();
+    function matches(item, q) {
+      const haystack = [
+        item.title || '',
+        item.type || '',
+        item.year || '',
+        item.description || '',
+        item.short_description || '',
+        item.back_story || '',
+        item.future || '',
+        (item.tags || []).join(' '),
+        (item.components || []).join(' '),
+        (item.components_tx || []).join(' '),
+        (item.components_rx || []).join(' ')
+      ].join(' ').toLowerCase();
 
-        return haystack.includes(q);
-      }
+      return haystack.includes(q);
+    }
 
-      function isRelated(a, b) {
-        if (a.id === b.id) return true;
+    function isRelated(a, b) {
+      if (a.id === b.id) return true;
 
-        return (a.relations || []).includes(b.id) ||
-          (b.relations || []).includes(a.id);
-      }
+      return (a.relations || []).includes(b.id) ||
+        (b.relations || []).includes(a.id);
+    }
 
-      function getPreviewText(item) {
-        const text = (item.description || item.short_description || '').trim();
+    function getPreviewText(item) {
+      const text = (item.description || item.short_description || '').trim();
 
-        // first line only
-        const firstLine = text.split('\n')[0];
+      // first line only
+      const firstLine = text.split('\n')[0];
 
-        // limit length
-        return firstLine.length > 80
-          ? firstLine.slice(0, 80) + '...'
-          : firstLine;
-      }
+      // limit length
+      return firstLine.length > 80
+        ? firstLine.slice(0, 80) + '...'
+        : firstLine;
+    }
 
-      function getForeverPreview(item) {
-        const text = (item.description || '').trim();
+    function getForeverPreview(item) {
+      const text = (item.description || '').trim();
 
-        return text.length > 200
-          ? text.slice(0, 200) + '...'
-          : text;
-      }
+      return text.length > 200
+        ? text.slice(0, 200) + '...'
+        : text;
+    }
 
-      function escapeHTML(str) {
-        return String(str || '')
-          .replaceAll('&', '&amp;')
-          .replaceAll('<', '&lt;')
-          .replaceAll('>', '&gt;')
-          .replaceAll('"', '&quot;')
-          .replaceAll("'", '&#039;');
-      }
+    function escapeHTML(str) {
+      return String(str || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
 
-      function renderDefaultInfo() {
-        const panel = document.getElementById('info-content');
-        if (!panel || !biographyData) return;
+    function renderDefaultInfo() {
+      const panel = document.getElementById('info-content');
+      if (!panel || !biographyData) return;
 
-        const bio = (biographyData.bio || [])
-          .map(p => `<p>${escapeHTML(p)}</p>`)
-          .join('');
+      const bio = (biographyData.bio || [])
+        .map(p => `<p>${escapeHTML(p)}</p>`)
+        .join('');
 
-        const statement = (biographyData.statement || [])
-          .map(p => `<p>${escapeHTML(p)}</p>`)
-          .join('');
+      const statement = (biographyData.statement || [])
+        .map(p => `<p>${escapeHTML(p)}</p>`)
+        .join('');
 
-        panel.innerHTML = `
+      panel.innerHTML = `
   <h2>BIOGRAPHY</h2>
   ${bio}
   <h2>ARTIST STATEMENT</h2>
   ${statement}
 `;
-      }
+    }
 
-      function renderItemInfo(item) {
-        const panel = document.getElementById('info-content');
-        if (!panel) return;
+    function renderItemInfo(item) {
+      const panel = document.getElementById('info-content');
+      if (!panel) return;
 
-        const text = item.short_description || item.description || item.back_story || '';
-        const cleanText = escapeHTML(text).replace(/\n/g, '<br>');
+      const text = item.short_description || item.description || item.back_story || '';
+      const cleanText = escapeHTML(text).replace(/\n/g, '<br>');
 
-        panel.innerHTML = `
+      panel.innerHTML = `
   <h2>${escapeHTML(item.title || '')}</h2>
   <div class="info-meta">${escapeHTML(item.type || '')}${item.year ? ' · ' + escapeHTML(item.year) : ''}</div>
   <p>${cleanText}</p>
 `;
+    }
+
+    function renderItems(items, q) {
+      const meta = document.getElementById('search-meta');
+      const grid = document.getElementById('items-grid');
+      grid.innerHTML = '';
+
+      if (meta) {
+        meta.textContent = q
+          ? (items.length ? items.length + ' result' + (items.length !== 1 ? 's' : '') : '')
+          : '';
       }
 
-      function renderItems(items, q) {
-        const meta = document.getElementById('search-meta');
-        const grid = document.getElementById('items-grid');
-        grid.innerHTML = '';
+      const mini = document.getElementById('mini-map');
+      mini.innerHTML = '';
+      miniMap.clear();
 
-        if (meta) {
-          meta.textContent = q
-            ? (items.length ? items.length + ' result' + (items.length !== 1 ? 's' : '') : '')
-            : '';
-        }
+      if (items.length === 0) {
+        grid.innerHTML = '<div class="no-results">nothing found for "' + q + '"</div>';
+        return;
+      }
 
-        const mini = document.getElementById('mini-map');
-        mini.innerHTML = '';
-        miniMap.clear();
+      items.forEach((item, idx) => {
 
-        if (items.length === 0) {
-          grid.innerHTML = '<div class="no-results">nothing found for "' + q + '"</div>';
-          return;
-        }
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = item.short_description || '';
+        const text = (tempDiv.textContent || '').trim();
+        const preview = text.length > 80 ? text.slice(0, 80) + '...' : text;
 
-        items.forEach((item, idx) => {
+        const el = document.createElement('div');
+        el.className = 'grid-item';
+        el.dataset.id = item.id;
+        el.style.animationDelay = (idx * 30) + 'ms';
 
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = item.short_description || '';
-          const text = (tempDiv.textContent || '').trim();
-          const preview = text.length > 80 ? text.slice(0, 80) + '...' : text;
-
-          const el = document.createElement('div');
-          el.className = 'grid-item';
-          el.dataset.id = item.id;
-          el.style.animationDelay = (idx * 30) + 'ms';
-
-          el.innerHTML = `
+        el.innerHTML = `
   <div class="grid-item-image-container">
     ${item.main_image
-              ? `<img class="grid-item-image" src="${item.main_image}" alt="${item.title}" loading="lazy">`
-              : `<div class="grid-item-placeholder">${item.type === "forever in sound"
-                ? getForeverPreview(item)
-                : getPreviewText(item)
-              }</div>`
-            }
+            ? `<img class="grid-item-image" src="${item.main_image}" alt="${item.title}" loading="lazy">`
+            : `<div class="grid-item-placeholder">${item.type === "forever in sound"
+              ? getForeverPreview(item)
+              : getPreviewText(item)
+            }</div>`
+          }
       <div class="grid-item-overlay">
         <span class="grid-item-overlay-text">${(item.tags || []).slice(0, 5).join(' · ')}</span>
       </div>
@@ -754,101 +763,101 @@
           <div class="grid-item-type">${item.type} · ${item.year}</div>
         `;
 
-          const goTo = () => {
-            if (!item.url) return;
+        const goTo = () => {
+          if (!item.url) return;
 
-            window.location.href = item.url;
-          };
+          window.location.href = item.url;
+        };
 
-          el.addEventListener('click', goTo);
-          grid.appendChild(el);
+        el.addEventListener('click', goTo);
+        grid.appendChild(el);
 
-          const sq = document.createElement('div');
-          sq.className = 'mini-square';
-          miniMap.set(item.id, sq);
-          mini.appendChild(sq);
+        const sq = document.createElement('div');
+        sq.className = 'mini-square';
+        miniMap.set(item.id, sq);
+        mini.appendChild(sq);
 
-          el.addEventListener('mouseenter', () => {
-            const panel = document.getElementById('info-content');
+        el.addEventListener('mouseenter', () => {
+          const panel = document.getElementById('info-content');
 
-            // CANCEL pending bio fade
-            if (bioTimeout) {
-              clearTimeout(bioTimeout);
-              bioTimeout = null;
-            }
+          // CANCEL pending bio fade
+          if (bioTimeout) {
+            clearTimeout(bioTimeout);
+            bioTimeout = null;
+          }
 
-            panel.style.transition = 'none';
+          panel.style.transition = 'none';
+          panel.style.opacity = 1;
+
+          renderItemInfo(item);
+
+          miniMap.forEach(sq => {
+            sq.classList.remove('active', 'related');
+          });
+
+          miniMap.get(item.id)?.classList.add('active');
+
+          (item.relations || []).forEach(id => {
+            miniMap.get(id)?.classList.add('related');
+          });
+        });
+
+        el.addEventListener('mouseleave', () => {
+          const panel = document.getElementById('info-content');
+
+          panel.style.transition = 'opacity 0.15s ease';
+          panel.style.opacity = 0;
+
+          bioTimeout = setTimeout(() => {
+            renderDefaultInfo();
+
+            panel.style.transition = 'opacity 8s ease';
             panel.style.opacity = 1;
 
-            renderItemInfo(item);
-
-            miniMap.forEach(sq => {
-              sq.classList.remove('active', 'related');
-            });
-
-            miniMap.get(item.id)?.classList.add('active');
-
-            (item.relations || []).forEach(id => {
-              miniMap.get(id)?.classList.add('related');
-            });
-          });
-
-          el.addEventListener('mouseleave', () => {
-            const panel = document.getElementById('info-content');
-
-            panel.style.transition = 'opacity 0.15s ease';
-            panel.style.opacity = 0;
-
-            bioTimeout = setTimeout(() => {
-              renderDefaultInfo();
-
-              panel.style.transition = 'opacity 8s ease';
-              panel.style.opacity = 1;
-
-              bioTimeout = null;
-            }, 150);
-          });
-
-        });
-      }
-      function getRelated(item) {
-        const scores = {};
-        allItems.forEach(other => {
-          if (other.id === item.id) return;
-          let score = 0;
-          if ((item.relations || []).includes(other.id)) score += 10;
-          if ((other.relations || []).includes(item.id)) score += 10;
-          const shared = (item.tags || []).filter(t => (other.tags || []).includes(t));
-          score += shared.length;
-          if (score > 0) scores[other.id] = { item: other, score };
-        });
-        return Object.values(scores)
-          .sort((a, b) => b.score - a.score)
-          .slice(0, 3)
-          .map(s => s.item);
-      }
-
-      fetch('https://api.github.com/repos/maysun-music/website/commits?per_page=1')
-        .then(res => res.json())
-        .then(data => {
-          const date = new Date(data[0].commit.author.date);
-
-          const mm = String(date.getMonth() + 1).padStart(2, '0');
-          const dd = String(date.getDate()).padStart(2, '0');
-          const yy = String(date.getFullYear()).slice(-2);
-
-          const hh = String(date.getHours()).padStart(2, '0');
-          const min = String(date.getMinutes()).padStart(2, '0');
-
-          document.getElementById('last-update').textContent =
-            `last update: ${mm}/${dd}/${yy} - ${hh}:${min}`;
-        })
-        .catch(() => {
-          document.getElementById('last-update').textContent = '';
+            bioTimeout = null;
+          }, 150);
         });
 
-      const overlayContents = {
-        contact: `
+      });
+    }
+    function getRelated(item) {
+      const scores = {};
+      allItems.forEach(other => {
+        if (other.id === item.id) return;
+        let score = 0;
+        if ((item.relations || []).includes(other.id)) score += 10;
+        if ((other.relations || []).includes(item.id)) score += 10;
+        const shared = (item.tags || []).filter(t => (other.tags || []).includes(t));
+        score += shared.length;
+        if (score > 0) scores[other.id] = { item: other, score };
+      });
+      return Object.values(scores)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+        .map(s => s.item);
+    }
+
+    fetch('https://api.github.com/repos/maysun-music/website/commits?per_page=1')
+      .then(res => res.json())
+      .then(data => {
+        const date = new Date(data[0].commit.author.date);
+
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+        const yy = String(date.getFullYear()).slice(-2);
+
+        const hh = String(date.getHours()).padStart(2, '0');
+        const min = String(date.getMinutes()).padStart(2, '0');
+
+        document.getElementById('last-update').textContent =
+          `last update: ${mm}/${dd}/${yy} - ${hh}:${min}`;
+      })
+      .catch(() => {
+        document.getElementById('last-update').textContent = '';
+      });
+
+    const overlayContents = {
+      contact: `
     <h2>CONTACT</h2>
     <p>Collaborations, commissions, questions.</p>
     <p><a href="mailto:maysun.booking@gmail.com">maysun.booking@gmail.com</a></p>
@@ -864,53 +873,54 @@
       </a>
     </div>
   `
-      };
+    };
 
-      function openOverlay(key) {
-        document.getElementById('overlay-backdrop').classList.add('visible');
-        document.getElementById('overlay-panel').style.display = 'block';
-        history.pushState({ overlay: key }, '', '#' + key);
+    function openOverlay(key) {
+      document.getElementById('overlay-backdrop').classList.add('visible');
+      document.getElementById('overlay-panel').style.display = 'block';
+      document.getElementById('overlay-close').style.display = 'block';
+      history.pushState({ overlay: key }, '', '#' + key);
 
-        if (key === 'shows') {
-          renderShowsOverlay();
-        } else {
-          document.getElementById('overlay-content').innerHTML = overlayContents[key] || '';
-        }
+      if (key === 'shows') {
+        renderShowsOverlay();
+      } else {
+        document.getElementById('overlay-content').innerHTML = overlayContents[key] || '';
       }
+    }
 
-      function renderShowsOverlay() {
-        const content = document.getElementById('overlay-content');
-        content.innerHTML = '<h2>SHOWS</h2><p style="opacity:0.4; font-size:11px;">loading...</p>';
+    function renderShowsOverlay() {
+      const content = document.getElementById('overlay-content');
+      content.innerHTML = '<h2>SHOWS</h2><p style="opacity:0.4; font-size:11px;">loading...</p>';
 
-        fetch('data/shows.json')
-          .then(r => r.json())
-          .then(shows => {
-            const upcoming = shows.filter(s => s.type === 'upcoming');
-            const past = shows.filter(s => s.type === 'past');
+      fetch('data/shows.json')
+        .then(r => r.json())
+        .then(shows => {
+          const upcoming = shows.filter(s => s.type === 'upcoming');
+          const past = shows.filter(s => s.type === 'past');
 
-            function formatDate(str) {
-              if (!str.match(/^\d{4}-\d{2}-\d{2}$/)) return str;
-              const [y, m, d] = str.split('-');
-              return new Date(y, m - 1, d)
-                .toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-                .toUpperCase();
-            }
+          function formatDate(str) {
+            if (!str.match(/^\d{4}-\d{2}-\d{2}$/)) return str;
+            const [y, m, d] = str.split('-');
+            return new Date(y, m - 1, d)
+              .toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+              .toUpperCase();
+          }
 
-            function renderList(list) {
-              return list.map(s => {
-                const date = `<span style="color:#bbb; font-size:13px; min-width:130px; display:inline-block;">${formatDate(s.date)}</span>`;
-                const collab = s.collaborators ? `<span style="color:#bbb; font-size:12px;"> ${s.collaborators}</span>` : '';
-                const venue = `<span style="font-size:12px;">${s.venue}</span>${collab}`;
-                const city = `<span style="color:#bbb; font-size:13px;"> — ${s.city}</span>`;
-                const inner = `${venue}${city}`;
-                const line = s.url
-                  ? `<a href="${s.url}" target="_blank" style="text-decoration:none; color:#00eeff;">${inner}</a>`
-                  : `<span style="color:#00eeff;">${inner}</span>`;
-                return `<div style="display:flex; gap:12px; padding:6px 0; border-bottom:0.5px solid rgba(255,255,255,0.05); flex-wrap:wrap;">${date}${line}</div>`;
-              }).join('');
-            }
+          function renderList(list) {
+            return list.map(s => {
+              const date = `<span style="color:#bbb; font-size:13px; min-width:130px; display:inline-block;">${formatDate(s.date)}</span>`;
+              const collab = s.collaborators ? `<span style="color:#bbb; font-size:12px;"> ${s.collaborators}</span>` : '';
+              const venue = `<span style="font-size:12px;">${s.venue}</span>${collab}`;
+              const city = `<span style="color:#bbb; font-size:13px;"> — ${s.city}</span>`;
+              const inner = `${venue}${city}`;
+              const line = s.url
+                ? `<a href="${s.url}" target="_blank" style="text-decoration:none; color:#00eeff;">${inner}</a>`
+                : `<span style="color:#00eeff;">${inner}</span>`;
+              return `<div style="display:flex; gap:12px; padding:6px 0; border-bottom:0.5px solid rgba(255,255,255,0.05); flex-wrap:wrap;">${date}${line}</div>`;
+            }).join('');
+          }
 
-            content.innerHTML = `
+          content.innerHTML = `
         <h2>SHOWS</h2>
         ${upcoming.length ? `
           <p style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">UPCOMING</p>
@@ -920,32 +930,33 @@
         <p style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">PAST</p>
         ${renderList(past)}
       `;
-          });
-      }
+        });
+    }
 
-      function closeOverlay() {
-        document.getElementById('overlay-backdrop').classList.remove('visible');
-        document.getElementById('overlay-panel').style.display = 'none';
-        history.pushState({}, '', window.location.pathname);
-      }
+    function closeOverlay() {
+      document.getElementById('overlay-backdrop').classList.remove('visible');
+      document.getElementById('overlay-panel').style.display = 'none';
+      document.getElementById('overlay-close').style.display = 'none';
+      history.pushState({}, '', window.location.pathname);
+    }
 
-      document.addEventListener('click', e => {
-        if (e.target.id === 'overlay-backdrop') closeOverlay();
-      });
+    document.addEventListener('click', e => {
+      if (e.target.id === 'overlay-backdrop') closeOverlay();
+    });
 
-      // open on load if hash matches
-      if (window.location.hash === '#contact') openOverlay('contact');
-      window.addEventListener('popstate', e => {
-        if (e.state?.overlay) openOverlay(e.state.overlay);
-        else closeOverlay();
-      });
-    </script>
+    // open on load if hash matches
+    if (window.location.hash === '#contact') openOverlay('contact');
+    window.addEventListener('popstate', e => {
+      if (e.state?.overlay) openOverlay(e.state.overlay);
+      else closeOverlay();
+    });
+  </script>
 
-    <div id="overlay-backdrop"></div>
-    <div id="overlay-panel">
-      <span id="overlay-close" onclick="closeOverlay()">close ✕</span>
-      <div id="overlay-content"></div>
-    </div>
+  <span id="overlay-close" onclick="closeOverlay()">✕</span>
+  <div id="overlay-backdrop"></div>
+  <div id="overlay-panel">
+    <div id="overlay-content"></div>
+  </div>
 
 </body>
 
