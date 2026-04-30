@@ -335,21 +335,61 @@
     /* ── MOBILE ───────────────────────────────────────────── */
     @media (max-width: 640px) {
 
-      #site-header,
-      #search-section,
-      #items-wrap,
-      #site-footer {
-        padding-left: 20px;
-        padding-right: 20px;
+      body::before {
+        display: none;
       }
 
       #site-header {
-        padding-top: 32px;
+        padding: 20px 20px 16px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgb(26, 1, 79);
+      }
+
+      #site-name {
+        margin-bottom: 10px;
+      }
+
+      #site-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 10px 16px;
+      }
+
+      .nav-item {
+        font-size: 12px;
+      }
+
+      #search-section {
+        padding: 0 20px 20px;
+      }
+
+      #items-wrap {
+        max-width: 100%;
+        padding: 20px 20px 40px;
       }
 
       #items-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .grid-item-image-container {
+        height: 120px;
+      }
+
+      .grid-item-title {
+        font-size: 0.75rem;
+      }
+
+      .grid-item-type {
+        font-size: 0.65rem;
+      }
+
+      .grid-item:active .grid-item-image-container {
+        opacity: 0.7;
       }
 
       #mini-map,
@@ -357,8 +397,34 @@
         display: none;
       }
 
-      #items-wrap {
-        max-width: 100%;
+      #site-footer {
+        padding: 20px 20px 36px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        text-align: center;
+      }
+
+      #last-update {
+        width: 100%;
+        margin-left: 0;
+        text-align: center;
+      }
+
+      #overlay-close {
+        position: fixed;
+        top: 12px;
+        right: 16px;
+        z-index: 2002;
+        background: rgb(26, 1, 79);
+        padding: 4px 8px;
+        opacity: 0.8;
+      }
+
+      #overlay-panel {
+        padding: 48px 24px 32px;
+        max-height: 90vh;
       }
 
     }
