@@ -340,6 +340,12 @@
       background: rgb(26, 1, 79);
     }
 
+    @media (max-width: 640px) {
+      .nav-break {
+        display: block;
+      }
+    }
+
     /* ── MOBILE ───────────────────────────────────────────── */
     @media (max-width: 640px) {
 
@@ -358,12 +364,25 @@
       #site-nav {
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: center;
         gap: 10px 16px;
+      }
+
+      .nav-item.filter {
+        flex-basis: auto;
+      }
+
+      .nav-item.link {
+        flex-basis: auto;
       }
 
       .nav-item {
         font-size: 12px;
+      }
+
+      .nav-break {
+        width: 100%;
+        display: none;
       }
 
       #search-section {
@@ -536,7 +555,7 @@
         <span class="nav-item filter" data-section="story">forever in sound</span>
         <span class="nav-item filter" data-section="albums">music</span>
         <span class="nav-item filter" data-section="fabrication">fabrication</span>
-
+        <span class="nav-break"></span>
         <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">shows</span>
         <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">contact</span>
       </nav>
@@ -545,6 +564,7 @@
     <!-- SEARCH -->
     <div id="search-section">
       <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
+      <div id="search-meta" style="font-size:11px; color:#ee00ff; opacity:0.5; margin-top:6px; min-height:16px;"></div>
     </div>
   </div>
   <!-- ITEMS -->
@@ -596,6 +616,7 @@
       }
       const filtered = q ? allItems.filter(item => matches(item, q)) : allItems;
       renderItems(filtered, q);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     document.querySelectorAll('.nav-item.filter').forEach(el => {
@@ -623,6 +644,8 @@
         }
 
         document.getElementById('search-input').value = '';
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
 
