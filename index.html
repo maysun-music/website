@@ -112,15 +112,13 @@
     /* ------- MAP --------- */
     #mini-map {
       position: fixed;
-      top: 55px;
+      top: 48px;
       right: 40px;
-
       display: grid;
       grid-template-columns: repeat(20, 8px);
       gap: 2px;
-
       opacity: 0.6;
-      z-index: 10;
+      z-index: 501;
     }
 
     .mini-square {
@@ -566,13 +564,14 @@
       <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
       <div id="search-meta" style="font-size:11px; color:#ee00ff; opacity:0.5; margin-top:6px; min-height:16px;"></div>
     </div>
+    <div id="mini-map"></div>
   </div>
   <!-- ITEMS -->
   <div id="items-wrap">
     <div id="items-grid"></div>
   </div>
 
-  <div id="mini-map"></div>
+
   <aside id="info-panel">
     <div id="info-content"></div>
   </aside>
@@ -902,6 +901,7 @@
       document.getElementById('overlay-backdrop').classList.add('visible');
       document.getElementById('overlay-panel').style.display = 'block';
       document.getElementById('overlay-close').style.display = 'block';
+      document.body.style.overflow = 'hidden';
       history.pushState({ overlay: key }, '', '#' + key);
 
       if (key === 'shows') {
@@ -960,6 +960,7 @@
       document.getElementById('overlay-backdrop').classList.remove('visible');
       document.getElementById('overlay-panel').style.display = 'none';
       document.getElementById('overlay-close').style.display = 'none';
+      document.body.style.overflow = '';
       history.pushState({}, '', window.location.pathname);
     }
 
