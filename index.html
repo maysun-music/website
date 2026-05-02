@@ -79,6 +79,10 @@
       color: #ee00ff;
     }
 
+    #bio-burger {
+      display: none;
+    }
+
     /* ── SEARCH ───────────────────────────────────────────── */
     #search-section {
       max-width: 1000px;
@@ -306,20 +310,14 @@
       color: #ee00ff;
     }
 
-    @keyframes fadeUp {
+    @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(6px);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
       }
-    }
-
-    .grid-item {
-      animation: fadeUp 0.2s ease forwards;
     }
 
     #last-update {
@@ -362,7 +360,7 @@
       #site-nav {
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 10px 16px;
       }
 
@@ -446,6 +444,10 @@
       #overlay-panel {
         padding: 48px 24px 32px;
         max-height: 90vh;
+      }
+
+      #bio-burger {
+        display: block;
       }
 
     }
@@ -550,6 +552,8 @@
     <header id="site-header">
       <div id="site-name">MAYSUN</div>
       <nav id="site-nav">
+        <span id="bio-burger" onclick="openOverlay('bio')"
+          style="cursor:pointer; font-size:18px; color:#00eeff; opacity:0.5; margin-left:auto;">☰</span>
         <span class="nav-item filter" data-section="story">forever in sound</span>
         <span class="nav-item filter" data-section="albums">music</span>
         <span class="nav-item filter" data-section="fabrication">fabrication</span>
@@ -767,7 +771,10 @@
         const el = document.createElement('div');
         el.className = 'grid-item';
         el.dataset.id = item.id;
-        el.style.animationDelay = (idx * 30) + 'ms';
+        const randomDelay = (1 + Math.random() * 4).toFixed(2);
+        el.style.opacity = '0';
+        el.style.animation = `fadeIn ${(0.8 + Math.random() * 1.2).toFixed(2)}s ease forwards`;
+        el.style.animationDelay = randomDelay + 's';
 
         el.innerHTML = `
   <div class="grid-item-image-container">
@@ -907,6 +914,8 @@
 
       if (key === 'shows') {
         renderShowsOverlay();
+      } else if (key === 'bio') {
+        renderBioOverlay();
       } else {
         document.getElementById('overlay-content').innerHTML = overlayContents[key] || '';
       }
@@ -957,6 +966,32 @@
         });
     }
 
+    function renderBioOverlay() {
+      const content = document.getElementById('overlay-content');
+      if (!biographyData) return;
+
+      const bio = (biographyData.bio || []).map(p => `<p>${escapeHTML(p)}</p>`).join('');
+      const statement = (biographyData.statement || []).map(p => `<p>${escapeHTML(p)}</p>`).join('');
+
+      content.innerHTML = `
+    <h2>BIOGRAPHY</h2>
+    ${bio}
+    <h2>ARTIST STATEMENT</h2>
+    ${statement}
+    <div class="overlay-icons" style="margin-top:32px;">
+      <a href="https://www.instagram.com/maysun.music/" target="_blank">
+        <img src="assets/images/logos/ig_logo.png" alt="Instagram">
+      </a>
+      <a href="https://maysunmusic.bandcamp.com/" target="_blank">
+        <img src="assets/images/logos/bc_logo.png" alt="Bandcamp">
+      </a>
+      <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">
+        <img src="assets/images/logos/yt_logo.png" alt="YouTube">
+      </a>
+    </div>
+  `;
+    }
+
     function closeOverlay() {
       document.getElementById('overlay-backdrop').classList.remove('visible');
       document.getElementById('overlay-panel').style.display = 'none';
@@ -969,12 +1004,13 @@
       if (e.target.id === 'overlay-backdrop') closeOverlay();
     });
 
-    // open on load if hash matches
     if (window.location.hash === '#contact') openOverlay('contact');
+
     window.addEventListener('popstate', e => {
       if (e.state?.overlay) openOverlay(e.state.overlay);
       else closeOverlay();
     });
+
   </script>
 
   <span id="overlay-close" onclick="closeOverlay()">✕</span>
