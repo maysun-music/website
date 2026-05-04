@@ -7,85 +7,75 @@
     <title>Link In Bio</title>
     <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon" />
     <style>
+        :root {
+            --color-bg: rgb(26, 1, 79);
+            --color-main: #00f7ff;
+            --color-accent: #ee00ff;
+        }
+
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: white;
+            background-color: var(--color-bg);
+            color: var(--color-main);
             margin: 0;
             padding: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .mobile-menu {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            padding: 20px 0;
+            inset: 0;
+            background-color: var(--color-bg);
+            padding: 24px 16px;
             text-align: center;
-            z-index: 9998;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .mobile-menu.visible {
-            opacity: 1;
-            visibility: visible;
         }
 
         .mobile-menu a {
             display: block;
-            padding: 15px 0;
-            color: black;
+            padding: 10px 0;
+            color: var(--color-main);
             text-decoration: none;
-            font-size: calc(100vh / 20);
-            font-weight: bolder;
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
-            cursor: pointer;
-            line-height: 1;
             transition: opacity 0.2s ease, transform 0.1s ease;
         }
 
-        .mobile-menu a:active,
         .mobile-menu a:hover,
-        #upcoming-links a:active,
-        #upcoming-links a:hover {
-            opacity: 0.7;
-            transform: scale(0.98);
+        .mobile-menu a:active {
+            opacity: 0.6;
+            transform: scale(0.97);
         }
 
+        /* upcoming block */
+
         #upcoming-links {
-            margin-bottom: 2em;
-            border-bottom: 1px solid black;
-            padding-bottom: 1em;
+            width: 100%;
+            max-width: 420px;
+            margin-bottom: 28px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
         }
 
         #upcoming-links a {
             display: block;
-            font-weight: bolder;
-            color: black;
-            margin: 0.75em auto;
-            width: 90vw;
-            font-size: clamp(1.1rem, 4vw, 1.75rem);
-            /* scales with screen size */
-            white-space: nowrap;
-            overflow: hidden;
+            color: var(--color-accent);
+            margin: 4px 0;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            font-weight: 600;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        /* small note */
 
-        @media (max-width: 600px) {
-            .mobile-menu a {
-                font-size: calc(100vh / 20);
-            }
+        #upcoming-links p {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            margin-bottom: 18px;
         }
     </style>
 </head>
@@ -95,7 +85,7 @@
         <br />
         <div id="upcoming-links">
             <!-- Upcoming shows will appear here -->
-            <p style="font-size: 0.7rem; opacity: 0.5; margin-top: -1em; margin-bottom: 2em;">
+            <p style="font-size: 0.7rem; opacity: 0.5; margin-top: -1em; margin-bottom: 0.5em;">
                 Tap “•••” and “Open in browser” for best experience.
             </p>
         </div>
@@ -103,7 +93,7 @@
         <a href="https://maysunmusic.bandcamp.com/">BANDCAMP</a>
         <a href="https://www.youtube.com/@MAYSUNmusic">YOUTUBE</a>
         <a href="mailto:maysun.booking@gmail.com">CONTACT</a>
-        ↓
+        <div style="opacity:0.4; margin: 10px 0;">⬇</div>
         <a href="https://www.maysun.zip/forever.html">FOREVER IN SOUND</a>
     </div>
 
@@ -152,5 +142,5 @@
         });
     </script>
 </body>
-</html>
 
+</html>
