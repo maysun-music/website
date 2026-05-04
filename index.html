@@ -8,6 +8,20 @@
   <link rel="stylesheet" href="styles/global.css" />
 
   <style>
+    :root {
+      /* DEFAULT = ELECTRIC */
+      --color-bg: rgb(26, 1, 79);
+      --color-main: #00f7ff;
+      --color-accent: #ee00ff;
+    }
+
+    /* MATERIAL MODE */
+    body.material-mode {
+      --color-bg: #e8e6e1;
+      --color-main: #1a1a1a;
+      --color-accent: #5b8cff;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,7 +29,7 @@
     }
 
     body {
-      background: rgb(26, 1, 79);
+      background: var(--color-bg);
       position: relative;
       z-index: 0;
     }
@@ -33,7 +47,7 @@
       letter-spacing: 0.01em;
       margin-bottom: 14px;
       line-height: 1;
-      color: #00eeff
+      color: var(--color-main)
     }
 
     #site-nav {
@@ -45,7 +59,7 @@
 
     .nav-item {
       font-size: 13px;
-      color: #00eeff;
+      color: var(--color-main);
       letter-spacing: 0.04em;
     }
 
@@ -60,13 +74,13 @@
     }
 
     .nav-item.filter:hover {
-      background: #ee00ff;
-      color: rgb(26, 1, 79);
+      background: var(--color-accent);
+      color: var(--color-bg);
     }
 
     .nav-item.filter.active {
-      background: #ee00ff;
-      color: rgb(26, 1, 79);
+      background: var(--color-accent);
+      color: var(--color-bg);
     }
 
     /* LINK behavior */
@@ -76,11 +90,20 @@
     }
 
     .nav-item.link:hover {
-      color: #ee00ff;
+      color: var(--color-accent);
     }
 
     #bio-burger {
       display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      color: var(--color-main);
+      opacity: 0.6;
+      cursor: pointer;
+      z-index: 600;
+      line-height: 1;
     }
 
     /* ── SEARCH ───────────────────────────────────────────── */
@@ -88,29 +111,29 @@
       max-width: 1000px;
       margin: 0;
       padding: 0 40px 6px;
-      /* border-bottom: 0.5px solid #00f7ff; */
+      /* border-bottom: 0.5px solid var(--color-main); */
     }
 
     #search-input {
       width: 100%;
       border: none;
-      border-bottom: 1px solid #ee00ff;
+      border-bottom: 1px solid var(--color-accent);
       font-family: Helvetica, Arial, sans-serif;
       font-size: clamp(16px, 3vw, 24px);
       padding: 6px 0;
       outline: none;
       background: transparent;
-      color: #ee00ff;
+      color: var(--color-accent);
       letter-spacing: 0.01em;
       transition: border-color 0.2s;
     }
 
     #search-input:focus {
-      border-bottom-color: #ee00ff;
+      border-bottom-color: var(--color-accent);
     }
 
     #search-input::placeholder {
-      color: #ee00ff;
+      color: var(--color-accent);
     }
 
     /* ------- MAP --------- */
@@ -128,7 +151,7 @@
     .mini-square {
       width: 8px;
       height: 8px;
-      background: #00eeff33;
+      background: var(--color-main)33;
     }
 
     .mini-square.active {
@@ -149,13 +172,13 @@
       max-height: calc(100vh - 180px);
       overflow-y: auto;
 
-      color: #00eeff;
+      color: var(--color-main);
       font-family: Helvetica, Arial, sans-serif;
       font-size: 12px;
       line-height: 1.5;
 
       z-index: 999;
-      background: rgb(26, 1, 79);
+      background: var(--color-bg);
       padding: 0 12px;
 
     }
@@ -166,7 +189,7 @@
     }
 
     #info-panel h2 {
-      color: #ee00ff;
+      color: var(--color-accent);
       font-size: 18px;
       margin-bottom: 10px;
     }
@@ -197,7 +220,7 @@
 
     .grid-item {
       cursor: pointer;
-      transition: opacity 1s ease-in, filter 1s ease-in;
+      transition: filter 0.2s ease;
     }
 
     .grid-item-image-container {
@@ -206,7 +229,7 @@
       overflow: hidden;
       border: 1px solid rgba(0, 0, 0, 0.07);
       position: relative;
-      background: #000000;
+      background: var(--color-bg);
     }
 
     .grid-item-image {
@@ -246,7 +269,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       line-height: 1.6;
-      color: #00eeff;
+      color: var(--color-main);
     }
 
     .grid-item-title {
@@ -254,7 +277,7 @@
       font-size: 0.88rem;
       margin-top: 10px;
       margin-bottom: 3px;
-      color: #ee00ff;
+      color: var(--color-accent);
     }
 
     .grid-item-type {
@@ -275,7 +298,7 @@
 
       font-size: 10px;
       line-height: 1.4;
-      color: #00eeff;
+      color: var(--color-main);
 
       background: black;
       opacity: 0.9;
@@ -293,21 +316,21 @@
       max-width: 1000px;
       margin: 0;
       padding: 24px 40px 48px;
-      border-top: 0.5px solid #00eeff;
+      border-top: 0.5px solid var(--color-main);
       display: flex;
       gap: 24px;
     }
 
     #site-footer a {
       font-size: 12px;
-      color: #00eeff;
+      color: var(--color-main);
       text-decoration: none;
       letter-spacing: 0.04em;
       transition: color 0.15s;
     }
 
     #site-footer a:hover {
-      color: #ee00ff;
+      color: var(--color-accent);
     }
 
     @keyframes fadeIn {
@@ -333,14 +356,26 @@
       position: sticky;
       top: 0;
       z-index: 500;
-      background: rgb(26, 1, 79);
+      background: var(--color-bg);
+    }
+
+    @media (max-width: 1000px) {
+      body::before {
+        display: none;
+      }
     }
 
     @media (max-width: 640px) {
       .nav-break {
         display: block;
       }
+
+      #bio-burger {
+        display: block;
+      }
     }
+
+
 
     /* ── MOBILE ───────────────────────────────────────────── */
     @media (max-width: 640px) {
@@ -350,7 +385,11 @@
       }
 
       #site-header {
-        padding: 20px 20px 16px;
+        padding: 20px 20px 16px 20px;
+      }
+
+      #site-name {
+        padding-left: 0;
       }
 
       #site-name {
@@ -436,7 +475,7 @@
         top: 12px;
         right: 16px;
         z-index: 2002;
-        background: rgb(26, 1, 79);
+        background: var(--color-bg);
         padding: 4px 8px;
         opacity: 0.8;
       }
@@ -476,8 +515,8 @@
       max-width: 94vw;
       max-height: 85vh;
       overflow-y: auto;
-      background: rgb(26, 1, 79);
-      border: 0.5px solid #00eeff;
+      background: var(--color-bg);
+      border: 0.5px solid var(--color-main);
       padding: 48px;
       z-index: 2001;
       cursor: default;
@@ -486,13 +525,13 @@
     #overlay-panel h2 {
       font-size: 28px;
       font-weight: bold;
-      color: #00eeff;
+      color: var(--color-main);
       margin-bottom: 16px;
     }
 
     #overlay-panel p {
       font-size: 13px;
-      color: #00eeff;
+      color: var(--color-main);
       line-height: 1.6;
       margin-bottom: 20px;
       opacity: 0.8;
@@ -531,7 +570,7 @@
       right: 24px;
       font-size: 28px;
       font-weight: bold;
-      color: #00eeff;
+      color: var(--color-main);
       opacity: 0.6;
       cursor: pointer;
       z-index: 2002;
@@ -552,8 +591,7 @@
     <header id="site-header">
       <div id="site-name">MAYSUN</div>
       <nav id="site-nav">
-        <span id="bio-burger" onclick="openOverlay('bio')"
-          style="cursor:pointer; font-size:18px; color:#00eeff; opacity:0.5; margin-left:auto;">☰</span>
+        <span id="bio-burger" onclick="openOverlay('bio')">☰</span>
         <span class="nav-item filter" data-section="story">forever in sound</span>
         <span class="nav-item filter" data-section="albums">music</span>
         <span class="nav-item filter" data-section="fabrication">fabrication</span>
@@ -567,7 +605,8 @@
     <!-- SEARCH -->
     <div id="search-section">
       <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
-      <div id="search-meta" style="font-size:11px; color:#ee00ff; opacity:0.5; margin-top:6px; min-height:16px;"></div>
+      <div id="search-meta"
+        style="font-size:11px; color:var(--color-accent); opacity:0.5; margin-top:6px; min-height:16px;"></div>
     </div>
     <div id="mini-map"></div>
   </div>
@@ -627,9 +666,11 @@
       el.addEventListener('click', () => {
         if (!allItems.length) return;
         const section = el.dataset.section;
+        updateColorMode(section);
 
         if (activeSection === section) {
           activeSection = null;
+          updateColorMode(null);
           document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
           renderItems(allItems, '');
         } else {
@@ -771,7 +812,7 @@
         const el = document.createElement('div');
         el.className = 'grid-item';
         el.dataset.id = item.id;
-        const randomDelay = (1 + Math.random() * 4).toFixed(2);
+        const randomDelay = (0.5 + Math.random() * 2).toFixed(2); // RNDM DELAY
         el.style.opacity = '0';
         el.style.animation = `fadeIn ${(0.8 + Math.random() * 1.2).toFixed(2)}s ease forwards`;
         el.style.animationDelay = randomDelay + 's';
@@ -947,8 +988,8 @@
               const city = `<span style="color:#bbb; font-size:13px;"> — ${s.city}</span>`;
               const inner = `${venue}${city}`;
               const line = s.url
-                ? `<a href="${s.url}" target="_blank" style="text-decoration:none; color:#00eeff;">${inner}</a>`
-                : `<span style="color:#00eeff;">${inner}</span>`;
+                ? `<a href="${s.url}" target="_blank" style="text-decoration:none; color:var(--color-main);">${inner}</a>`
+                : `<span style="color:var(--color-main);">${inner}</span>`;
               return `<div style="display:flex; gap:12px; padding:6px 0; border-bottom:0.5px solid rgba(255,255,255,0.05); flex-wrap:wrap;">${date}${line}</div>`;
             }).join('');
           }
@@ -1010,6 +1051,14 @@
       if (e.state?.overlay) openOverlay(e.state.overlay);
       else closeOverlay();
     });
+
+    function updateColorMode(section) {
+      if (section === 'fabrication' || section === 'resources') {
+        document.body.classList.add('material-mode');
+      } else {
+        document.body.classList.remove('material-mode');
+      }
+    }
 
   </script>
 
