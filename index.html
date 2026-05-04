@@ -127,6 +127,11 @@
       line-height: 1;
     }
 
+    .nav-break {
+      display: none;
+
+    }
+
     /* ── SEARCH ───────────────────────────────────────────── */
     #search-section {
       max-width: none;
@@ -387,24 +392,14 @@
       }
     }
 
-    @media (max-width: 640px) {
-      .nav-break {
-        display: block;
-      }
-
-      #bio-burger {
-        display: block;
-      }
-
-      #search-input {
-        clip-path: none;
-      }
-    }
-
-
-
     /* ── MOBILE ───────────────────────────────────────────── */
+
     @media (max-width: 640px) {
+
+      #site-name {
+        text-align: center;
+        width: 100%;
+      }
 
       body::before {
         display: none;
@@ -416,34 +411,62 @@
 
       #site-name {
         padding-left: 0;
-      }
-
-      #site-name {
         margin-bottom: 10px;
       }
 
       #site-nav {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 10px 16px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px 16px;
+        justify-content: start;
       }
 
-      .nav-item.filter {
-        flex-basis: auto;
+      /* force exact rows */
+      .nav-item:nth-child(2),
+      .nav-item:nth-child(3),
+      .nav-item:nth-child(4) {
+
+        grid-row: 1;
+
       }
 
+      .nav-item:nth-child(5),
+      .nav-item:nth-child(7),
+      .nav-item:nth-child(8) {
+        grid-row: 2;
+
+      }
+
+      /* burger stays top right */
+
+      #bio-burger {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .nav-item {
+        font-size: 16px;
+        text-align: center;
+      }
+
+      .nav-item.filter,
       .nav-item.link {
         flex-basis: auto;
       }
 
-      .nav-item {
-        font-size: 12px;
+      /* FIX */
+      .nav-break {
+        display: block;
+        width: 100%;
       }
 
-      .nav-break {
-        width: 100%;
-        display: none;
+      #bio-burger {
+        display: block;
+      }
+
+      #search-input {
+        clip-path: none;
       }
 
       #search-section {
@@ -510,12 +533,8 @@
         padding: 48px 24px 32px;
         max-height: 90vh;
       }
-
-      #bio-burger {
-        display: block;
-      }
-
     }
+
 
     /* ── OVERLAY ─────────────────────────────────────────── */
     #overlay-backdrop {
