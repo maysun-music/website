@@ -208,6 +208,8 @@
       background: transparent;
       padding: 0 12px;
 
+      overflow: visible;
+
     }
 
     #info-content {
@@ -241,6 +243,11 @@
 
     p {
       word-break: keep-all;
+    }
+
+    #info-scroll {
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
     }
 
     /* ── ITEMS ────────────────────────────────────────────── */
@@ -674,7 +681,9 @@
 
 
   <aside id="info-panel">
-    <div id="info-content"></div>
+    <div id="info-scroll">
+      <div id="info-content"></div>
+    </div>
   </aside>
 
   <!-- FOOTER -->
@@ -870,7 +879,7 @@
         p.appendChild(wordSpan);
 
         // add space between words
-        if (i < text.length - 1) {
+        if (i < text.split(' ').length - 1) {
           p.appendChild(document.createTextNode(' '));
         }
       });
@@ -881,52 +890,90 @@
     function glitchCharacter(el, mouseX, mouseY) {
       const rect = el.getBoundingClientRect();
 
-      const dx = mouseX - (rect.left + rect.width / 2);
-      const dy = mouseY - (rect.top + rect.height / 2);
+      const dx = (rect.left + rect.width / 2) - mouseX;
+      const dy = (rect.top + rect.height / 2) - mouseY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const RADIUS = 160;
+      const RADIUS = 600;
       if (distance > RADIUS) return;
 
-      const proximity = Math.pow(1 - distance / RADIUS, 2); // smoother falloff
+      const proximity = 1 - distance / RADIUS;
 
-      // directional push (NOT random jitter)
-      const angle = Math.atan2(dy, dx);
+      // ---- ORIGINAL LETTER FADES (does NOT move) ----
+      el.style.opacity = 0;
 
-      // base push away from cursor
-      const push = 50 * proximity;
+      clearTimeout(el._fadeTimeout);
 
-      const baseX = Math.cos(angle) * push;
-      const baseY = Math.sin(angle) * push;
+      el.style.transition = 'none';
+      el.style.opacity = 0;
 
-      // small randomness layered ON TOP
-      const jitterX = (Math.random() - 0.5) * 10 * proximity;
-      const jitterY = (Math.random() - 0.5) * 10 * proximity;
+      el._fadeTimeout = setTimeout(() => {
+        el.style.transition = 'opacity 6s ease';
+        el.style.opacity = 1;
+      }, 120 + Math.random() * 300); // slight randomness = organic
 
-      const offsetX = baseX + jitterX;
-      const offsetY = baseY + jitterY;
+      // ---- GHOST CLONE ----
+      const clone = el.cloneNode(true);
 
-      el.style.setProperty('--dx', offsetX + 'px');
-      el.style.setProperty('--dy', offsetY + 'px');
+      clone.style.position = 'fixed'; // IMPORTANT: stable positioning
+      clone.style.left = rect.left + 'px';
+      clone.style.top = rect.top + 'px';
+      clone.style.pointerEvents = 'none';
+      clone.style.margin = 0;
 
-      el.style.opacity = 0.4 + 0.6 * (1 - proximity);
+      const color = getComputedStyle(el).color;
+      clone.style.color = color;
 
+      const cs = getComputedStyle(el);
+
+      clone.style.fontSize = cs.fontSize;
+      clone.style.fontFamily = cs.fontFamily;
+      clone.style.fontWeight = cs.fontWeight;
+      clone.style.letterSpacing = cs.letterSpacing;
+      clone.style.lineHeight = cs.lineHeight;
+
+      clone.style.zIndex = 2000;
+
+      // random scatter (NOT directional)
+      const scatterX = (Math.random() - 0.5) * 100 * proximity;
+      const scatterY = (Math.random() - 0.5) * 60 * proximity;
+
+      clone.style.transform = `translate(${scatterX}px, ${scatterY}px)`;
+
+      // random opacity for texture
+      clone.style.opacity = 0.05 + Math.random() * 0.9;
+
+      const duration = 4 + Math.random() * 6;
+      clone.style.transition = `opacity ${duration}s ease`;
+
+      document.body.appendChild(clone);
+
+      // fade OUT clone
       requestAnimationFrame(() => {
-        const currentX = parseFloat(el.style.getPropertyValue('--dx')) || 0;
-        const currentY = parseFloat(el.style.getPropertyValue('--dy')) || 0;
-
-        el.style.setProperty('--dx', currentX * 0.92 + 'px');
-        el.style.setProperty('--dy', currentY * 0.92 + 'px');
+        clone.style.opacity = 0;
       });
 
+      // cleanup
+      setTimeout(() => {
+        clone.remove();
+      }, duration * 1000);
     }
 
     function enableBioGlitch(container) {
       container.addEventListener('mousemove', (e) => {
+        if (!container.contains(e.target)) return;
         const el = e.target;
         if (!el.classList.contains('glitch-char')) return;
 
-        glitchCharacter(el, e.clientX, e.clientY);
+        const chars = el.parentElement.querySelectorAll('.glitch-char');
+
+        const index = Array.from(chars).indexOf(el);
+
+        for (let i = index - 4; i <= index + 4; i++) {
+          if (chars[i]) {
+            glitchCharacter(chars[i], e.clientX, e.clientY);
+          }
+        }
       });
     }
 
