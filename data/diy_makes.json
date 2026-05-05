@@ -123,6 +123,42 @@
     ]
   },
   {
+
+  "id": "fume_extractor",
+  "title": "Fume Extractor",
+  "type": "utility",
+  "year": "2026",
+  "url": "fume_extractor.html",
+  "section": "fabrication",
+  "tags": [
+    "fabrication", "utilities", "diy", "workspace"
+  ],
+  "relations": [
+    ""
+  ],
+  "main_image": "assets/images/diy_devices/fume_extractor/main_fume_1600w.jpg",
+  "short_description": "Compact DIY fume extractor built around a 120mm fan with activated carbon filtration. Intended for low sound operation and a minimal footprint for soldering work", 
+  "back_story": "Needed a small, quiet fume extractor that wouldn’t take over my desk. I could not find a commercial options that wasn't too large, loud, or overpriced. I built a custom version using reused acrylic and simple hardware.",
+  "components": [
+    "120mm 1350rpm fan",
+    "2x 120mm fan grills",
+    "activated carbon filter sponge",
+    "12V PWM speed controller",
+    "acrylic",
+    "zip ties",
+    "bolts & nuts",
+    "barrel connector",
+    "wire",
+    "L metal brackets"
+  ],
+
+  "gallery": [
+    "assets/images/diy_devices/fume_extractor/bts01_fume_900h.jpg",
+    "assets/images/diy_devices/fume_extractor/bts02_fume_900h.jpg",
+    "assets/images/diy_devices/fume_extractor/bts03_fume_900h.jpg"
+  ]
+},
+  {
     "id": "pizzarat",
     "title": "PizzaRAT",
     "type": "virtual instrument",
