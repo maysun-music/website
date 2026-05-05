@@ -234,8 +234,13 @@
     .glitch-char {
       display: inline-block;
       position: relative;
-      transition: transform 0.4s cubic-bezier(0.33, 0, 0.1, 1), opacity 0.4s ease;
+      transition: transform 0.6s linear, opacity 1.2s ease;
       transform: translate(var(--dx, 0px)) translateY(var(--dy, 0px));
+      white-space: pre;
+    }
+
+    p {
+      word-break: keep-all;
     }
 
     /* ── ITEMS ────────────────────────────────────────────── */
@@ -851,11 +856,23 @@
     function createGlitchParagraph(text) {
       const p = document.createElement('p');
 
-      text.split('').forEach(char => {
-        const span = document.createElement('span');
-        span.className = 'glitch-char';
-        span.innerHTML = char === ' ' ? '&nbsp;' : char;
-        p.appendChild(span);
+      text.split(' ').forEach((word, i) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.style.whiteSpace = 'nowrap';
+
+        word.split('').forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'glitch-char';
+          span.innerHTML = char === ' ' ? '&nbsp;' : char;
+          wordSpan.appendChild(span);
+        });
+
+        p.appendChild(wordSpan);
+
+        // add space between words
+        if (i < text.length - 1) {
+          p.appendChild(document.createTextNode(' '));
+        }
       });
 
       return p;
@@ -868,23 +885,40 @@
       const dy = mouseY - (rect.top + rect.height / 2);
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance > 30) return;
+      const RADIUS = 160;
+      if (distance > RADIUS) return;
 
-      const proximity = 1 - distance / 30;
+      const proximity = Math.pow(1 - distance / RADIUS, 2); // smoother falloff
 
-      const offsetX = (Math.random() - 0.5) * 8 * proximity;
-      const offsetY = (Math.random() - 0.5) * 8 * proximity;
+      // directional push (NOT random jitter)
+      const angle = Math.atan2(dy, dx);
+
+      // base push away from cursor
+      const push = 50 * proximity;
+
+      const baseX = Math.cos(angle) * push;
+      const baseY = Math.sin(angle) * push;
+
+      // small randomness layered ON TOP
+      const jitterX = (Math.random() - 0.5) * 10 * proximity;
+      const jitterY = (Math.random() - 0.5) * 10 * proximity;
+
+      const offsetX = baseX + jitterX;
+      const offsetY = baseY + jitterY;
 
       el.style.setProperty('--dx', offsetX + 'px');
       el.style.setProperty('--dy', offsetY + 'px');
-      el.style.opacity = '0.3';
 
-      clearTimeout(el._t);
-      el._t = setTimeout(() => {
-        el.style.setProperty('--dx', '0px');
-        el.style.setProperty('--dy', '0px');
-        el.style.opacity = '1';
-      }, 300);
+      el.style.opacity = 0.4 + 0.6 * (1 - proximity);
+
+      requestAnimationFrame(() => {
+        const currentX = parseFloat(el.style.getPropertyValue('--dx')) || 0;
+        const currentY = parseFloat(el.style.getPropertyValue('--dy')) || 0;
+
+        el.style.setProperty('--dx', currentX * 0.92 + 'px');
+        el.style.setProperty('--dy', currentY * 0.92 + 'px');
+      });
+
     }
 
     function enableBioGlitch(container) {
