@@ -894,23 +894,27 @@
       const dy = (rect.top + rect.height / 2) - mouseY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const RADIUS = 600;
+      const RADIUS = 2000;
       if (distance > RADIUS) return;
 
       const proximity = 1 - distance / RADIUS;
 
       // ---- ORIGINAL LETTER FADES (does NOT move) ----
-      el.style.opacity = 0;
-
       clearTimeout(el._fadeTimeout);
 
-      el.style.transition = 'none';
-      el.style.opacity = 0;
+      // map proximity → opacity (never fully gone)
+      const minOpacity = 0.35; // lowest visible
+      const targetOpacity = minOpacity + (1 - proximity) * (1 - minOpacity);
 
+      // immediate drop (no transition)
+      el.style.transition = 'none';
+      el.style.opacity = targetOpacity;
+
+      // smooth return to full
       el._fadeTimeout = setTimeout(() => {
-        el.style.transition = 'opacity 6s ease';
+        el.style.transition = 'opacity 12s ease';
         el.style.opacity = 1;
-      }, 120 + Math.random() * 300); // slight randomness = organic
+      }, 320 + Math.random() * 1000);
 
       // ---- GHOST CLONE ----
       const clone = el.cloneNode(true);
@@ -935,13 +939,13 @@
       clone.style.zIndex = 2000;
 
       // random scatter (NOT directional)
-      const scatterX = (Math.random() - 0.5) * 100 * proximity;
-      const scatterY = (Math.random() - 0.5) * 60 * proximity;
+      const scatterX = (Math.random() - 0.5) * 200 * proximity;
+      const scatterY = (Math.random() - 0.5) * 300 * proximity;
 
       clone.style.transform = `translate(${scatterX}px, ${scatterY}px)`;
 
       // random opacity for texture
-      clone.style.opacity = 0.05 + Math.random() * 0.9;
+      clone.style.opacity = 0.05 + Math.random() * 0.3;
 
       const duration = 4 + Math.random() * 6;
       clone.style.transition = `opacity ${duration}s ease`;
@@ -956,7 +960,7 @@
       // cleanup
       setTimeout(() => {
         clone.remove();
-      }, duration * 1000);
+      }, duration * 4000);
     }
 
     function enableBioGlitch(container) {
