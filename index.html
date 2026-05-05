@@ -231,6 +231,13 @@
       margin-bottom: 1em;
     }
 
+    .glitch-char {
+      display: inline-block;
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.33, 0, 0.1, 1), opacity 0.4s ease;
+      transform: translate(var(--dx, 0px)) translateY(var(--dy, 0px));
+    }
+
     /* ── ITEMS ────────────────────────────────────────────── */
     #items-wrap {
       max-width: calc(100vw - 420px);
@@ -793,24 +800,100 @@
         .replaceAll("'", '&#039;');
     }
 
+    //     function renderDefaultInfo() {
+    //       const panel = document.getElementById('info-content');
+    //       if (!panel || !biographyData) return;
+
+    //       const bio = (biographyData.bio || [])
+    //         .map(p => `<p>${escapeHTML(p)}</p>`)
+    //         .join('');
+
+    //       const statement = (biographyData.statement || [])
+    //         .map(p => `<p>${escapeHTML(p)}</p>`)
+    //         .join('');
+
+    //       panel.innerHTML = `
+    //   <h2>BIOGRAPHY</h2>
+    //   ${bio}
+    //   <h2>ARTIST STATEMENT</h2>
+    //   ${statement}
+    // `;
+    //     }
+
     function renderDefaultInfo() {
       const panel = document.getElementById('info-content');
       if (!panel || !biographyData) return;
 
-      const bio = (biographyData.bio || [])
-        .map(p => `<p>${escapeHTML(p)}</p>`)
-        .join('');
+      panel.innerHTML = ''; // clear
 
-      const statement = (biographyData.statement || [])
-        .map(p => `<p>${escapeHTML(p)}</p>`)
-        .join('');
+      const bioTitle = document.createElement('h2');
+      bioTitle.textContent = 'BIOGRAPHY';
+      panel.appendChild(bioTitle);
 
-      panel.innerHTML = `
-  <h2>BIOGRAPHY</h2>
-  ${bio}
-  <h2>ARTIST STATEMENT</h2>
-  ${statement}
-`;
+      biographyData.bio.forEach(text => {
+        panel.appendChild(createGlitchParagraph(text));
+      });
+
+      const statementTitle = document.createElement('h2');
+      statementTitle.textContent = 'ARTIST STATEMENT';
+      panel.appendChild(statementTitle);
+
+      biographyData.statement.forEach(text => {
+        panel.appendChild(createGlitchParagraph(text));
+      });
+
+      if (!panel._glitchBound) {
+        enableBioGlitch(panel);
+        panel._glitchBound = true;
+      }
+    }
+
+    function createGlitchParagraph(text) {
+      const p = document.createElement('p');
+
+      text.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'glitch-char';
+        span.innerHTML = char === ' ' ? '&nbsp;' : char;
+        p.appendChild(span);
+      });
+
+      return p;
+    }
+
+    function glitchCharacter(el, mouseX, mouseY) {
+      const rect = el.getBoundingClientRect();
+
+      const dx = mouseX - (rect.left + rect.width / 2);
+      const dy = mouseY - (rect.top + rect.height / 2);
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance > 30) return;
+
+      const proximity = 1 - distance / 30;
+
+      const offsetX = (Math.random() - 0.5) * 8 * proximity;
+      const offsetY = (Math.random() - 0.5) * 8 * proximity;
+
+      el.style.setProperty('--dx', offsetX + 'px');
+      el.style.setProperty('--dy', offsetY + 'px');
+      el.style.opacity = '0.3';
+
+      clearTimeout(el._t);
+      el._t = setTimeout(() => {
+        el.style.setProperty('--dx', '0px');
+        el.style.setProperty('--dy', '0px');
+        el.style.opacity = '1';
+      }, 300);
+    }
+
+    function enableBioGlitch(container) {
+      container.addEventListener('mousemove', (e) => {
+        const el = e.target;
+        if (!el.classList.contains('glitch-char')) return;
+
+        glitchCharacter(el, e.clientX, e.clientY);
+      });
     }
 
     function renderItemInfo(item) {
