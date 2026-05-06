@@ -8,9 +8,9 @@
     <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon" />
     <style>
         :root {
-            --color-bg: rgb(26, 1, 79);
-            --color-main: #00f7ff;
-            --color-accent: #ee00ff;
+            --color-bg: #6c8670;
+            --color-main: #e4f1e4;
+            --color-accent: #80d4d6;
         }
 
         body {
@@ -21,6 +21,18 @@
             padding: 0;
             height: 100vh;
         }
+
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: url("assets/images/misc/grain.gif");
+            background-repeat: repeat;
+            opacity: 0.05; 
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: soft-light;
+        }
+
 
         .mobile-menu {
             display: flex;
@@ -59,7 +71,7 @@
             max-width: 420px;
             margin-bottom: 28px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+            border-bottom: 1px solid rgba(228, 241, 228, 0.2);
         }
 
         #upcoming-links a {
@@ -81,6 +93,7 @@
 </head>
 
 <body>
+    <div class="grain-overlay"></div>
     <div class="mobile-menu visible" id="mobileMenu">
         <br />
         <div id="upcoming-links">
@@ -93,7 +106,7 @@
         <a href="https://maysunmusic.bandcamp.com/">BANDCAMP</a>
         <a href="https://www.youtube.com/@MAYSUNmusic">YOUTUBE</a>
         <a href="mailto:maysun.booking@gmail.com">CONTACT</a>
-        <div style="opacity:0.4; margin: 10px 0;">⬇</div>
+        <div style="opacity:0.4; margin: 10px 0;">⇣</div>
         <a href="https://www.maysun.zip/forever.html">FOREVER IN SOUND</a>
     </div>
 

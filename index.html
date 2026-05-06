@@ -308,6 +308,13 @@
       max-width: 100%;
     }
 
+    /* will need to remove this once I get rid of old nav css/html */
+    @media (max-width: 1000px) {
+      body::before {
+        display: none;
+      }
+    }
+
     /* ── ITEMS ────────────────────────────────────────────── */
     #items-wrap {
       max-width: calc(100vw - var(--panel-width) - 100px);
