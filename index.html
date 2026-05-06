@@ -89,6 +89,12 @@
       color: var(--color-main)
     }
 
+    #site-name img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+
     #site-nav {
       display: flex;
       flex-wrap: wrap;
@@ -724,7 +730,9 @@
   <div id="sticky-top">
     <!-- HEADER -->
     <header id="site-header">
-      <div id="site-name">MAYSUN</div>
+      <div id="site-name">
+        <img src="assets/images/logos/maysun_logo.png" alt="MAYSUN">
+      </div>
       <span id="bio-burger" onclick="openOverlay('bio')">☰</span>
       <nav id="site-nav">
         <span class="nav-item filter" data-section="story">forever in sound</span>
