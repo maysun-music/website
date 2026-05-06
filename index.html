@@ -91,9 +91,11 @@
 
     #site-nav {
       display: flex;
-      gap: 24px;
       flex-wrap: wrap;
       align-items: baseline;
+      gap: 10px 24px;
+
+      max-width: calc(100vw - var(--panel-width) - var(--panel-gap) - 120px);
     }
 
     .nav-item {
@@ -280,9 +282,35 @@
       overflow-y: auto;
     }
 
+    /* PANEL HIDDEN MODE */
+    body.no-info-panel {
+
+      --panel-width: 0px;
+      --panel-gap: 0px;
+
+    }
+
+    body.no-info-panel #info-panel,
+    body.no-info-panel #mini-map {
+      display: none;
+    }
+
+    body.no-info-panel #sticky-top {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    body.no-info-panel #search-input {
+      clip-path: none;
+    }
+
+    body.no-info-panel #site-nav {
+      max-width: 100%;
+    }
+
     /* ── ITEMS ────────────────────────────────────────────── */
     #items-wrap {
-      max-width: calc(100vw - 420px);
+      max-width: calc(100vw - var(--panel-width) - 100px);
       margin-right: 360px;
       margin: 0;
       padding: 36px 40px 60px;
@@ -432,15 +460,21 @@
       position: sticky;
       top: 0;
       z-index: 500;
+
       background: transparent;
+
       backdrop-filter: blur(60px);
       -webkit-backdrop-filter: blur(60px);
-    }
 
-    @media (max-width: 1000px) {
-      body::before {
-        display: none;
-      }
+      -webkit-mask-image: linear-gradient(to right,
+          black 0%,
+          black calc(100% - var(--panel-width) - var(--panel-gap) - 80px),
+          transparent calc(100% - var(--panel-width) - var(--panel-gap)));
+
+      mask-image: linear-gradient(to right,
+          black 0%,
+          black calc(100% - var(--panel-width) - var(--panel-gap) - 80px),
+          transparent calc(100% - var(--panel-width) - var(--panel-gap)));
     }
 
     /* ── MOBILE ───────────────────────────────────────────── */
@@ -1322,6 +1356,17 @@
         document.body.classList.remove('material-mode');
       }
     }
+
+    function updateLayoutMode() {
+      if (window.innerWidth <= 1000) {
+        document.body.classList.add('no-info-panel');
+      } else {
+        document.body.classList.remove('no-info-panel');
+      }
+    }
+
+    updateLayoutMode();
+    window.addEventListener('resize', updateLayoutMode);
 
   </script>
 
