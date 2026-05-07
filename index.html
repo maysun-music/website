@@ -99,14 +99,21 @@
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
-      gap: 10px 12px;
+      row-gap: 10px;
+      column-gap: 0;
       max-width: 100%;
+    }
+
+    .nav-row {
+      display: flex;
+      gap: 12px;
     }
 
     .nav-item {
       font-size: 13px;
       color: var(--color-main);
       letter-spacing: 0.04em;
+      padding: 2px 6px;
     }
 
     /* FILTER behavior */
@@ -114,10 +121,7 @@
       cursor: pointer;
     }
 
-    .nav-item.filter {
-      padding: 2px 6px;
-      /* always present */
-    }
+    
 
     .nav-item.filter:hover {
       background: var(--color-accent);
