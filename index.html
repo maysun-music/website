@@ -1133,7 +1133,7 @@
         const el = document.createElement('div');
         el.className = 'grid-item';
         el.dataset.id = item.id;
-        const randomDelay = (0.5 + Math.random() * 2).toFixed(2); // RNDM DELAY
+        const randomDelay = (Math.random() * 2).toFixed(2); // RNDM DELAY
         el.style.opacity = '0';
         el.style.animation = `fadeIn ${(0.8 + Math.random() * 1.2).toFixed(2)}s ease forwards`;
         el.style.animationDelay = randomDelay + 's';
