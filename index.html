@@ -100,8 +100,7 @@
       flex-wrap: wrap;
       align-items: baseline;
       gap: 10px 24px;
-
-      max-width: calc(100vw - var(--panel-width) - var(--panel-gap) - 120px);
+      max-width: 100%;
     }
 
     .nav-item {
@@ -145,7 +144,7 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      font-size: 28px;
+      font-size: 42px;
       color: var(--color-main);
       opacity: 0.6;
       cursor: pointer;
@@ -183,7 +182,7 @@
       border: none;
       border-bottom: 1px solid var(--color-accent);
       font-family: Helvetica, Arial, sans-serif;
-      font-size: clamp(16px, 3vw, 24px);
+      font-size: clamp(13px, 1.8vw, 18px);
       padding: 6px 0;
       outline: none;
       background: transparent;
@@ -231,7 +230,7 @@
 
     #info-panel {
       position: fixed;
-      top: 140px;
+      top: 200px;
       right: var(--panel-gap);
       width: var(--panel-width);
       max-height: calc(100vh - 180px);
@@ -429,13 +428,38 @@
     }
 
     /* ── FOOTER ───────────────────────────────────────────── */
-    #site-footer {
-      max-width: 1000px;
+    /* #site-footer {
+      max-width: calc(100vw - var(--panel-width) - var(--panel-gap) - 80px);
       margin: 0;
+      margin-right: auto;
       padding: 24px 40px 48px;
       border-top: 0.5px solid var(--color-main);
       display: flex;
       gap: 24px;
+    } */
+
+    #site-footer {
+      position: relative;
+
+      max-width: 1000px;
+      margin: 0;
+      padding: 24px 40px 48px;
+
+      display: flex;
+      gap: 24px;
+    }
+
+    #site-footer::before {
+      content: "";
+      position: absolute;
+
+      top: 0;
+      left: 40px;
+
+      width: calc(100% - var(--panel-width) - var(--panel-gap) - 80px);
+
+      height: 0.5px;
+      background: var(--color-main);
     }
 
     #site-footer a {
@@ -495,8 +519,11 @@
     @media (max-width: 640px) {
 
       #site-name {
-        text-align: center;
         width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-left: 0;
+        margin-bottom: 10px;
       }
 
       body::before {
@@ -507,29 +534,22 @@
         padding: 20px 20px 16px 20px;
       }
 
-      #site-name {
-        padding-left: 0;
-        margin-bottom: 10px;
-      }
-
       #site-nav {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px 16px;
-        justify-content: start;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
       }
 
-      /* force exact rows */
-      .nav-item:nth-child(1),
-      .nav-item:nth-child(2),
-      .nav-item:nth-child(3),
-      .nav-item:nth-child(4) {
-        grid-row: 1;
+      .nav-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: nowrap;
+
       }
 
-      .nav-item:nth-child(6),
-      .nav-item:nth-child(7) {
-        grid-row: 2;
+      .nav-item.filter {
+        padding: 0;
       }
 
       /* burger stays top right */
@@ -730,18 +750,21 @@
   <div id="sticky-top">
     <!-- HEADER -->
     <header id="site-header">
-      <div id="site-name">
+      <div id="site-name" onclick="resetAll()" style="cursor:pointer;">
         <img src="assets/images/logos/maysun_logo.png" alt="MAYSUN">
       </div>
       <span id="bio-burger" onclick="openOverlay('bio')">☰</span>
       <nav id="site-nav">
-        <span class="nav-item filter" data-section="story">forever in sound</span>
-        <span class="nav-item filter" data-section="albums">music</span>
-        <span class="nav-item filter" data-section="fabrication">fabrication</span>
-        <span class="nav-item filter" data-section="resources">resources</span>
-        <span class="nav-break"></span>
-        <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">shows</span>
-        <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">contact</span>
+        <div class="nav-row">
+          <span class="nav-item filter" data-section="story">forever in sound</span>
+          <span class="nav-item filter" data-section="albums">music</span>
+          <span class="nav-item filter" data-section="fabrication">fabrication</span>
+        </div>
+        <div class="nav-row">
+          <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">shows</span>
+          <span class="nav-item filter" data-section="resources">resources</span>
+          <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">contact</span>
+        </div>
       </nav>
     </header>
 
@@ -1065,7 +1088,13 @@
       if (!panel) return;
 
       const text = item.short_description || item.description || item.back_story || '';
-      const cleanText = escapeHTML(text).replace(/\n/g, '<br>');
+      const q = document.getElementById('search-input').value.trim().toLowerCase();
+
+      let cleanText = escapeHTML(text).replace(/\n/g, '<br>');
+      if (q) {
+        const regex = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        cleanText = cleanText.replace(regex, '<mark style="background:var(--color-accent); color:var(--color-bg); padding:0 2px;">$1</mark>');
+      }
 
       panel.innerHTML = `
   <h2>${escapeHTML(item.title || '')}</h2>
@@ -1168,17 +1197,17 @@
         el.addEventListener('mouseleave', () => {
           const panel = document.getElementById('info-content');
 
-          panel.style.transition = 'opacity 0.15s ease';
-          panel.style.opacity = 0;
-
           bioTimeout = setTimeout(() => {
-            renderDefaultInfo();
+            panel.style.transition = 'opacity 2s ease';
+            panel.style.opacity = 0;
 
-            panel.style.transition = 'opacity 8s ease';
-            panel.style.opacity = 1;
-
-            bioTimeout = null;
-          }, 150);
+            setTimeout(() => {
+              renderDefaultInfo();
+              panel.style.transition = 'opacity 8s ease';
+              panel.style.opacity = 1;
+              bioTimeout = null;
+            }, 2000);
+          }, 300000); // 5 minutes = 300000ms
         });
 
       });
@@ -1352,8 +1381,40 @@
       history.pushState({}, '', window.location.pathname);
     }
 
+    function resetAll() {
+      activeSection = null;
+      updateColorMode(null);
+      document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
+      document.getElementById('search-input').value = '';
+      renderItems(allItems, '');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (bioTimeout) { clearTimeout(bioTimeout); bioTimeout = null; }
+      const panel = document.getElementById('info-content');
+      panel.style.transition = 'opacity 0.3s ease';
+      panel.style.opacity = 0;
+      setTimeout(() => {
+        renderDefaultInfo();
+        panel.style.transition = 'opacity 8s ease';
+        panel.style.opacity = 1;
+      }, 300);
+    }
+
     document.addEventListener('click', e => {
       if (e.target.id === 'overlay-backdrop') closeOverlay();
+    });
+
+    document.getElementById('items-wrap').addEventListener('click', e => {
+      if (!e.target.closest('.grid-item')) {
+        if (bioTimeout) { clearTimeout(bioTimeout); bioTimeout = null; }
+        const panel = document.getElementById('info-content');
+        panel.style.transition = 'opacity 0.3s ease';
+        panel.style.opacity = 0;
+        setTimeout(() => {
+          renderDefaultInfo();
+          panel.style.transition = 'opacity 8s ease';
+          panel.style.opacity = 1;
+        }, 300);
+      }
     });
 
     const hash = window.location.hash.slice(1);
