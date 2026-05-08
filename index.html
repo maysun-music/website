@@ -121,7 +121,7 @@
       cursor: pointer;
     }
 
-    
+
 
     .nav-item.filter:hover {
       background: var(--color-accent);
@@ -543,6 +543,7 @@
         flex-direction: column;
         gap: 8px;
         align-items: center;
+        margin-top: 20px;
       }
 
       .nav-row {
@@ -556,11 +557,26 @@
         padding: 0;
       }
 
+      #search-input {
+        font-size: 16px;
+      }
+
+      #sticky-top {
+        padding-bottom: 0px;
+        backdrop-filter: blur(60px);
+        -webkit-backdrop-filter: blur(60px);
+      }
+
+      body.no-info-panel #sticky-top {
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+
       /* burger stays top right */
 
       #bio-burger {
         position: absolute;
-        top: 20px;
+        top: 10px;
         right: 20px;
       }
 
@@ -589,7 +605,7 @@
       }
 
       #search-section {
-        padding: 0 20px 20px;
+        padding: 0 20px 0px;
       }
 
       #items-wrap {
@@ -1407,18 +1423,24 @@
       if (e.target.id === 'overlay-backdrop') closeOverlay();
     });
 
+    function restoreBio() {
+      if (bioTimeout) { clearTimeout(bioTimeout); bioTimeout = null; }
+      const panel = document.getElementById('info-content');
+      panel.style.transition = 'opacity 0.3s ease';
+      panel.style.opacity = 0;
+      setTimeout(() => {
+        renderDefaultInfo();
+        panel.style.transition = 'opacity 8s ease';
+        panel.style.opacity = 1;
+      }, 300);
+    }
+
     document.getElementById('items-wrap').addEventListener('click', e => {
-      if (!e.target.closest('.grid-item')) {
-        if (bioTimeout) { clearTimeout(bioTimeout); bioTimeout = null; }
-        const panel = document.getElementById('info-content');
-        panel.style.transition = 'opacity 0.3s ease';
-        panel.style.opacity = 0;
-        setTimeout(() => {
-          renderDefaultInfo();
-          panel.style.transition = 'opacity 8s ease';
-          panel.style.opacity = 1;
-        }, 300);
-      }
+      if (!e.target.closest('.grid-item')) restoreBio();
+    });
+
+    document.getElementById('info-panel').addEventListener('click', () => {
+      restoreBio();
     });
 
     const hash = window.location.hash.slice(1);
