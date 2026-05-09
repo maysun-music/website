@@ -213,7 +213,8 @@
       grid-template-columns: repeat(20, 8px);
       gap: 2px;
       opacity: 0.6;
-      z-index: 501;
+      z-index: 5000;
+      pointer-events: none;
     }
 
     .mini-square {
@@ -793,8 +794,10 @@
       <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
       <div id="search-meta"></div>
     </div>
-    <div id="mini-map"></div>
   </div>
+  </div>
+
+  <div id="mini-map"></div>
   <!-- ITEMS -->
   <div id="items-wrap">
     <div id="items-grid"></div>
@@ -1460,7 +1463,7 @@
     }
 
     function updateLayoutMode() {
-      if (window.innerWidth <= 1000) {
+      if (window.innerWidth <= 640) {
         document.body.classList.add('no-info-panel');
       } else {
         document.body.classList.remove('no-info-panel');
