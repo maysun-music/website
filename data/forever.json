@@ -940,19 +940,43 @@
     "month": 2
   },
   {
-    "id": "wireless",
-    "title": "58. WIRELESS",
+    "id": "av-tech",
+    "title": "58. A/V Technician",
     "type": "forever in sound",
     "year": "2026",
-    "tags": [],
+    "month": 2,
+    "tags": [
+      "av",
+      "corporate",
+      "audio technician"
+    ],
     "section": "story",
-    "relations": [],
+    "relations": [
+      "wireless"
+    ],
+    "url": "forever.html#av-tech",
+    "main_image": [],
+    "description": "As I was adapting to life in NYC, I naturally moved towards AV technician work. In order to complement my mostly self-taught / DIY background, I went through several certifications online.\n\nWith these, I became more aware of the scale and flexibility of networked audio systems. Office buildings contain beamforming microphones, localized sound systems, echo cancellation, distributed playback, DSP processing, often in compact modular devices. Entire buildings become responsive sound environments.\n\nI started wondering whether any of this equipment could be repurposed for musical uses. I was also curious about what happens to this equipment once companies change ecosystems or renovate spaces.\n\nLuckily, a pair of Xilica Solaro units (FR1 & QR1) appeared on Facebook Marketplace for $175, both loaded with Dante cards and analog I/O for a total of 12 inpouts, 12 outputs. In music-marketed-dante world this alone would be 1200$ at the lowest.\n\nThis became the starting point for transforming my bedroom into a networked spatial audio system. I built a custom Euroblock to 1/4\" TRS snakes, assembled a compact amplifier system, and repurposed six passive Realistic Minimus 7 spekaers into a permanent installation.\n\nHaving this be over network also allowed me to enter the system from different locations in the room. Sound can be captured, routed, spatialized, processed, and redistributed across the room easily.\n\nMy room is now a living environment for sound playback, capture, and processing."
+  },
+  {
+    "id": "wireless",
+    "title": "59. Wireless",
+    "type": "forever in sound",
+    "year": "2026",
+    "month": 4,
+    "tags": [
+      "wireless",
+      "esp32",
+      "spatial-audio",
+      "fabrication"
+    ],
+    "section": "story",
+    "relations": [
+      "av-tech",
+      "cycl"
+    ],
     "url": "forever.html#wireless",
     "main_image": "assets/images/misc/listener_plot.jpg",
-    "description": "Adapting to life in NYC placed me in several AV tech roles. Setting up interpretation systems for conferences, front of house sound and audio assistance in venues, and stage crew for different productions.\n\nEach situation shared a common element: wireless systems.\n\nInterpreters broadcast to receivers worn by the audience. Venues use wireless handhelds for presenters. Stage crews rely on wireless communication.\n\nThis exposure made these systems feel reliable, and I began considering how to integrate them into my own process.\n\nMy CYCL synth used an embedded microphone and had a free secondary input. Pairing it with a wireless mic would allow placement further away in the space, or in another room entirely. The architecture of a building could become part of the signal path.\n\nIf the sound source could be separated from the processing, could the controls be as well?\n\nI started developing a second DIY instrument built around the same core as CYCL, with wireless control using ESP32 microcontrollers and ESP-NOW. I called it the Listener System. Multiple units can be coordinated from a single controller, with each unit mounted directly to a speaker and processing sound locally.\n\nThis makes a form of portable, scalable spatial audio possible without the cabling infrastructure it usually requires. Rather than moving sound through space, I move processing.\n\nBecause the listeners share the same space and process similar sounds, it still creates a sense of unified movement.\n\nIt also allows multi-room coordination. A Listener in an adjacent area can capture its surroundings, generate its own sound field, and send it into the main space, where it is reprocessed and can bleed back into the halls and into that initial room. The feedback path spans architecture rather than a single room.\n\nThe Listener System is currently in progress.",
-    "media": {
-      "image": "assets/images/misc/listener_plot.jpg"
-    },
-    "month": 3
+    "description": "Setting up interpretation systems for conferences, front of house sound, audio assistance in venues, and stage crew for productions exposed me to a recurring element: wireless systems.\n\nInterpreters broadcast to receivers worn by the audience. Venues use wireless handhelds for presenters. Stage crews rely on wireless communication.\n\nThis exposure made these systems feel reliable, and I began considering how to integrate them into my own process.\n\nMy CYCL synth used an embedded microphone and had a free secondary input. Pairing it with a wireless mic would allow placement further away in the space, or in another room entirely. The architecture of a building could become part of the signal path.\n\nIf the sound source could be separated from the processing, could the controls be as well?\n\nI started developing a second DIY instrument built around the same core as CYCL, with wireless control using ESP32 microcontrollers and ESP-NOW. I called it the Listener System. Multiple units can be coordinated from a single controller, with each unit mounted directly to a speaker and processing sound locally.\n\nThis makes a form of portable, scalable spatial audio possible without the cabling infrastructure it usually requires. Rather than moving sound through space, I move processing.\n\nBecause the listeners share the same space and process similar sounds, it still creates a sense of unified movement.\n\nIt also allows multi-room coordination. A Listener in an adjacent area can capture its surroundings, generate its own sound field, and send it into the main space, where it is reprocessed and can bleed back into the halls and into that initial room. The feedback path spans architecture rather than a single room.\n\nThe Listener System is currently in progress."
   }
 ]
