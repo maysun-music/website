@@ -101,12 +101,13 @@
       align-items: baseline;
       row-gap: 10px;
       column-gap: 0;
-      max-width: 100%;
+      width: calc(100vw - var(--panel-width) - var(--panel-gap) - 80px);
     }
 
     .nav-row {
       display: flex;
       gap: 12px;
+      width: 100%;
     }
 
     .nav-item {
@@ -446,7 +447,7 @@
     #site-footer {
       position: relative;
 
-      max-width: 1000px;
+      max-width: calc(100vw - var(--panel-width) - var(--panel-gap));
       margin: 0;
       padding: 24px 40px 48px;
 
@@ -461,7 +462,7 @@
       top: 0;
       left: 40px;
 
-      width: calc(100% - var(--panel-width) - var(--panel-gap) - 80px);
+      width: calc(100% - 80px);
 
       height: 0.5px;
       background: var(--color-main);
