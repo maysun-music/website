@@ -255,6 +255,25 @@
     }
 
     /* Mobile: hide grid, full width content */
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 2em 0;
+    }
+
+    .photo-gallery .photo {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .photo-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       .grid-nav {
         display: none;
@@ -389,7 +408,14 @@
 
         // Image
         // Image (only if no YouTube)
-        if (!section.media?.youtube && section.main_image) {
+        // Image
+        if (section.media?.images?.length) {
+          html += `<div class="photo-gallery">` +
+            section.media.images.map(src =>
+              `<img class="photo" src="${src}" alt="${section.title}">`
+            ).join('') +
+            `</div>`;
+        } else if (!section.media?.youtube && section.main_image) {
           html += `<img class="photo" src="${section.main_image}" alt="${section.title}">`;
         }
 
