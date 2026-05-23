@@ -1164,8 +1164,8 @@
 
         el.innerHTML = `
   <div class="grid-item-image-container">
-    ${item.main_image
-            ? `<img class="grid-item-image" src="${item.main_image}" alt="${item.title}" loading="lazy">`
+${item.main_image || item.media?.images?.[0]
+            ? `<img class="grid-item-image" src="${item.main_image || item.media?.images?.[0]}" alt="${item.title}" loading="lazy">`
             : `<div class="grid-item-placeholder">${item.type === "forever in sound"
               ? getForeverPreview(item)
               : getPreviewText(item)
