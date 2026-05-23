@@ -837,7 +837,11 @@
     ]).then(([diy, albums, spatial, forever, installations, biography]) => {
       biographyData = biography;
       allItems = [...diy, ...albums, ...spatial, ...forever, ...installations]
-        .sort((a, b) => Number(b.year) - Number(a.year));
+        .sort((a, b) => {
+          const yearDiff = Number(b.year) - Number(a.year);
+          if (yearDiff !== 0) return yearDiff;
+          return Number(b.month || 0) - Number(a.month || 0);
+        });
       renderDefaultInfo();
       renderItems(allItems, '');
     });
@@ -874,7 +878,8 @@
           let filtered = allItems.filter(item => item.section === section);
 
           if (section === 'story') {
-            filtered = filtered.sort((a, b) => a.title.localeCompare(b.title));
+            filtered = filtered.sort((a, b) => b.title.localeCompare(a.title));
+
           }
 
           renderItems(filtered, '');
@@ -1164,8 +1169,8 @@
 
         el.innerHTML = `
   <div class="grid-item-image-container">
-${item.main_image || item.media?.images?.[0]
-            ? `<img class="grid-item-image" src="${item.main_image || item.media?.images?.[0]}" alt="${item.title}" loading="lazy">`
+${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${item.media.youtube[0]}/hqdefault.jpg`) || item.media?.images?.[0]
+            ? `<img class="grid-item-image" src="${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${item.media.youtube[0]}/hqdefault.jpg`) || item.media?.images?.[0]}" alt="${item.title}" loading="lazy">`
             : `<div class="grid-item-placeholder">${item.type === "forever in sound"
               ? getForeverPreview(item)
               : getPreviewText(item)
