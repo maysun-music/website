@@ -826,6 +826,7 @@
     let biographyData = null;
     let bioTimeout = null;
     let activeSection = null;
+    let similarityMap = new Map();
 
     Promise.all([
       fetch('data/diy_makes.json').then(r => r.json()),
@@ -844,6 +845,7 @@
         });
       renderDefaultInfo();
       renderItems(allItems, '');
+      buildSimilarityMap();
     });
 
     document.getElementById('search-input').addEventListener('input', function () {
@@ -1218,9 +1220,12 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
           miniMap.get(item.id)?.classList.add('active');
 
-          (item.relations || []).forEach(id => {
-            miniMap.get(id)?.classList.add('related');
-          });
+          const related = similarityMap.get(item.id);
+          if (related) {
+            related.forEach((score, id) => {
+              miniMap.get(id)?.classList.add('related');
+            });
+          }
         });
 
         el.addEventListener('mouseleave', () => {
@@ -1257,6 +1262,38 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         .slice(0, 3)
         .map(s => s.item);
     }
+
+    const STOP_WORDS = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'i', 'my', 'me', 'we', 'our', 'you', 'your', 'it', 'its', 'this', 'that', 'these', 'those', 'he', 'she', 'they', 'them', 'his', 'her', 'their', 'which', 'who', 'what', 'when', 'where', 'how', 'all', 'any', 'each', 'every', 'more', 'most', 'also', 'just', 'not', 'no', 'so', 'if', 'then', 'than', 'into', 'out', 'up', 'about', 'after', 'before', 'there', 'here', 'while', 'very', 'too', 'only', 'same', 'own', 'both', 'other', 'such', 'one', 'two', 'new', 'back', 'still', 'well', 'even', 'never', 'always', 'made', 'make', 'use', 'used', 'using', 'way', 'work', 'time', 'year', 'day', 'like', 'know', 'think', 'feel', 'want', 'need', 'start', 'find', 'found', 'take', 'get', 'got', 'put', 'set', 'come', 'go', 'give', 'see', 'let', 'around', 'between', 'without', 'within', 'along', 'down', 'left', 'right', 'next', 'last', 'long', 'small', 'large', 'full', 'short', 'old', 'good', 'since', 'later', 'early', 'often', 'much', 'many', 'some', 'few', 'less', 'once']);
+
+    function getWords(item) {
+      const text = [
+        item.title || '',
+        item.description || '',
+        item.short_description || '',
+        item.back_story || ''
+      ].join(' ').toLowerCase();
+      return new Set(text.match(/\b[a-z]{3,}\b/g)?.filter(w => !STOP_WORDS.has(w)) || []);
+    }
+
+    function buildSimilarityMap() {
+      const wordSets = new Map();
+      allItems.forEach(item => wordSets.set(item.id, getWords(item)));
+
+      allItems.forEach(a => {
+        const wordsA = wordSets.get(a.id);
+        const scores = new Map();
+        allItems.forEach(b => {
+          if (a.id === b.id) return;
+          const wordsB = wordSets.get(b.id);
+          let shared = 0;
+          wordsA.forEach(w => { if (wordsB.has(w)) shared++; });
+          const score = shared / Math.sqrt(wordsA.size * wordsB.size);
+          if (score > 0.1) scores.set(b.id, score);
+        });
+        similarityMap.set(a.id, scores);
+      });
+    }
+
 
     fetch('https://api.github.com/repos/maysun-music/website/commits?per_page=1')
       .then(res => res.json())
@@ -1416,6 +1453,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       document.querySelectorAll('.nav-item.filter').forEach(c => c.classList.remove('active'));
       document.getElementById('search-input').value = '';
       renderItems(allItems, '');
+      buildSimilarityMap();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (bioTimeout) { clearTimeout(bioTimeout); bioTimeout = null; }
       const panel = document.getElementById('info-content');
