@@ -1,4 +1,32 @@
 [
+    {
+    "id": "bigknob_hc1",
+    "title": "BIG KNOB + HC1",
+    "type": "utility",
+    "year": "2026",
+    "url": "bigknob_hc1.html",
+    "section": "fabrication",
+    "main_image": "assets/images/diy_devices/bigknob_hc1/main_bigknob_1600w.jpg",
+    "short_description": "A modified Mackie Passive Big Knob with an integrated DIYRE HC1 headphone amplifier.\n\nBuilt as a compact monitoring and routing utility for my home Dante setup, allowing speaker and headphone monitoring without dedicating additional Dante outputs.\n\nThe HC1 is mounted directly inside the Big Knob enclosure, with an added power switch, barrel connector, side-mounted headphone output, independent headphone volume control, and extended LED and potentiometer.\n\nThe headphone output remains independant from Mackie outputs A/B.",
+    "back_story": "I was looking for a way to add headphone monitoring to my home Dante system without dedicating additional analog outputs to it.\n\nI found a Mackie Big Knob on Facebook Marketplace for cheap and initially planned to use output A for speakers and output B for headphones. This would have required a headphone amp.\n\nAs ergonomics are important to me, I did not want another box in my setup and, after opening the Big Knob, I realized there was enough space inside the enclosure to integrate a headphone amplifier directly into the unit. I started looking at DIY kits and found the DIYRE HC1.\n\nThe HC1 PCB was mounted internally, with extended wiring for the volume control, power switch, barrel connector, and LED. The side panels of the Big Knob were sanded, painted, and sealed with polyurethane.\n\nOriginally, I planned to tap the audio signal post mono/stereo switch inside the Mackie, but realized this point was post-volume knob on the Big Knob. I preferred keeping headphone volume independent from Mackie outputs A/B.\n\n Headphones remain independent from outputs A/B which can be switched, muted, dimmed and have their own volume control.\n\nAlthough originally built for monitoring and mixing, the system can also function as a compact live routing utility.\n\nFor example, a sound source can feed the inputs while Output A feeds the PA and Output B feeds a second pair of speakers elsewhere in the room. The headphone amplifier can simultaneously feed a small amp with independent volume control. This allows transitions between localized sound, full-room amplification, and distant speaker pairs without relying on a computer with tactile buttons.",
+    "components": [
+      "Mackie Big Knob - Passive",
+      "DIYRE HC1 headphone amplifier kit",
+      "Barrel connector",
+      "Illuminated toggle switch with safety cover",
+      "Replacement orange LED",
+      "Paint, primer, and polyurethane"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/bigknob_hc1/bts01_bigknob_900h.jpg",
+      "assets/images/diy_devices/bigknob_hc1/bts02_bigknob_900h.jpg",
+      "assets/images/diy_devices/bigknob_hc1/bts03_bigknob_900h.jpg",
+      "assets/images/diy_devices/bigknob_hc1/bts04_bigknob_900h.jpg",
+      "assets/images/diy_devices/bigknob_hc1/bts05_bigknob_900h.jpg",
+      "assets/images/diy_devices/bigknob_hc1/bts06_bigknob_900h.jpg",
+      "assets/images/diy_devices/bigknob_hc1/bts07_bigknob_900h.jpg"
+    ]
+  },
   {
     "id": "dls",
     "title": "Listener System",
@@ -123,47 +151,48 @@
     ]
   },
   {
-
-  "id": "fume_extractor",
-  "title": "Fume Extractor",
-  "type": "utility",
-  "year": "2026",
-  "url": "fume_extractor.html",
-  "section": "fabrication",
-  "tags": [
-    "fabrication", "utilities", "diy", "workspace"
-  ],
-  "relations": [
-    ""
-  ],
-  "main_image": "assets/images/diy_devices/fume_extractor/main_fume_1600w.jpg",
-  "short_description": "Compact DIY fume extractor built around a 120mm fan with activated carbon filtration. Intended for low sound operation and a minimal footprint for soldering work", 
-  "back_story": "Needed a small, quiet fume extractor that wouldn’t take over my desk. I could not find a commercial options that wasn't too large, loud, or overpriced. I built a custom version using reused acrylic and simple hardware.",
-  "components": [
-    "120mm 1350rpm fan",
-    "2x 120mm fan grills",
-    "activated carbon filter sponge",
-    "12V PWM speed controller",
-    "acrylic",
-    "zip ties",
-    "bolts & nuts",
-    "barrel connector",
-    "wire",
-    "L metal brackets",
-    "1 Toggle Switch", 
-    "470Ω resistor", 
-    "White LED Backlight Module"
-  ],
-
-  "gallery": [
-    "assets/images/diy_devices/fume_extractor/bts01_fume_900h.jpg",
-    "assets/images/diy_devices/fume_extractor/bts02_fume_900h.jpg",
-    "assets/images/diy_devices/fume_extractor/bts03_fume_900h.jpg",
-    "assets/images/diy_devices/fume_extractor/bts04_fume_900h.jpg",
-    "assets/images/diy_devices/fume_extractor/bts05_fume_900h.jpg",
-    "assets/images/diy_devices/fume_extractor/bts06_fume_900h.jpg"
-  ]
-},
+    "id": "fume_extractor",
+    "title": "Fume Extractor",
+    "type": "utility",
+    "year": "2026",
+    "url": "fume_extractor.html",
+    "section": "fabrication",
+    "tags": [
+      "fabrication",
+      "utilities",
+      "diy",
+      "workspace"
+    ],
+    "relations": [
+      ""
+    ],
+    "main_image": "assets/images/diy_devices/fume_extractor/main_fume_1600w.jpg",
+    "short_description": "Compact DIY fume extractor built around a 120mm fan with activated carbon filtration. Intended for low sound operation and a minimal footprint for soldering work",
+    "back_story": "Needed a small, quiet fume extractor that wouldn’t take over my desk. I could not find a commercial options that wasn't too large, loud, or overpriced. I built a custom version using reused acrylic and simple hardware.",
+    "components": [
+      "120mm 1350rpm fan",
+      "2x 120mm fan grills",
+      "activated carbon filter sponge",
+      "12V PWM speed controller",
+      "acrylic",
+      "zip ties",
+      "bolts & nuts",
+      "barrel connector",
+      "wire",
+      "L metal brackets",
+      "1 Toggle Switch",
+      "470Ω resistor",
+      "White LED Backlight Module"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/fume_extractor/bts01_fume_900h.jpg",
+      "assets/images/diy_devices/fume_extractor/bts02_fume_900h.jpg",
+      "assets/images/diy_devices/fume_extractor/bts03_fume_900h.jpg",
+      "assets/images/diy_devices/fume_extractor/bts04_fume_900h.jpg",
+      "assets/images/diy_devices/fume_extractor/bts05_fume_900h.jpg",
+      "assets/images/diy_devices/fume_extractor/bts06_fume_900h.jpg"
+    ]
+  },
   {
     "id": "pizzarat",
     "title": "PizzaRAT",
