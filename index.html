@@ -828,6 +828,25 @@
     let activeSection = null;
     let similarityMap = new Map();
 
+    // approved word bank for tags
+    const TAG_BANK = [
+      'spatial',
+      'cyclical',
+      'modular',
+      'granular',
+      'tape',
+      'field-recording',
+      'generative',
+      'reamping',
+      'installation',
+      'acoustic',
+      'dante',
+      'feedback',
+      'diy',
+      'drums',
+      'album'
+    ];
+
     Promise.all([
       fetch('data/diy_makes.json').then(r => r.json()),
       fetch('data/albums.json').then(r => r.json()),
@@ -1179,7 +1198,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
             }</div>`
           }
       <div class="grid-item-overlay">
-        <span class="grid-item-overlay-text">${(item.tags || []).slice(0, 5).join(' · ')}</span>
+        <span class="grid-item-overlay-text">${getTopWords(item, 5).join(' · ')}</span>
       </div>
           </div>
           <div class="grid-item-title">${item.title}</div>
@@ -1292,6 +1311,24 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         });
         similarityMap.set(a.id, scores);
       });
+    }
+
+    function getTopWords(item, n = 5) {
+
+      const text = [
+        item.title || '',
+        item.description || '',
+        item.short_description || '',
+        item.back_story || '',
+        item.future || '',
+        (item.tags || []).join(' ')
+      ]
+        .join(' ')
+        .toLowerCase();
+
+      return TAG_BANK
+        .filter(tag => text.includes(tag.toLowerCase()))
+        .slice(0, n);
     }
 
 
