@@ -851,8 +851,8 @@
       'plugin',
       'synth',
       'life',
-      'utility', 
-      'samples', 
+      'utility',
+      'samples',
       'industry'
     ];
 
@@ -1336,7 +1336,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         .toLowerCase();
 
       return TAG_BANK
-        .filter(tag => text.includes(tag.toLowerCase()))
+        .filter(tag => text.includes(tag.toLowerCase().replace('-', ' ')))
         .slice(0, n);
     }
 
