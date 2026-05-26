@@ -1215,7 +1215,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         `;
 
         const goTo = () => {
-          if (item.section === 'fabrication') {
+          if (item.section === 'fabrication' || item.section === 'albums') {
             openOverlay('item/' + item.id);
           } else {
             if (!item.url) return;
@@ -1493,6 +1493,57 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       const item = allItems.find(i => i.id === id);
       if (!item) return;
 
+      // RELATED
+      const relatedItems = [...(similarityMap.get(item.id) || new Map()).entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([rid]) => allItems.find(i => i.id === rid))
+        .filter(Boolean);
+
+      const relatedBlock = relatedItems.length ? `
+        <div style="margin-top:2em; border-top:0.5px solid var(--color-main); padding-top:1.5em;">
+          <h2>Related</h2>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:1em;">
+            ${relatedItems.map(r => {
+        const thumb = r.main_image
+          || (r.media?.youtube?.[0] && `https://img.youtube.com/vi/${r.media.youtube[0]}/hqdefault.jpg`)
+          || r.media?.images?.[0] || '';
+        return `
+                <div onclick="openOverlay('item/${r.id}')" style="cursor:pointer; width:160px;">
+                  ${thumb
+            ? `<img src="${thumb}" style="width:100%; height:100px; object-fit:cover; display:block;">`
+            : `<div style="width:100%; height:100px; background:rgba(128,128,128,0.15); display:flex; align-items:center; justify-content:center; font-size:10px; opacity:0.5;">${escapeHTML(r.type)}</div>`
+          }
+                  <div style="font-size:12px; font-weight:bold; margin-top:6px; color:var(--color-accent);">${escapeHTML(r.title)}</div>
+                  <div style="font-size:11px; color:#bbb;">${escapeHTML(r.type)} · ${r.year}</div>
+                </div>
+              `;
+      }).join('')}
+          </div>
+        </div>
+      ` : '';
+
+      // ALBUM LAYOUT
+      if (item.section === 'albums') {
+        const mainImage = item.main_image
+          ? `<img src="${item.main_image}" style="width:100%; max-width:300px; height:auto; margin:1em 0 1.5em; display:block;">`
+          : '';
+        const bandcampLink = item.url
+          ? `<a href="${item.url}" target="_blank" style="display:inline-block; margin-bottom:1.5em; font-size:13px; border-bottom:1px solid var(--color-main); padding-bottom:2px;">listen on bandcamp →</a>`
+          : '';
+
+        content.innerHTML = `
+          <h2>${escapeHTML(item.title || '')}</h2>
+          <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${escapeHTML(String(item.year || ''))}</div>
+          ${mainImage}
+          ${bandcampLink}
+          ${item.description ? `<p>${escapeHTML(item.description).replace(/\n/g, '<br>')}</p>` : ''}
+          ${relatedBlock}
+        `;
+        return;
+      }
+
+      // FABRICATION LAYOUT
       const components = [
         ...(item.components || []),
         ...(item.components_tx || []),
@@ -1537,6 +1588,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         ${futureBlock}
         ${linksBlock}
         ${galleryBlock}
+        ${relatedBlock}
       `;
     }
 
