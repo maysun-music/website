@@ -1215,9 +1215,12 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         `;
 
         const goTo = () => {
-          if (!item.url) return;
-
-          window.location.href = item.url;
+          if (item.section === 'fabrication') {
+            openOverlay('item/' + item.id);
+          } else {
+            if (!item.url) return;
+            window.location.href = item.url;
+          }
         };
 
         el.addEventListener('click', goTo);
@@ -1483,6 +1486,58 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       </a>
     </div>
   `;
+    }
+
+    function renderItemOverlay(id) {
+      const content = document.getElementById('overlay-content');
+      const item = allItems.find(i => i.id === id);
+      if (!item) return;
+
+      const components = [
+        ...(item.components || []),
+        ...(item.components_tx || []),
+        ...(item.components_rx || [])
+      ];
+
+      const componentBlock = components.length ? `
+        <h2>Components</h2>
+        <ul style="padding-left:20px; margin-bottom:1.5em;">
+          ${components.map(c => `<li style="margin-bottom:4px; font-size:13px; opacity:0.8;">${escapeHTML(c)}</li>`).join('')}
+        </ul>
+      ` : '';
+
+      const futureBlock = item.future ? `
+        <h2>Next Steps</h2>
+        <p>${escapeHTML(item.future)}</p>
+      ` : '';
+
+      const linksBlock = (item.links || []).length ? `
+        <div style="margin-bottom:1.5em;">
+          ${item.links.map(l => `<a href="${escapeHTML(l.url)}" target="_blank" style="display:block; margin-bottom:8px; font-size:13px;">${escapeHTML(l.label)}</a>`).join('')}
+        </div>
+      ` : '';
+
+      const galleryBlock = (item.gallery || []).length ? `
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:1.5em;">
+          ${item.gallery.map(img => `<img src="${img}" style="height:140px; width:auto; object-fit:cover;" loading="lazy">`).join('')}
+        </div>
+      ` : '';
+
+      const mainImage = item.main_image
+        ? `<img src="${item.main_image}" style="width:100%; height:auto; margin:1em 0 1.5em;" loading="lazy">`
+        : '';
+
+      content.innerHTML = `
+        <h2>${escapeHTML(item.title || '')}</h2>
+        <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${escapeHTML(String(item.year || ''))}</div>
+        ${mainImage}
+        ${item.short_description ? `<p>${item.short_description.replace(/\n/g, '<br>')}</p>` : ''}
+        ${item.back_story ? `<h2>Reason for Making</h2><p>${escapeHTML(item.back_story).replace(/\n/g, '<br>')}</p>` : ''}
+        ${componentBlock}
+        ${futureBlock}
+        ${linksBlock}
+        ${galleryBlock}
+      `;
     }
 
     function closeOverlay() {
