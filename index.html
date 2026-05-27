@@ -232,6 +232,25 @@
       background: yellow;
     }
 
+    /* ----- OVERLAY STUFF ---- */
+    .overlay-media {
+      width: auto;
+      max-width: 700px;
+      max-height: 468px;
+      height: auto;
+
+      display: block;
+      margin: 1em 0 1.5em 0;
+
+      object-fit: contain;
+    }
+
+    .overlay-video {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 0 1.5em 0;
+    }
+
     /* ------ RIGHT SIDE PANEL ---- */
 
     #info-panel {
@@ -693,7 +712,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 700px;
+      width: min(1100px, 92vw);
       max-width: 94vw;
       max-height: 85vh;
       overflow-y: auto;
@@ -1553,13 +1572,13 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       // FOREVER IN SOUND LAYOUT
       if (item.section === 'story') {
         const youtubeBlock = (item.media?.youtube || []).map(yid => `
-          <div style="position:relative; padding-bottom:56.25%; height:0; margin-bottom:1em;">
+          <div class="overlay-video" style="position:relative; padding-bottom:56.25%; height:0;">
             <iframe src="https://www.youtube.com/embed/${yid}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen loading="lazy"></iframe>
           </div>
         `).join('');
 
         const imagesBlock = (item.media?.images || []).map(src =>
-          `<img src="${src}" style="width:100%; height:auto; display:block; margin-bottom:8px;">`
+          `<img src="${src}" class="overlay-media">`
         ).join('');
 
         content.innerHTML = `
@@ -1603,9 +1622,20 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
       const galleryBlock = (item.gallery || []).length ? `
         <div style="margin-top:1.5em;">
-          <div style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">BTS</div>
-<img id="gallery-focus" src="${item.gallery[0]}" style="width:100%; max-height:500px; object-fit:contain; display:block; margin-bottom:8px;">          <div style="display:flex; gap:5px; flex-wrap:wrap;">
-            ${item.gallery.map(img => `
+          <h2 style="margin-bottom:12px;">WIP Pictures</h2>
+<img 
+  id="gallery-focus" 
+  src="${item.gallery[0]}" 
+  style="
+    width:auto;
+    max-width:700px;
+    max-height:500px;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    margin:0 0 8px 0;
+  "
+>            ${item.gallery.map(img => `
               <img src="${img}" onclick="setGalleryFocus('${img}')"
                 style="height:56px; width:auto; object-fit:cover; cursor:pointer; opacity:0.6; transition:opacity 0.15s;"
                 onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
@@ -1615,7 +1645,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       ` : '';
 
       const mainImage = item.main_image
-        ? `<img src="${item.main_image}" style="width:100%; height:auto; margin:1em 0 1.5em;" loading="lazy">`
+        ? `<img src="${item.main_image}" class="overlay-media" loading="lazy">`
         : '';
 
       content.innerHTML = `
