@@ -1215,7 +1215,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         `;
 
         const goTo = () => {
-          if (item.section === 'fabrication' || item.section === 'albums') {
+          if (item.section === 'fabrication' || item.section === 'albums' || item.section === 'story') {
             openOverlay('item/' + item.id);
           } else {
             if (!item.url) return;
@@ -1325,6 +1325,12 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       });
     }
 
+    function setGalleryFocus(src) {
+      const focus = document.getElementById('gallery-focus');
+      if (focus) focus.src = src;
+    }
+
+
     function getTopWords(item, n = 5) {
 
       const text = [
@@ -1388,6 +1394,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       document.getElementById('overlay-close').style.display = 'block';
       document.body.style.overflow = 'hidden';
       history.pushState({ overlay: key }, '', '#' + key);
+      document.getElementById('overlay-panel').scrollTop = 0;
 
       if (key === 'shows') {
         renderShowsOverlay();
@@ -1539,6 +1546,32 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
           ${bandcampLink}
           ${item.description ? `<p>${escapeHTML(item.description).replace(/\n/g, '<br>')}</p>` : ''}
           ${relatedBlock}
+`;
+        return;
+      }
+
+      // FOREVER IN SOUND LAYOUT
+      if (item.section === 'story') {
+        const youtubeBlock = (item.media?.youtube || []).map(yid => `
+          <div style="position:relative; padding-bottom:56.25%; height:0; margin-bottom:1em;">
+            <iframe src="https://www.youtube.com/embed/${yid}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen loading="lazy"></iframe>
+          </div>
+        `).join('');
+
+        const imagesBlock = (item.media?.images || []).map(src =>
+          `<img src="${src}" style="width:100%; height:auto; display:block; margin-bottom:8px;">`
+        ).join('');
+
+        content.innerHTML = `
+          <h2>${escapeHTML(item.title || '')}</h2>
+          <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(String(item.year || ''))}</div>
+          ${imagesBlock}
+          ${item.description ? `<p style="white-space:pre-line;">${escapeHTML(item.description)}</p>` : ''}
+          ${youtubeBlock}
+          <div style="margin-top:2em; border-top:0.5px solid var(--color-main); padding-top:1em;">
+            <a href="forever.html" style="font-size:12px; opacity:0.6;">→ forever in sound</a>
+          </div>
+          ${relatedBlock}
         `;
         return;
       }
@@ -1569,8 +1602,15 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       ` : '';
 
       const galleryBlock = (item.gallery || []).length ? `
-        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:1.5em;">
-          ${item.gallery.map(img => `<img src="${img}" style="height:140px; width:auto; object-fit:cover;" loading="lazy">`).join('')}
+        <div style="margin-top:1.5em;">
+          <div style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">BTS</div>
+<img id="gallery-focus" src="${item.gallery[0]}" style="width:100%; max-height:500px; object-fit:contain; display:block; margin-bottom:8px;">          <div style="display:flex; gap:5px; flex-wrap:wrap;">
+            ${item.gallery.map(img => `
+              <img src="${img}" onclick="setGalleryFocus('${img}')"
+                style="height:56px; width:auto; object-fit:cover; cursor:pointer; opacity:0.6; transition:opacity 0.15s;"
+                onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+            `).join('')}
+          </div>
         </div>
       ` : '';
 
