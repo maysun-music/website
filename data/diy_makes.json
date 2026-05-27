@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": "bigknob_hc1",
     "title": "BIG KNOB + HC1",
     "type": "utility",
@@ -25,6 +25,29 @@
       "assets/images/diy_devices/bigknob_hc1/bts05_bigknob_900h.jpg",
       "assets/images/diy_devices/bigknob_hc1/bts06_bigknob_900h.jpg",
       "assets/images/diy_devices/bigknob_hc1/bts07_bigknob_900h.jpg"
+    ]
+  },
+  {
+    "id": "euroblock_snake_qr1",
+    "title": "QR1 TRS-Euroblock Snake",
+    "type": "utility",
+    "year": "2026",
+    "url": "euroblock_snake_qr1.html",
+    "section": "fabrication",
+    "main_image": "assets/images/diy_devices/euroblock_snake_qr1/main_euroblock_snake_qr1_1600w.jpg",
+    "short_description": "An 8-channel passive snake converting euroblock connections from a Xilica Solaro QR1 into a more performance-friendly 1/4\" TRS connectors.\n\nBuilt for live use of a QR1 fitted with 4-input and 4-output analog Dante cards.",
+    "back_story": "I built this snake to make a Xilica Solaro QR1 more practical for live music performance.\n\nThe QR1 is fitted with 4-channel analog input and output Dante cards using euroblock connectors, which are common in AV installations but inconvenient for quick patching on stage.\n\nThe snake is housed in a small aluminum enclosure with panel-mounted jacks and a rubber grommet for strain relief. It allows the QR1 to function as a traditional live audio interface while keeping the flexibility of a Dante-based system.",
+    "components": [
+      "Aluminum enclosure",
+      "8x 1/4\" panel mount TRS connectors",
+      "8x euroblock connectors",
+      "Rubber grommet"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/euroblock_snake_qr1/bts01_euroblock_snake_qr1_900h.jpg",
+      "assets/images/diy_devices/euroblock_snake_qr1/bts02_euroblock_snake_qr1_900h.jpg",
+      "assets/images/diy_devices/euroblock_snake_qr1/bts03_euroblock_snake_qr1_900h.jpg",
+      "assets/images/diy_devices/euroblock_snake_qr1/bts04_euroblock_snake_qr1_900h.jpg"
     ]
   },
   {
@@ -92,16 +115,6 @@
     "year": "2026",
     "url": "amp_board.html",
     "section": "fabrication",
-    "tags": [
-      "spatial-audio",
-      "fabrication",
-      "utilities",
-      "dante",
-      "diy"
-    ],
-    "relations": [
-      "euroblock_snake"
-    ],
     "main_image": "assets/images/diy_devices/amp_board/main_amp_1600w.jpg",
     "short_description": "6-channel amp board built for a home spatial audio setup. Powers six Realistic Minimus 7 speakers from a shared 24V PSU, converting balanced 1/4\" inputs to unbalanced. Open layout on a wooden base with elevated acrylic panel for airflow and mounting.",
     "back_story": "My room becoming a spatial audio system, built around a secondhand Dante network, six Realistic Minimus 7 speakers, and a DIY euroblock snake. The last missing piece was amplification. Rather than purchasing a 6-channel amp, three stereo TPA3116D2 boards were combined into one as a more economical solution.",
@@ -121,7 +134,7 @@
   },
   {
     "id": "euroblock_snake",
-    "title": "TRS to Euroblock Snake",
+    "title": "FR1 TRS-Euroblock Snake",
     "type": "utility",
     "year": "2026",
     "url": "euroblock_snake.html",
