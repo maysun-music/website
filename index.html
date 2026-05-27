@@ -1176,7 +1176,7 @@
 
       panel.innerHTML = `
   <h2>${escapeHTML(item.title || '')}</h2>
-  <div class="info-meta">${escapeHTML(item.type || '')}${item.year ? ' · ' + escapeHTML(item.year) : ''}</div>
+<div class="info-meta">${escapeHTML(item.type || '')}${item.year ? ' · ' + formatItemDate(item) : ''}</div>
   <p>${cleanText}</p>
 `;
     }
@@ -1230,7 +1230,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       </div>
           </div>
           <div class="grid-item-title">${item.title}</div>
-          <div class="grid-item-type">${item.type} · ${item.year}</div>
+          <div class="grid-item-type">${item.type} · ${formatItemDate(item)}</div>
         `;
 
         const goTo = () => {
@@ -1366,6 +1366,12 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       return TAG_BANK
         .filter(tag => text.includes(tag.toLowerCase().replace('-', ' ')))
         .slice(0, n);
+    }
+
+    function formatItemDate(item) {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const year = String(item.year || '');
+      return item.month ? `${months[item.month - 1]} ${year}` : year;
     }
 
 
@@ -1560,7 +1566,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
         content.innerHTML = `
           <h2>${escapeHTML(item.title || '')}</h2>
-          <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${escapeHTML(String(item.year || ''))}</div>
+<div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${formatItemDate(item)}</div>
           ${mainImage}
           ${bandcampLink}
           ${item.description ? `<p>${escapeHTML(item.description).replace(/\n/g, '<br>')}</p>` : ''}
@@ -1583,13 +1589,12 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
         content.innerHTML = `
           <h2>${escapeHTML(item.title || '')}</h2>
-          <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(String(item.year || ''))}</div>
+          <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${formatItemDate(item)}</div>
           ${imagesBlock}
           ${item.description ? `<p style="white-space:pre-line;">${escapeHTML(item.description)}</p>` : ''}
           ${youtubeBlock}
           <div style="margin-top:2em; border-top:0.5px solid var(--color-main); padding-top:1em;">
-            <a href="forever.html" style="font-size:12px; opacity:0.6;">→ forever in sound</a>
-          </div>
+<a href="${item.url || 'forever.html'}" style="font-size:12px; opacity:0.6;">See in full context</a>          </div>
           ${relatedBlock}
         `;
         return;
@@ -1650,8 +1655,8 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
       content.innerHTML = `
         <h2>${escapeHTML(item.title || '')}</h2>
-        <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${escapeHTML(String(item.year || ''))}</div>
-        ${mainImage}
+<div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${formatItemDate(item)}</div>
+      ${mainImage}
         ${item.short_description ? `<p>${item.short_description.replace(/\n/g, '<br>')}</p>` : ''}
         ${item.back_story ? `<h2>Reason for Making</h2><p>${escapeHTML(item.back_story).replace(/\n/g, '<br>')}</p>` : ''}
         ${componentBlock}
