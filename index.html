@@ -958,12 +958,12 @@
       return haystack.includes(q);
     }
 
-    function isRelated(a, b) {
-      if (a.id === b.id) return true;
+    // function isRelated(a, b) {
+    //   if (a.id === b.id) return true;
 
-      return (a.relations || []).includes(b.id) ||
-        (b.relations || []).includes(a.id);
-    }
+    //   return (a.relations || []).includes(b.id) ||
+    //     (b.relations || []).includes(a.id);
+    // }
 
     function getPreviewText(item) {
       const text = (item.description || item.short_description || '').trim();
@@ -1296,22 +1296,23 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
       });
     }
-    function getRelated(item) {
-      const scores = {};
-      allItems.forEach(other => {
-        if (other.id === item.id) return;
-        let score = 0;
-        if ((item.relations || []).includes(other.id)) score += 10;
-        if ((other.relations || []).includes(item.id)) score += 10;
-        const shared = (item.tags || []).filter(t => (other.tags || []).includes(t));
-        score += shared.length;
-        if (score > 0) scores[other.id] = { item: other, score };
-      });
-      return Object.values(scores)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 3)
-        .map(s => s.item);
-    }
+    
+    // function getRelated(item) {
+    //   const scores = {};
+    //   allItems.forEach(other => {
+    //     if (other.id === item.id) return;
+    //     let score = 0;
+    //     if ((item.relations || []).includes(other.id)) score += 10;
+    //     if ((other.relations || []).includes(item.id)) score += 10;
+    //     const shared = (item.tags || []).filter(t => (other.tags || []).includes(t));
+    //     score += shared.length;
+    //     if (score > 0) scores[other.id] = { item: other, score };
+    //   });
+    //   return Object.values(scores)
+    //     .sort((a, b) => b.score - a.score)
+    //     .slice(0, 3)
+    //     .map(s => s.item);
+    // }
 
     const STOP_WORDS = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'i', 'my', 'me', 'we', 'our', 'you', 'your', 'it', 'its', 'this', 'that', 'these', 'those', 'he', 'she', 'they', 'them', 'his', 'her', 'their', 'which', 'who', 'what', 'when', 'where', 'how', 'all', 'any', 'each', 'every', 'more', 'most', 'also', 'just', 'not', 'no', 'so', 'if', 'then', 'than', 'into', 'out', 'up', 'about', 'after', 'before', 'there', 'here', 'while', 'very', 'too', 'only', 'same', 'own', 'both', 'other', 'such', 'one', 'two', 'new', 'back', 'still', 'well', 'even', 'never', 'always', 'made', 'make', 'use', 'used', 'using', 'way', 'work', 'time', 'year', 'day', 'like', 'know', 'think', 'feel', 'want', 'need', 'start', 'find', 'found', 'take', 'get', 'got', 'put', 'set', 'come', 'go', 'give', 'see', 'let', 'around', 'between', 'without', 'within', 'along', 'down', 'left', 'right', 'next', 'last', 'long', 'small', 'large', 'full', 'short', 'old', 'good', 'since', 'later', 'early', 'often', 'much', 'many', 'some', 'few', 'less', 'once']);
 
