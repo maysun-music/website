@@ -1234,7 +1234,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         `;
 
         const goTo = () => {
-          if (item.section === 'fabrication' || item.section === 'albums' || item.section === 'story') {
+          if (item.section === 'fabrication' || item.section === 'albums' || item.section === 'story' || item.section === 'resources') {
             openOverlay('item/' + item.id);
           } else {
             if (!item.url) return;
@@ -1296,7 +1296,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
       });
     }
-    
+
     // function getRelated(item) {
     //   const scores = {};
     //   allItems.forEach(other => {
@@ -1350,6 +1350,17 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       if (focus) focus.src = src;
     }
 
+    function downloadTxt(id, filename) {
+      const item = allItems.find(i => i.id === id);
+      if (!item?.txt) return;
+      const blob = new Blob([item.txt], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename || id + '.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
 
     function getTopWords(item, n = 5) {
 
@@ -1561,7 +1572,10 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         const mainImage = item.main_image
           ? `<img src="${item.main_image}" style="width:100%; max-width:300px; height:auto; margin:1em 0 1.5em; display:block;">`
           : '';
-        const bandcampLink = item.url
+        const bandcampEmbed = item.media?.bandcamp_embed
+          ? `<div style="margin:1em 0 1.5em;">${item.media.bandcamp_embed}</div>`
+          : '';
+        const bandcampLink = !item.media?.bandcamp_embed && item.url
           ? `<a href="${item.url}" target="_blank" style="display:inline-block; margin-bottom:1.5em; font-size:13px; border-bottom:1px solid var(--color-main); padding-bottom:2px;">listen on bandcamp →</a>`
           : '';
 
@@ -1569,6 +1583,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
           <h2>${escapeHTML(item.title || '')}</h2>
 <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${formatItemDate(item)}</div>
           ${mainImage}
+          ${bandcampEmbed}
           ${bandcampLink}
           ${item.description ? `<p>${escapeHTML(item.description).replace(/\n/g, '<br>')}</p>` : ''}
           ${relatedBlock}
@@ -1596,6 +1611,63 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
           ${youtubeBlock}
           <div style="margin-top:2em; border-top:0.5px solid var(--color-main); padding-top:1em;">
 <a href="${item.url || 'forever.html'}" style="font-size:12px; opacity:0.6;">See in full context</a>          </div>
+          ${relatedBlock}
+        `;
+        return;
+      }
+
+      // RESOURCES / SPATIAL LAYOUT
+      if (item.section === 'resources') {
+        const galleryBlock = (item.gallery || []).length ? `
+          <div style="margin-top:1.5em;">
+            <img id="gallery-focus" src="${item.gallery[0]}"
+              style="width:100%; max-height:400px; object-fit:contain; display:block; margin-bottom:8px;">
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              ${item.gallery.map(img => `
+                <img src="${img}" onclick="setGalleryFocus('${img}')"
+                  style="height:56px; width:auto; object-fit:cover; cursor:pointer; opacity:0.6; transition:opacity 0.15s;"
+                  onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+              `).join('')}
+            </div>
+          </div>
+        ` : '';
+
+        const metaLine = [
+          item.location,
+          item.speakers,
+          item.date ? `mapped ${item.date}` : null
+        ].filter(Boolean).join(' · ');
+
+        const venueLink = item.venue_url
+          ? `<a href="${item.venue_url}" target="_blank" style="font-size:12px; opacity:0.6;">${item.venue_url}</a>`
+          : '';
+          const bandcampEmbed = item.media?.bandcamp_embed
+          ? `<div style="margin:1em 0 1.5em;">${item.media.bandcamp_embed}</div>`
+          : '';
+        const resourceLink = !item.media?.bandcamp_embed && item.url
+          ? `<a href="${item.url}" target="_blank" style="display:inline-block; margin-bottom:1.5em; font-size:13px; border-bottom:1px solid var(--color-main); padding-bottom:2px;">open →</a>`
+          : '';
+
+        const txtBlock = item.txt ? `
+          <div style="margin-top:1.5em;">
+            <div style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">SPEAKER LAYOUT</div>
+            <textarea readonly style="width:100%; height:120px; font-family:monospace; font-size:10px; background:rgba(0,0,0,0.2); color:var(--color-main); border:0.5px solid var(--color-main); padding:10px; resize:vertical; box-sizing:border-box;">${item.txt}</textarea>
+            <button onclick="downloadTxt('${item.id}', '${item.filename || item.id + '.txt'}')"
+              style="margin-top:8px; font-size:11px; letter-spacing:0.08em; background:none; border:0.5px solid var(--color-main); color:var(--color-main); padding:6px 20px; cursor:pointer;">
+              Download .txt
+            </button>
+          </div>
+        ` : '';
+
+        content.innerHTML = `
+          <h2>${escapeHTML(item.title || '')}</h2>
+          <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(metaLine)}</div>
+          ${venueLink ? `<div style="margin-bottom:1em;">${venueLink}</div>` : ''}
+          ${bandcampEmbed}
+          ${resourceLink}
+          ${item.description ? `<p>${escapeHTML(item.description).replace(/\n/g, '<br>')}</p>` : ''}
+          ${galleryBlock}
+          ${txtBlock}
           ${relatedBlock}
         `;
         return;
