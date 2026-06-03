@@ -19,15 +19,16 @@
   ],
   "components": [
     "ESP32-S3",
-    "1 potentiometer",
+    "10K potentiometer",
     "4x piezo elements",
-    "4x 1/4\" jack connectors",
+    "8x 1/4\" jack connectors",
     "Aluminum enclosure",
     "Plywood",
     "Acrylic",
-    "Satin polyurethane finish",
+    "Satin polyurethane",
     "Felt pads", 
-    "screws"
+    "Screws", 
+    "Nylon washers"
   ],
   "gallery": [
     "assets/images/diy_devices/tap_triggers/bts01_tap-trigger_900h.jpg",
