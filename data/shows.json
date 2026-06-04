@@ -1,5 +1,13 @@
 [
-          {
+  {
+    "date": "2026-09-12",
+    "collaborators": "Liis Ring",
+    "venue": "Exposure Therapy",
+    "city": "ONLINE",
+    "type": "upcoming",
+    "url": "https://exposuretx.com/"
+  },
+  {
     "date": "2026-08-09",
     "collaborators": null,
     "venue": "Active/Passive Festival",
@@ -7,7 +15,7 @@
     "type": "upcoming",
     "url": "https://www.activepassive.ca/"
   },
-        {
+  {
     "date": "2026-06-06",
     "collaborators": null,
     "venue": "Metalabel Studio",
@@ -15,7 +23,7 @@
     "type": "upcoming",
     "url": "https://dfos.itm.studio/m/shared-worlds-new-inc-demo2026-x-metalabel?utm_campaign=feed&utm_medium=referral&utm_source=later-linkinbio"
   },
-      {
+  {
     "date": "2026-07-03",
     "collaborators": "w/ Marika Koguchi",
     "venue": "Reforesters Laboratory",
@@ -23,13 +31,13 @@
     "type": "upcoming",
     "url": "https://luma.com/8dsgkwc3"
   },
-        {
+  {
     "date": "2026-06-19",
     "venue": "L&SD",
     "city": "Booklyn, NY, USA",
     "type": "upcoming"
   },
-    {
+  {
     "date": "2026-04-03",
     "collaborators": "w/ Marika Koguchi",
     "venue": "Reforesters Laboratory",
