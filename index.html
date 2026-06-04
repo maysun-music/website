@@ -1447,8 +1447,17 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       fetch('data/shows.json')
         .then(r => r.json())
         .then(shows => {
-          const upcoming = shows.filter(s => s.type === 'upcoming');
-          const past = shows.filter(s => s.type === 'past');
+          function parseShowDate(str) {
+            return str.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(str) : new Date(0);
+          }
+
+          const upcoming = shows
+            .filter(s => s.type === 'upcoming')
+            .sort((a, b) => parseShowDate(a.date) - parseShowDate(b.date));
+
+          const past = shows
+            .filter(s => s.type === 'past')
+            .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
 
           function formatDate(str) {
             if (!str.match(/^\d{4}-\d{2}-\d{2}$/)) return str;
