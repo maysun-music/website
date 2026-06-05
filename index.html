@@ -345,11 +345,6 @@
       display: none;
     }
 
-    body.no-info-panel #sticky-top {
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
-
     body.no-info-panel #search-input {
       clip-path: none;
     }
@@ -606,11 +601,8 @@
         padding-bottom: 0px;
         backdrop-filter: blur(60px);
         -webkit-backdrop-filter: blur(60px);
-      }
-
-      body.no-info-panel #sticky-top {
-        -webkit-mask-image: none;
-        mask-image: none;
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
       }
 
       /* burger stays top right */
@@ -687,6 +679,7 @@
         justify-content: center;
         gap: 16px;
         text-align: center;
+        max-width: 100vw;
       }
 
       #last-update {
