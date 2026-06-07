@@ -279,7 +279,7 @@
       top: 200px;
       right: var(--panel-gap);
       width: var(--panel-width);
-      max-height: calc(100vh - 180px);
+      height: calc(100vh - 200px);
       overflow-y: auto;
 
       color: var(--color-main);
@@ -290,9 +290,6 @@
       z-index: 999;
       background: transparent;
       padding: 0 12px;
-
-      overflow: visible;
-
     }
 
     #info-content {
@@ -329,8 +326,9 @@
     }
 
     #info-scroll {
-      max-height: calc(100vh - 180px);
+      height: 100%;
       overflow-y: auto;
+      padding-bottom: 60px;
     }
 
     /* PANEL HIDDEN MODE */
