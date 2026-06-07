@@ -16,14 +16,6 @@
     "url": "https://www.activepassive.ca/"
   },
   {
-    "date": "2026-06-06",
-    "collaborators": null,
-    "venue": "Metalabel Studio",
-    "city": "Booklyn, NY, USA",
-    "type": "upcoming",
-    "url": "https://dfos.itm.studio/m/shared-worlds-new-inc-demo2026-x-metalabel?utm_campaign=feed&utm_medium=referral&utm_source=later-linkinbio"
-  },
-  {
     "date": "2026-07-03",
     "collaborators": "w/ Marika Koguchi",
     "venue": "Reforesters Laboratory",
@@ -35,7 +27,16 @@
     "date": "2026-06-19",
     "venue": "L&SD",
     "city": "Booklyn, NY, USA",
-    "type": "upcoming"
+    "type": "upcoming",
+    "url": "https://beta.lightandsound.design/e/eremitrecords"
+  },
+  {
+    "date": "2026-06-06",
+    "collaborators": null,
+    "venue": "Metalabel Studio",
+    "city": "Booklyn, NY, USA",
+    "type": "past",
+    "url": "https://dfos.itm.studio/m/shared-worlds-new-inc-demo2026-x-metalabel?utm_campaign=feed&utm_medium=referral&utm_source=later-linkinbio"
   },
   {
     "date": "2026-04-03",
