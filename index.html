@@ -1555,7 +1555,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       // ALBUM LAYOUT
       if (item.section === 'albums') {
         const mainImage = item.main_image
-          ? `<img src="${item.main_image}" style="width:100%; max-width:300px; height:auto; margin:1em 0 1.5em; display:block;">`
+          ? `<a href="${item.url || '#'}" target="_blank" style="display:inline-block; margin:1em 0 1.5em;"><img src="${item.main_image}" style="width:100%; max-width:300px; height:auto; display:block;"></a>`
           : '';
         const bandcampEmbed = item.media?.bandcamp_embed
           ? `<div style="margin:1em 0 1.5em;">${item.media.bandcamp_embed}</div>`
