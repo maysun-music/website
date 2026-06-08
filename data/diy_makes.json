@@ -13,7 +13,7 @@
   "back_story": "Built for friend Melissa Almaguer, who wanted a way to trigger sounds from a Roland SP-404 using her feet while performing.\n\nThe goal was to make triggers that could blend naturally with the dance board, and not feel like separate electronic equipment.\n\nEach trigger is made from a piezo mounted inside a small handmade plywood box with the acrylic pad over the piezo which allows to fine tune tension with a felt spacer. Reclaimed materials were used and finished with satin polyurethane. The receiver is housed in an aluminum enclosure and converts the four trigger inputs into MIDI over USB.\n\nA single knob raises the gate threshold, making the triggers less sensitive when needed. An LED on the receiver flickers when a trigger is received.",
   "links": [
     {
-      "label": "Melissa Almaguer",
+      "label": "for Melissa Almaguer",
       "url": "https://www.melissaalmaguer.com/"
     }
   ],

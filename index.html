@@ -1566,10 +1566,11 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
         content.innerHTML = `
           <h2>${escapeHTML(item.title || '')}</h2>
-<div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${formatItemDate(item)}</div>
+          <div style="font-size:15px; color:#bbb; margin-bottom:0.5em;">${escapeHTML(item.type || '')} · ${formatItemDate(item)}</div>
+          ${bandcampLink}
+          <div style="margin-bottom:1.5em;"></div>
           ${mainImage}
           ${bandcampEmbed}
-          ${bandcampLink}
           ${item.description ? `<p>${escapeHTML(item.description).replace(/\n/g, '<br>')}</p>` : ''}
           ${relatedBlock}
 `;
@@ -1590,12 +1591,12 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
         content.innerHTML = `
           <h2>${escapeHTML(item.title || '')}</h2>
-          <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${formatItemDate(item)}</div>
+          <div style="font-size:15px; color:#bbb; margin-bottom:0.5em;">${formatItemDate(item)}</div>
+          <div style="margin-bottom:1em;"><a href="${item.url || 'forever.html'}" style="font-size:13px; opacity:0.6;">See in full context</a></div>
+          <div style="margin-bottom:1.5em;"></div>
           ${imagesBlock}
           ${item.description ? `<p style="white-space:pre-line;">${escapeHTML(item.description)}</p>` : ''}
           ${youtubeBlock}
-          <div style="margin-top:2em; border-top:0.5px solid var(--color-main); padding-top:1em;">
-<a href="${item.url || 'forever.html'}" style="font-size:12px; opacity:0.6;">See in full context</a>          </div>
           ${relatedBlock}
         `;
         return;
@@ -1713,13 +1714,14 @@ width:100%;
 
       content.innerHTML = `
         <h2>${escapeHTML(item.title || '')}</h2>
-<div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(item.type || '')} · ${formatItemDate(item)}</div>
-      ${mainImage}
+        <div style="font-size:15px; color:#bbb; margin-bottom:0.5em;">${escapeHTML(item.type || '')} · ${formatItemDate(item)}</div>
+        ${linksBlock}
+        <div style="margin-bottom:1.5em;"></div>
+        ${mainImage}
         ${item.short_description ? `<p>${item.short_description.replace(/\n/g, '<br>')}</p>` : ''}
         ${item.back_story ? `<h2>Reason for Making</h2><p>${escapeHTML(item.back_story).replace(/\n/g, '<br>')}</p>` : ''}
         ${componentBlock}
         ${futureBlock}
-        ${linksBlock}
         ${galleryBlock}
         ${relatedBlock}
       `;
