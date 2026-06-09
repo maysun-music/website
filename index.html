@@ -140,7 +140,8 @@
     }
 
     .nav-item.link:hover {
-      color: var(--color-accent);
+      background: var(--color-accent);
+      color: var(--color-bg);
     }
 
     #bio-burger {
@@ -1845,37 +1846,22 @@ width:100%;
 
       const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
 
-      // draw lines from each related square to mouse, fading out with distance
-      relatedSquares.forEach(sq => {
-        const { x, y } = getSquareCenter(sq);
-        const dist = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
-        const maxDist = 800;
-        if (dist > maxDist) return;
-        const opacity = (1 - dist / maxDist) * 0.6;
+      const active = activeSquares[0];
 
-        mapCtx.beginPath();
-        mapCtx.moveTo(x, y);
-        mapCtx.lineTo(mouseX, mouseY);
-        mapCtx.strokeStyle = `rgba(255, 255, 100, ${opacity})`;
-        mapCtx.lineWidth = 0.5;
-        mapCtx.stroke();
-      });
+      if (active) {
+        const { x: ax, y: ay } = getSquareCenter(active);
 
-      // draw lines from active square to mouse
-      activeSquares.forEach(sq => {
-        const { x, y } = getSquareCenter(sq);
-        const dist = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
-        const maxDist = 800;
-        if (dist > maxDist) return;
-        const opacity = (1 - dist / maxDist) * 0.6;
+        relatedSquares.forEach(sq => {
+          const { x, y } = getSquareCenter(sq);
 
-        mapCtx.beginPath();
-        mapCtx.moveTo(x, y);
-        mapCtx.lineTo(mouseX, mouseY);
-        mapCtx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-        mapCtx.lineWidth = 0.5;
-        mapCtx.stroke();
-      });
+          mapCtx.beginPath();
+          mapCtx.moveTo(ax, ay);
+          mapCtx.lineTo(x, y);
+          mapCtx.strokeStyle = 'rgba(255,255,100,0.35)';
+          mapCtx.lineWidth = 0.1;
+          mapCtx.stroke();
+        });
+      }
 
       requestAnimationFrame(drawMapLines);
     }
