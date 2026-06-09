@@ -97,24 +97,22 @@
 
     #site-nav {
       display: flex;
-      flex-wrap: wrap;
       align-items: baseline;
-      row-gap: 10px;
-      column-gap: 0;
       width: calc(100vw - var(--panel-width) - var(--panel-gap) - 80px);
     }
 
     .nav-row {
       display: flex;
-      gap: 12px;
+      gap: 4px;
+      flex-wrap: wrap;
       width: 100%;
     }
 
     .nav-item {
-      font-size: 13px;
+      font-size: 18px;
       color: var(--color-main);
-      letter-spacing: 0.04em;
-      padding: 2px 6px;
+      letter-spacing: 0.08em;
+      padding: 2px 4px;
       white-space: nowrap;
     }
 
@@ -813,14 +811,12 @@
       <span id="bio-burger" onclick="openOverlay('bio')">☰</span>
       <nav id="site-nav">
         <div class="nav-row">
-          <span class="nav-item filter" data-section="story">forever in sound</span>
-          <span class="nav-item filter" data-section="albums">music</span>
-          <span class="nav-item filter" data-section="fabrication">fabrication</span>
-        </div>
-        <div class="nav-row">
-          <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">shows</span>
-          <span class="nav-item filter" data-section="resources">resources</span>
-          <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">contact</span>
+          <span class="nav-item filter" data-section="story">/forever in sound</span>
+          <span class="nav-item filter" data-section="albums">/music</span>
+          <span class="nav-item filter" data-section="fabrication">/fabrication</span>
+          <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">/shows</span>
+          <span class="nav-item filter" data-section="resources">/resources</span>
+          <span class="nav-item link" onclick="openOverlay('contact')" style="cursor:pointer;">/contact</span>
         </div>
       </nav>
     </header>
@@ -1804,6 +1800,87 @@ width:100%;
 
     updateLayoutMode();
     window.addEventListener('resize', updateLayoutMode);
+
+
+    // ── MINI MAP CONNECTING LINES ──────────────────────────
+    const mapCanvas = document.createElement('canvas');
+    mapCanvas.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:4999;';
+    document.body.appendChild(mapCanvas);
+    const mapCtx = mapCanvas.getContext('2d');
+
+    let mouseX = -1000, mouseY = -1000;
+
+    function resizeCanvas() {
+      mapCanvas.width = window.innerWidth;
+      mapCanvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function getSquareCenter(sq) {
+      const rect = sq.getBoundingClientRect();
+      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    }
+
+    function drawMapLines() {
+      mapCtx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
+
+      const activeSquares = [];
+      const relatedSquares = [];
+
+      miniMap.forEach(sq => {
+        if (sq.classList.contains('active')) activeSquares.push(sq);
+        else if (sq.classList.contains('related')) relatedSquares.push(sq);
+      });
+
+      if (activeSquares.length === 0) {
+        requestAnimationFrame(drawMapLines);
+        return;
+      }
+
+      const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
+
+      // draw lines from each related square to mouse, fading out with distance
+      relatedSquares.forEach(sq => {
+        const { x, y } = getSquareCenter(sq);
+        const dist = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
+        const maxDist = 800;
+        if (dist > maxDist) return;
+        const opacity = (1 - dist / maxDist) * 0.6;
+
+        mapCtx.beginPath();
+        mapCtx.moveTo(x, y);
+        mapCtx.lineTo(mouseX, mouseY);
+        mapCtx.strokeStyle = `rgba(255, 255, 100, ${opacity})`;
+        mapCtx.lineWidth = 0.5;
+        mapCtx.stroke();
+      });
+
+      // draw lines from active square to mouse
+      activeSquares.forEach(sq => {
+        const { x, y } = getSquareCenter(sq);
+        const dist = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
+        const maxDist = 800;
+        if (dist > maxDist) return;
+        const opacity = (1 - dist / maxDist) * 0.6;
+
+        mapCtx.beginPath();
+        mapCtx.moveTo(x, y);
+        mapCtx.lineTo(mouseX, mouseY);
+        mapCtx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+        mapCtx.lineWidth = 0.5;
+        mapCtx.stroke();
+      });
+
+      requestAnimationFrame(drawMapLines);
+    }
+
+    drawMapLines();
 
   </script>
 
