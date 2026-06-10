@@ -574,20 +574,20 @@
 
       #site-nav {
         display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: center;
-        margin-top: 20px;
+        width: 100%;
+        margin-top: 12px;
       }
 
       .nav-row {
         display: flex;
-        gap: 16px;
-        flex-wrap: nowrap;
-
+        gap: 4px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
       }
 
-      .nav-item.filter {
+      .nav-item.filter,
+      .nav-item.link {
         padding: 0;
       }
 
@@ -1589,10 +1589,10 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         content.innerHTML = `
           <h2>${escapeHTML(item.title || '')}</h2>
           <div style="font-size:15px; color:#bbb; margin-bottom:0.5em;">${formatItemDate(item)}</div>
-          <div style="margin-bottom:1em;"><a href="${item.url || 'forever.html'}" style="font-size:13px; opacity:0.6;">See in full context</a></div>
           <div style="margin-bottom:1.5em;"></div>
           ${imagesBlock}
           ${item.description ? `<p style="white-space:pre-line;">${escapeHTML(item.description)}</p>` : ''}
+          <div style="margin-bottom:1em;"><a href="${item.url || 'forever.html'}" style="font-size:13px; opacity:0.6;">Read in full context</a></div>
           ${youtubeBlock}
           ${relatedBlock}
         `;
