@@ -780,6 +780,12 @@
       opacity: 1;
     }
 
+    .drift-word {
+      display: inline-block;
+      transition: transform 120s ease-in-out, opacity 40s ease-in-out;
+      will-change: transform, opacity;
+    }
+
     #overlay-close {
       position: fixed;
       top: 20px;
@@ -1433,6 +1439,12 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       }
     }
 
+    function driftText(text) {
+      return escapeHTML(text).split(/\s+/).map(w =>
+        `<span class="drift-word">${w}</span>`
+      ).join(' ');
+    }
+
     function renderShowsOverlay() {
       const content = document.getElementById('overlay-content');
       content.innerHTML = '<h2>SHOWS</h2><p style="opacity:0.4; font-size:11px;">loading...</p>';
@@ -1461,17 +1473,19 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
           }
 
 
-          function renderList(list) {
+          function renderList(list, isPast = false) {
             return list.map(s => {
               const date = formatDate(s.date);
               const collab = s.collaborators ? ` · ${s.collaborators}` : '';
-              const line1 = `<div style="font-size:12px; color:#bbb;">${date} — ${s.city}</div>`;
-              const line2 = `<div style="font-size:13px; color:var(--color-main);">${s.venue}${collab}</div>`;
+
+              const line1 = `<div style="font-size:12px; color:#bbb;">${driftText(date + ' — ' + s.city)}</div>`;
+              const line2 = `<div style="font-size:13px; color:var(--color-main);">${driftText(s.venue + collab)}</div>`;
               const inner = `${line1}${line2}`;
               const linked = s.url
                 ? `<a href="${s.url}" target="_blank" style="text-decoration:none;">${inner}</a>`
                 : inner;
-              return `<div style="margin-bottom:16px;">${linked}</div>`;
+              const cls = isPast ? 'class="past-show-item"' : '';
+              return `<div ${cls} style="margin-bottom:16px;">${linked}</div>`;
             }).join('');
           }
 
@@ -1482,10 +1496,37 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
           ${renderList(upcoming)}
           <div style="margin-bottom:24px;"></div>
         ` : ''}
-        <p style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">PAST</p>
-        ${renderList(past)}
+<p style="font-size:10px; letter-spacing:0.1em; opacity:0.5; margin-bottom:8px;">PAST</p>
+        ${renderList(past, true)}
       `;
+
+          setTimeout(startShowsDrift, 500);
+
         });
+
+    }
+
+    function startShowsDrift() {
+      const words = document.querySelectorAll('#overlay-content .past-show-item .drift-word');
+      if (!words.length) return;
+
+      setTimeout(() => {
+        const panel = document.getElementById('overlay-panel');
+        const panelRect = panel.getBoundingClientRect();
+
+        const cx = panelRect.left + panelRect.width * 0.62;
+        const cy = panelRect.top + panelRect.height * 0.62;
+
+        words.forEach(span => {
+          const rect = span.getBoundingClientRect();
+
+          const dx = cx - (rect.left + rect.width / 2) + (Math.random() - 0.5) * 180;
+          const dy = cy - (rect.top + rect.height / 2) + (Math.random() - 0.5) * 100;
+
+          span.style.transform = `translate(${dx}px, ${dy}px)`;
+          span.style.opacity = (0.35 + Math.random() * 0.25).toFixed(2);
+        });
+      }, 2000);
     }
 
     function renderBioOverlay() {
