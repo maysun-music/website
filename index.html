@@ -782,7 +782,7 @@
 
     .drift-word {
       display: inline-block;
-      transition: transform 120s ease-in-out, opacity 40s ease-in-out;
+      transition: transform 60s ease-in-out, opacity 40s ease-in-out;
       will-change: transform, opacity;
     }
 
@@ -1500,7 +1500,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
         ${renderList(past, true)}
       `;
 
-          setTimeout(startShowsDrift, 500);
+          setTimeout(startShowsDrift, 50);
 
         });
 
@@ -1526,7 +1526,7 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
           span.style.transform = `translate(${dx}px, ${dy}px)`;
           span.style.opacity = (0.35 + Math.random() * 0.25).toFixed(2);
         });
-      }, 2000);
+      }, 50);
     }
 
     function renderBioOverlay() {
