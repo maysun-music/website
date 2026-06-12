@@ -5,6 +5,7 @@
     "type": "album",
     "section": "albums",
     "year": "2016",
+    "month": "4",
     "tags": [
       "album",
       "music",
@@ -27,6 +28,7 @@
     "type": "album",
     "section": "albums",
     "year": "2016",
+    "month": "10",
     "tags": [
       "album",
       "music",
@@ -49,6 +51,7 @@
     "type": "album",
     "section": "albums",
     "year": "2017",
+    "month": "4",
     "tags": [
       "album",
       "music",
@@ -72,6 +75,7 @@
     "type": "album",
     "section": "albums",
     "year": "2020",
+    "month": "9",
     "tags": [
       "album",
       "music",
@@ -94,6 +98,7 @@
     "type": "album",
     "section": "albums",
     "year": "2020",
+    "month": "11",
     "tags": [
       "album",
       "music",
@@ -117,6 +122,7 @@
     "type": "album",
     "section": "albums",
     "year": "2021",
+    "month": "2",
     "tags": [
       "album",
       "music",
@@ -141,6 +147,7 @@
     "type": "album",
     "section": "albums",
     "year": "2023",
+    "month": "11",
     "tags": [
       "album",
       "music",
