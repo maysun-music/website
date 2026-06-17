@@ -512,7 +512,7 @@
       color: var(--color-accent);
     }
 
-    @keyframes fadeIn {
+    /* @keyframes fadeIn {
       from {
         opacity: 0;
       }
@@ -520,7 +520,10 @@
       to {
         opacity: 1;
       }
-    }
+    } */
+
+    @keyframes fadeIn {}
+
 
     #last-update {
       font-size: 12px;
@@ -1221,9 +1224,22 @@
         el.className = 'grid-item';
         el.dataset.id = item.id;
         const randomDelay = (Math.random() * 2).toFixed(2); // RNDM DELAY
+        // el.style.opacity = '0';
+        // el.style.animation = `fadeIn ${(0.8 + Math.random() * 1.2).toFixed(2)}s ease forwards`;
+        // el.style.animationDelay = randomDelay + 's';
         el.style.opacity = '0';
-        el.style.animation = `fadeIn ${(0.8 + Math.random() * 1.2).toFixed(2)}s ease forwards`;
-        el.style.animationDelay = randomDelay + 's';
+        el.style.animation = 'none';
+        const delay = Math.random() * 1000;
+        const steps = 4 + Math.floor(Math.random() * 3);
+        setTimeout(() => {
+          let step = 0;
+          const interval = 80 + Math.random() * 80;
+          const timer = setInterval(() => {
+            step++;
+            el.style.opacity = (step / steps).toFixed(2);
+            if (step >= steps) clearInterval(timer);
+          }, interval);
+        }, delay);
 
         el.innerHTML = `
   <div class="grid-item-image-container">
