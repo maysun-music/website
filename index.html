@@ -924,6 +924,7 @@
       renderDefaultInfo();
       renderItems(allItems, '');
       buildSimilarityMap();
+      if (hash) openOverlay(hash);
     });
 
     document.getElementById('search-input').addEventListener('input', function () {
@@ -1841,7 +1842,6 @@ width:100%;
     });
 
     const hash = window.location.hash.slice(1);
-    if (hash) openOverlay(hash);
 
     window.addEventListener('popstate', e => {
       if (e.state?.overlay) openOverlay(e.state.overlay);
