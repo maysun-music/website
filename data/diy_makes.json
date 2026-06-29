@@ -275,16 +275,18 @@
       "Daisy Seed Microcontroller",
       "MAX9814 Microphone",
       "DotStar 8\u00d78 LED matrix",
-      "10 Momentary Switches",
+      "11 Momentary Switches",
       "2 Encoders",
-      "6 Potentiometers",
-      "1 Toggle Switch",
+      "9 Potentiometers",
+      "2 Toggle Switch",
       "1 Power Switch",
-      "5v Regulator",
-      "Stereo 1/4\" output",
+      "5v Buck Converer",
+      "Stereo 1/8\" output",
+      "Mono 1/4\" input",
       "Barrel connector",
-      "Aluminum enclosure (hand-cut)",
-      "Oak panel (hand-cut)"
+      "Plywood body",
+      "Acrylic backing"
+
     ],
     "gallery": [
       "assets/images/diy_devices/cycl/bts00_synth_1600w.jpg",
