@@ -23,12 +23,20 @@
     "type": "upcoming",
     "url": "https://www.activepassive.ca/"
   },
+    {
+    "date": "2026-07-12",
+    "collaborators": "w/ Laura Wolf",
+    "venue": "Synesthesia",
+    "city": "Brooklyn, NY, USA",
+    "type": "upcoming",
+    "url": null
+  },
   {
     "date": "2026-07-03",
     "collaborators": "w/ Marika Koguchi",
     "venue": "Reforesters Laboratory",
     "city": "Booklyn, NY, USA",
-    "type": "upcoming",
+    "type": "past",
     "url": "https://luma.com/8dsgkwc3"
   },
   {
