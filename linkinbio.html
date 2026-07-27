@@ -112,6 +112,24 @@
         <a href="mailto:maysun.booking@gmail.com">CONTACT</a>
         <div style="opacity:0.4; margin: 10px 0;">⇣</div>
         <a href="https://www.maysun.zip/forever.html">FOREVER IN SOUND</a>
+
+        <div id="bio-section"
+            style="width:100%; max-width:420px; margin-top:28px; padding-top:20px; border-top:1px solid rgba(228,241,228,0.2); text-align:left; font-size:0.85rem; line-height:1.6; opacity:0.7;">
+        </div>
+
+        <script>
+            fetch('data/biography.json')
+                .then(r => r.json())
+                .then(data => {
+                    const el = document.getElementById('bio-section');
+                    [...data.bio, ...data.statement].forEach(p => {
+                        const para = document.createElement('p');
+                        para.style.marginBottom = '0.8em';
+                        para.textContent = p;
+                        el.appendChild(para);
+                    });
+                });
+        </script>
     </div>
 
     <script>
