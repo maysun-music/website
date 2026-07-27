@@ -120,7 +120,7 @@
                 .then(r => r.json())
                 .then(data => {
                     const el = document.getElementById('bio-section');
-                    [...data.bio, ...data.statement].forEach(p => {
+                    [...data.bio].forEach(p => {
                         const para = document.createElement('p');
                         para.style.marginBottom = '0.8em';
                         para.textContent = p;
