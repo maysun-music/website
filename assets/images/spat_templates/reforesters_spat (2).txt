@@ -1,0 +1,4 @@
+# ======================================
+# AED provided by Reforesters Laboratory upon booking.
+# ======================================
+# Scale distance by 0.3 for XP4L.

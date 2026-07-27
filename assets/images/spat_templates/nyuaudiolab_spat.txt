@@ -1,0 +1,113 @@
+# ======================================
+# File "nyuaudiolab_spat.txt"
+# Made with XP4L - www.xp4l.com
+# Room is not symmetrical or perfectly rectangular — AED positions measured by hand
+# Scaled distance 0.53x
+# formatted by Etienne Mason - MAYSUN - www.maysun.zip
+# AED data compatible with Spat5 (Max/MSP) 
+# and other OSC-based spatial audio software
+# Sub channels (not in AED layout)
+# ch 4 = LFE (left and right sub)
+# ch 25-26-27-28 = individual subs
+# ======================================
+# ROUTING: XP4L ch → Audiolab output
+# --------------------------------------
+# 1  → 1   LEFT
+# 2  → 2   RIGHT
+# 3  → 3   CENTER
+# 4  → 5   LSS
+# 5  → 6   RSS
+# 6  → 7   LRS
+# 7  → 8   RRS
+# 8  → 9   LTF
+# 9  → 10  RTF
+# 10 → 11  LTR
+# 11 → 12  RTR
+# 12 → 17  LTM
+# 13 → 18  RTM
+# 14 → 23  CR
+# 15 → 29  PIP 1-1
+# 16 → 30  PIP 1-2
+# 17 → 31  PIP 1-3
+# 18 → 32  PIP 1-4
+# 19 → 33  PIP 2-1
+# 20 → 34  PIP 2-2
+# 21 → 35  PIP 2-3
+# 22 → 36  PIP 2-4
+# 23 → 37  PIP 3-1
+# 24 → 38  PIP 3-2
+# 25 → 39  PIP 3-3
+# 26 → 40  PIP 3-4
+# 27 → 41  PIP 4-1
+# 28 → 42  PIP 4-2
+# 29 → 43  PIP 4-3
+# 30 → 44  PIP 4-4
+# 31 → 45  PIP 5-1
+# 32 → 46  PIP 5-2
+# 33 → 47  PIP 5-3
+# 34 → 48  PIP 5-4
+# 35 → 49  PIP 6-1
+# 36 → 50  PIP 6-2
+# 37 → 51  PIP 6-3
+# 38 → 52  PIP 6-4
+# 39 → 53  PIP 7-1
+# 40 → 54  PIP 7-2
+# 41 → 55  PIP 7-3
+# 42 → 56  PIP 7-4
+# 43 → 57  PIP 8-1
+# 44 → 58  PIP 8-2
+# 45 → 59  PIP 8-3
+# 46 → 60  PIP 8-4
+# -----------------------------------------
+# Audiolab outputs 4, 13-16, 19-22, 25-28 must be skipped for continuous channels for AED
+# ======================================
+/speaker/number 46
+/speakers/correction/delay "auto"
+/speakers/correction/gain "auto"
+/speakers/aed -32.0 16.0 1.379 34.9875 15.6593 1.396 0.0 18.2456 1.179 -90.2272 24.561 0.887 82.1967 30.9994 0.726 -142.0 16.0 1.366 148.0 16.0 1.379 -25.4213 50.4726 0.706 34.2323 49.7498 0.713 -135.988 53.5699 0.677 143.852 58.6701 0.638 -81.0047 65.1693 0.600 76.0975 65.4588 0.598 -180.0 22.3589 0.971 -19.9914 23.5933 1.291 -19.9914 17.8022 1.243 -20.0 11.0831 1.205 -19.9914 4.20598 1.186 22.8382 23.1896 1.312 22.8387 17.4796 1.265 22.8382 10.8762 1.228 22.8382 4.34399 1.210 55.0 30.7435 1.012 54.9972 23.6283 0.948 54.9972 14.9451 0.898 54.9972 5.72147 0.873 130.213 28.9971 1.066 130.203 22.1724 1.006 130.203 13.9635 0.961 130.203 5.33215 0.936 160.301 24.7068 1.236 160.301 18.689 1.186 160.301 11.6616 1.147 160.306 4.43058 1.126 -158.0 25.6394 1.194 -158.008 19.437 1.142 -158.008 12.1507 1.101 -158.008 4.62044 1.080 -129.619 24.5477 1.244 -129.616 18.5645 1.193 -129.616 11.5804 1.154 -129.616 4.3983 1.135 -50.0027 27.5393 1.118 -50.0027 20.9754 1.061 -50.0027 13.1622 1.017 -50.0 5.0 0.995
+/speaker/1/name "Left"
+/speaker/2/name "Right"
+/speaker/3/name "Center"
+/speaker/4/name "LSS"
+/speaker/5/name "RSS"
+/speaker/6/name "LRS"
+/speaker/7/name "RRS"
+/speaker/8/name "LTF"
+/speaker/9/name "RTF"
+/speaker/10/name "LTR"
+/speaker/11/name "RTR"
+/speaker/12/name "LTM"
+/speaker/13/name "RTM"
+/speaker/14/name "CR"
+/speaker/15/name "PIPE 1-1"
+/speaker/16/name "PIPE 1-2"
+/speaker/17/name "PIPE 1-3"
+/speaker/18/name "PIPE 1-4"
+/speaker/19/name "PIPE 2-1"
+/speaker/20/name "PIPE 2-2"
+/speaker/21/name "PIPE 2-3"
+/speaker/22/name "PIPE 2-4"
+/speaker/23/name "PIPE 3-1"
+/speaker/24/name "PIPE 3-2"
+/speaker/25/name "PIPE 3-3"
+/speaker/26/name "PIPE 3-4"
+/speaker/27/name "PIPE 4-1"
+/speaker/28/name "PIPE 4-2"
+/speaker/29/name "PIPE 4-3"
+/speaker/30/name "PIPE 4-4"
+/speaker/31/name "PIPE 5-1"
+/speaker/32/name "PIPE 5-2"
+/speaker/33/name "PIPE 5-3"
+/speaker/34/name "PIPE 5-4"
+/speaker/35/name "PIPE 6-1"
+/speaker/36/name "PIPE 6-2"
+/speaker/37/name "PIPE 6-3"
+/speaker/38/name "PIPE 6-4"
+/speaker/39/name "PIPE 7-1"
+/speaker/40/name "PIPE 7-2"
+/speaker/41/name "PIPE 7-3"
+/speaker/42/name "PIPE 7-4"
+/speaker/43/name "PIPE 8-1"
+/speaker/44/name "PIPE 8-2"
+/speaker/45/name "PIPE 8-3"
+/speaker/46/name "PIPE 8-4"
