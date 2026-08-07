@@ -15,12 +15,20 @@
     "type": "upcoming",
     "url": "https://exposuretx.com/"
   },
-    {
+  {
     "date": "2026-08-15",
     "collaborators": null,
     "venue": "Noosphere",
     "city": "Governor Island, NYC",
     "type": "upcoming"
+  },
+  {
+    "date": "2026-08-14",
+    "collaborators": "w/ Color Theory",
+    "venue": "Pageant",
+    "city": "Brooklyn, NYC",
+    "type": "upcoming",
+    "url": "https: //www.eventbrite.com/e/sound-restorer-palabra-cecilia-bob-the-fisherman-maysun-tickets-1996767578579"
   },
   {
     "date": "2026-08-09",
@@ -30,7 +38,7 @@
     "type": "upcoming",
     "url": "https://www.activepassive.ca/"
   },
-    {
+  {
     "date": "2026-07-12",
     "collaborators": "w/ Laura Wolf",
     "venue": "Synesthesia",
