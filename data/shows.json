@@ -20,7 +20,8 @@
     "collaborators": null,
     "venue": "Noosphere",
     "city": "Governor Island, NYC",
-    "type": "upcoming"
+    "type": "upcoming",
+    "url": "https://www.nooarts.org/calendar/open-house-governors-island-august"
   },
   {
     "date": "2026-08-14",
@@ -35,7 +36,7 @@
     "collaborators": null,
     "venue": "Active/Passive Festival",
     "city": "Galiano Island, BC, CAN",
-    "type": "upcoming",
+    "type": "past",
     "url": "https://www.activepassive.ca/"
   },
   {
