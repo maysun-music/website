@@ -460,19 +460,30 @@
       }, 50);
     }
 
-    function setupJumpLatest() {
+function setupJumpLatest() {
       const button = document.getElementById('jumpLatest');
       if (!button || sections.length === 0) return;
 
       const latest = sections[sections.length - 1];
 
-      if (latest.year && latest.month) {
-        const monthNames = [
-          'January', 'February', 'March', 'April', 'May', 'June',
-          'July', 'August', 'September', 'October', 'November', 'December'
-        ];
-        button.textContent = `(Latest entry ${monthNames[latest.month - 1]})`;
-      }
+      button.textContent = 'latest entry';
+
+      fetch('https://api.github.com/repos/maysun-music/website/commits?path=data/forever.json&page=1&per_page=1')
+        .then(res => res.json())
+        .then(commits => {
+          const dateStr = commits?.[0]?.commit?.author?.date;
+          if (dateStr) {
+            const d = new Date(dateStr);
+            const monthNames = [
+              'January', 'February', 'March', 'April', 'May', 'June',
+              'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            button.textContent = `latest entry — ${monthNames[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+          }
+        })
+        .catch(() => {
+          // API call failed or rate-limited — button just stays as "latest entry"
+        });
 
       button.addEventListener('click', () => {
         document.getElementById(latest.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
