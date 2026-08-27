@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAYSUN — Y13</title>
+    <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon" />
+
+    <style>
+        :root {
+            --color-bg: #6c8670;
+            --color-main: #e4f1e4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-main);
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: url("assets/images/misc/grain.gif");
+            background-repeat: repeat;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: soft-light;
+        }
+
+        .links {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .links a {
+            color: var(--color-main);
+            text-decoration: none;
+            font-size: clamp(2.5rem, 10vw, 6rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            line-height: 1.1;
+            text-transform: uppercase;
+            transition: opacity 0.2s ease, transform 0.1s ease;
+        }
+
+        .links a:hover,
+        .links a:active {
+            opacity: 0.6;
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grain-overlay"></div>
+
+    <main class="links">
+        <a href="https://www.maysun.zip/" target="_blank" rel="noopener">
+            WEBSITE
+        </a>
+
+        <a href="https://www.instagram.com/maysun.music/" target="_blank" rel="noopener">
+            INSTAGRAM
+        </a>
+
+        <a href="mailto:etienne.mason@gmail.com">
+            EMAIL
+        </a>
+    </main>
+</body>
+
+</html>
