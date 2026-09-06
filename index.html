@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAYSUN</title>
   <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon" />
-  <meta name="description" content="MAYSUN: sound, instruments, and spatial audio systems by Etienne Mason. Compositions, DIY builds, and installations." />
+  <meta name="description"
+    content="MAYSUN: sound, instruments, and spatial audio systems by Etienne Mason. Compositions, DIY builds, and installations." />
   <meta property="og:title" content="MAYSUN" />
   <meta property="og:description" content="Sound, instruments, and spatial audio systems by Etienne Mason." />
   <meta property="og:image" content="https://www.maysun.zip/assets/images/logos/maysun_logo.png" />
@@ -1261,10 +1262,11 @@
           }, interval);
         }, delay);
 
+        const thumbSrc = item.thumb || item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${item.media.youtube[0]}/hqdefault.jpg`) || item.media?.images?.[0];
         el.innerHTML = `
   <div class="grid-item-image-container">
-${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${item.media.youtube[0]}/hqdefault.jpg`) || item.media?.images?.[0]
-            ? `<img class="grid-item-image" src="${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${item.media.youtube[0]}/hqdefault.jpg`) || item.media?.images?.[0]}" alt="${item.title}" loading="lazy">`
+${thumbSrc
+            ? `<img class="grid-item-image" src="${thumbSrc}" alt="${item.title}" loading="lazy">`
             : `<div class="grid-item-placeholder">${item.type === "forever in sound"
               ? getForeverPreview(item)
               : getPreviewText(item)
