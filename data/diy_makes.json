@@ -1,4 +1,18 @@
 [
+    {
+    "id": "speakon_box",
+    "title": "Amp to SpeakON box",
+    "type": "utility",
+    "year": "2026",
+    "month": 9,
+    "url": "speakon_box.html",
+    "section": "fabrication",
+    "main_image": "null",
+    "short_description": "null",
+    "back_story": "null",
+    "components": [],
+    "gallery": []
+  },
   {
     "id": "cycl_v2",
     "title": "CYCL V2",
