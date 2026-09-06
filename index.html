@@ -5,6 +5,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAYSUN</title>
+  <link rel="icon" href="assets/images/logos/m_favicon.ico" type="image/x-icon" />
+  <meta name="description" content="MAYSUN: sound, instruments, and spatial audio systems by Etienne Mason. Compositions, DIY builds, and installations." />
+  <meta property="og:title" content="MAYSUN" />
+  <meta property="og:description" content="Sound, instruments, and spatial audio systems by Etienne Mason." />
+  <meta property="og:image" content="https://www.maysun.zip/assets/images/logos/maysun_logo.png" />
+  <meta property="og:url" content="https://www.maysun.zip/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MAYSUN" />
+  <meta name="twitter:description" content="Sound, instruments, and spatial audio systems by Etienne Mason." />
+  <meta name="twitter:image" content="https://www.maysun.zip/assets/images/logos/maysun_logo.png" />
   <link rel="stylesheet" href="styles/global.css" />
 
   <style>
@@ -1454,8 +1465,13 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
 
       if (key === 'shows') {
         renderShowsOverlay();
+        document.title = 'Shows · MAYSUN';
       } else if (key === 'bio') {
         renderBioOverlay();
+        document.title = 'Biography · MAYSUN';
+      } else if (key === 'contact') {
+        document.getElementById('overlay-content').innerHTML = overlayContents[key] || '';
+        document.title = 'Contact · MAYSUN';
       } else {
         document.getElementById('overlay-content').innerHTML = overlayContents[key] || '';
       }
@@ -1463,6 +1479,8 @@ ${item.main_image || (item.media?.youtube?.[0] && `https://img.youtube.com/vi/${
       if (key.startsWith('item/')) {
         const id = key.slice(5);
         renderItemOverlay(id);
+        const item = allItems.find(i => i.id === id);
+        if (item) document.title = item.title + ' · MAYSUN';
       }
     }
 
@@ -1798,6 +1816,7 @@ width:100%;
       document.getElementById('overlay-close').style.display = 'none';
       document.body.style.overflow = '';
       history.pushState({}, '', window.location.pathname);
+      document.title = 'MAYSUN';
     }
 
     function resetAll() {
