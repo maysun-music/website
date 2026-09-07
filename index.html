@@ -918,13 +918,20 @@
       'industry'
     ];
 
+    function fetchJSON(url) {
+      return fetch(url).then(res => {
+        if (!res.ok) throw new Error(`Failed to load ${url} (status ${res.status})`);
+        return res.json();
+      });
+    }
+
     Promise.all([
-      fetch('data/diy_makes.json').then(r => r.json()),
-      fetch('data/albums.json').then(r => r.json()),
-      fetch('data/spatial_templates.json').then(r => r.json()),
-      fetch('data/forever.json').then(r => r.json()),
-      fetch('data/installations.json').then(r => r.json()),
-      fetch('data/biography.json').then(r => r.json())
+      fetchJSON('data/diy_makes.json'),
+      fetchJSON('data/albums.json'),
+      fetchJSON('data/spatial_templates.json'),
+      fetchJSON('data/forever.json'),
+      fetchJSON('data/installations.json'),
+      fetchJSON('data/biography.json')
     ]).then(([diy, albums, spatial, forever, installations, biography]) => {
       biographyData = biography;
       allItems = [...diy, ...albums, ...spatial, ...forever, ...installations]
@@ -937,6 +944,10 @@
       renderItems(allItems, '');
       buildSimilarityMap();
       if (hash) openOverlay(hash);
+    }).catch(err => {
+      console.error('Failed to load site data:', err);
+      document.getElementById('items-grid').innerHTML =
+        '<div class="no-results">Something didn\'t load correctly. Try refreshing the page.</div>';
     });
 
     document.getElementById('search-input').addEventListener('input', function () {
@@ -1417,10 +1428,10 @@ ${thumbSrc
     }
 
 
-    fetch('https://api.github.com/repos/maysun-music/website/commits?per_page=1')
+    fetch('data/last_update.json')
       .then(res => res.json())
       .then(data => {
-        const date = new Date(data[0].commit.author.date);
+        const date = new Date(data.timestamp);
 
         const mm = String(date.getMonth() + 1).padStart(2, '0');
         const dd = String(date.getDate()).padStart(2, '0');
