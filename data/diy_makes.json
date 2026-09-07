@@ -7,11 +7,27 @@
     "month": 9,
     "url": "speakon_box.html",
     "section": "fabrication",
-    "main_image": "null",
-    "short_description": "null",
-    "back_story": "null",
-    "components": [],
-    "gallery": []
+    "main_image": "assets/images/diy_devices/speakon_box/main_speakonbox_1600w.jpg",
+    "thumb": "assets/images/diy_devices/speakon_box/main_speakonbox_400w.jpg",
+    "short_description": "A compact two-channel amplifier box for driving transducers.\n\nBuilt around a TPA3116D2 amplifier with two 1/4\" unbalanced inputs, two speakON outputs, and a combined volume and power knob. Powered by an external 12V supply, with a pink LED power indicator.",
+    "components": [
+      "TPA3116D2 two-channel amplifier board",
+      "2x 1/4\" TS",
+      "2x 2-pole speakON panel connectors",
+      "2x speakON cable connectors",
+      "Female spade connectors",
+      "DC barrel socket",
+      "5mm pink LED",
+      "1 kΩ resistor",
+      "Steel electrical box",
+      "Clear polyurethane",
+      "Heat-shrink tubing"
+    ],
+    "gallery": [
+      "assets/images/diy_devices/speakon_box/bts01_speakonbox_900h.jpg",
+      "assets/images/diy_devices/speakon_box/bts02_speakonbox_900h.jpg",
+      "assets/images/diy_devices/speakon_box/bts03_speakonbox_900h.jpg"
+    ]
   },
   {
     "id": "cycl_v2",
