@@ -401,20 +401,12 @@
     "in_use": "TBD",
     "field_notes": [
       {
-        "date": "05/21/25",
-        "text": "Test with Daisy POD"
-      },
-      {
         "date": "05/22/25",
-        "text": "Feedback tests"
+        "text": "First feedback tests with Daisy POD"
       },
       {
         "date": "05/25/25",
-        "text": "Starting to build granular states"
-      },
-      {
-        "date": "06/06/25",
-        "text": "Working Daisy Seed version, but digital-sounding issues."
+        "text": "Starting to design first granular state."
       },
       {
         "date": "06/15/25",
@@ -426,15 +418,15 @@
       },
       {
         "date": "06/18/25",
-        "text": "Added SunPulse granular state."
+        "text": "Added SunPulse synth engine."
       },
       {
         "date": "06/22/25",
-        "text": "Added sound reactive LED. Fixed synth voice."
+        "text": "Added sound reactive LED. Updated synth voice."
       },
       {
         "date": "07/15/25",
-        "text": "Added knobs for synth engine controls."
+        "text": "Mapped knobs to synth engine controls."
       },
       {
         "date": "07/16/25",
@@ -462,7 +454,7 @@
       },
       {
         "date": "07/29/25",
-        "text": "Synth engine CPU fix."
+        "text": "Synth engine CPU crashing fix."
       },
       {
         "date": "07/29/25",
@@ -470,7 +462,7 @@
       },
       {
         "date": "07/30/25",
-        "text": "Added rule for two simultaneous effects maximum to avoid CPU crashing."
+        "text": "Added logic for two simultaneous effects maximum to avoid CPU crashing."
       },
       {
         "date": "08/01/25",
@@ -482,15 +474,7 @@
       },
       {
         "date": "09/16/25",
-        "text": "Simplified SunCrystals granular state."
-      },
-      {
-        "date": "11/11/25",
-        "text": "Beat Repeat logic fixed."
-      },
-      {
-        "date": "11/12/25",
-        "text": "Beat Repeat gain staging update."
+        "text": "Simplified SunCrystals granular state for better CPU management."
       },
       {
         "date": "11/13/25",
@@ -501,10 +485,6 @@
         "text": "SunCrystals granular state full redesign."
       },
       {
-        "date": "11/25/25",
-        "text": "Buffer residue cleanup and sample attempts."
-      },
-      {
         "date": "11/26/25",
         "text": "SunSynth fix and additional note scales redesign."
       },
@@ -513,20 +493,16 @@
         "text": "High Shifter synth clipping fix and control update."
       },
       {
-        "date": "12/09/25",
-        "text": "Bounce system WIP. Unstable."
-      },
-      {
         "date": "12/10/25",
-        "text": "Effects gain staging fix."
+        "text": "Effects gain staging redesign."
       },
       {
         "date": "12/22/25",
-        "text": "Bounce renamed BounceLooper. Fixed logic."
+        "text": "Added BounceLooper."
       },
       {
         "date": "12/23/25",
-        "text": "Added mute when pressed to BounceLooper."
+        "text": "Added mute to BounceLooper when switch is pressed."
       },
       {
         "date": "12/30/25",
