@@ -721,6 +721,8 @@
         padding: 48px 24px 32px;
         max-height: 90vh;
       }
+
+
     }
 
 
@@ -747,6 +749,7 @@
       position: fixed;
       top: 50%;
       left: 50%;
+      font-family: Helvetica, Arial, sans-serif;
       transform: translate(-50%, -50%);
       width: min(1100px, 92vw);
       max-width: 94vw;
@@ -766,13 +769,66 @@
       margin-bottom: 16px;
     }
 
-    #overlay-panel p {
-      font-size: 13px;
+    .overlay-section-title {
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-top: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .field-notes {
+      margin-bottom: 1.5em;
+    }
+
+    .field-note {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 14px;
+      padding: 8px 0;
+      border-bottom: 0.5px solid color-mix(in srgb, var(--color-main) 20%, transparent);
+      font-size: 12px;
+      line-height: 1.5;
       color: var(--color-main);
-      line-height: 1.6;
-      margin-bottom: 20px;
+    }
+
+    .field-note-date {
+      opacity: 0.45;
+      white-space: nowrap;
+    }
+
+    .field-note-text {
       opacity: 0.8;
     }
+
+    #overlay-panel p,
+    #overlay-panel li {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: normal;
+      line-height: 1.45;
+      color: var(--color-main);
+      opacity: 0.8;
+    }
+
+    #overlay-panel p {
+      margin-bottom: 14px;
+    }
+
+    #overlay-panel li {
+      margin-bottom: 4px;
+    }
+
+    /* .fabrication-text {
+      font-size: 13px !important;
+      font-weight: normal !important;
+      line-height: 1.45 !important;
+      color: var(--color-main);
+      opacity: 0.8;
+      margin-bottom: 14px;
+    } */
 
     #overlay-panel a {
       color: var(--color-main);
@@ -1003,7 +1059,9 @@
         item.description || '',
         item.short_description || '',
         item.back_story || '',
+        item.in_use || '',
         item.future || '',
+        (item.field_notes || []).map(note => `${note.date || ''} ${note.text || ''}`).join(' '),
         (item.tags || []).join(' '),
         (item.components || []).join(' '),
         (item.components_tx || []).join(' '),
@@ -1362,7 +1420,9 @@ ${thumbSrc
         item.title || '',
         item.description || '',
         item.short_description || '',
-        item.back_story || ''
+        item.back_story || '',
+        item.in_use || '',
+        (item.field_notes || []).map(note => note.text || '').join(' ')
       ].join(' ').toLowerCase();
       return new Set(text.match(/\b[a-z]{3,}\b/g)?.filter(w => !STOP_WORDS.has(w)) || []);
     }
@@ -1410,7 +1470,9 @@ ${thumbSrc
         item.description || '',
         item.short_description || '',
         item.back_story || '',
+        item.in_use || '',
         item.future || '',
+        (item.field_notes || []).map(note => note.text || '').join(' '),
         (item.tags || []).join(' ')
       ]
         .join(' ')
@@ -1627,7 +1689,7 @@ ${thumbSrc
 
       const relatedBlock = relatedItems.length ? `
         <div style="margin-top:2em; border-top:0.5px solid var(--color-main); padding-top:1.5em;">
-          <h2>Related</h2>
+          <div class="overlay-section-title" style="margin-top:0;">Related</div>
           <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:1em;">
             ${relatedItems.map(r => {
         const thumb = r.main_image
@@ -1741,6 +1803,8 @@ ${thumbSrc
           </div>
         ` : '';
 
+
+
         content.innerHTML = `
           <h2>${escapeHTML(item.title || '')}</h2>
           <div style="font-size:11px; color:#bbb; margin-bottom:1.5em;">${escapeHTML(metaLine)}</div>
@@ -1763,16 +1827,44 @@ ${thumbSrc
       ];
 
       const componentBlock = components.length ? `
-        <h2>Components</h2>
+        <div class="overlay-section-title">Components</div>
         <ul style="padding-left:20px; margin-bottom:1.5em;">
-          ${components.map(c => `<li style="margin-bottom:4px; font-size:13px; opacity:0.8;">${escapeHTML(c)}</li>`).join('')}
+          ${components.map(c => `<li>${escapeHTML(c)}</li>`).join('')}
+        </ul>
+      ` : '';
+
+      const effectsBlock = (item.effects || []).length ? `
+        <ul style="padding-left:20px; margin-bottom:14px;">
+          ${item.effects.map(effect => `
+            <li>
+              <strong>${escapeHTML(effect.name)}:</strong>
+              ${escapeHTML(effect.description)}
+            </li>
+          `).join('')}
         </ul>
       ` : '';
 
       const futureBlock = item.future ? `
-        <h2>Next Steps</h2>
-        <p>${escapeHTML(item.future)}</p>
+        <div class="overlay-section-title">Next Steps</div>
+        <p>${escapeHTML(item.future).replace(/\n/g, '<br>')}</p>
       ` : '';
+
+      const inUseBlock = item.in_use ? `
+  <div class="overlay-section-title">In Use</div>
+<p>${escapeHTML(item.in_use).replace(/\n\n/g, '<br>').replace(/\n/g, ' ')}</p>
+` : '';
+
+      const fieldNotesBlock = (item.field_notes || []).length ? `
+  <div class="overlay-section-title">Field Notes</div>
+  <div class="field-notes">
+    ${item.field_notes.map(note => `
+      <div class="field-note">
+        <div class="field-note-date">${escapeHTML(note.date || '')}</div>
+        <div class="field-note-text">${escapeHTML(note.text || '')}</div>
+      </div>
+    `).join('')}
+  </div>
+` : '';
 
       const linksBlock = (item.links || []).length ? `
         <div style="margin-bottom:1.5em;">
@@ -1782,7 +1874,7 @@ ${thumbSrc
 
       const galleryBlock = (item.gallery || []).length ? `
   <div style="margin-top:2em; max-width:700px;">
-    <h2 style="margin-bottom:12px;">WIP Pictures</h2>
+    <div class="overlay-section-title" style="margin-top:0;">WIP Pictures</div>
 
     <div style="
       width:100%;
@@ -1843,12 +1935,27 @@ ${thumbSrc
         ${linksBlock}
         <div style="margin-bottom:1.5em;"></div>
         ${mainImage}
-        ${item.short_description ? `<p>${item.short_description.replace(/\n/g, '<br>')}</p>` : ''}
-        ${item.back_story ? `<h2>Reason for Making</h2><p>${escapeHTML(item.back_story).replace(/\n/g, '<br>')}</p>` : ''}
-        ${componentBlock}
-        ${futureBlock}
-        ${galleryBlock}
-        ${relatedBlock}
+${item.short_description ? `<p>${escapeHTML(item.short_description).replace(/\n\n/g, '<br>').replace(/\n/g, ' ')}</p>` : ''}
+
+${effectsBlock}
+
+${item.description_after ? `<p>${escapeHTML(item.description_after).replace(/\n\n/g, '<br>').replace(/\n/g, ' ')}</p>` : ''}
+${item.back_story ? `
+  <div class="overlay-section-title">Reason for Making</div>
+<p>${escapeHTML(item.back_story).replace(/\n\n/g, '<br>').replace(/\n/g, ' ')}</p>
+` : ''}
+
+${componentBlock}
+
+${galleryBlock}
+
+${inUseBlock}
+
+${fieldNotesBlock}
+
+${futureBlock}
+
+${relatedBlock}
       `;
     }
 

@@ -23,7 +23,8 @@
       "Clear polyurethane",
       "Dayton Audio EX32EP2-4 Tranducer",
       "2x speakON cable connectors",
-      "Spade connectors"
+      "Spade connectors",
+      "Acrylic panel"
     ],
     "gallery": [
       "assets/images/diy_devices/speakon_box/bts01_speakonbox_900h.jpg",
@@ -127,9 +128,10 @@
     "section": "fabrication",
     "main_image": "assets/images/diy_devices/euroblock_snake_qr1/main_euroblock_snake_qr1_1600w.jpg",
     "thumb": "assets/images/diy_devices/euroblock_snake_qr1/main_euroblock_snake_qr1_400w.jpg",
-    "short_description": "An 8-channel passive snake converting euroblock connections from a Xilica Solaro QR1 into a more performance-friendly 1/4\" TRS connectors.\n\nBuilt for live use of a QR1 fitted with 4-input and 4-output analog Dante cards.",
+    "short_description": "An 8-channel passive snake converting euroblock connections from a Xilica Solaro QR1 into more performance-friendly 1/4\" TRS connectors.\n\nBuilt for live use of a QR1 fitted with 4-input and 4-output analog Dante cards.",
     "back_story": "I built this snake to make a Xilica Solaro QR1 more practical for live music performance.\n\nThe QR1 is fitted with 4-channel analog input and output Dante cards using euroblock connectors, which are common in AV installations but inconvenient for quick patching on stage.\n\nThe snake is housed in a small aluminum enclosure with panel-mounted jacks and a rubber grommet for strain relief. It allows the QR1 to function as a traditional live audio interface while keeping the flexibility of a Dante-based system.",
     "components": [
+      "Xilica Solaro QR1",
       "Aluminum enclosure",
       "8x 1/4\" panel mount TRS connectors",
       "8x euroblock connectors",
@@ -140,6 +142,21 @@
       "assets/images/diy_devices/euroblock_snake_qr1/bts02_euroblock_snake_qr1_900h.jpg",
       "assets/images/diy_devices/euroblock_snake_qr1/bts03_euroblock_snake_qr1_900h.jpg",
       "assets/images/diy_devices/euroblock_snake_qr1/bts04_euroblock_snake_qr1_900h.jpg"
+    ],
+    "in_use": "tbd",
+    "field_notes": [
+      {
+        "date": "08/30/26",
+        "text": "Cable length revealed interference. Started troubleshooting and redesign."
+      },
+      {
+        "date": "09/09/26",
+        "text": "2-inch cable run from TRS to euroblock gives a clean signal."
+      },
+      {
+        "date": "XX/XX/XX",
+        "text": "Updated to euroblock-to-RJ45 connections."
+      }
     ]
   },
   {
@@ -314,7 +331,7 @@
   },
   {
     "id": "cycl",
-    "title": "CYCL",
+    "title": "CYCL V1",
     "type": "instrument",
     "year": "2025",
     "month": 1,
@@ -322,7 +339,27 @@
     "section": "fabrication",
     "main_image": "assets/images/diy_devices/cycl/main_synth_1600w.jpg",
     "thumb": "assets/images/diy_devices/cycl/main_synth_400w.jpg",
-    "short_description": "This instrument creates soundscapes from surrounding sounds. It listens to and processes nearby musicians, audience chatter, movement, room acoustics, and other audible activity. Because it hears the space and returns sound back into the room, it produces successive iterations of that space over time. Each pass feeds into the next, forming cycles in which the room itself functions as the source. The signal path starts from the built-in microphone and is routed into either a dry path, a beat-repeat processor, or a looper.<br><br>These paths are then recombined and sent into a combination of four effects:<ul><li><strong>SunCrystals:</strong> chaotic granular processing with pitch-shift and feedback</li><li><strong>High Shifter:</strong> granular processing based on +1 and +2 octave logic</li><li><strong>Low Shifter:</strong> granular processing based on −1 and −2 octave logic</li><li><strong>SunGrain:</strong> a chopping effect that imposes rhythmic structure on incoming sound</li></ul>After this stage, the signal can continue to the output, or a snapshot can be captured and looped at half speed, creating a new source that can be routed back through the effects chain. This process can be repeated indefinitely, producing sounds that range from dark ambient textures to glitch-driven electronic material and tape-degradation–style soundscapes.<br><br>An 8×8 LED matrix display provides real-time visual feedback, indicating the active effect, CPU load, loop lengths, beat-repeat speeds, SunGrain tempo, per-effect gain, and input and output meters.",
+    "short_description": "This instrument creates soundscapes from surrounding sounds. It listens to and processes nearby musicians, audience chatter, movement, room acoustics, and other audible activity. Because it hears the space and returns sound back into the room, it produces successive iterations of that space over time. Each pass feeds into the next, forming cycles in which the room itself functions as the source. The signal path starts from the built-in microphone and is routed into either a dry path, a beat-repeat processor, or a looper.\n\nThese paths are then recombined and sent into a combination of four effects:",
+    "effects": [
+      {
+        "name": "SunCrystals",
+        "description": "chaotic granular processing with pitch-shift and feedback"
+      },
+      {
+        "name": "High Shifter",
+        "description": "granular processing based on +1 and +2 octave logic"
+      },
+      {
+        "name": "Low Shifter",
+        "description": "granular processing based on −1 and −2 octave logic"
+      },
+      {
+        "name": "SunGrain",
+        "description": "a chopping effect that imposes rhythmic structure on incoming sound"
+      }
+    
+    ],
+    "description_after": "After this stage, the signal can continue to the output, or a snapshot can be captured and looped at half speed, creating a new source that can be routed back through the effects chain. This process can be repeated indefinitely, producing sounds that range from dark ambient textures to glitch-driven electronic material and tape-degradation–style soundscapes.\n\nAn 8×8 LED matrix display provides real-time visual feedback, indicating the active effect, CPU load, loop lengths, beat-repeat speeds, SunGrain tempo, per-effect gain, and input and output meters.",
     "back_story": "After years of using physical space as part of my recording process, I began looking for a way to reconnect with space in a live context, and to reamp sound through a room in real time. I had moved through many setups, including hardware synths, modular systems, samplers, and working entirely in a DAW, but none of them allowed this process to happen simply or directly in performance. I designed this instrument to be a portable, self-contained way to work with space live, without relying on external gear. It replaces the typical chain of microphone, interface, computer, DAW, and cabling, making it easier to improvise and collaborate.",
     "components": [
       "Daisy Seed Microcontroller",
@@ -360,6 +397,153 @@
       "assets/images/diy_devices/cycl/bts16_synth_900h.jpg",
       "assets/images/diy_devices/cycl/bts17_synth_900h.jpg",
       "assets/images/diy_devices/cycl/bts18_synth_900h.jpg"
+    ],
+    "in_use": "TBD",
+    "field_notes": [
+      {
+        "date": "05/21/25",
+        "text": "Test with Daisy POD"
+      },
+      {
+        "date": "05/22/25",
+        "text": "Feedback tests"
+      },
+      {
+        "date": "05/25/25",
+        "text": "Starting to build granular states"
+      },
+      {
+        "date": "06/06/25",
+        "text": "Working Daisy Seed version, but digital-sounding issues."
+      },
+      {
+        "date": "06/15/25",
+        "text": "DSP signal path restructure."
+      },
+      {
+        "date": "06/17/25",
+        "text": "Working MAX9814 microphone into effects path."
+      },
+      {
+        "date": "06/18/25",
+        "text": "Added SunPulse granular state."
+      },
+      {
+        "date": "06/22/25",
+        "text": "Added sound reactive LED. Fixed synth voice."
+      },
+      {
+        "date": "07/15/25",
+        "text": "Added knobs for synth engine controls."
+      },
+      {
+        "date": "07/16/25",
+        "text": "Added Beat Repeat and chord changes."
+      },
+      {
+        "date": "07/22/25",
+        "text": "Created Low Shifter granular state."
+      },
+      {
+        "date": "07/25/25",
+        "text": "Created High Shifter granular state."
+      },
+      {
+        "date": "07/28/25",
+        "text": "Renamed Dual-octave shifters, processing calibrated."
+      },
+      {
+        "date": "07/28/25",
+        "text": "Fixed clipping issues."
+      },
+      {
+        "date": "07/29/25",
+        "text": "Separated shifters into independent processors again."
+      },
+      {
+        "date": "07/29/25",
+        "text": "Synth engine CPU fix."
+      },
+      {
+        "date": "07/29/25",
+        "text": "Added DotStar LED matrix."
+      },
+      {
+        "date": "07/30/25",
+        "text": "Added rule for two simultaneous effects maximum to avoid CPU crashing."
+      },
+      {
+        "date": "08/01/25",
+        "text": "Beat Repeat changed to Beat Repeat A/B/C."
+      },
+      {
+        "date": "09/06/25",
+        "text": "Redesigned Dotstar LED matrix"
+      },
+      {
+        "date": "09/16/25",
+        "text": "Simplified SunCrystals granular state."
+      },
+      {
+        "date": "11/11/25",
+        "text": "Beat Repeat logic fixed."
+      },
+      {
+        "date": "11/12/25",
+        "text": "Beat Repeat gain staging update."
+      },
+      {
+        "date": "11/13/25",
+        "text": "Added volume meters."
+      },
+      {
+        "date": "11/15/25",
+        "text": "SunCrystals granular state full redesign."
+      },
+      {
+        "date": "11/25/25",
+        "text": "Buffer residue cleanup and sample attempts."
+      },
+      {
+        "date": "11/26/25",
+        "text": "SunSynth fix and additional note scales redesign."
+      },
+      {
+        "date": "12/08/25",
+        "text": "High Shifter synth clipping fix and control update."
+      },
+      {
+        "date": "12/09/25",
+        "text": "Bounce system WIP. Unstable."
+      },
+      {
+        "date": "12/10/25",
+        "text": "Effects gain staging fix."
+      },
+      {
+        "date": "12/22/25",
+        "text": "Bounce renamed BounceLooper. Fixed logic."
+      },
+      {
+        "date": "12/23/25",
+        "text": "Added mute when pressed to BounceLooper."
+      },
+      {
+        "date": "12/30/25",
+        "text": "DotStar update."
+      },
+      {
+        "date": "12/31/25",
+        "text": "Fixed click sounds in bounce."
+      },
+      {
+        "date": "01/02/26",
+        "text": "Added envelop follower."
+      },
+      {
+        "date": "01/16/26",
+        "text": "SunCrystals 2 rework."
+      }
     ]
   },
   {
