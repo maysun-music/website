@@ -25,7 +25,7 @@
   "url": "contact.html#spatial",
   "venue_url": "https://www.onx.studio/",
   "main_image": "assets/images/spat_templates/onx_soundroom/onxsrsept2026_01.jpg",
-  "description": "Speaker layout template for the ONX Sound Room, New York. 11.1 system. Speaker positions measured by hand with a laser measuring system. AED data compatible with Spat5 (Max/MSP) and other OSC-based spatial audio software.",
+  "description": "Speaker layout template for the ONX Sound Room, New York. 11.1 system. Speaker positions measured with a laser measure. AED data compatible with Spat5 (Max/MSP) and other OSC-based spatial audio software.",
   "location": "New York, NY",
   "speakers": "11.1",
   "filename": "onx_soundroom_sept2026_spat.txt",

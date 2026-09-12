@@ -2,9 +2,9 @@
 # File "onx_soundroom_091226_spat.txt"
 # Made with XP4L - www.xp4l.com
 # ONX Sound Room - September 2026
-# Speaker positions measured by hand with laser measuring system
+# Speaker positions measured with a laser measure.
 # Speakers are not perfectly symmetrical on the ceiling grid
-# Speaker 6 is positioned further inward because of the door.
+# Speaker 5 is positioned inward because of physical door opening.
 # Scaled distance 0.32x
 # formatted by Etienne Mason - MAYSUN - www.maysun.zip
 # AED data compatible with Spat5 (Max/MSP)
@@ -17,14 +17,14 @@
 # 1  → 1   CENTER
 # 2  → 2   FRONT LEFT
 # 3  → 3   FRONT RIGHT
-# 4  → 5   BACK LEFT
-# 5  → 6   BACK RIGHT
-# 6  → 7   MIDDLE LEFT
-# 7  → 8   MIDDLE RIGHT
-# 8  → 9   TOP FRONT LEFT
-# 9  → 10  TOP FRONT RIGHT
-# 10 → 11  TOP BACK LEFT
-# 11 → 12  TOP BACK RIGHT
+# 4  → 5   BACK RIGHT
+# 5  → 6   BACK LEFT
+# 6  → 7   MIDDLE RIGHT
+# 7  → 8   MIDDLE LEFT
+# 8  → 9   TOP FRONT RIGHT
+# 9  → 10  TOP FRONT LEFT
+# 10 → 11  TOP BACK RIGHT
+# 11 → 12  TOP BACK LEFT
 # --------------------------------------
 # ONX output 4 is reserved for SUB / LFE and skipped in the AED layout
 # ======================================
