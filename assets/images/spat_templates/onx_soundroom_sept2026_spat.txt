@@ -1,0 +1,45 @@
+# ======================================
+# File "onx_soundroom_091226_spat.txt"
+# Made with XP4L - www.xp4l.com
+# ONX Sound Room - September 2026
+# Speaker positions measured by hand with laser measuring system
+# Speakers are not perfectly symmetrical on the ceiling grid
+# Speaker 6 is positioned further inward because of the door.
+# Scaled distance 0.32x
+# formatted by Etienne Mason - MAYSUN - www.maysun.zip
+# AED data compatible with Spat5 (Max/MSP)
+# and other OSC-based spatial audio software
+# Sub channel (not in AED layout)
+# ch 4 = SUB / LFE
+# ======================================
+# ROUTING: XP4L ch → ONX output
+# --------------------------------------
+# 1  → 1   CENTER
+# 2  → 2   FRONT LEFT
+# 3  → 3   FRONT RIGHT
+# 4  → 5   BACK LEFT
+# 5  → 6   BACK RIGHT
+# 6  → 7   MIDDLE LEFT
+# 7  → 8   MIDDLE RIGHT
+# 8  → 9   TOP FRONT LEFT
+# 9  → 10  TOP FRONT RIGHT
+# 10 → 11  TOP BACK LEFT
+# 11 → 12  TOP BACK RIGHT
+# --------------------------------------
+# ONX output 4 is reserved for SUB / LFE and skipped in the AED layout
+# ======================================
+/speaker/number 11
+/speakers/correction/delay "auto"
+/speakers/correction/gain "auto"
+/speakers/aed 0.0 56.6145 1.1689 -49.0536 20.1306 1.2273 48.5267 20.3258 1.216 -141.682 21.2004 1.168 148.285 22.8095 1.0896 -90.0 25.887 0.9675 90.0 26.307 0.9531 -62.7447 69.9414 1.039 70.622 63.2538 1.0929 -136.411 64.7901 1.0788 125.65 59.6702 1.1308
+/speaker/1/name "CENTER"
+/speaker/2/name "FRONT LEFT"
+/speaker/3/name "FRONT RIGHT"
+/speaker/4/name "BACK LEFT"
+/speaker/5/name "BACK RIGHT"
+/speaker/6/name "MIDDLE LEFT"
+/speaker/7/name "MIDDLE RIGHT"
+/speaker/8/name "TOP FRONT LEFT"
+/speaker/9/name "TOP FRONT RIGHT"
+/speaker/10/name "TOP BACK LEFT"
+/speaker/11/name "TOP BACK RIGHT"
