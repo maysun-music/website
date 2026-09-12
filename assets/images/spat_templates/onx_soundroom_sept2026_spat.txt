@@ -3,14 +3,12 @@
 # Made with XP4L - www.xp4l.com
 # ONX Sound Room - September 2026
 # Speaker positions measured with a laser measure.
-# Speakers are not perfectly symmetrical on the ceiling grid
+# Speakers are not perfectly symmetrical on the ceiling grid.
 # Speaker 5 is positioned inward because of physical door opening.
-# Scaled distance 0.32x
-# formatted by Etienne Mason - MAYSUN - www.maysun.zip
 # AED data compatible with Spat5 (Max/MSP)
 # and other OSC-based spatial audio software
-# Sub channel (not in AED layout)
-# ch 4 = SUB / LFE
+# Scaled distance 0.32x
+# formatted by Etienne Mason - MAYSUN - www.maysun.zip
 # ======================================
 # ROUTING: XP4L ch → ONX output
 # --------------------------------------
