@@ -1,4 +1,42 @@
 [
+
+{
+  "id": "spat-onx-soundroom-sept2026",
+  "title": "ONX - Sound Room - Sept 2026",
+  "type": "spatial template",
+  "section": "resources",
+  "year": "2026",
+  "tags": [
+    "spatial-audio",
+    "resources",
+    "new york",
+    "template",
+    "max",
+    "msp",
+    "xp4l",
+    "dante"
+  ],
+  "relations": [
+    "spat-reforesters",
+    "spat-iris-cantor",
+    "spat-nyu-audiolab",
+    "cycl"
+  ],
+  "url": "contact.html#spatial",
+  "venue_url": "https://www.onx.studio/",
+  "main_image": "assets/images/spat_templates/onx_soundroom/onxsrsept2026_01.jpg",
+  "description": "Speaker layout template for the ONX Sound Room, New York. 11.1 system. Speaker positions measured by hand with a laser measuring system. AED data compatible with Spat5 (Max/MSP) and other OSC-based spatial audio software.",
+  "location": "New York, NY",
+  "speakers": "11.1",
+  "filename": "onx_soundroom_sept2026_spat.txt",
+  "gallery": [
+    "assets/images/spat_templates/onx_soundroom/onxsrsept2026_01.jpg",
+    "assets/images/spat_templates/onx_soundroom/onxsrsept2026_02.jpg",
+    "assets/images/spat_templates/onx_soundroom/onxsrsept2026_03.jpg",
+    "assets/images/spat_templates/onx_soundroom/onxsrsept2026_04.jpg"
+  ],
+  "txt": "# ======================================\n# File \"onx_soundroom_091226_spat.txt\"\n# Made with XP4L - www.xp4l.com\n# ONX Sound Room - September 2026\n# Speaker positions measured by hand with laser measuring system\n# Speakers are not perfectly symmetrical on the ceiling grid\n# Speaker 6 is positioned further inward because of the door.\n# Scaled distance 0.32x\n# formatted by Etienne Mason - MAYSUN - www.maysun.zip\n# AED data compatible with Spat5 (Max/MSP)\n# and other OSC-based spatial audio software\n# Sub channel (not in AED layout)\n# ch 4 = SUB / LFE\n# ======================================\n# ROUTING: XP4L ch → ONX output\n# --------------------------------------\n# 1  → 1   CENTER\n# 2  → 2   FRONT LEFT\n# 3  → 3   FRONT RIGHT\n# 4  → 5   BACK LEFT\n# 5  → 6   BACK RIGHT\n# 6  → 7   MIDDLE LEFT\n# 7  → 8   MIDDLE RIGHT\n# 8  → 9   TOP FRONT LEFT\n# 9  → 10  TOP FRONT RIGHT\n# 10 → 11  TOP BACK LEFT\n# 11 → 12  TOP BACK RIGHT\n# --------------------------------------\n# ONX output 4 is reserved for SUB / LFE and skipped in the AED layout\n# ======================================\n/speaker/number 11\n/speakers/correction/delay \"auto\"\n/speakers/correction/gain \"auto\"\n/speakers/aed 0.0 56.6145 1.1689 -49.0536 20.1306 1.2273 48.5267 20.3258 1.216 -141.682 21.2004 1.168 148.285 22.8095 1.0896 -90.0 25.887 0.9675 90.0 26.307 0.9531 -62.7447 69.9414 1.039 70.622 63.2538 1.0929 -136.411 64.7901 1.0788 125.65 59.6702 1.1308\n/speaker/1/name \"CENTER\"\n/speaker/2/name \"FRONT LEFT\"\n/speaker/3/name \"FRONT RIGHT\"\n/speaker/4/name \"BACK LEFT\"\n/speaker/5/name \"BACK RIGHT\"\n/speaker/6/name \"MIDDLE LEFT\"\n/speaker/7/name \"MIDDLE RIGHT\"\n/speaker/8/name \"TOP FRONT LEFT\"\n/speaker/9/name \"TOP FRONT RIGHT\"\n/speaker/10/name \"TOP BACK LEFT\"\n/speaker/11/name \"TOP BACK RIGHT\""
+},
   {
     "id": "spat-reforesters",
     "title": "Reforesters Laboratory",
