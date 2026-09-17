@@ -37,15 +37,22 @@
     "title": "CYCL V2",
     "type": "instrument",
     "year": "2026",
-    "month": 8,
+    "month": 9,
     "url": "cycl_v2.html",
     "section": "fabrication",
     "main_image": "assets/images/diy_devices/cyclv2/main_cycl_v2_1600w.jpg",
     "thumb": "assets/images/diy_devices/cyclv2/main_cycl_v2_400w.jpg",
     "short_description": "CYCL V2 is the next iteration of CYCL, a self-contained synthesizer for capturing and processing surrounding sound in real time.\n\nCurrently in development, this version expands the original system by distributing processing across two Daisy Seed microcontrollers connected through SAI2.\n\nA custom PCB replaces much of the point-to-point wiring of the original instrument, creating a cleaner and more integrated hardware platform for continued development. Currently in PCB phase.",
     "back_story": "CYCL V2 builds directly on the first version of CYCL, now with dual Daisy Seed to allow for expanded granular worlds.",
-    "components": [],
-    "gallery": []
+        "components": [
+      "2x Daisy Seed",
+      "Custom PCB",
+      "more detail to come..."
+    ],
+        "gallery": [
+      "assets/images/diy_devices/cyclv2/bts01_cycl_v2_900h.jpg",
+      "assets/images/diy_devices/cyclv2/bts02_cycl_v2_900h.jpg"
+    ]
   },
   {
     "id": "tap_dance_trigger_midi",
