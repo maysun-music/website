@@ -709,12 +709,16 @@
 
       #overlay-close {
         position: fixed;
-        top: 12px;
-        right: 16px;
-        z-index: 2002;
-        background-color: var(--color-bg);
-        padding: 4px 8px;
-        opacity: 0.8;
+        top: 20px;
+        right: 24px;
+        z-index: 9999;
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 1;
+        color: var(--color-main);
+        cursor: pointer;
+        opacity: 0.6;
+        display: none;
       }
 
       #overlay-panel {
@@ -877,8 +881,18 @@
       line-height: 1;
     }
 
-    #overlay-close:hover {
-      opacity: 1;
+    #overlay-nav {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 2002;
+      display: none;
+      font-size: 18px;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: var(--color-main);
+      opacity: 0.6;
     }
   </style>
 </head>
@@ -910,7 +924,6 @@
       <input type="text" id="search-input" placeholder="filter by:" autocomplete="off" spellcheck="false" />
       <div id="search-meta"></div>
     </div>
-  </div>
   </div>
 
   <div id="mini-map-container">
@@ -945,6 +958,8 @@
     let bioTimeout = null;
     let activeSection = null;
     let similarityMap = new Map();
+    let currentDisplayedItems = [];
+    let currentOverlayItemId = null;
 
     // approved word bank for tags
     const TAG_BANK = [
@@ -1282,6 +1297,7 @@
     }
 
     function renderItems(items, q) {
+      currentDisplayedItems = items;
       const meta = document.getElementById('search-meta');
       const grid = document.getElementById('items-grid');
       grid.innerHTML = '';
@@ -1531,9 +1547,12 @@ ${thumbSrc
     };
 
     function openOverlay(key) {
+      currentOverlayItemId = key.startsWith('item/') ? key.slice(5) : null;
       document.getElementById('overlay-backdrop').classList.add('visible');
       document.getElementById('overlay-panel').style.display = 'block';
       document.getElementById('overlay-close').style.display = 'block';
+      document.getElementById('overlay-nav').style.display =
+        key.startsWith('item/') ? 'flex' : 'none';
       document.body.style.overflow = 'hidden';
       history.pushState({ overlay: key }, '', '#' + key);
       document.getElementById('overlay-panel').scrollTop = 0;
@@ -1963,9 +1982,11 @@ ${relatedBlock}
       document.getElementById('overlay-backdrop').classList.remove('visible');
       document.getElementById('overlay-panel').style.display = 'none';
       document.getElementById('overlay-close').style.display = 'none';
+      document.getElementById('overlay-nav').style.display = 'none';
       document.body.style.overflow = '';
       history.pushState({}, '', window.location.pathname);
       document.title = 'MAYSUN';
+      currentOverlayItemId = null;
     }
 
     function resetAll() {
@@ -1989,6 +2010,28 @@ ${relatedBlock}
 
     document.addEventListener('click', e => {
       if (e.target.id === 'overlay-backdrop') closeOverlay();
+    });
+
+
+    document.addEventListener('keydown', e => {
+      if (!currentOverlayItemId) return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+      const overlayItems = currentDisplayedItems.filter(item =>
+        item.section === 'fabrication' ||
+        item.section === 'albums' ||
+        item.section === 'story' ||
+        item.section === 'resources'
+      );
+
+      const idx = overlayItems.findIndex(i => i.id === currentOverlayItemId);
+      if (idx === -1) return;
+
+      const nextIdx = e.key === 'ArrowRight' ? idx + 1 : idx - 1;
+      if (nextIdx < 0 || nextIdx >= overlayItems.length) return;
+
+      openOverlay('item/' + overlayItems[nextIdx].id);
     });
 
     function restoreBio() {
@@ -2104,7 +2147,7 @@ ${relatedBlock}
     drawMapLines();
 
   </script>
-
+  <div id="overlay-nav">⬅ ⮕ keys to navigate</div>
   <span id="overlay-close" onclick="closeOverlay()">✕</span>
   <div id="overlay-backdrop"></div>
   <div id="overlay-panel">
@@ -2112,5 +2155,3 @@ ${relatedBlock}
   </div>
 
 </body>
-
-</html>
