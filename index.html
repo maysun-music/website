@@ -960,6 +960,7 @@
     let similarityMap = new Map();
     let currentDisplayedItems = [];
     let currentOverlayItemId = null;
+    let currentUpcomingShows = [];
 
     // approved word bank for tags
     const TAG_BANK = [
@@ -1584,6 +1585,100 @@ ${thumbSrc
       ).join(' ');
     }
 
+    function pad2(n) { return String(n).padStart(2, '0'); }
+
+    function formatCompactDate(dt) {
+      return `${dt.getFullYear()}${pad2(dt.getMonth() + 1)}${pad2(dt.getDate())}`;
+    }
+
+    function formatCompactDateTime(dt) {
+      return `${formatCompactDate(dt)}T${pad2(dt.getHours())}${pad2(dt.getMinutes())}00`;
+    }
+
+    function getShowStartDate(show) {
+      const [y, m, d] = show.date.split('-').map(Number);
+      if (show.time) {
+        const [hh, mm] = show.time.split(':').map(Number);
+        return new Date(y, m - 1, d, hh, mm);
+      }
+      return new Date(y, m - 1, d);
+    }
+
+    function buildGoogleCalendarUrl(show) {
+      const start = getShowStartDate(show);
+      const title = encodeURIComponent(`MAYSUN @ ${show.venue}`);
+      const location = encodeURIComponent(`${show.venue}, ${show.city}`);
+      const detailsText = [
+        show.collaborators ? `with ${show.collaborators}` : '',
+        show.url || ''
+      ].filter(Boolean).join('\n\n');
+
+      const details = encodeURIComponent(detailsText);
+      let datesParam;
+      if (show.time) {
+        const end = new Date(start);
+        end.setHours(end.getHours() + 3);
+        datesParam = `${formatCompactDateTime(start)}/${formatCompactDateTime(end)}`;
+      } else {
+        const end = new Date(start);
+        end.setDate(end.getDate() + 1);
+        datesParam = `${formatCompactDate(start)}/${formatCompactDate(end)}`;
+      }
+
+      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${datesParam}&details=${details}&location=${location}`;
+    }
+
+    function buildICSContent(show) {
+      const start = getShowStartDate(show);
+      const uid = `${show.date}-${show.venue}`.replace(/[^a-zA-Z0-9]/g, '') + '@maysun.zip';
+      const dtstamp = formatCompactDateTime(new Date()) + 'Z';
+
+      let dtStartLine, dtEndLine;
+      if (show.time) {
+        const end = new Date(start);
+        end.setHours(end.getHours() + 3);
+        dtStartLine = `DTSTART:${formatCompactDateTime(start)}`;
+        dtEndLine = `DTEND:${formatCompactDateTime(end)}`;
+      } else {
+        const end = new Date(start);
+        end.setDate(end.getDate() + 1);
+        dtStartLine = `DTSTART;VALUE=DATE:${formatCompactDate(start)}`;
+        dtEndLine = `DTEND;VALUE=DATE:${formatCompactDate(end)}`;
+      }
+
+      return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//MAYSUN//Shows//EN',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${dtstamp}`,
+        dtStartLine,
+        dtEndLine,
+        `SUMMARY:MAYSUN @ ${show.venue}`,
+        `LOCATION:${show.venue}, ${show.city}`,
+        `DESCRIPTION:${[
+          show.collaborators ? 'with ' + show.collaborators : '',
+          show.url || ''
+        ].filter(Boolean).join('\\n\\n')}`,
+        ...(show.url ? [`URL:${show.url}`] : []),
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+    }
+
+    function downloadShowICS(idx) {
+      const show = currentUpcomingShows[idx];
+      if (!show) return;
+      const blob = new Blob([buildICSContent(show)], { type: 'text/calendar' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `maysun-${show.venue}-${show.date}.ics`.replace(/\s+/g, '-').toLowerCase();
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
     function renderShowsOverlay() {
       const content = document.getElementById('overlay-content');
       content.innerHTML = '<h2>SHOWS</h2><p style="opacity:0.4; font-size:11px;">loading...</p>';
@@ -1603,6 +1698,8 @@ ${thumbSrc
             .filter(s => s.type === 'past')
             .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
 
+          currentUpcomingShows = upcoming;
+
           function formatDate(str) {
             if (!str.match(/^\d{4}-\d{2}-\d{2}$/)) return str;
             const [y, m, d] = str.split('-');
@@ -1613,18 +1710,26 @@ ${thumbSrc
 
 
           function renderList(list, isPast = false) {
-            return list.map(s => {
+            return list.map((s, i) => {
               const date = formatDate(s.date);
               const collab = s.collaborators ? ` · ${s.collaborators}` : '';
 
               const line1 = `<div style="font-size:12px; color:#bbb;">${driftText(date + ' — ' + s.city)}</div>`;
-              const line2 = `<div style="font-size:13px; color:var(--color-main);">${driftText(s.venue + collab)}</div>`;
-              const inner = `${line1}${line2}`;
+              const line2 = `<div style="font-size:13px; color:var(--color-main); line-height:1.2; margin:0;">${driftText(s.venue + collab)}</div>`; const inner = `${line1}${line2}`;
               const linked = s.url
                 ? `<a href="${s.url}" target="_blank" style="text-decoration:none;">${inner}</a>`
                 : inner;
+
+              const hasValidDate = /^\d{4}-\d{2}-\d{2}$/.test(s.date);
+              const calendarButtons = (!isPast && hasValidDate) ? `
+  <div style="margin:0; line-height:1;">
+                  <a href="${buildGoogleCalendarUrl(s)}" target="_blank" style="font-size:10px; opacity:0.6; text-decoration:none; border-bottom:1px dotted currentColor; margin-right:12px;">+ Google Calendar</a>
+                  <span onclick="downloadShowICS(${i})" style="font-size:10px; opacity:0.6; cursor:pointer; border-bottom:1px dotted currentColor;">+ iCal (.ics)</span>
+                </div>
+              ` : '';
+
               const cls = isPast ? 'class="past-show-item"' : '';
-              return `<div ${cls} style="margin-bottom:16px;">${linked}</div>`;
+              return `<div ${cls} style="margin-bottom:16px;">${linked}${calendarButtons}</div>`;
             }).join('');
           }
 
