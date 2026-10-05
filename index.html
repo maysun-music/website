@@ -909,7 +909,7 @@
       <span id="bio-burger" onclick="openOverlay('bio')">☰</span>
       <nav id="site-nav">
         <div class="nav-row">
-          <span class="nav-item filter" data-section="story">/forever in sound</span>
+          <a class="nav-item link" href="forever.html">/forever in sound</a>
           <span class="nav-item filter" data-section="albums">/music</span>
           <span class="nav-item filter" data-section="fabrication">/fabrication</span>
           <span class="nav-item link" onclick="openOverlay('shows')" style="cursor:pointer;">/shows</span>
@@ -1368,7 +1368,9 @@ ${thumbSrc
         `;
 
         const goTo = () => {
-          if (item.section === 'fabrication' || item.section === 'albums' || item.section === 'story' || item.section === 'resources') {
+          if (item.section === 'story') {
+            window.location.href = `forever.html#${item.id}`;
+          } else if (item.section === 'fabrication' || item.section === 'albums' || item.section === 'resources') {
             openOverlay('item/' + item.id);
           } else {
             if (!item.url) return;
@@ -1861,29 +1863,29 @@ ${thumbSrc
       }
 
       // FOREVER IN SOUND LAYOUT
-      if (item.section === 'story') {
-        const youtubeBlock = (item.media?.youtube || []).map(yid => `
-          <div class="overlay-video" style="position:relative; padding-bottom:56.25%; height:0;">
-            <iframe src="https://www.youtube.com/embed/${yid}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen loading="lazy"></iframe>
-          </div>
-        `).join('');
+      // if (item.section === 'story') {
+      //   const youtubeBlock = (item.media?.youtube || []).map(yid => `
+      //     <div class="overlay-video" style="position:relative; padding-bottom:56.25%; height:0;">
+      //       <iframe src="https://www.youtube.com/embed/${yid}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen loading="lazy"></iframe>
+      //     </div>
+      //   `).join('');
 
-        const imagesBlock = (item.media?.images || []).map(src =>
-          `<img src="${src}" class="overlay-media">`
-        ).join('');
+      //   const imagesBlock = (item.media?.images || []).map(src =>
+      //     `<img src="${src}" class="overlay-media">`
+      //   ).join('');
 
-        content.innerHTML = `
-          <h2>${escapeHTML(item.title || '')}</h2>
-          <div style="font-size:15px; color:#bbb; margin-bottom:0.5em;">${formatItemDate(item)}</div>
-          <div style="margin-bottom:1.5em;"></div>
-          ${imagesBlock}
-          ${item.description ? `<p style="white-space:pre-line;">${escapeHTML(item.description)}</p>` : ''}
-          <div style="margin-bottom:1em;"><a href="${item.url || 'forever.html'}" style="font-size:13px; opacity:0.6;">Read in full context</a></div>
-          ${youtubeBlock}
-          ${relatedBlock}
-        `;
-        return;
-      }
+      //   content.innerHTML = `
+      //     <h2>${escapeHTML(item.title || '')}</h2>
+      //     <div style="font-size:15px; color:#bbb; margin-bottom:0.5em;">${formatItemDate(item)}</div>
+      //     <div style="margin-bottom:1.5em;"></div>
+      //     ${imagesBlock}
+      //     ${item.description ? `<p style="white-space:pre-line;">${escapeHTML(item.description)}</p>` : ''}
+      //     <div style="margin-bottom:1em;"><a href="${item.url || 'forever.html'}" style="font-size:13px; opacity:0.6;">Read in full context</a></div>
+      //     ${youtubeBlock}
+      //     ${relatedBlock}
+      //   `;
+      //   return;
+      // }
 
       // RESOURCES / SPATIAL LAYOUT
       if (item.section === 'resources') {
