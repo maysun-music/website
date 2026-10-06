@@ -530,6 +530,41 @@
       color: var(--color-accent);
     }
 
+    /* ETIENNE MASON CROSS-OUT */
+
+    #site-footer .etienne-link {
+      position: relative;
+      display: inline-block;
+    }
+
+    #site-footer .etienne-link::after {
+      content: "";
+      position: absolute;
+
+      left: -5%;
+      top: 48%;
+
+      width: 110%;
+      height: 1.5px;
+
+      background: var(--color-main);
+
+      transform: rotate(-5deg);
+      transform-origin: center;
+
+      pointer-events: none;
+
+      transition:
+        opacity 120ms ease,
+        transform 120ms ease,
+        background-color 3.5s ease;
+    }
+
+    #site-footer .etienne-link:hover::after {
+      opacity: 0;
+      transform: rotate(-5deg) scaleX(0.8);
+    }
+
     /* @keyframes fadeIn {
       from {
         opacity: 0;
@@ -949,6 +984,8 @@
     <a href="https://www.youtube.com/@MAYSUNmusic" target="_blank">youtube</a>
     <a href="#" onclick="openOverlay('bio'); return false;">biography</a>
     <a href="#" onclick="openOverlay('contact'); return false;">contact</a>
+    <a class="etienne-link" href="https://etiennemason.com" target="_blank" rel="noopener noreferrer">etienne mason</a>
+
     <span id="last-update"></span>
   </footer>
 
