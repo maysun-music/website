@@ -107,6 +107,17 @@
       margin: 2em 0;
     }
 
+    /* YouTube iframe positioning */
+    .youtube-placeholder iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      border: 0;
+    }
+
     /* Keep images from overflowing */
     .photo {
       width: 100%;
@@ -460,7 +471,7 @@
       }, 50);
     }
 
-function setupJumpLatest() {
+    function setupJumpLatest() {
       const button = document.getElementById('jumpLatest');
       if (!button || sections.length === 0) return;
 
