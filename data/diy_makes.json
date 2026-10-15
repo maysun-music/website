@@ -46,16 +46,21 @@
     "section": "fabrication",
     "main_image": "assets/images/diy_devices/cyclv2/main_cycl_v2_1600w.jpg",
     "thumb": "assets/images/diy_devices/cyclv2/main_cycl_v2_400w.jpg",
-    "short_description": "CYCL V2 is the next iteration of CYCL, a self-contained synthesizer for capturing and processing surrounding sound in real time.\n\nCurrently in development, this version expands the original system by distributing processing across two Daisy Seed microcontrollers connected through SAI2.\n\nA custom PCB replaces much of the point-to-point wiring of the original instrument, creating a cleaner and more integrated hardware platform for continued development. Currently in PCB phase.",
-    "back_story": "CYCL V2 builds directly on the first version of CYCL, now with dual Daisy Seed to allow for expanded granular worlds.",
+    "short_description": "CYCL V2 is the next iteration of CYCL, a self-contained synthesizer with an embedded microphone that captures and processes surrounding sound in real time through custom granular processing states.\n\nCurrently in development, this version expands the original system by distributing processing across two Daisy Seed microcontrollers, allowing for greater processing capacity and more complex sound manipulation.",
+    "back_story": "August 2026 — Designed the custom PCB to combine two Daisy Seeds into a single instrument.\n\nSeptember 2026 — PCB assembly and initial testing of audio communication between the two Daisy Seeds using SAI2.\n\nOctober 2026 — After extensive testing and exchanges with the Daisy Seed developers, including work that contributed to modifications of the open-source libDaisy library, I have decided to move away from SAI2 audio communication due to clock synchronization issues.\n\nThe seeds were also upgraded to the newer V3 versions. To upgrade the microphone, I selected Primo EM272 capsules and designed a dedicated preamplifier PCB. The preamp is assembled and successfully tested, and will be integrated into the instrument.",
     "components": [
-      "2x Daisy Seed",
-      "Custom PCB",
-      "more detail to come..."
+      "2x Daisy Seed V3",
+      "Custom dual Daisy PCB",
+      "Custom microphone preamp PCB",
+      "Primo EM272 microphone capsule",
+      "More to come..."
     ],
     "gallery": [
       "assets/images/diy_devices/cyclv2/bts01_cycl_v2_900h.jpg",
-      "assets/images/diy_devices/cyclv2/bts02_cycl_v2_900h.jpg"
+      "assets/images/diy_devices/cyclv2/bts02_cycl_v2_900h.jpg",
+      "assets/images/diy_devices/cyclv2/bts03_cycl_v2_900h.jpg",
+      "assets/images/diy_devices/cyclv2/bts04_cycl_v2_900h.jpg",
+      "assets/images/diy_devices/cyclv2/bts05_cycl_v2_900h.jpg"
     ]
   },
   {
