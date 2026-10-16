@@ -2000,13 +2000,35 @@ ${thumbSrc
       const effectsBlock = (item.effects || []).length ? `
         <ul style="padding-left:20px; margin-bottom:14px;">
           ${item.effects.map(effect => `
-            <li>
-              <strong>${escapeHTML(effect.name)}:</strong>
-              ${escapeHTML(effect.description)}
+            <li style="margin-bottom:12px;">
+              <strong>${escapeHTML(effect.name)}:</strong><br>
+              ${escapeHTML(effect.description).replace(/\n/g, '<br>')}
             </li>
           `).join('')}
         </ul>
       ` : '';
+
+      const diagramBlock = item.diagram ? `
+  <div style="margin:2em 0;">
+    <div class="overlay-section-title">Signal Flow Diagram</div>
+    <img
+      src="${escapeHTML(item.diagram)}"
+      style="width:100%; max-width:600px; height:auto; display:block;"
+      loading="lazy"
+      alt="Signal flow diagram"
+    >
+  </div>
+` : '';
+
+      const signalFlowBlock = item.signal_flow ? `
+  <div class="overlay-section-title">Signal Flow</div>
+  <p>${escapeHTML(item.signal_flow).replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</p>
+` : '';
+
+      const synthBlock = item.synth_engine ? `
+  <div class="overlay-section-title">Synth Engine</div>
+  <p>${escapeHTML(item.synth_engine).replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</p>
+` : '';
 
       const futureBlock = item.future ? `
         <div class="overlay-section-title">Next Steps</div>
@@ -2099,11 +2121,19 @@ ${thumbSrc
         ${linksBlock}
         <div style="margin-bottom:1.5em;"></div>
         ${mainImage}
-${item.short_description ? `<p>${escapeHTML(item.short_description).replace(/\n\n/g, '<br>').replace(/\n/g, ' ')}</p>` : ''}
 
+${item.short_description ? `<p>${escapeHTML(item.short_description).replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</p>` : ''}
+
+${diagramBlock}
+
+${signalFlowBlock}
+
+${(item.effects || []).length ? `<div class="overlay-section-title">Effects</div>` : ''}
 ${effectsBlock}
 
-${item.description_after ? `<p>${escapeHTML(item.description_after).replace(/\n\n/g, '<br>').replace(/\n/g, ' ')}</p>` : ''}
+${synthBlock}
+
+${item.description_after ? `<p>${escapeHTML(item.description_after).replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</p>` : ''}
 ${item.back_story ? `
   <div class="overlay-section-title">Reason for Making</div>
 <p>${escapeHTML(item.back_story).replace(/\n\n/g, '<br>').replace(/\n/g, ' ')}</p>
