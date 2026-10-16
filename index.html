@@ -1588,6 +1588,13 @@ ${thumbSrc
     };
 
     function openOverlay(key) {
+      if (key.startsWith('item/')) {
+        const targetItem = allItems.find(i => i.id === key.slice(5));
+        if (targetItem && targetItem.section === 'story') {
+          window.location.href = `forever.html#${targetItem.id}`;
+          return;
+        }
+      }
       currentOverlayItemId = key.startsWith('item/') ? key.slice(5) : null;
       document.getElementById('overlay-backdrop').classList.add('visible');
       document.getElementById('overlay-panel').style.display = 'block';
@@ -2196,7 +2203,7 @@ ${relatedBlock}
       const overlayItems = currentDisplayedItems.filter(item =>
         item.section === 'fabrication' ||
         item.section === 'albums' ||
-        item.section === 'story' ||
+        // item.section === 'story' ||
         item.section === 'resources'
       );
 
